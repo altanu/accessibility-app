@@ -14,9 +14,8 @@ export default {
   },
   mounted: function () {
     axios.get('http://localhost:3000/users.json')
-      .then(response => {
-        this.msg = JSON.stringify(response.data)
-      })
+      .then(response => (this.msg = response.data))
+      .catch(error => console.log(error))
   }
 }
 </script>
