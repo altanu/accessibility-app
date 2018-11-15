@@ -1,6 +1,13 @@
 <template>
   <div class="Users">
-    <h1>{{ msg }}</h1>
+    <h1> User Index</h1>
+    <ul>
+      <li
+        v-for="user in msg">
+        {{ user.id }} - {{ user.first_name}} {{ user.last_name }} @ {{ user.email}}
+        <router-link :to="{path: '/users/' + user.id, params: { userId: user.id }}">Inspect</router-link>
+      </li>
+    </ul>
 
   </div>
 </template>

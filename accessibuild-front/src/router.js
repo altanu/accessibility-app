@@ -7,6 +7,7 @@ import Users from './components/Users.vue'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/locations',
@@ -17,11 +18,6 @@ export default new Router({
       path: '/users',
       name: 'users',
       component: Users
-    },
-    {
-      path: '/user/:id',
-      name: 'user',
-      component: User
     }
   ]
 })
