@@ -34,7 +34,13 @@
   export default {
     name: 'Register',
     data() {
-      return {}
+      return {
+        first_name: String,
+        last_name: String,
+        email: String,
+        password: String,
+        password_confirmation: String
+      }
     }
   }
 
