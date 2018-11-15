@@ -9,8 +9,10 @@
 var axios = require('axios')
 export default {
   name: 'Locations',
-  props: {
-    msg: String
+  data() {
+    return{
+      msg: String
+    }
   },
   mounted: function () {
     axios.get('http://localhost:3000/locations.json')
