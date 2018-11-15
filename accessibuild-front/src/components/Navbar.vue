@@ -1,11 +1,13 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div>
+    <div style="display: flex">
       <form class="form-inline">
         <input class="form-control" ref="autocomplete" onFocus="value = ''" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-primary" type="submit" style="margin-left: 1rem">🔍 Search</button>
+        <button class="btn btn-outline-success" type="submit" style="margin-left: .5rem">🔍 Search</button>
       </form>
-      <router-link to="/" class="navbar-brand" style="margin: auto">AccessiBuild</router-link>       
+      <form class="form-inline">
+        <button class="btn btn-outline-primary" ref="registerlogin" type="submit">Login / Register</button>
+      </form>
     </div>
   </nav>
 </template>
