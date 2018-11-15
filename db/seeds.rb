@@ -22,6 +22,10 @@ Location.destroy_all
 osm_data.each do |place|
   if place["place_id"].include? "Ej"
     puts "skipping invalid location"
+  elsif place["addr:housenumber"] == ""
+    puts "skipping invalid location"
+  elsif place["addr:street"] == ""
+    puts "skipping invalid location"
   else
     if place["wheelchair"] == "yes"
       place["wheelchair"] = 2
