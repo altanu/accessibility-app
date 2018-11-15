@@ -3,7 +3,7 @@
   <div class="w-75 p-5">
   <h1>Welcome to the Login Page!</h1>
 
-  <form>
+  <form v-on:submit.prevent="onSubmit">
     <div class="form-group">
       <label>First Name</label>
       <input type="text" name="first_name" class="form-control" v-model="first_name">
