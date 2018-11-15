@@ -1,27 +1,38 @@
 <template>
-  <div class="Users">
-    <h1> User Index</h1>
-    <ul>
-      <li
-        v-for="user in msg">
-        {{ user.id }} - {{ user.first_name}} {{ user.last_name }} @ {{ user.email}}
-        <router-link :to="{path: '/user/' + user.id, params: { userId: user.id }}">Inspect</router-link>
-      </li>
-    </ul>
+  <div class="container-fluid">
+    <div class="row alert-info">
+      <div class="col-sm">
+        Email
+      </div>
+      <div class="col-sm">
+        Phone Number
+      </div>
+    </div>
+    <div class="row alert-info">
+      <div class="col-sm">
+        {{ user.email }}
+      </div>
+      <div class="col-sm">
+        {{ user.phone_number }}
+      </div>
+    </div>
+    </div>
 
-  </div>
 </template>
 
 <script>
 var axios = require('axios')
 export default {
   name: 'Users',
-  props: {
-    msg: String
+  data () {
+    return {
+      user: null
+    }
   },
   mounted: function () {
-    axios.get('http://localhost:3000/users.json')
-      .then(response => (this.msg = response.data))
+    var userId = this.$route.params.id
+    axios.get('http://localhost:3000/users/' + userId)
+      .then(response => (this.user = response.data))
       .catch(error => console.log(error))
   }
 }
