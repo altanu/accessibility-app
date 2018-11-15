@@ -1,9 +1,9 @@
 <template>
   <div id="app">
+    <Navbar></Navbar>
     <Container></Container>
     <router-view/>
     <Footer></Footer>
-    <Navbar></Navbar>
   </div>
 </template>
 
