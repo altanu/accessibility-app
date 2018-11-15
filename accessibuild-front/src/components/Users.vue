@@ -10,14 +10,14 @@ export default {
   name: 'Users',
   data () {
     return {
-      user: null,
+      user: null
     }
   },
   mounted: function () {
     var userId = this.$route.params.id
-      axios.get('http://localhost:3000/users/' + userId + '.json')
-        .then(response => (this.user = response.data))
-        .catch(error => console.log(error))
+    axios.get('http://localhost:3000/users/' + userId + '.json')
+      .then(response => (this.user = response.data))
+      .catch(error => console.log(error))
   }
 }
 </script>
