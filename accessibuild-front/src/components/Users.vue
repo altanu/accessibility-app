@@ -1,7 +1,23 @@
 <template>
-  <div class="Users">
-    <h1>Welcome, {{ user.first_name }}</h1>
-  </div>
+  <div class="container-fluid">
+    <div class="row alert-info">
+      <div class="col-sm">
+        Email
+      </div>
+      <div class="col-sm">
+        Phone Number
+      </div>
+    </div>
+    <div class="row alert-info">
+      <div class="col-sm">
+        {{ user.email }}
+      </div>
+      <div class="col-sm">
+        {{ user.phone_number }}
+      </div>
+    </div>
+    </div>
+
 </template>
 
 <script>
@@ -15,7 +31,7 @@ export default {
   },
   mounted: function () {
     var userId = this.$route.params.id
-    axios.get('http://localhost:3000/users/' + userId + '.json')
+    axios.get('http://localhost:3000/users/' + userId)
       .then(response => (this.user = response.data))
       .catch(error => console.log(error))
   }
