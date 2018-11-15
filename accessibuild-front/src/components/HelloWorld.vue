@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ user_data }}</h1>
 
   </div>
 </template>
@@ -10,7 +10,7 @@ var axios = require('axios')
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    user_data: String
   },
   mounted: function () {
     axios.get('http://localhost:3000/users')
