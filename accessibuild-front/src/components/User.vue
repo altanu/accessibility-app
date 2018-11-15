@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    <h1>{{ user_data }}</h1>
+  <div class="User">
+    <h1>{{ msg }}</h1>
 
   </div>
 </template>
@@ -8,13 +8,13 @@
 <script>
 var axios = require('axios')
 export default {
-  name: 'HelloWorld',
+  name: 'User',
   props: {
-    user_data: String
+    msg: String
   },
   mounted: function () {
     axios.get('http://localhost:3000/users.json')
-      .then(response => (this.user_data = response.data))
+      .then(response => (this.msg = response.data))
       .catch(error => console.log(error))
   }
 }

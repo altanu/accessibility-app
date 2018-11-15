@@ -13,7 +13,7 @@ export default {
     msg: String
   },
   mounted: function () {
-    axios.get('http://localhost:3000/users/' + this.$route.params.id + '.json')
+    axios.get('http://localhost:3000/users.json')
       .then(response => (this.msg = response.data))
       .catch(error => console.log(error))
   }

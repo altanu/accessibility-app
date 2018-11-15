@@ -8,7 +8,7 @@
 <script>
 var axios = require('axios')
 export default {
-  name: 'HelloWorld',
+  name: 'Locations',
   props: {
     msg: String
   },
