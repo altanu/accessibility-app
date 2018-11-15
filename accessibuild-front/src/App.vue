@@ -1,22 +1,14 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/users">Users</router-link> |
-      <router-link to="/locations">Locations</router-link> |
-      <Container></Container>
-    </div>
+    <Container></Container>
     <router-view/>
-    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin: 0 30% 0">
-      With Bootstrap!
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
     <Footer></Footer>
+    <Navbar></Navbar>
   </div>
-
 </template>
+
 <script>
+import Navbar from './components/Navbar'
 import Container from './components/Container.vue'
 import Footer from './components/Footer.vue'
 export default {
@@ -26,7 +18,8 @@ export default {
   },
   components: {
     Container,
-    Footer
+    Footer,
+    Navbar
   }
 }
 </script>
