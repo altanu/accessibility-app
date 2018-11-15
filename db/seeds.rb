@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+#  osm_data is the places found from OpenStreetMap, and populated with corresponding place_id from gMaps
+osm_data = ActiveSupport::JSON.decode(File.read('db/osm.json'))
+
 puts 'Seeding DB'
 puts 'Seeding users'
 
@@ -16,9 +19,23 @@ User.create!(first_name: 'Louis', last_name:'Riehl', email: 'louisriehl@gmail.co
 
 puts 'Seeding locations'
 Location.destroy_all
-Location.create!(house_number: 1, street: 'Test St.', wheelchair: true, bathroom: true, parking: true, coordinates: '90.123,90.123')
-Location.create!(house_number: 2, street: 'Test St.', wheelchair: false, bathroom: false, parking: false, coordinates: '90.555,90.555')
-Location.create!(house_number: 3, street: 'Test St.', wheelchair: true, bathroom: false, parking: false, coordinates: '90.999,90.999')
+osm_data.each do |place|
+  if place["place_id"].include? "Ej"
+    puts "skipping invalid location"
+  else
+    if place["wheelchair"] == "yes"
+      place["wheelchair"] = 2
+    elsif place["wheelchair"] == "limited"
+      place["wheelchair"] = 1
+    else
+      place["wheelchair"] = 0
+    end
+    Location.create!(
+      house_number: place["addr:housenumber"], 
+      street: place["addr:street"], 
+      wheelchair: place["wheelchair"])
+  end
+end
 
 puts 'Seeding contacts'
 Contact.destroy_all
