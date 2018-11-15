@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 
 // import 'bootstrap/dist/js/bootstrap'
-import 'bootstrap';
+import 'bootstrap'
 
 // import plugins individually - require exports-loader
 import 'bootstrap/js/dist/modal'
