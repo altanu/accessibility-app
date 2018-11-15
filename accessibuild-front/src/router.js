@@ -16,7 +16,7 @@ export default new Router({
       component: Locations
     },
     {
-      path: '/users',
+      path: '/users/:userId',
       name: 'users',
       component: Users
     },
