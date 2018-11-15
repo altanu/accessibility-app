@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  house_number: 1
+  street: MyString
+  wheelchair: 1
+  bathroom: 
+  parking: 
+  coordinates: MyString
+
+two:
+  house_number: 1
+  street: MyString
+  wheelchair: 1
+  bathroom: 
+  parking: 
+  coordinates: MyString

@@ -10,10 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_14_192432) do
+ActiveRecord::Schema.define(version: 2018_11_15_141841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.integer "phone_number"
+    t.boolean "emergency"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_contacts_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.integer "house_number"
+    t.string "street"
+    t.integer "wheelchair"
+    t.boolean "bathroom"
+    t.boolean "parking"
+    t.string "coordinates"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "location_id"
+    t.boolean "wheel_chair"
+    t.text "description"
+    t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_reviews_on_location_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "location_id"
+    t.datetime "trip_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_trips_on_location_id"
+    t.index ["user_id"], name: "index_trips_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
@@ -26,4 +71,9 @@ ActiveRecord::Schema.define(version: 2018_11_14_192432) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "contacts", "users"
+  add_foreign_key "reviews", "locations"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "trips", "locations"
+  add_foreign_key "trips", "users"
 end
