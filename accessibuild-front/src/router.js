@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Locations from './components/Locations.vue'
 import Users from './components/Users.vue'
-import User from './components/User.vue'
 
 Vue.use(Router)
 
@@ -16,14 +15,9 @@ export default new Router({
       component: Locations
     },
     {
-      path: '/users/:userId',
+      path: '/users/:id',
       name: 'users',
       component: Users
-    },
-    {
-      path: '/user/:id',
-      name: 'user',
-      component: User
     }
   ]
 })

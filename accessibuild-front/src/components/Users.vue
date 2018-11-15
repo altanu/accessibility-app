@@ -1,9 +1,6 @@
 <template>
   <div class="Users">
-    <h1> This is a specific user! </h1>
-    <h2>{{ msg }}</h2>
-    </ul>
-
+    <h1>Welcome, {{ user.first_name }}</h1>
   </div>
 </template>
 
@@ -11,13 +8,16 @@
 var axios = require('axios')
 export default {
   name: 'Users',
-  props: {
-    msg: String
+  data () {
+    return {
+      user: null,
+    }
   },
   mounted: function () {
-    axios.get('http://localhost:3000/users/' + this.$route.params.userId)
-      .then(response => (this.msg = response.data))
-      .catch(error => console.log(error))
+    var userId = this.$route.params.id
+      axios.get('http://localhost:3000/users/' + userId + '.json')
+        .then(response => (this.user = response.data))
+        .catch(error => console.log(error))
   }
 }
 </script>
