@@ -25,7 +25,7 @@
 </template>
 
 <script>
-
+var axios = require('axios')
 export default {
   name: 'Register',
   data () {
@@ -44,7 +44,20 @@ export default {
   methods: {
     postUser: function () {
       console.log("Posting!:" + JSON.stringify(this.form));
-    }
+      axios({
+      method: 'post',
+      url: 'http://localhost:3000/api/v2/users',
+      data: this.form,
+      })
+      .then(function (response) {
+          //handle success
+          console.log(response);
+      })
+      .catch(function (response) {
+          //handle error
+          console.log(response);
+      });
+      }
   }
 }
 
