@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-75 p-5">
+  <div class="w-75" style="margin: auto">
   <h1>Register for a new account</h1>
 
   <form v-on:submit.prevent>

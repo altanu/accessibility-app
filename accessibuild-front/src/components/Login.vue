@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-75 p-5">
+  <div class="w-75" style="margin: auto;">
   <h1>Login</h1>
 
   <form v-on:submit.prevent>
