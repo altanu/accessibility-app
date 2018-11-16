@@ -22,9 +22,18 @@ module Api
 
         if @user.save
           puts '@user was saved successfully'
+          payload = { user_id: @user.id }
+          session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
+          tokens = session.login
+
+          response.set_cookie(JWTSessions.access_cookie,
+                              value: tokens[:access],
+                              httponly: true,
+                              secure: Rails.env.production?)
+
           puts @user.inspect
           # puts user_url(@user)
-          render json: @user, status: :created, location: api_v2_users_url(@user)
+          render json: { csrf: tokens[:csrf] }
         else
           render json: @user.errors.full_messages, status: :unprocessable_entity
         end
