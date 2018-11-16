@@ -1,13 +1,13 @@
 <template>
-  <div id="app">
+  <div id="app" style="height: 100%">
     <Navbar v-bind:onClick='setState' v-on:place_update='updateLocation'></Navbar>
-    <div>
-    <div>
-      <div class='d-flex align-self-center' style="width: 100%; height:20px; padding-top: 3.4em">
-        <div style="min-width:60%;">
+    <div style="height: 100%">
+    <div style="height: 100%">
+      <div class='d-flex align-self-center' style="padding-top: 3.4em; height: 100%">
+        <div style="min-width:60%; height: 100%;">
           <Map v-bind:current-place="this.currentLocation"></Map>
         </div>
-        <div style="min-width:40%; padding-top: 2em;">
+        <div style="min-width:40%; padding-top: 2em; height: 100%">
           <transition name='fade'>
             <component v-bind:is='state.right' v-bind:current-place="this.currentLocation"></component>
           </transition>
