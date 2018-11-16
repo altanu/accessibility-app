@@ -19,20 +19,20 @@ export default {
   props: {
     onClick: Function
   },
-  data() {
+  data () {
     return { currentPlace: null }
   },
   methods: {
-    setPlace(place) {
-      this.currentPlace = place;
+    setPlace (place) {
+      this.currentPlace = place
     },
-    addMarker() {
+    addMarker () {
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng()
-        };
-        this.currentPlace = marker;
+        }
+        this.currentPlace = marker
         this.$emit('place_update', this.currentPlace)
       }
     }

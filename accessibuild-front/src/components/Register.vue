@@ -48,18 +48,18 @@ export default {
   methods: {
     postUser: function () {
       axios({
-      method: 'post',
-      url: 'http://localhost:3000/api/v2/users',
-      data: {user: this.form }
+        method: 'post',
+        url: 'http://localhost:3000/api/v2/users',
+        data: { user: this.form }
       })
-      .then(function (response) {
+        .then(function (response) {
           // Handle success
-          console.log(response);
-      })
-      .catch(function (response) {
+          console.log(response)
+        })
+        .catch(function (response) {
           // Handle error
-          console.log(response);
-      })
+          console.log(response)
+        })
     }
   }
 }

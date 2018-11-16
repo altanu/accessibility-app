@@ -17,33 +17,33 @@
 
 <script>
 export default {
-  name: "GoogleMap",
+  name: 'GoogleMap',
   props: {
-    currentPlace: Object,
+    currentPlace: Object
   },
-  data() {
+  data () {
     return {
       // default to Montreal to keep it simple
       center: { lat: 45.508, lng: -73.587 },
       markers: [],
       places: [],
       currentPlace: null
-    };
+    }
   },
 
-  mounted() {
-    this.geolocate();
+  mounted () {
+    this.geolocate()
   },
 
   methods: {
-    geolocate: function() {
+    geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
         this.center = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
-        };
-      });
+        }
+      })
     }
   }
-};
+}
 </script>
