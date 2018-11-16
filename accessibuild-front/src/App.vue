@@ -3,7 +3,7 @@
     <Navbar v-bind:onClick='setState' v-on:place_update='updateLocation'></Navbar>
     <div>
     <div>
-      <div class='d-flex align-self-center' style="width: 100%; height:20px">
+      <div class='d-flex align-self-center' style="width: 100%; height:20px; padding-top: 3.4em">
         <div style="min-width:60%;">
           <Map v-bind:current-place="this.currentLocation"></Map>
         </div>
