@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>Big Container</h1>
-    <div class='container d-flex'>
-      <div class='container flex-fill' id='map'>This is the map component</div>
+    <div class='container-fluid d-flex no-padding'>
+      <div class='container-fluid flex-fill' id='map'>This is the map component</div>
       <div class='container' id='right'>This is the right component</div>
     </div>
   </div>
@@ -22,6 +22,9 @@ export default {
 <style scoped>
 .Container {
   flex-direction: column;
+}
+.no-padding {
+  padding: 0;
 }
 #map {
   background-color: green;
