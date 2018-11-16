@@ -1,5 +1,5 @@
 <template>
-  <footer class='footer'>
+  <footer class='footer fixed-bottom'>
     <div class='container'>
       This is the footer
     </div>

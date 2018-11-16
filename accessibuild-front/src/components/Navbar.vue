@@ -1,5 +1,5 @@
 <template>
-  <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+  <nav class='navbar fixed-top navbar-expand-lg navbar-light bg-light'>
       <form class='form-inline' v-on:submit.prevent>
         <button @click='onClick("RightHome")' class='btn btn-outline-primary'>Home</button>
 
