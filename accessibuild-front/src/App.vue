@@ -26,6 +26,7 @@ import Footer from './components/Footer.vue'
 import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
 import Map from './components/Map.vue'
+import Login from './components/Login.vue'
 
 const store = {
   state: {
@@ -58,6 +59,7 @@ export default {
     Navbar,
     RightHome,
     Register,
+    Login,
     Map
   }
 }
