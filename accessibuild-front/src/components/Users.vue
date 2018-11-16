@@ -31,7 +31,7 @@ export default {
   },
   mounted: function () {
     var userId = this.$route.params.id
-    axios.get('http://localhost:3000/users/api/v1/' + userId)
+    axios.get('http://localhost:3000/api/vi/users/' + userId)
       .then(response => (this.user = response.data))
       .catch(error => console.log(error))
   }
