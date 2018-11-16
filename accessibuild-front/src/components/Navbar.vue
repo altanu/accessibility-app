@@ -7,8 +7,9 @@
           <input class='form-control' ref='autocomplete' type='text' placeholder='Search' aria-label='Search'>
           <button class='btn btn-outline-success' type='submit' style='margin-left: .5rem'>🔍 Search</button>
         </form>
-      
-        <button @click='onClick("Register")' class='btn btn-outline-primary' ref='registerlogin' type='submit'>Login / Register</button>
+
+        <button @click='onClick("Register")' class='btn btn-outline-primary' ref='register' type='submit'>Register</button>
+        <button @click='onClick("Login")' class='btn btn-outline-primary' ref='login' type='submit'>Login</button>
       </form>
   </nav>
 </template>

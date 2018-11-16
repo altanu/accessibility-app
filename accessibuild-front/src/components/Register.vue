@@ -1,49 +1,68 @@
 <template>
 
   <div class="w-75 p-5">
-  <h1>Welcome to the Registration Page!</h1>
+  <h1>Register for a new account</h1>
 
-  <form v-on:submit.prevent="onSubmit">
+  <form v-on:submit.prevent>
     <div class="form-group">
-      <label>First Name</label>
-      <input type="text" name="first_name" class="form-control" v-model="first_name">
+      <input type="text" name="first_name" placeholder="First Name" class="form-control" v-model="form.first_name">
     </div>
     <div class="form-group">
-      <label>Last Name</label>
-      <input type="text" name="last_name" class="form-control" v-model="last_name">
+      <input type="text" name="last_name" placeholder="Last Name" class="form-control" v-model="form.last_name">
     </div>
     <div class="form-group">
-      <label>Email</label>
-      <input type="text" name="email" class="form-control" v-model="email">
+      <input type="text" name="email" placeholder="Email" class="form-control" v-model="form.email">
     </div>
     <div class="form-group">
-      <label>Password</label>
-      <input type="password" name="password" class="form-control" v-model="password">
+      <input type="text" name="phone_number" placeholder="Phone Number" class="form-control" v-model="form.phone_number">
     </div>
     <div class="form-group">
-      <label>Password Confirmation</label>
-      <input type="password" name="password_confirmation" class="form-control" v-model="password_confirmation">
+      <input type="password" name="password" placeholder="Password" class="form-control" v-model="form.password">
     </div>
-    <button type="submit" class="btn btn-success btn-block">Register</button>
+    <div class="form-group">
+      <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control" v-model="form.password_confirmation">
+    </div>
+    <button type="submit" class="btn btn-success btn-block" @click="postUser">Register</button>
   </form>
 </div>
 </template>
 
 <script>
-
+var axios = require('axios')
 export default {
   name: 'Register',
   data () {
     return {
       form: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone_number: "",
+        password: "",
+        password_confirmation: ""
       }
     }
+  },
+  template: {
+  },
+  methods: {
+    postUser: function () {
+      axios({
+      method: 'post',
+      url: 'http://localhost:3000/api/v2/users',
+      data: {user: this.form }
+      })
+      .then(function (response) {
+          //handle success
+          console.log(response);
+      })
+      .catch(function (response) {
+          //handle error
+          console.log(response);
+      });
+      }
   }
 }
+
 
 </script>

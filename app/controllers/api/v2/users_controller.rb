@@ -18,11 +18,15 @@ module Api
       # POST /users
       def create
         @user = User.new(user_params)
+        puts @user.inspect
 
         if @user.save
-          render json: @user, status: :created, location: @user
+          puts '@user was saved successfully'
+          puts @user.inspect
+          # puts user_url(@user)
+          render json: @user, status: :created, location: api_v2_users_url(@user)
         else
-          render json: @user.errors, status: :unprocessable_entity
+          render json: @user.errors.full_messages, status: :unprocessable_entity
         end
       end
 
