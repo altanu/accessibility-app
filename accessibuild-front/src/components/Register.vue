@@ -5,19 +5,19 @@
 
   <form v-on:submit.prevent>
     <div class="form-group">
-      <input type="text" name="first_name" placeholder="First Name" class="form-control" v-model="first_name">
+      <input type="text" name="first_name" placeholder="First Name" class="form-control" v-model="form.first_name">
     </div>
     <div class="form-group">
-      <input type="text" name="last_name" placeholder="Last Name" class="form-control" v-model="last_name">
+      <input type="text" name="last_name" placeholder="Last Name" class="form-control" v-model="form.last_name">
     </div>
     <div class="form-group">
-      <input type="text" name="email" placeholder="Email" class="form-control" v-model="email">
+      <input type="text" name="email" placeholder="Email" class="form-control" v-model="form.email">
     </div>
     <div class="form-group">
-      <input type="password" name="password" placeholder="Password" class="form-control" v-model="password">
+      <input type="password" name="password" placeholder="Password" class="form-control" v-model="form.password">
     </div>
     <div class="form-group">
-      <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control" v-model="password_confirmation">
+      <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control" v-model="form.password_confirmation">
     </div>
     <button type="submit" class="btn btn-success btn-block" @click="postUser">Register</button>
   </form>
@@ -31,11 +31,11 @@ export default {
   data () {
     return {
       form: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        password_confirmation: ""
       }
     }
   },
@@ -44,9 +44,10 @@ export default {
   },
   methods: {
     postUser: function () {
-      console.log("Posting!");
+      console.log("Posting!:" + this.form);
     }
   }
 }
+
 
 </script>
