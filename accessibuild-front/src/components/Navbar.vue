@@ -1,19 +1,23 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div style="display: flex">
-      <form class="form-inline">
-        <input class="form-control" ref="autocomplete" onFocus="value = ''" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit" style="margin-left: .5rem">🔍 Search</button>
+  <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+    <div style='display: flex'>
+      <form class='form-inline'>
+        <input class='form-control' ref='autocomplete' onFocus='value = ""' type='text' placeholder='Search' aria-label='Search'>
+        <button class='btn btn-outline-success' type='submit' style='margin-left: .5rem'>🔍 Search</button>
       </form>
-      <form class="form-inline">
-        <button class="btn btn-outline-primary" ref="registerlogin" type="submit">Login / Register</button>
+      <form class='form-inline' v-on:submit.prevent>
+        <button @click='onClick("Register")' class='btn btn-outline-primary' ref='registerlogin' type='submit'>Login / Register</button>
       </form>
+      <button @click='onClick("RightHome")' class='btn btn-outline-primary'>Home</button>
     </div>
   </nav>
 </template>
 
 <script>
 export default {
+  props: {
+    onClick: Function
+  },
   mounted () {
     this.autocomplete = new google.maps.places.Autocomplete(
       (this.$refs.autocomplete),

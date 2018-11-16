@@ -9,8 +9,8 @@
 var axios = require('axios')
 export default {
   name: 'Locations',
-  data() {
-    return{
+  data () {
+    return {
       msg: String
     }
   },

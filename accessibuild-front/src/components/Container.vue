@@ -9,12 +9,19 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'Container',
-  // components: {
-  //   map,
-  //   right
-  // }
+  components: {
+    Register,
+    RightHome
+  },
+  data: () => {
+    return {
+      state: store.state
+    }
+  }
 }
 </script>
 
