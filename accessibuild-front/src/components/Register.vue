@@ -34,12 +34,12 @@ export default {
   data () {
     return {
       form: {
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone_number: "",
-        password: "",
-        password_confirmation: ""
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone_number: '',
+        password: '',
+        password_confirmation: ''
       }
     }
   },
@@ -48,21 +48,20 @@ export default {
   methods: {
     postUser: function () {
       axios({
-      method: 'post',
-      url: 'http://localhost:3000/api/v2/users',
-      data: {user: this.form }
+        method: 'post',
+        url: 'http://localhost:3000/api/v2/users',
+        data: { user: this.form }
       })
-      .then(function (response) {
-          //handle success
-          console.log(response);
-      })
-      .catch(function (response) {
-          //handle error
-          console.log(response);
-      });
-      }
+        .then(function (response) {
+          // Handle success
+          console.log(response)
+        })
+        .catch(function (response) {
+          // Handle error
+          console.log(response)
+        })
+    }
   }
 }
-
 
 </script>

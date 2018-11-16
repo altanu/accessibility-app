@@ -4,14 +4,18 @@ module Api
       before_action :set_review, only: [:show, :update, :destroy]
 
       # GET /reviews
+
       def index
-        @reviews = Review.all
+        @reference = params[:user_id] ? User.find(params[:user_id]) : Location.find(params[:location_id])
+        @reviews = @reference.reviews
 
         render json: @reviews
       end
 
       # GET /reviews/1
       def show
+        @reference = params[:user_id] ? User.find(params[:user_id]) : Location.find(params[:location_id])
+        @review = @reference.reviews.find(params[:id])
         render json: @review
       end
 
@@ -20,7 +24,7 @@ module Api
         @review = Review.new(review_params)
 
         if @review.save
-          render json: @review, status: :created, location: @review
+          render json: @review, status: :created, location: api_v2_location_reviews_url(@review)
         else
           render json: @review.errors, status: :unprocessable_entity
         end

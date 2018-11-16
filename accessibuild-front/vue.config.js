@@ -6,7 +6,7 @@ module.exports = {
     resolve: {
       extensions: ['.js'],
       alias: {
-        'jquery': 'jquery/dist/jquery.slim.js',
+        'jquery': 'jquery/dist/jquery.slim.js'
       }
     },
     plugins: [
@@ -14,8 +14,8 @@ module.exports = {
         '$': 'jquery',
         jQuery: 'jquery',
         Popper: ['popper.js', 'default'],
-        'Util': "exports-loader?Util!bootstrap/js/dist/util"
-      }),
+        'Util': 'exports-loader?Util!bootstrap/js/dist/util'
+      })
       // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],
     devServer: {

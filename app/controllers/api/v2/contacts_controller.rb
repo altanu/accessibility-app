@@ -23,7 +23,7 @@ module Api
         @contact = Contact.new(contact_params)
 
         if @contact.save
-          render json: @contact, status: :created, location: @contact
+          render json: @contact, status: :created, location: api_v2_user_contacts_url(@contact)
         else
           render json: @contact.errors, status: :unprocessable_entity
         end
