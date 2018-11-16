@@ -5,6 +5,11 @@ module Api
 
       # GET /reviews
       def index
+        if params[:user_id]
+          puts "Looking for reviews based on user"
+        elsif params[:location_id]
+          puts "Looking for reviews based on location"
+        end
         @reviews = Review.all
 
         render json: @reviews
