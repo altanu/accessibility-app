@@ -1,20 +1,21 @@
 <template>
-  <div>
-    <h1>Big Container</h1>
-    <div class='container d-flex'>
-      <div class='container flex-fill' id='map'>This is the map component</div>
-      <div class='container' id='right'>This is the right component</div>
-    </div>
-  </div>
+
 </template>
 
 <script>
+
+
 export default {
-  name: 'Container'
-  // components: {
-  //   map,
-  //   right
-  // }
+  name: 'Container',
+  components: {
+    Register,
+    RightHome
+  },
+  data: () => {
+    return {
+      state: store.state
+    }
+  }
 }
 </script>
 
