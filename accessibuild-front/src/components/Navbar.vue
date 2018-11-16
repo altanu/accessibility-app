@@ -3,9 +3,9 @@
       <form class='form-inline' v-on:submit.prevent>
         <button @click='onClick("RightHome")' class='btn btn-outline-primary'>Home</button>
 
-        <form class='form-inline'>
-          <input class='form-control' ref='autocomplete' type='text' placeholder='Search' aria-label='Search'>
-          <button class='btn btn-outline-success' type='submit' style='margin-left: .5rem'>🔍 Search</button>
+        <form class='form-inline' v-on:submit.prevent>
+          <gmap-autocomplete class='form-control' @place_changed="setPlace"></gmap-autocomplete>
+          <button class='btn btn-outline-success' @click="addMarker">🔍 Search</button>
         </form>
 
         <button @click='onClick("Register")' class='btn btn-outline-primary' ref='register' type='submit'>Register</button>
@@ -19,18 +19,23 @@ export default {
   props: {
     onClick: Function
   },
-  mounted () {
-    this.autocomplete = new google.maps.places.Autocomplete(
-      (this.$refs.autocomplete),
-      {types: ['geocode']}
-    )
-    this.autocomplete.addListener('place_changed', () => {
-      let place = this.autocomplete.getPlace();
-      let address_components = place.address_components;
-      let lat = place.geometry.location.lat();
-      let lon = place.geometry.location.lng();
-      console.log("place", place)
-    })
+  data() {
+    return { currentPlace: null }
+  },
+  methods: {
+    setPlace(place) {
+      this.currentPlace = place;
+    },
+    addMarker() {
+      if (this.currentPlace) {
+        const marker = {
+          lat: this.currentPlace.geometry.location.lat(),
+          lng: this.currentPlace.geometry.location.lng()
+        };
+        this.currentPlace = marker;
+        this.$emit('place_update', this.currentPlace)
+      }
+    }
   }
 }
 </script>
