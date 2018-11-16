@@ -50,7 +50,7 @@ export default {
       axios({
       method: 'post',
       url: 'http://localhost:3000/api/v2/users',
-      data: {user: { first_name: "Test", last_name: "Testerson", email: "test@test.com", password: "secret", password_confirmation: "secret" }}
+      data: {user: this.form }
       })
       .then(function (response) {
           //handle success
