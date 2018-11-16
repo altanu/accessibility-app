@@ -45,6 +45,7 @@ export default {
         .catch(error => this.signinFailed(error))
     },
     signinSuccessful (response) {
+      console.log(response.data.csrf)
       if (!response.data.csrf) {
         this.signinFailed(response)
         return
