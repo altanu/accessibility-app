@@ -3,7 +3,7 @@
   <div class="w-75 p-5">
   <h1>Register for a new account</h1>
 
-  <form v-on:submit.prevent="onSubmit">
+  <form v-on:submit.prevent>
     <div class="form-group">
       <input type="text" name="first_name" placeholder="First Name" class="form-control" v-model="first_name">
     </div>
@@ -19,7 +19,7 @@
     <div class="form-group">
       <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control" v-model="password_confirmation">
     </div>
-    <button type="submit" class="btn btn-success btn-block">Register</button>
+    <button type="submit" class="btn btn-success btn-block" @click="postUser">Register</button>
   </form>
 </div>
 </template>
@@ -37,6 +37,14 @@ export default {
         password: '',
         password_confirmation: ''
       }
+    }
+  },
+  template: {
+
+  },
+  methods: {
+    postUser: function () {
+      console.log("Posting!");
     }
   }
 }

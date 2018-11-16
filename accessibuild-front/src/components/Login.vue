@@ -3,7 +3,7 @@
   <div class="w-75 p-5">
   <h1>Login</h1>
 
-  <form v-on:submit.prevent="onSubmit">
+  <form v-on:submit.prevent>
     <div class="form-group">
       <input type="text" name="email" placeholder="Email" class="form-control" v-model="email">
     </div>
