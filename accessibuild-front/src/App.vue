@@ -2,9 +2,8 @@
   <div id="app">
     <Navbar v-bind:onClick='setState'></Navbar>
     <div>
-    <h1>Big Container</h1>
     <div class='container d-flex'>
-      <div class='container flex-fill' id='map'>This is the map component</div>
+      <Map></Map>
       <transition name='fade'>
         <component v-bind:is='state.right'></component>
       </transition>
@@ -20,6 +19,20 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer.vue'
 import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
+import Map from './components/Map.vue'
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var pos = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+
+    console.log('found html5 location', pos)
+  }, function() {
+    console.log('there was an error');
+  });
+}
 
 const store = {
   state: {
