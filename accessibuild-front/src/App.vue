@@ -17,7 +17,6 @@
 
 <script>
 import Navbar from './components/Navbar'
-// import Container from './components/Container.vue'
 import Footer from './components/Footer.vue'
 import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
@@ -26,7 +25,6 @@ const store = {
   state: {
     right: 'RightHome'
   }
-
 }
 
 export default {
