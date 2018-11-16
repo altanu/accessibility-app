@@ -40,11 +40,10 @@ export default {
     }
   },
   template: {
-
   },
   methods: {
     postUser: function () {
-      console.log("Posting!:" + this.form);
+      console.log("Posting!:" + JSON.stringify(this.form));
     }
   }
 }
