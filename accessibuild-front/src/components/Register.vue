@@ -14,6 +14,9 @@
       <input type="text" name="email" placeholder="Email" class="form-control" v-model="form.email">
     </div>
     <div class="form-group">
+      <input type="text" name="phone_number" placeholder="Phone Number" class="form-control" v-model="form.phone_number">
+    </div>
+    <div class="form-group">
       <input type="password" name="password" placeholder="Password" class="form-control" v-model="form.password">
     </div>
     <div class="form-group">
@@ -34,6 +37,7 @@ export default {
         first_name: "",
         last_name: "",
         email: "",
+        phone_number: "",
         password: "",
         password_confirmation: ""
       }
