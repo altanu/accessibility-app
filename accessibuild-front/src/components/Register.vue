@@ -31,19 +31,19 @@
 
 <script>
 
-  export default {
-    name: 'Register',
-    data() {
-      return {
-        form: {
-          first_name: "",
-          last_name: "",
-          email: "",
-          password: "",
-          password_confirmation: ""
-        }
+export default {
+  name: 'Register',
+  data () {
+    return {
+      form: {
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''
       }
     }
   }
+}
 
 </script>
