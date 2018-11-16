@@ -37,7 +37,8 @@ osm_data.each do |place|
     Location.create!(
       house_number: place["addr:housenumber"], 
       street: place["addr:street"], 
-      wheelchair: place["wheelchair"])
+      wheelchair: place["wheelchair"],
+      place_id: place["place_id"])
   end
 end
 
