@@ -43,11 +43,13 @@ export default {
   },
   methods: {
     postUser: function () {
-      console.log("Posting!:" + JSON.stringify(this.form));
+      var dataToSend = JSON.stringify(this.form)
+      var newUser = { "user": dataToSend }
+      console.log(newUser)
       axios({
       method: 'post',
       url: 'http://localhost:3000/api/v2/users',
-      data: this.form,
+      data: newUser,
       })
       .then(function (response) {
           //handle success
