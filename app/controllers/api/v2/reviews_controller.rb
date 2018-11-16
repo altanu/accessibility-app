@@ -4,13 +4,10 @@ module Api
       before_action :set_review, only: [:show, :update, :destroy]
 
       # GET /reviews
+
       def index
-        if params[:user_id]
-          puts "Looking for reviews based on user"
-        elsif params[:location_id]
-          puts "Looking for reviews based on location"
-        end
-        @reviews = Review.all
+        @reference = params[:user_id] ? User.find(params[:user_id]) : Location.find(params[:location_id])
+        @reviews = @reference.reviews
 
         render json: @reviews
       end
