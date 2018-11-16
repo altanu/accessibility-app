@@ -1,7 +1,7 @@
 <template>
 
   <div class="w-75 p-5">
-  <h1>Welcome to the Login Page!</h1>
+  <h1>Welcome to the Registration Page!</h1>
 
   <form v-on:submit.prevent="onSubmit">
     <div class="form-group">
