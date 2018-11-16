@@ -14,6 +14,8 @@ module Api
 
       # GET /reviews/1
       def show
+        @reference = params[:user_id] ? User.find(params[:user_id]) : Location.find(params[:location_id])
+        @review = @reference.reviews.find(params[:id])
         render json: @review
       end
 
