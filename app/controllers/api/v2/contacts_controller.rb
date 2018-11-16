@@ -5,13 +5,16 @@ module Api
 
       # GET /contacts
       def index
-        @contacts = Contact.all
+        @user = User.find(params[:user_id])
+        @contacts = @user.contacts
 
         render json: @contacts
       end
 
       # GET /contacts/1
       def show
+        @user = User.find(params[:user_id])
+        @contacts = @user.contacts.find(params[:id])
         render json: @contact
       end
 
