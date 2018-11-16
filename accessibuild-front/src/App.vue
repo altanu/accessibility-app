@@ -5,7 +5,9 @@
     <h1>Big Container</h1>
     <div class='container d-flex'>
       <div class='container flex-fill' id='map'>This is the map component</div>
-      <component v-bind:is='state.right'></component>
+      <transition name='fade'>
+        <component v-bind:is='state.right'></component>
+      </transition>
     </div>
   </div>
     <router-view/>
@@ -51,3 +53,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.fade-enter-active {
+  transition: opacity 1.5s;
+}
+.fade-leave-active {
+  opacity: 0;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
