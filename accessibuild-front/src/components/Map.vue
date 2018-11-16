@@ -2,7 +2,7 @@
   <div>
     <gmap-map
       :center="currentPlace"
-      :zoom="24"
+      :zoom="zoom"
       style="min-width:100%;  height: 800px;"
     >
       <gmap-marker
@@ -25,6 +25,7 @@ export default {
     return {
       // default to Montreal to keep it simple
       center: { lat: 45.508, lng: -73.587 },
+      zoom: 16,
       markers: [],
       places: [],
       currentPlace: null
