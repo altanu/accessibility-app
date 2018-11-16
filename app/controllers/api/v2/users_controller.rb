@@ -20,6 +20,7 @@ module Api
         @user = User.new(user_params)
 
         if @user.save
+          puts '@user was saved successfully'
           render json: @user, status: :created, location: @user
         else
           render json: @user.errors, status: :unprocessable_entity
@@ -48,7 +49,7 @@ module Api
 
         # Only allow a trusted parameter "white list" through.
         def user_params
-          params.permit(:first_name, :last_name, :email, :phone_number, :password, :password_confirmation)
+          params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :password, :password_confirmation)
         end
     end
   end
