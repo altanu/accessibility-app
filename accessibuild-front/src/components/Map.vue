@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div style="height: 100%">
     <gmap-map
       :center="currentPlace"
       :zoom="zoom"
-      style="min-width:100%;  height: 800px;"
+      style="min-width:50%; height: 100%"
     >
       <gmap-marker
         :key="index"
