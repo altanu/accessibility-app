@@ -42,7 +42,8 @@ export default {
   data: () => {
     return {
       state: store.state,
-      currentLocation: {}
+      // default to montreal
+      currentLocation: { lat: 45.508, lng: -73.587 }
     }
   },
   methods: {
@@ -51,7 +52,6 @@ export default {
     },
     updateLocation (place) {
       this.currentLocation = place
-      console.log('updated location', this.currentLocation)
     }
   },
   components: {
