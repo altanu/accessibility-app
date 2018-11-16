@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div style="height: 100%">
     <gmap-map
       :center="currentPlace"
-      :zoom="24"
-      style="min-width:100%;  height: 800px;"
+      :zoom="zoom"
+      style="min-width:50%; height: 100%"
     >
       <gmap-marker
         :key="index"
@@ -25,6 +25,7 @@ export default {
     return {
       // default to Montreal to keep it simple
       center: { lat: 45.508, lng: -73.587 },
+      zoom: 16,
       markers: [],
       places: [],
       currentPlace: null

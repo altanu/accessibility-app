@@ -20,7 +20,7 @@ module Api
         @location = Location.new(location_params)
 
         if @location.save
-          render json: @location, status: :created, location: @location
+          render json: @location, status: :created, location: api_v2_locations_url(@location)
         else
           render json: @location.errors, status: :unprocessable_entity
         end

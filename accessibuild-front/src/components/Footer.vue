@@ -1,7 +1,6 @@
 <template>
-  <footer class='footer'>
+  <footer class='footer fixed-bottom'>
     <div class='container'>
-      This is the footer
     </div>
   </footer>
 </template>
@@ -17,7 +16,7 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 60px;
+  height: 10px;
   line-height: 60px;
   background-color: #f5f5f5;
 }
