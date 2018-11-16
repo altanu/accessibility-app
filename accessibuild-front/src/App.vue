@@ -9,7 +9,7 @@
         </div>
         <div style="min-width:40%">
           <transition name='fade'>
-            <component v-bind:is='state.right'></component>
+            <component v-bind:is='state.right' v-bind:current-place="this.currentLocation"></component>
           </transition>
         </div>
       </div>
@@ -49,9 +49,8 @@ export default {
       this.state.right = stateValue
     },
     updateLocation (place) {
-      console.log("PLACE", place)
       this.currentLocation = place
-      console.log("CURRENTLOCATION", this.currentLocation)
+      console.log('updated location', this.currentLocation)
     }
   },
   components: {
