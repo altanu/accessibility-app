@@ -3,9 +3,9 @@
       <form class='form-inline' v-on:submit.prevent>
         <button @click='onClick("RightHome")' class='btn btn-outline-primary'>Home</button>
 
-        <form class='form-inline'>
-          <gmap-autocomplete class='form-control' @place_changed="moveMap"></gmap-autocomplete>
-          <button class='btn btn-outline-success' type='submit' style='margin-left: .5rem'>🔍 Search</button>
+        <form class='form-inline' v-on:submit.prevent>
+          <gmap-autocomplete class='form-control' @place_changed="setPlace"></gmap-autocomplete>
+          <button class='btn btn-outline-success' @click="addMarker">🔍 Search</button>
         </form>
       
         <button @click='onClick("Register")' class='btn btn-outline-primary' ref='registerlogin' type='submit'>Login / Register</button>
@@ -18,9 +18,22 @@ export default {
   props: {
     onClick: Function
   },
+  data() {
+    return { currentPlace: null }
+  },
   methods: {
-    moveMap(place) {
-      this.$emit('newLocation',place)
+    setPlace(place) {
+      this.currentPlace = place;
+    },
+    addMarker() {
+      if (this.currentPlace) {
+        const marker = {
+          lat: this.currentPlace.geometry.location.lat(),
+          lng: this.currentPlace.geometry.location.lng()
+        };
+        this.currentPlace = marker;
+        this.$emit('place_update', this.currentPlace)
+      }
     }
   }
 }

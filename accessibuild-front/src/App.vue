@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Navbar v-bind:onClick='setState'></Navbar>
+    <Navbar v-bind:onClick='setState' v-on:place_update='updateLocation'></Navbar>
     <div>
     <div>
       <div class='d-flex'>
         <div style="min-width:60%">
-          <Map></Map>
+          <Map v-bind:current-place="this.currentLocation"></Map>
         </div>
         <div style="min-width:40%">
           <transition name='fade'>
@@ -47,6 +47,11 @@ export default {
   methods: {
     setState (stateValue) {
       this.state.right = stateValue
+    },
+    updateLocation (place) {
+      console.log("PLACE", place)
+      this.currentLocation = place
+      console.log("CURRENTLOCATION", this.currentLocation)
     }
   },
   components: {

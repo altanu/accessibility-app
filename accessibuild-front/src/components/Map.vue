@@ -3,7 +3,7 @@
     <gmap-map
       :center="center"
       :zoom="12"
-      style="width:100%;  height: 400px;"
+      style="width:100%;  height: 800px;"
     >
       <gmap-marker
         :key="index"
@@ -18,9 +18,14 @@
 <script>
 export default {
   name: "GoogleMap",
+  props: {
+    currentPlace: Object,
+  },
   data() {
     return {
-      center: { lat: 32.508, lng: -32.587 },
+      // default to Montreal to keep it simple
+      // change this to whatever makes sense
+      center: this.currentPlace,
       markers: [],
       places: [],
       currentPlace: null
