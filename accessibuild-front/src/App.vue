@@ -26,23 +26,12 @@ import Footer from './components/Footer.vue'
 import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
 import Map from './components/Map.vue'
-import Vue from 'vue'
-import Vuex from 'vuex'
-Vue.use(Vuex)
 
-const store = new Vuex.Store({
+const store = {
   state: {
-    right: 'RightHome',
-    mapCenter : { lat: 45.508, lng: -73.587 },
-  },
-  mutations: {
-    updateMap (state, newLoc) {
-      console.log("Original state mapcenter", state.mapCenter)
-      console.log("received new location", newLoc)
-      state.mapCenter = newLoc
-    }
+    right: 'RightHome'
   }
-})
+}
 
 export default {
   name: 'App',
@@ -52,7 +41,7 @@ export default {
   data: () => {
     return {
       state: store.state,
-      currentLocation: store.state.mapCenter
+      currentLocation: {}
     }
   },
   methods: {
@@ -61,7 +50,7 @@ export default {
     },
     updateLocation (place) {
       console.log("PLACE", place)
-      store.commit('updateMap', place)
+      this.currentLocation = place
       console.log("CURRENTLOCATION", this.currentLocation)
     }
   },
