@@ -2,11 +2,17 @@
   <div id="app">
     <Navbar v-bind:onClick='setState'></Navbar>
     <div>
-    <div class='container d-flex'>
-      <Map></Map>
-      <transition name='fade'>
-        <component v-bind:is='state.right'></component>
-      </transition>
+    <div>
+      <div class='d-flex'>
+        <div style="min-width:60%">
+          <Map></Map>
+        </div>
+        <div style="min-width:40%">
+          <transition name='fade'>
+            <component v-bind:is='state.right'></component>
+          </transition>
+        </div>
+      </div>
     </div>
   </div>
     <router-view/>
@@ -21,19 +27,6 @@ import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
 import Map from './components/Map.vue'
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    var pos = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    };
-
-    console.log('found html5 location', pos)
-  }, function() {
-    console.log('there was an error');
-  });
-}
-
 const store = {
   state: {
     right: 'RightHome'
@@ -47,7 +40,8 @@ export default {
   },
   data: () => {
     return {
-      state: store.state
+      state: store.state,
+      currentLocation: {}
     }
   },
   methods: {

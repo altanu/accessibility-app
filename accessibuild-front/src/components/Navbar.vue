@@ -4,7 +4,7 @@
         <button @click='onClick("RightHome")' class='btn btn-outline-primary'>Home</button>
 
         <form class='form-inline'>
-          <input class='form-control' ref='autocomplete' type='text' placeholder='Search' aria-label='Search'>
+          <gmap-autocomplete class='form-control' @place_changed="moveMap"></gmap-autocomplete>
           <button class='btn btn-outline-success' type='submit' style='margin-left: .5rem'>🔍 Search</button>
         </form>
       
@@ -18,18 +18,10 @@ export default {
   props: {
     onClick: Function
   },
-  mounted () {
-    this.autocomplete = new google.maps.places.Autocomplete(
-      (this.$refs.autocomplete),
-      {types: ['geocode']}
-    )
-    this.autocomplete.addListener('place_changed', () => {
-      let place = this.autocomplete.getPlace();
-      let address_components = place.address_components;
-      let lat = place.geometry.location.lat();
-      let lon = place.geometry.location.lng();
-      console.log("place", place)
-    })
+  methods: {
+    moveMap(place) {
+      this.$emit('newLocation',place)
+    }
   }
 }
 </script>
