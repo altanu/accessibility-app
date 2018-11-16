@@ -1,28 +1,23 @@
 <template>
 
   <div class="w-75 p-5">
-  <h1>Welcome to the Registration Page!</h1>
+  <h1>Register for a new account</h1>
 
   <form v-on:submit.prevent="onSubmit">
     <div class="form-group">
-      <label>First Name</label>
-      <input type="text" name="first_name" class="form-control" v-model="first_name">
+      <input type="text" name="first_name" placeholder="First Name" class="form-control" v-model="first_name">
     </div>
     <div class="form-group">
-      <label>Last Name</label>
-      <input type="text" name="last_name" class="form-control" v-model="last_name">
+      <input type="text" name="last_name" placeholder="Last Name" class="form-control" v-model="last_name">
     </div>
     <div class="form-group">
-      <label>Email</label>
-      <input type="text" name="email" class="form-control" v-model="email">
+      <input type="text" name="email" placeholder="Email" class="form-control" v-model="email">
     </div>
     <div class="form-group">
-      <label>Password</label>
-      <input type="password" name="password" class="form-control" v-model="password">
+      <input type="password" name="password" placeholder="Password" class="form-control" v-model="password">
     </div>
     <div class="form-group">
-      <label>Password Confirmation</label>
-      <input type="password" name="password_confirmation" class="form-control" v-model="password_confirmation">
+      <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control" v-model="password_confirmation">
     </div>
     <button type="submit" class="btn btn-success btn-block">Register</button>
   </form>
