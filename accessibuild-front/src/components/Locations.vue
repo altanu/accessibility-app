@@ -15,7 +15,7 @@ export default {
     }
   },
   mounted: function () {
-    axios.get('http://localhost:3000/api/v1/locations.json')
+    axios.get('http://localhost:3000/api/v2/locations.json')
       .then(response => (this.msg = response.data))
       .catch(error => console.log(error))
   }
