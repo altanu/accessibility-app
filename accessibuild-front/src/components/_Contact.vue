@@ -1,5 +1,8 @@
 <template>
-  <dd v-bind:class="[ contactInfo.emergency ? 'text-danger' : 'text-success' ]">{{ fullName }} - {{ contactInfo.phone_number }} - {{ contactInfo.email }} <button @click='setForm'>Update</button><button>Remove</button></dd>
+  <form v-if="isForm">
+    <input type="text" name="text" placeholder="text">
+  </form>
+  <p v-else v-bind:class="[ contactInfo.emergency ? 'text-danger' : 'text-success' ]">{{ fullName }} - {{ contactInfo.phone_number }} - {{ contactInfo.email }} <button @click='setForm'>Update</button><button>Remove</button></p>
 </template>
 
 <script>

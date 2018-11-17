@@ -13,10 +13,9 @@
       <dd>{{ user.email || 'No email'}}</dd>
     </dl>
     <p>Contacts</p>
-    <dl v-for="contact in contacts">
-      <dt>A contact</dt>
+    <div v-for="contact in contacts">
       <Contact :contact='contact'></Contact>
-    </dl>
+    </div>
   </div>
 </template>
 
