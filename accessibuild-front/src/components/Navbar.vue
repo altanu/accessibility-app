@@ -4,8 +4,8 @@
         <button @click='onClick("RightHome")' class='btn btn-outline-primary'>Home</button>
 
         <form class='form-inline' v-on:submit.prevent>
-          <gmap-autocomplete class='form-control' @place_changed="setPlace"></gmap-autocomplete>
-          <button class='btn btn-outline-success' @click="addMarker">🔍 Search</button>
+           <input id="pac-input" class="form-control" type="text" placeholder="Search keywords or addresses">
+          <button class='btn btn-outline-success' @click="setQuery">🔍 Search</button>
         </form>
 
         <button @click='onClick("Register")' class='btn btn-outline-primary' ref='register' type='submit'>Register</button>
@@ -17,6 +17,7 @@
         <button @click='onClick("Contacts")' class='btn btn-outline-primary' type='submit'>Contacts</button>
 
         <button @click='signOut' class='btn btn-outline-primary' type='submit'>Log Out</button>
+       
 
       </form>
   </nav>
@@ -36,8 +37,9 @@ export default {
     setPlace (place) {
       this.currentPlace = place
     },
-    addMarker () {
+    setQuery () {
       if (this.currentPlace) {
+        console.log("what the search bar is sending",this.currentPlace)
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng()
@@ -54,7 +56,8 @@ export default {
           this.$router.replace('/')
         })
         .catch(error => this.setError(error, 'Cannot sign out'))
-    }
-  }
+    },
+  },
+
 }
 </script>
