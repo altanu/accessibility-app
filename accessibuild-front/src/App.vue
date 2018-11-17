@@ -28,6 +28,7 @@ import RightHome from './components/RightHome.vue'
 import Map from './components/Map.vue'
 import Login from './components/Login.vue'
 import Contacts from './components/Contacts.vue'
+import Profile from './components/Profile.vue'
 
 const store = {
   state: {
@@ -62,7 +63,8 @@ export default {
     Register,
     Login,
     Map,
-    Contacts
+    Contacts,
+    Profile
   }
 }
 </script>
