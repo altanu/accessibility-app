@@ -20,13 +20,9 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import Navbar from './components/Navbar'
-=======
 import SubmitReview from './components/SubmitReview.vue'
 import Navbar from './components/Navbar.vue'
 // import Footer from './components/Footer.vue'
->>>>>>> 60e834a454c884a7716240b79f0f5a7d2322ce39
 import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
 import Map from './components/Map.vue'
@@ -69,9 +65,7 @@ export default {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         })
-      }),
-    sendMessage (message) {
-      this.messageForChildren = message
+      })
     }
   },
   components: {
