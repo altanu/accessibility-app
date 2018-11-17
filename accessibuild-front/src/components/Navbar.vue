@@ -9,8 +9,13 @@
         </form>
 
         <button @click='onClick("Register")' class='btn btn-outline-primary' ref='register' type='submit'>Register</button>
+
         <button @click='onClick("Login")' class='btn btn-outline-primary' ref='login' type='submit'>Login</button>
+
+        <button @click='onClick("Profile")' class='btn btn-outline-primary' ref='profile' type='submit'>Profile</button>
+
         <button @click='onClick("Contacts")' class='btn btn-outline-primary' type='submit'>Contacts</button>
+
         <button @click='signOut' class='btn btn-outline-primary' type='submit'>Log Out</button>
        
 
@@ -24,7 +29,9 @@ export default {
     onClick: Function
   },
   data () {
-    return { currentPlace: null }
+    return {
+      currentPlace: null
+    }
   },
   methods: {
     setPlace (place) {
