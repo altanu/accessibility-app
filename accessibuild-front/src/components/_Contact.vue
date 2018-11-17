@@ -25,11 +25,8 @@ export default {
       contactInfo: this.contact
     }
   },
-  mounted: function () {
-    console.log("I am a contect of number " + this.contactInfo.id + ". I am alive!")
-  },
   computed: {
-    fullName: function() {
+    fullName: function () {
       return this.contactInfo.first_name + ' ' + this.contactInfo.last_name
     }
   },
@@ -43,16 +40,16 @@ export default {
     updateContact: function () {
       var url = this.buildUrl()
       axios.put(url, { contact: this.contactInfo })
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error))
-      .then( () => this.setForm())
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error))
+        .then(() => this.setForm())
     },
     deleteContact: function () {
       var url = this.buildUrl()
       axios.delete(url)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error))
-      .then( () => this.triggerRerender())
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error))
+        .then(() => this.triggerRerender())
     },
     buildUrl: function () {
       return 'http://localhost:3000/api/v2/users/' + this.contactInfo.user_id + '/contacts/' + this.contactInfo.id
