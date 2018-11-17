@@ -15,7 +15,7 @@
     <div id="contacts-block" v-if="hasContacts">
       <h4>Contacts</h4>
       <div v-for="contact in contacts">
-        <Contact :contact='contact' :trigger-rerender="fetchUserData"></Contact>
+        <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
       </div>
     </div>
     <h4 v-else>No contacts here... Let's add some!</h4>
@@ -50,6 +50,10 @@ export default {
       .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userId + '/contacts')
         .then(response => (this.contacts = response.data))
         .catch(error => console.log(error)))
+    },
+    refreshContacts: function () {
+      this.contacts = {}
+      this.fetchUserData()
     }
   },
   components: {
