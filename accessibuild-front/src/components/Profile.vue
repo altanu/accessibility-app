@@ -5,10 +5,12 @@
     <p> My parent says: {{ userId }}</p>
 
     <dl>
-      <dt>Thing</dt>
-      <dd>Description of Thing</dd>
-      <dt>Thing</dt>
-      <dd>Description of Another Thing</dd>
+      <dt>First Name</dt>
+      <dd>{{ user.first_name }}</dd>
+      <dt>Last Name</dt>
+      <dd>{{ user.last_name }}</dd>
+      <dt>Email</dt>
+      <dd>{{ user.email }}</dd>
     </dl>
   </div>
 </template>
@@ -18,11 +20,16 @@
 export default {
   name: 'Profile',
   props: {
-    userId: Number
+    userId: Number,
   },
   data () {
     return {
-      msg: 'Component loaded!'
+      msg: 'Component loaded!',
+      user: {
+        first_name: "Test",
+        last_name: "Testerson",
+        email: "testing@email.com"
+      }
     }
   }
 }
