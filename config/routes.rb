@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  post 'sessions', controller: :sessions, action: :create
+  delete 'sessions', controller: :sessions, action: :destroy
+  post 'refresh', controller: :refresh, action: :create
+
   namespace :api do
     namespace :v1 do
       resources :users do

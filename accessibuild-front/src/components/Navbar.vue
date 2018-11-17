@@ -10,6 +10,9 @@
 
         <button @click='onClick("Register")' class='btn btn-outline-primary' ref='register' type='submit'>Register</button>
         <button @click='onClick("Login")' class='btn btn-outline-primary' ref='login' type='submit'>Login</button>
+        <button @click='onClick("Contacts")' class='btn btn-outline-primary' type='submit'>Contacts</button>
+        <button @click='signOut' class='btn btn-outline-primary' type='submit'>Log Out</button>
+
       </form>
   </nav>
 </template>
@@ -35,6 +38,15 @@ export default {
         this.currentPlace = marker
         this.$emit('place_update', this.currentPlace)
       }
+    },
+    signOut () {
+      this.$http.secured.delete('/sessions')
+        .then(response => {
+          delete localStorage.csrf
+          delete localStorage.signedIn
+          this.$router.replace('/')
+        })
+        .catch(error => this.setError(error, 'Cannot sign out'))
     }
   }
 }

@@ -22,7 +22,7 @@
     <div class="form-group">
       <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control" v-model="form.password_confirmation">
     </div>
-    <button type="submit" class="btn btn-success btn-block" @click="postUser">Register</button>
+    <button type="submit" class="btn btn-success btn-block" @click="signup">Register</button>
   </form>
 </div>
 </template>
@@ -39,27 +39,38 @@ export default {
         email: '',
         phone_number: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        error: ''
       }
     }
   },
   template: {
   },
   methods: {
-    postUser: function () {
-      axios({
-        method: 'post',
-        url: 'http://localhost:3000/api/v2/users',
-        data: { user: this.form }
-      })
-        .then(function (response) {
-          // Handle success
-          console.log(response)
-        })
-        .catch(function (response) {
-          // Handle error
-          console.log(response)
-        })
+    signup () {
+      this.$http.plain.post('/api/v2/users', { user: this.form })
+        .then(response => this.signupSuccessful(response))
+        .catch(error => this.signupFailed(error))
+    },
+    signupSuccessful (response) {
+      if (!response.data.csrf) {
+        this.signupFailed(response)
+        return
+      }
+      localStorage.csrf = response.data.csrf
+      localStorage.signedIn = true
+      this.error = ''
+      // this.$router.replace('/home')
+    },
+    signupFailed (error) {
+      this.error = (error.response && error.response.data && error.response.data.error) || 'Something went wrong'
+      delete localStorage.csrf
+      delete localStorage.signedIn
+    },
+    checkSignedIn () {
+      if (localStorage.signedIn) {
+        // this.$router.replace('/home')
+      }
     }
   }
 }
