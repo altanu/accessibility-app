@@ -7,9 +7,9 @@
         <div style="min-width:60%; height: 100%;">
           <Map v-bind:current-place="this.currentLocation"></Map>
         </div>
-        <div style="min-width:40%; padding-top: 2em; height: 100%">
+        <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
           <transition name='fade'>
-            <component v-bind:is='state.right' v-bind:current-place="this.currentLocation" v-bind:onClick='setState'></component>
+            <component v-bind:is='state.right' v-bind:current-place="this.currentLocation" v-bind:onClick='setState' :user-id="this.userId"></component>
           </transition>
         </div>
       </div>
@@ -29,6 +29,7 @@ import RightHome from './components/RightHome.vue'
 import Map from './components/Map.vue'
 import Login from './components/Login.vue'
 import Contacts from './components/Contacts.vue'
+import Profile from './components/Profile.vue'
 
 const store = {
   state: {
@@ -45,7 +46,8 @@ export default {
     return {
       state: store.state,
       // default to montreal
-      currentLocation: { lat: 45.508, lng: -73.587 }
+      currentLocation: { lat: 45.508, lng: -73.587 },
+      userId: 1
     }
   },
   methods: {
@@ -54,6 +56,9 @@ export default {
     },
     updateLocation (place) {
       this.currentLocation = place
+    },
+    sendMessage (message) {
+      this.messageForChildren = message
     }
   },
   components: {
@@ -64,7 +69,8 @@ export default {
     Login,
     Map,
     Contacts,
-    SubmitReview
+    Profile,
+    SubmitReview,
   }
 }
 </script>
