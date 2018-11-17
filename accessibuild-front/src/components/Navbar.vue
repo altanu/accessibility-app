@@ -10,6 +10,8 @@
 
         <button @click='onClick("Register")' class='btn btn-outline-primary' ref='register' type='submit'>Register</button>
         <button @click='onClick("Login")' class='btn btn-outline-primary' ref='login' type='submit'>Login</button>
+        <button @click='onClick("Contacts")' class='btn btn-outline-primary' type='submit'>Contacts</button>
+
       </form>
   </nav>
 </template>
