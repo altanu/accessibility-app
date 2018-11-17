@@ -33,13 +33,13 @@
 
 <script>
 
-var axios = require('axios')
 import Contact from './_Contact.vue'
+var axios = require('axios')
 
 export default {
   name: 'Profile',
   props: {
-    userId: Number,
+    userId: Number
   },
   data () {
     return {
@@ -49,10 +49,10 @@ export default {
       makingNewContact: false,
       newContact: {
         user_id: this.userId,
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone_number: "",
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone_number: '',
         emergency: false
       }
     }
@@ -63,41 +63,41 @@ export default {
   methods: {
     fetchUserData: function () {
       axios.get('http://localhost:3000/api/v2/users/' + this.userId)
-      .then(response => (this.user = response.data))
-      .catch(error => console.log(error))
-      .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userId + '/contacts')
-        .then(response => (this.contacts = response.data))
-        .catch(error => console.log(error)))
+        .then(response => (this.user = response.data))
+        .catch(error => console.log(error))
+        .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userId + '/contacts')
+          .then(response => (this.contacts = response.data))
+          .catch(error => console.log(error)))
     },
     refreshContacts: function () {
       this.contacts = {}
       this.fetchUserData()
     },
-    toggleForm: function() {
+    toggleForm: function () {
       this.makingNewContact = !this.makingNewContact
     },
-    pushNewContact: function() {
+    pushNewContact: function () {
       var url = this.buildUrl()
-      axios.post(url, {contact: this.newContact})
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error))
-      .then(() => {
-        this.toggleForm()
-        this.emptyFields()
-        this.reRender()
-      })
+      axios.post(url, { contact: this.newContact })
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error))
+        .then(() => {
+          this.toggleForm()
+          this.emptyFields()
+          this.reRender()
+        })
     },
-    buildUrl: function() {
+    buildUrl: function () {
       return 'http://localhost:3000/api/v2/users/' + this.newContact.user_id + '/contacts'
     },
-    emptyFields: function() {
-      this.newContact.first_name = ""
-      this.newContact.last_name = ""
-      this.newContact.email = ""
-      this.newContact.phone_number = ""
+    emptyFields: function () {
+      this.newContact.first_name = ''
+      this.newContact.last_name = ''
+      this.newContact.email = ''
+      this.newContact.phone_number = ''
       this.newContact.emergency = false
     },
-    reRender: function() {
+    reRender: function () {
       this.contacts = {}
       this.fetchUserData()
     }
@@ -107,7 +107,7 @@ export default {
   },
   computed: {
     hasContacts: function () {
-      return Object.keys(this.contacts).length !== 0 ? true : false
+      return Object.keys(this.contacts).length !== 0
     }
   }
 }
