@@ -9,7 +9,7 @@
         </div>
         <div style="min-width:40%; padding-top: 2em; height: 100%">
           <transition name='fade'>
-            <component v-bind:is='state.right' v-bind:current-place="this.currentLocation"></component>
+            <component v-bind:is='state.right' v-bind:current-place="this.currentLocation" :message-from-parent="this.messageForChildren"></component>
           </transition>
         </div>
       </div>
@@ -45,7 +45,8 @@ export default {
     return {
       state: store.state,
       // default to montreal
-      currentLocation: { lat: 45.508, lng: -73.587 }
+      currentLocation: { lat: 45.508, lng: -73.587 },
+      messageForChildren: 'No message yet.'
     }
   },
   methods: {
@@ -54,6 +55,9 @@ export default {
     },
     updateLocation (place) {
       this.currentLocation = place
+    },
+    sendMessage (message) {
+      this.messageForChildren = message
     }
   },
   components: {
