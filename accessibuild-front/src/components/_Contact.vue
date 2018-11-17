@@ -7,7 +7,7 @@
     <input type="checkbox" name="emergency" v-model="contactInfo.emergency">
     <button type='submit' @click='updateContact'>Save</button>
   </form>
-  <p v-else v-bind:class="[ contactInfo.emergency ? 'text-danger' : 'text-success' ]">{{ fullName }} - {{ contactInfo.phone_number }} - {{ contactInfo.email }} <button @click='setForm'>Update</button><button>Remove</button></p>
+  <p v-else v-bind:class="[ contactInfo.emergency ? 'text-danger' : 'text-success' ]">{{ fullName }} - {{ contactInfo.phone_number }} - {{ contactInfo.email }} <button @click='setForm'>Update</button><button @click='deleteContact'>Remove</button></p>
 </template>
 
 <script>
@@ -37,13 +37,18 @@ export default {
       this.contactInfo = this.contact
     },
     updateContact: function () {
-      console.log('Updating contact')
       var url = this.buildUrl()
       axios.put(url, { contact: this.contactInfo })
       .then((response) => console.log(response))
       .catch((error) => console.log(error))
       .then( () => this.setForm())
-
+    },
+    deleteContact: function () {
+      var url = this.buildUrl()
+      axios.delete(url)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error))
+      .then( () => this.setForm())
     },
     buildUrl: function () {
       return 'http://localhost:3000/api/v2/users/' + this.contactInfo.user_id + '/contacts/' + this.contactInfo.id
