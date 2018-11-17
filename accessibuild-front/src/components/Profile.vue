@@ -23,7 +23,7 @@
 <script>
 
 var axios = require('axios')
-import Contact from './Contact.vue'
+import Contact from './_Contact.vue'
 
 export default {
   name: 'Profile',

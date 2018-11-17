@@ -1,5 +1,5 @@
 <template>
-  <dd>{{ fullName }} - {{ contact.phone_number }} - {{ contact.email }} </dd>
+  <dd v-bind:class="[ contact.emergency ? 'text-danger' : 'text-success' ]">{{ fullName }} - {{ contact.phone_number }} - {{ contact.email }} <button>Update</button><button>Remove</button></dd>
 </template>
 
 <script>
