@@ -19,6 +19,7 @@
       </div>
     </div>
     <h4 v-else>No contacts here... Let's add some!</h4>
+    <button v-if="!makingNewContact">Create New Contact</button>
   </div>
 </template>
 
@@ -36,7 +37,8 @@ export default {
     return {
       msg: 'Component loaded!',
       user: {},
-      contacts: {}
+      contacts: {},
+      makingNewContact: false
     }
   },
   mounted: function () {
