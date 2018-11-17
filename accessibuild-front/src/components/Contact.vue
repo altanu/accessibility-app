@@ -1,5 +1,5 @@
 <template>
-  <p>I'm a contact</p>
+  <dd>I'm a contact!</dd>
 </template>
 
 <script>

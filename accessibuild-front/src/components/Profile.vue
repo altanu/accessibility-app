@@ -14,14 +14,16 @@
     </dl>
     <p>Contacts</p>
     <dl v-for="contact in contacts">
-      <dt>Name</dt>
-      <dd>{{ contact.first_name }} {{ contact.last_name }} </dd>
+      <dt>A contact</dt>
+      <Contact></Contact>
     </dl>
   </div>
 </template>
 
 <script>
+
 var axios = require('axios')
+import Contact from './Contact.vue'
 
 export default {
   name: 'Profile',
@@ -47,6 +49,9 @@ export default {
         .then(response => (this.contacts = response.data))
         .catch(error => console.log(error)))
     }
+  },
+  components: {
+    Contact
   }
 }
 
