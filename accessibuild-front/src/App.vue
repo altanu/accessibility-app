@@ -16,7 +16,6 @@
     </div>
   </div>
     <router-view/>
-    <!-- <Footer></Footer> -->
   </div>
 </template>
 
@@ -42,6 +41,9 @@ export default {
   props: {
     msg: String
   },
+  mounted () {
+    this.geolocate();
+  },
   data: () => {
     return {
       state: store.state,
@@ -57,8 +59,13 @@ export default {
     updateLocation (place) {
       this.currentLocation = place
     },
-    sendMessage (message) {
-      this.messageForChildren = message
+    geolocate: function () {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.updateLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        })
+      })
     }
   },
   components: {

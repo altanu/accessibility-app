@@ -30,7 +30,8 @@ Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyDhckeqRinlpHeTfo3T-ethx8hJyTG62UY',
     libraries: 'places'
-  }
+  },
+  installComponents: true
 })
 
 Vue.config.productionTip = false
