@@ -26,7 +26,7 @@
       <input type="text" name="email" placeholder="Email" v-model="newContact.email">
       <input type="text" name="phone_number" placeholder="Phone Number" v-model="newContact.phone_number">
       <input type="checkbox" name="emergency" v-model="newContact.emergency">
-      <button type='submit' @click="toggleForm">Save</button>
+      <button type='submit' @click="pushNewContact">Save</button>
   </form>
   </div>
 </template>
@@ -48,6 +48,7 @@ export default {
       contacts: {},
       makingNewContact: false,
       newContact: {
+        user_id: this.userId,
         first_name: "",
         last_name: "",
         email: "",
@@ -74,6 +75,31 @@ export default {
     },
     toggleForm: function() {
       this.makingNewContact = !this.makingNewContact
+    },
+    pushNewContact: function() {
+      var url = this.buildUrl()
+      axios.post(url, {contact: this.newContact})
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error))
+      .then(() => {
+        this.toggleForm()
+        this.emptyFields()
+        this.reRender()
+      })
+    },
+    buildUrl: function() {
+      return 'http://localhost:3000/api/v2/users/' + this.newContact.user_id + '/contacts'
+    },
+    emptyFields: function() {
+      this.newContact.first_name = ""
+      this.newContact.last_name = ""
+      this.newContact.email = ""
+      this.newContact.phone_number = ""
+      this.newContact.emergency = false
+    },
+    reRender: function() {
+      this.contacts = {}
+      this.fetchUserData()
     }
   },
   components: {
