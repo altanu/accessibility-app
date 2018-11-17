@@ -1,6 +1,8 @@
 <template>
-  <h3>Profile</h3>
-  <p> {{ msg }} </p>
+  <div id="profile">
+    <h3>Profile</h3>
+    <p> {{ msg }} </p>
+  </div>
 </template>
 
 <script>
