@@ -12,6 +12,9 @@
       <dt>Email</dt>
       <dd>{{ user.email || 'No email'}}</dd>
     </dl>
+    <div v-if='contacts.length !== 0'>
+      <p>Found some contacts!</p>
+    </div>
   </div>
 </template>
 
@@ -26,14 +29,22 @@ export default {
   data () {
     return {
       msg: 'Component loaded!',
-      user: {}
+      user: {},
+      contacts: {}
     }
   },
   mounted: function () {
-    // console.log('Current loaded userid is' + this.userId)
-    axios.get('http://localhost:3000/api/v2/users/' + this.userId)
+    this.fetchUserData()
+  },
+  methods: {
+    fetchUserData: function () {
+      axios.get('http://localhost:3000/api/v2/users/' + this.userId)
       .then(response => (this.user = response.data))
       .catch(error => console.log(error))
+      .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userId + '/contacts')
+        .then(response => (this.contacts = response.data))
+        .catch(error => console.log(error)))
+    }
   }
 }
 
