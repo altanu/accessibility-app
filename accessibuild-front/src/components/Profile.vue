@@ -19,7 +19,15 @@
       </div>
     </div>
     <h4 v-else>No contacts here... Let's add some!</h4>
-    <button v-if="!makingNewContact">Create New Contact</button>
+    <button v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
+    <form v-else v-on:submit.prevent>
+      <input type="text" name="first_name" placeholder="First Name" v-model="newContact.first_name">
+      <input type="text" name="last_name" placeholder="Last Name" v-model="newContact.last_name">
+      <input type="text" name="email" placeholder="Email" v-model="newContact.email">
+      <input type="text" name="phone_number" placeholder="Phone Number" v-model="newContact.phone_number">
+      <input type="checkbox" name="emergency" v-model="newContact.emergency">
+      <button type='submit' @click="toggleForm">Save</button>
+  </form>
   </div>
 </template>
 
@@ -38,7 +46,14 @@ export default {
       msg: 'Component loaded!',
       user: {},
       contacts: {},
-      makingNewContact: false
+      makingNewContact: false,
+      newContact: {
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone_number: "",
+        emergency: false
+      }
     }
   },
   mounted: function () {
@@ -56,6 +71,9 @@ export default {
     refreshContacts: function () {
       this.contacts = {}
       this.fetchUserData()
+    },
+    toggleForm: function() {
+      this.makingNewContact = !this.makingNewContact
     }
   },
   components: {
