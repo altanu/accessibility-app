@@ -1,7 +1,7 @@
 <template>
   <div class="w-75 p-5">
     <h1>Right Home</h1>
-    <button>Submit review</button>
+    <button @click='onClick("SubmitReview")'>Submit review</button>
     <button>Search</button>
     {{ currentPlace }}
   </div>
@@ -10,6 +10,7 @@
 <script>
 export default {
   props: {
+    onClick: Function,
     currentPlace: Object
   },
   name: 'RightHome',

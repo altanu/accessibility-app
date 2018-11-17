@@ -9,7 +9,7 @@
         </div>
         <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
           <transition name='fade'>
-            <component v-bind:is='state.right' v-bind:current-place="this.currentLocation" :user-id="this.userId"></component>
+            <component v-bind:is='state.right' v-bind:current-place="this.currentLocation" v-bind:onClick='setState' :user-id="this.userId"></component>
           </transition>
         </div>
       </div>
@@ -21,7 +21,8 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar'
+import SubmitReview from './components/SubmitReview.vue'
+import Navbar from './components/Navbar.vue'
 // import Footer from './components/Footer.vue'
 import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
@@ -68,7 +69,8 @@ export default {
     Login,
     Map,
     Contacts,
-    Profile
+    Profile,
+    SubmitReview,
   }
 }
 </script>
