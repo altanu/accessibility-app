@@ -5,15 +5,19 @@
     <section class="d-flex flex-column accessibility-info">
       <section class="picker wheelchair-picker">
         <p>Wheelchair</p>
-        <button class="btn btn-success">Fully</button><button class="btn btn-warning">Partially</button><button class="btn btn-danger">Not at all</button>
+        <button @click="savePickerChoice($event)" class="btn btn-success" id="wheel-fully">Fully</button>
+        <button @click="savePickerChoice($event)" class="btn btn-warning" id="wheel-partially">Partially</button>
+        <button @click="savePickerChoice($event)" class="btn btn-danger" id="wheel-no">Not at all</button>
       </section>
       <section class="picker bathroom-picker">
         <p>Accessible Bathroom</p>
-        <button class="btn btn-success">Yes</button><button class="btn btn-danger">No</button>
+        <button @click="savePickerChoice($event)" class="btn btn-success" id="bath-yes">Yes</button>
+        <button @click="savePickerChoice($event)" class="btn btn-danger" id="bath-no">No</button>
       </section>
       <section class="picker parking-picker">
         <p>Accessible Parking</p>
-        <button class="btn btn-success">Yes</button><button class="btn btn-danger">No</button>
+        <button @click="savePickerChoice($event)" class="btn btn-success" id="parking-yes">Yes</button>
+        <button @click="savePickerChoice($event)" class="btn btn-danger" id="parking-no">No</button>
       </section>
       <section class="comment-container">
         <form>
@@ -46,6 +50,9 @@ export default {
     }
   },
   methods: {
+    savePickerChoice (event) {
+      console.log(event.target.id)
+    },
     setError (error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     }
