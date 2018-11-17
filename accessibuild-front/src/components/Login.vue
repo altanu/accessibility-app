@@ -16,7 +16,6 @@
 </template>
 
 <script>
-var axios = require('axios')
 export default {
   name: 'Login',
   data () {
@@ -34,18 +33,11 @@ export default {
   },
   methods: {
     signin () {
-      axios({
-        method: 'post',
-        url: 'http://localhost:3000/sessions',
-        data: {
-          email: this.email,
-          password: this.password
-        }
-      }).then(response => this.signinSuccessful(response))
+      this.$http.plain.post('/sessions', { email: this.email, password: this.password })
+        .then(response => this.signinSuccessful(response))
         .catch(error => this.signinFailed(error))
     },
     signinSuccessful (response) {
-      console.log(response.data.csrf)
       if (!response.data.csrf) {
         this.signinFailed(response)
         return

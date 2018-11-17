@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import VueAxios from 'vue-axios'
+import { securedAxiosInstance, plainAxiosInstance } from './backend/axios'
+
 // import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap'
 
@@ -13,6 +16,12 @@ import 'bootstrap/js/dist/tooltip'
 import 'bootstrap/scss/bootstrap.scss'
 
 import * as VueGoogleMaps from 'vue2-google-maps'
+
+Vue.config.productionTip = false
+Vue.use(VueAxios, {
+  secured: securedAxiosInstance,
+  plain: plainAxiosInstance
+})
 
 // jquery
 global.$ = $
@@ -28,5 +37,7 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  securedAxiosInstance,
+  plainAxiosInstance,
   render: h => h(App)
 }).$mount('#app')
