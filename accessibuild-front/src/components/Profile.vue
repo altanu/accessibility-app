@@ -12,9 +12,11 @@
       <dt>Email</dt>
       <dd>{{ user.email || 'No email'}}</dd>
     </dl>
-    <div v-if='contacts.length !== 0'>
-      <p>Found some contacts!</p>
-    </div>
+    <p>Contacts</p>
+    <dl v-for="contact in contacts">
+      <dt>Name</dt>
+      <dd>{{ contact.first_name }} {{ contact.last_name }} </dd>
+    </dl>
   </div>
 </template>
 
