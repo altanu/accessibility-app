@@ -7,7 +7,7 @@
         <div style="min-width:60%; height: 100%;">
           <Map v-bind:current-place="this.currentLocation"></Map>
         </div>
-        <div style="min-width:40%; padding-top: 2em; height: 100%">
+        <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
           <transition name='fade'>
             <component v-bind:is='state.right' v-bind:current-place="this.currentLocation" :user-id="this.userId"></component>
           </transition>
