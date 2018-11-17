@@ -28,7 +28,6 @@ export default {
       zoom: 16,
       markers: [],
       places: [],
-      currentPlace: null
     }
   },
 
