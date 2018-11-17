@@ -15,7 +15,7 @@
     <p>Contacts</p>
     <dl v-for="contact in contacts">
       <dt>A contact</dt>
-      <Contact></Contact>
+      <Contact :contact='contact'></Contact>
     </dl>
   </div>
 </template>
