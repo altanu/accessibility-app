@@ -2,7 +2,7 @@
   <div id="profile">
     <h3>Profile</h3>
     <p> {{ msg }} </p>
-    <p> My parent says: {{ messageFromParent }}</p>
+    <p> My parent says: {{ userId }}</p>
 
     <dl>
       <dt>Thing</dt>
@@ -17,7 +17,9 @@
 
 export default {
   name: 'Profile',
-  props: ['messageFromParent'],
+  props: {
+    userId: Number
+  },
   data () {
     return {
       msg: 'Component loaded!'
