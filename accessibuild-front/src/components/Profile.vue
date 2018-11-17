@@ -12,10 +12,13 @@
       <dt>Email</dt>
       <dd>{{ user.email || 'No email'}}</dd>
     </dl>
-    <p>Contacts</p>
-    <div v-for="contact in contacts">
-      <Contact :contact='contact'></Contact>
+    <div id="contacts-block" v-if="hasContacts">
+      <h4>Contacts</h4>
+      <div v-for="contact in contacts">
+        <Contact :contact='contact' :trigger-rerender="fetchUserData"></Contact>
+      </div>
     </div>
+    <h4 v-else>No contacts here... Let's add some!</h4>
   </div>
 </template>
 
@@ -51,6 +54,11 @@ export default {
   },
   components: {
     Contact
+  },
+  computed: {
+    hasContacts: function () {
+      return Object.keys(this.contacts).length !== 0 ? true : false
+    }
   }
 }
 

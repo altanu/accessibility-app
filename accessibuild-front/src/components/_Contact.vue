@@ -16,13 +16,17 @@ var axios = require('axios')
 export default {
   name: 'Contact',
   props: {
-    contact: Object
+    contact: Object,
+    triggerRerender: Function
   },
   data () {
     return {
       isForm: false,
       contactInfo: this.contact
     }
+  },
+  mounted: function () {
+    console.log("I am a contect of number " + this.contactInfo.id + ". I am alive!")
   },
   computed: {
     fullName: function() {
@@ -48,7 +52,7 @@ export default {
       axios.delete(url)
       .then((response) => console.log(response))
       .catch((error) => console.log(error))
-      .then( () => this.setForm())
+      .then( () => this.triggerRerender())
     },
     buildUrl: function () {
       return 'http://localhost:3000/api/v2/users/' + this.contactInfo.user_id + '/contacts/' + this.contactInfo.id
