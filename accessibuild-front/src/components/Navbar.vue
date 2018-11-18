@@ -1,25 +1,22 @@
 <template>
-  <nav class='navbar fixed-top navbar-expand-lg navbar-light bg-light'>
-      <form class='form-inline' v-on:submit.prevent>
+  <nav class='navbar fixed-top navbar-light bg-light'>
+    <div style="display:flex; width: 100%; flex-direction: row; justify-content: space-between">
+      <div style="flex-grow: 2"> 
         <button @click='onClick("RightHome")' class='btn btn-outline-primary'>Home</button>
-
-        <form class='form-inline' v-on:submit.prevent>
-           <input id="pac-input" class="form-control" type="text" placeholder="Search keywords or addresses">
-          <button class='btn btn-outline-success' @click="setQuery">🔍 Search</button>
-        </form>
-
+      </div>
+      <div style="flex-grow: 6">
+        <input id="pac-input" class="form-control" type="text" placeholder="🔍 Search keywords or addresses">
+      </div>
+      <div style="flex-grow: 2; display:flex; justify-content: flex-end">
         <button @click='onClick("Register")' class='btn btn-outline-primary' ref='register' type='submit'>Register</button>
 
         <button @click='onClick("Login")' class='btn btn-outline-primary' ref='login' type='submit'>Login</button>
 
         <button @click='onClick("Profile")' class='btn btn-outline-primary' ref='profile' type='submit'>Profile</button>
 
-        <button @click='onClick("Contacts")' class='btn btn-outline-primary' type='submit'>Contacts</button>
-
         <button @click='signOut' class='btn btn-outline-primary' type='submit'>Log Out</button>
-       
-
-      </form>
+      </div>
+    </div>
   </nav>
 </template>
 

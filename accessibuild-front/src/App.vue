@@ -1,6 +1,6 @@
 <template>
   <div id="app" style="height: 100%">
-    <Navbar v-bind:onClick='setState' v-on:place_update='updateLocation'></Navbar>
+    <Navbar v-bind:onClick='setState'></Navbar>
     <div style="height: 100%">
     <div style="height: 100%">
       <div class='d-flex align-self-center' style="padding-top: 3.4em; height: 100%">
@@ -22,7 +22,6 @@
 <script>
 import SubmitReview from './components/SubmitReview.vue'
 import Navbar from './components/Navbar.vue'
-// import Footer from './components/Footer.vue'
 import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
 import Map from './components/Map.vue'

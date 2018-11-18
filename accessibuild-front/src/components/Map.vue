@@ -42,9 +42,9 @@ export default {
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
       searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
+        var searchPlaces = searchBox.getPlaces();
 
-        if (places.length == 0) {
+        if (searchPlaces.length == 0) {
           return;
         }
 
@@ -53,10 +53,10 @@ export default {
           marker.setMap(null);
         });
         markers = [];
-
+        
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
+        searchPlaces.forEach(function(place) {
           if (!place.geometry) {
             console.log("Returned place contains no geometry");
             return;
@@ -86,33 +86,7 @@ export default {
         });
         map.fitBounds(bounds);
       });
-      
-      var placesArray = [];
-      var service = new google.maps.places.PlacesService(map);
-      var searchLocation = new google.maps.LatLng(this.currentPlace.lat, this.currentPlace.lng)
-      var request = {
-        location: searchLocation,
-        radius: '5000',
-        query: 'Starbucks'
-      };
-
-      service.textSearch(request, callback);
-
-      function callback(results, status) {
-        for (var i = 0; i < results.length; i++) {
-          placesArray.push(results[i]);
-        }
-      }
-
-      return placesArray;
-    }).then(data => {
-      this.places = data
-      console.log("places", this.places)
     })
-  },
-
-  methods: {
-    
   },
 }
 </script>
