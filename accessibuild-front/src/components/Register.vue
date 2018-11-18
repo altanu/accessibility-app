@@ -28,7 +28,6 @@
 </template>
 
 <script>
-var axios = require('axios')
 export default {
   name: 'Register',
   data () {
@@ -72,7 +71,6 @@ export default {
         // this.$router.replace('/home')
       }
     }
-  },
+  }
 }
-
 </script>

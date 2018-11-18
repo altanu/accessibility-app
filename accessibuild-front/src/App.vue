@@ -5,11 +5,11 @@
     <div style="height: 100%">
       <div class='d-flex align-self-center' style="padding-top: 3.4em; height: 100%">
         <div style="min-width:60%; height: 100%;">
-          <Map v-bind:current-place="this.currentLocation"></Map>
+          <Map v-bind:current-place="this.currentLocation" v-bind:places-list="this.placesList"></Map>
         </div>
         <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
           <transition name='fade'>
-            <component v-bind:is='state.right' v-bind:current-place="this.currentLocation" v-bind:onClick='setState' :user-id="this.userId"></component>
+            <component v-bind:is='state.right' v-bind:current-place="this.currentLocation" v-bind:places-list="this.placesList" v-bind:onClick='setState' :user-id="this.userId"></component>
           </transition>
         </div>
       </div>
@@ -48,7 +48,8 @@ export default {
       state: store.state,
       // default to montreal
       currentLocation: { lat: 45.508, lng: -73.587 },
-      userId: 1
+      userId: 1,
+      placesList: []
     }
   },
   methods: {

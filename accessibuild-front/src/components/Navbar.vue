@@ -1,7 +1,7 @@
 <template>
   <nav class='navbar fixed-top navbar-light bg-light'>
     <div style="display:flex; width: 100%; flex-direction: row; justify-content: space-between">
-      <div style="flex-grow: 1"> 
+      <div style="flex-grow: 1">
         <button style="width: 7.5rem" @click='onClick("RightHome")' class='btn btn-outline-primary'>Home</button>
         <button style="width: 7.5rem" @click='onClick("Profile")' class='btn btn-outline-primary' ref='profile' type='submit'>Profile</button>
       </div>
@@ -30,20 +30,6 @@ export default {
     }
   },
   methods: {
-    setPlace (place) {
-      this.currentPlace = place
-    },
-    setQuery () {
-      if (this.currentPlace) {
-        console.log("what the search bar is sending",this.currentPlace)
-        const marker = {
-          lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
-        }
-        this.currentPlace = marker
-        this.$emit('place_update', this.currentPlace)
-      }
-    },
     signOut () {
       this.$http.secured.delete('/sessions')
         .then(response => {
@@ -52,8 +38,7 @@ export default {
           this.$router.replace('/')
         })
         .catch(error => this.setError(error, 'Cannot sign out'))
-    },
-  },
-
+    }
+  }
 }
 </script>

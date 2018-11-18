@@ -3,7 +3,6 @@
     <h1>Right Home</h1>
     <button @click='onClick("SubmitReview")'>Submit review</button>
     <button>Search</button>
-    {{ currentPlace }}
   </div>
 </template>
 
@@ -11,7 +10,8 @@
 export default {
   props: {
     onClick: Function,
-    currentPlace: Object
+    currentPlace: Object,
+    placesList: Array
   },
   name: 'RightHome',
   data () {

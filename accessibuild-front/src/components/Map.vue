@@ -3,10 +3,7 @@
     <gmap-map ref="mapRef"
       :center="currentPlace"
       :zoom="zoom"
-      style="min-width:50%; height: 100%"
-    >        
-
-      <gmap-marker></gmap-marker>
+      style="min-width:50%; height: 100%">
     </gmap-map>
   </div>
 </template>
@@ -17,18 +14,23 @@ export default {
   
   name: 'GoogleMap',
   props: {
-    currentPlace: Object
+    currentPlace: Object,
+    placesList: Array
   },
   data () {
     return {
       center: this.currentPlace,
       zoom: 16,
-      markers: [],
-      places: [],
     }
   },
-
-  mounted () {    
+  methods: {
+    updatePlacesList(newPlace) {
+      this.placesList.push(newPlace)
+    }
+  },
+  mounted () {
+    console.log("Do we have places list?", this.placesList)
+    var self = this
     this.$refs.mapRef.$mapPromise.then((map) => {
       var input = document.getElementById('pac-input');
       var searchBox = new google.maps.places.SearchBox(input);
@@ -42,32 +44,35 @@ export default {
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
       searchBox.addListener('places_changed', function() {
-        var searchPlaces = searchBox.getPlaces();
+        var searchPlaces = searchBox.getPlaces()
 
         if (searchPlaces.length == 0) {
-          return;
+          return
         }
 
         // Clear out the old markers.
         markers.forEach(function(marker) {
-          marker.setMap(null);
+          marker.setMap(null)
         });
-        markers = [];
+        markers = []
         
         // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
+        var bounds = new google.maps.LatLngBounds()
         searchPlaces.forEach(function(place) {
           if (!place.geometry) {
-            console.log("Returned place contains no geometry");
-            return;
+            console.log("Returned place contains no geometry")
+            return
           }
+
+          self.updatePlacesList(place)
+          
           var icon = {
             url: place.icon,
             size: new google.maps.Size(71, 71),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(17, 34),
             scaledSize: new google.maps.Size(25, 25)
-          };
+          }
 
           // Create a marker for each place.
           markers.push(new google.maps.Marker({
@@ -75,17 +80,17 @@ export default {
             icon: icon,
             title: place.name,
             position: place.geometry.location
-          }));
+          }))
 
           if (place.geometry.viewport) {
             // Only geocodes have viewport.
-            bounds.union(place.geometry.viewport);
+            bounds.union(place.geometry.viewport)
           } else {
-            bounds.extend(place.geometry.location);
+            bounds.extend(place.geometry.location)
           }
-        });
-        map.fitBounds(bounds);
-      });
+        })
+        map.fitBounds(bounds)
+      })
     })
   },
 }

@@ -20,7 +20,7 @@
         <button @click="savePickerChoice($event)" class="btn btn-danger" id="parking-no">No</button>
       </section>
       <section class="comment-container">
-        <form v-on:submit.prevet>
+        <form v-on:submit.prevent>
           <label for="comment">Leave a comment:</label>
           <textarea class="form-control" id="comment" v-model="newComment.description"></textarea>
           <star-rating v-model="newComment.rating" v-bind:star-size='25'></star-rating>
