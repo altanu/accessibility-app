@@ -5,7 +5,7 @@
     <div style="height: 100%">
       <div class='d-flex align-self-center' style="padding-top: 3.4em; height: 100%">
         <div style="min-width:60%; height: 100%;">
-          <Map v-bind:current-place="this.currentLocation" v-bind:places-list="this.placesList"></Map>
+          <Map v-bind:current-place="this.currentLocation" v-bind:places-list="this.placesList" v-on:clear="clearList"></Map>
         </div>
         <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
           <transition name='fade'>
@@ -41,7 +41,7 @@ export default {
     msg: String
   },
   mounted () {
-    this.geolocate();
+    this.geolocate()
   },
   data: () => {
     return {
@@ -66,6 +66,10 @@ export default {
           lng: position.coords.longitude
         })
       })
+    },
+    clearList: function () {
+      console.log('Called clear list')
+      this.placesList = []
     }
   },
   components: {
@@ -77,7 +81,7 @@ export default {
     Map,
     Contacts,
     Profile,
-    SubmitReview,
+    SubmitReview
   }
 }
 </script>

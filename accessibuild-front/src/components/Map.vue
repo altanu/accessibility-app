@@ -11,7 +11,7 @@
 <script>
 
 export default {
-  
+
   name: 'GoogleMap',
   props: {
     currentPlace: Object,
@@ -20,30 +20,34 @@ export default {
   data () {
     return {
       center: this.currentPlace,
-      zoom: 16,
+      zoom: 16
     }
   },
   methods: {
-    updatePlacesList(newPlace) {
+    updatePlacesList (newPlace) {
       this.placesList.push(newPlace)
+    },
+    clearPlacesList () {
+      this.$emit('clear')
     }
   },
   mounted () {
-    console.log("Do we have places list?", this.placesList)
     var self = this
+
     this.$refs.mapRef.$mapPromise.then((map) => {
-      var input = document.getElementById('pac-input');
-      var searchBox = new google.maps.places.SearchBox(input);
+      var input = document.getElementById('pac-input')
+      var searchBox = new google.maps.places.SearchBox(input)
 
       // Bias the SearchBox results towards current map's viewport.
-      map.addListener('bounds_changed', function() {
-        searchBox.setBounds(map.getBounds());
-      });
+      map.addListener('bounds_changed', function () {
+        searchBox.setBounds(map.getBounds())
+      })
 
-      var markers = [];
+      var markers = []
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
-      searchBox.addListener('places_changed', function() {
+      searchBox.addListener('places_changed', function () {
+        self.clearPlacesList()
         var searchPlaces = searchBox.getPlaces()
 
         if (searchPlaces.length == 0) {
@@ -51,21 +55,21 @@ export default {
         }
 
         // Clear out the old markers.
-        markers.forEach(function(marker) {
+        markers.forEach(function (marker) {
           marker.setMap(null)
-        });
+        })
         markers = []
-        
+
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds()
-        searchPlaces.forEach(function(place) {
+        searchPlaces.forEach(function (place) {
           if (!place.geometry) {
-            console.log("Returned place contains no geometry")
+            console.log('Returned place contains no geometry')
             return
           }
 
           self.updatePlacesList(place)
-          
+
           var icon = {
             url: place.icon,
             size: new google.maps.Size(71, 71),
@@ -92,6 +96,6 @@ export default {
         map.fitBounds(bounds)
       })
     })
-  },
+  }
 }
 </script>
