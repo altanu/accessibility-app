@@ -22,8 +22,8 @@
       <section class="comment-container">
         <form>
           <label for="comment">Leave a comment:</label>
-          <textarea class="form-control" id="comment"></textarea>
-          <button class="btn btn-submit" type="submit">Submit</button>
+          <textarea class="form-control" id="comment" v-model="newComment.description"></textarea>
+          <button class="btn btn-submit" type="submit" @click="saveComment">Submit</button>
         </form>
       </section>
     </section>
@@ -60,13 +60,17 @@ export default {
       wheel_status: '',
       bathroom_status: '',
       parking_status: '',
-      comments: []
+      comments: [],
+      newComment: {
+        user_id: 1,
+        location_id: 1,
+        description: '',
+        rating: null
+      }
     }
   },
   created () {
-    axios.get(this.testUrl + '/reviews')
-      .then(response => (this.comments = response.data))
-      .catch(error => console.log(error))
+    this.fetchReviews()
     axios.get(this.testUrl)
       .then(response => {
         const location = response.data
@@ -76,6 +80,23 @@ export default {
       })
   },
   methods: {
+    fetchReviews () {
+      axios.get(this.testUrl + '/reviews')
+        .then(response => (this.comments = response.data))
+        .catch(error => console.log(error))
+    },
+    saveComment () {
+      axios.post(this.testUrl + '/reviews', { review: this.newComment })
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error))
+        .then(() => {
+          this.emptyComment()
+          this.fetchReviews()
+        })
+    },
+    emptyComment () {
+      this.newComment.description = ''
+    },
     savePickerChoice (event) {
       if (event.target.id[0] === 'w') {
         if (event.target.id === 'wheel-fully') {
