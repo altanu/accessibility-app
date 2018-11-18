@@ -5,7 +5,7 @@
     <div style="height: 100%">
       <div class='d-flex align-self-center' style="padding-top: 3.4em; height: 100%">
         <div style="min-width:60%; height: 100%;">
-          <Map v-bind:current-place="this.currentLocation" v-bind:places-list="this.placesList" v-on:clear="clearList"></Map>
+          <Map v-bind:current-place="this.currentLocation" v-bind:places-list="this.placesList"></Map>
         </div>
         <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
           <transition name='fade'>
@@ -67,10 +67,6 @@ export default {
         })
       })
     },
-    clearList: function () {
-      console.log('Called clear list')
-      this.placesList = []
-    }
   },
   components: {
     // Footer,
