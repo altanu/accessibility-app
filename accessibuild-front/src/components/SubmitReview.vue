@@ -23,6 +23,7 @@
         <form v-on:submit.prevet>
           <label for="comment">Leave a comment:</label>
           <textarea class="form-control" id="comment" v-model="newComment.description"></textarea>
+          <star-rating v-model="newComment.rating" v-bind:star-size='25'></star-rating>
           <button class="btn btn-submit" type="submit" @click="saveComment">Submit</button>
         </form>
       </section>
@@ -32,7 +33,7 @@
         <div class="card-header">User: {{ comment.user_id }}</div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Comment: {{ comment.description }}</li>
-          <li class="list-group-item">Rating: {{ comment.rating }}</li>
+          <li class="list-group-item">Rating: {{ comment.rating }} at {{ comment.created_at }}</li>
         </ul>
       </li>
     </section>
@@ -51,6 +52,7 @@
   }
 </style>
 <script>
+import StarRating from 'vue-star-rating'
 var axios = require('axios')
 export default {
   name: 'SubmitReview',
@@ -126,6 +128,9 @@ export default {
     setError (error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     }
+  },
+  components: {
+    StarRating
   }
 }
 
