@@ -35,8 +35,8 @@ osm_data.each do |place|
       place["wheelchair"] = 0
     end
     Location.create!(
-      house_number: place["addr:housenumber"], 
-      street: place["addr:street"], 
+      house_number: place["addr:housenumber"],
+      street: place["addr:street"],
       wheelchair: place["wheelchair"],
       place_id: place["place_id"])
   end
@@ -51,5 +51,12 @@ users.each do |user|
   user.contacts.create!(first_name: 'test3', last_name: 'test3', email: 'test3@test.test', phone_number: 1234567, emergency: true)
 end
 
-puts 'Seeding reviews (no reviews yet)'
+puts 'Seeding reviews'
+
+Location.find(1).reviews.create!(user_id: 1, description: 'cool place!', rating: '5')
+Location.find(1).reviews.create!(user_id: 1, description: 'cool place!', rating: '4')
+Location.find(1).reviews.create!(user_id: 1, description: 'meh!', rating: '3')
+Location.find(1).reviews.create!(user_id: 1, description: 'crappy place!', rating: '2')
+Location.find(1).reviews.create!(user_id: 1, description: 'crappy place!', rating: '1')
+
 puts 'Seeding trips (no trips yet)'

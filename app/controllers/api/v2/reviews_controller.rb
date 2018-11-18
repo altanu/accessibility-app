@@ -7,7 +7,7 @@ module Api
 
       def index
         @reference = params[:user_id] ? User.find(params[:user_id]) : Location.find(params[:location_id])
-        @reviews = @reference.reviews
+        @reviews = @reference.reviews.sort{ |b, a| a.created_at <=> b.created_at }
 
         render json: @reviews
       end

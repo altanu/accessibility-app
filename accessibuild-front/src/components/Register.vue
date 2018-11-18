@@ -72,7 +72,7 @@ export default {
         // this.$router.replace('/home')
       }
     }
-  }
+  },
 }
 
 </script>
