@@ -20,7 +20,7 @@
         <button @click="savePickerChoice($event)" class="btn btn-danger" id="parking-no">No</button>
       </section>
       <section class="comment-container">
-        <form>
+        <form v-on:submit.prevet>
           <label for="comment">Leave a comment:</label>
           <textarea class="form-control" id="comment" v-model="newComment.description"></textarea>
           <button class="btn btn-submit" type="submit" @click="saveComment">Submit</button>
