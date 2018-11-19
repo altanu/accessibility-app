@@ -60,12 +60,8 @@ export default {
       currentLocation: { lat: 45.5, lng: -73.5 },
       userId: 1,
       placesList: [],
-<<<<<<< HEAD
       currentAddress: '',
-=======
-      currentAddress: "",
       loggedIn: false
->>>>>>> feature/more-scss
     }
   },
   methods: {
@@ -86,14 +82,10 @@ export default {
         })
       })
     },
-<<<<<<< HEAD
-    newList: function (arr) {
-=======
     setLogin: function () {
       this.loggedIn = !this.loggedIn
     },
     newList: function(arr) {
->>>>>>> feature/more-scss
       this.placesList = arr
       this.state.right = 'rightHome'
       store.clearCurrentLocation()
