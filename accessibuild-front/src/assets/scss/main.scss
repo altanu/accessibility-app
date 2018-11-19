@@ -10,7 +10,7 @@ $green: #9FD8CB;
 body {
   font-family: Arial;
   background-color: $white !important;
-  color: $blue;
+  color: black;
 
   h3 {
     color: $white;
@@ -29,6 +29,11 @@ body {
       color: $white;
       background-color: $blue;
       border-color: $blue;
+      &:hover {
+        border-color: $blue;
+        color: $blue;
+        background-color: $white;
+      }
     }
     &.btn-success {
       color: $white;
@@ -41,6 +46,8 @@ body {
       background-color: $white;
       &:hover {
         border-color: $white;
+        color: $white;
+        background-color: $blue;
       }
     }
   }
