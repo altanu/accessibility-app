@@ -3,11 +3,11 @@
     <Navbar v-bind:onClick='setState'></Navbar>
     <div style="height: 100%">
     <div style="height: 100%">
-      <div class='d-flex align-self-center' style="padding-top: 3.4em; height: 100%">
+      <div class='d-flex align-self-center' style="padding-top: 5.4em; height: 100%">
         <div style="min-width:60%; height: 100%;">
-          <Map 
-            v-bind:current-place="this.currentLocation" 
-            v-bind:places-list="this.placesList" 
+          <Map
+            v-bind:current-place="this.currentLocation"
+            v-bind:places-list="this.placesList"
             v-bind:address-string="this.currentAddress"
             v-on:address-change="updateAddress"
             v-on:new-list="newList">
@@ -15,12 +15,12 @@
         </div>
         <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
           <transition name='fade'>
-            <component 
-              v-bind:is='state.right' 
-              v-bind:address-string="this.currentAddress" 
-              v-bind:current-place="this.currentLocation" 
-              v-bind:places-list="this.placesList" 
-              v-bind:onClick='setState' 
+            <component
+              v-bind:is='state.right'
+              v-bind:address-string="this.currentAddress"
+              v-bind:current-place="this.currentLocation"
+              v-bind:places-list="this.placesList"
+              v-bind:onClick='setState'
               :user-id="this.userId">
             </component>
           </transition>
