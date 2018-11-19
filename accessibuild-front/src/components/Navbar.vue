@@ -2,12 +2,13 @@
   <nav class='navbar fixed-top navbar-light bg-light'>
     <div style="display:flex; flex-direction: column; width: 100%">
       <div style="display: flex; align-content: center; width: 100%">
-        <h3 style="width:100%; text-align: center"> AccessiBuild </h3>
       </div>
 
       <div style="display:flex; width: 100%; flex-direction: row; justify-content: space-between">
         <div style="flex-grow: 1">
-          <button style="width: 7.5rem" @click='onClick("RightHome")' class='btn btn-outline-primary'>Home</button>
+        <h3 style="width:100%; text-align: center">
+          <button id="accessibuild" style="width: 7.5rem" @click='onClick("RightHome")'>Accessibuild</button>
+        </h3>
           <button v-show="isLoggedIn"style="width: 7.5rem" @click='onClick("Profile")' class='btn btn-outline-primary' ref='profile' type='submit'>Profile</button>
         </div>
         <div style="flex-grow: 2">
