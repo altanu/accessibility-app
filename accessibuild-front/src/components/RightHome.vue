@@ -1,9 +1,15 @@
 <template>
   <div class="w-75 p-5">
-    <h1>Right Home</h1>
-    <button @click='onClick("SubmitReview")'>Submit review</button>
-    <button>Search</button>
-    <p> below is a list of places from the map </p>
+    <div v-if="placesList.length == 0">
+      <h4>Welcome</h4>
+      <p>We located you at {{addressString[0].formatted_address}}</p>
+      <p>What would you like to do today?</p>
+    </div>
+    <div>
+      <button class="btn btn-primary" @click='onClick("SubmitReview")'>Submit a new review</button>
+    </div>
+    <div v-if="placesList.length > 0">
+    <p>We found the following results for you:</p>
     <table>
       <tr>
         <td>Place_ID</td>
@@ -14,6 +20,7 @@
         <td> NEEDTOCALLAPI </td>
       </tr>
     </table>
+    </div>
   </div>
 </template>
 
@@ -22,14 +29,9 @@ export default {
   props: {
     onClick: Function,
     currentPlace: Object,
-    placesList: Array
+    placesList: Array,
+    addressString: Array
   },
   name: 'RightHome',
-  data () {
-    return {
-
-    }
-  }
 }
-
 </script>
