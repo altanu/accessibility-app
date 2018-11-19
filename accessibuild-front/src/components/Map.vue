@@ -15,7 +15,7 @@ export default {
   props: {
     currentPlace: Object,
     placesList: Array,
-    addressString: Array
+    addressString: String
   },
   data () {
     return {
@@ -25,7 +25,11 @@ export default {
   },
   methods: {
     updatePlacesList(newPlace, index) {
+      console.log("updating placesList index", index)
       this.placesList[index] = newPlace
+      if(index == 19) {
+        this.placesList.push(null);
+      }
     },
   },
   mounted () {
@@ -67,7 +71,6 @@ export default {
             return
           }
 
-          console.log("writing", place, "at index", i)
           self.updatePlacesList(place, i)
           var icon = {
             url: place.icon,
@@ -102,7 +105,7 @@ export default {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           }}, function(results, status) {
-            self.$emit('address-change', results)
+            self.$emit('address-change', results[0].formatted_address)
           })
         })
     })

@@ -60,10 +60,10 @@ export default {
     return {
       state: store.state,
       // default to montreal
-      currentLocation: { lat: 45, lng: -73 },
+      currentLocation: { lat: 45.5, lng: -73.5 },
       userId: 1,
       placesList: [],
-      currentAddress: []
+      currentAddress: ""
     }
   },
   methods: {
