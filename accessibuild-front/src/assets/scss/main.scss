@@ -16,7 +16,7 @@ body {
     color: $white;
     @media only screen and (max-width: 640px) {
       color: purple;
-  }
+    }
   }
 
   .navbar {
@@ -27,7 +27,6 @@ body {
   .btn{
 
     border-radius: 2rem;
-
     &.btn-primary {
       color: $white;
       background-color: $blue;
@@ -64,9 +63,7 @@ body {
     color: $white;
     padding-top: 0.2em;
     float: left;
-    &:focus {
-      outline: none;
-    }
+    cursor: pointer;
   }
 
   #search-container {
