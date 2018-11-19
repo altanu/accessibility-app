@@ -17,7 +17,7 @@
       </li>
       <li class="list-group-item">
         <label>Phone Number</label>
-        <input class="form-control" type="text" name="phone_number" v-bind:placeholder="contactInfo.phone_number" v-model="contactInfo.phone_number">
+        <input class="form-control" type="tel" name="phone_number" v-bind:placeholder="contactInfo.phone_number" v-model="contactInfo.phone_number">
       </li>
       <li class="list-group-item form-check">
         <input type="checkbox" name="emergency" v-model="contactInfo.emergency">  Emergency Contact

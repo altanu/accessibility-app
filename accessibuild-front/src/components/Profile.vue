@@ -10,15 +10,19 @@
       </ul>
     </div>
     <h4 v-else>Loading...</h4>
-    <button v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
+    <button class='btn btn-success' v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
     <form class="form-group jumbotron" v-else v-on:submit.prevent>
       <h4>Create a New Contact</h4>
       <input class="form-control" type="text" name="first_name" placeholder="First Name" v-model="newContact.first_name">
       <input class="form-control" type="text" name="last_name" placeholder="Last Name" v-model="newContact.last_name">
       <input class="form-control" type="text" name="email" placeholder="Email" v-model="newContact.email">
-      <input class="form-control" type="text" name="phone_number" placeholder="Phone Number" v-model="newContact.phone_number">
-      <input class="form-check" type="checkbox" name="emergency" v-model="newContact.emergency">
-      <button class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
+      <input class="form-control" type="tel" name="phone_number" placeholder="Phone Number" v-model="newContact.phone_number">
+      <div class="form-check form-check-inline">
+        <label class="form-check-label" style="padding: 1em">Set As Emergency Contact
+        <input class="form-check-input" type="checkbox" name="emergency" v-model="newContact.emergency">
+        </label>
+      </div><br>
+      <button style="float: right;"class="btn btn-success btn-block" type='submit' @click="pushNewContact">Save</button>
   </form>
   </div>
 </template>
