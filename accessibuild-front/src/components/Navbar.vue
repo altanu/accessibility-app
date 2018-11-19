@@ -19,7 +19,9 @@
           <button style="width: 5rem" @click='onClick("Login")' class='btn btn-outline-primary' ref='login' type='submit'>Login</button>
 
           <button style="width: 5rem" @click='signOut' class='btn btn-outline-primary' type='submit'>Log Out</button>
+          <button style="width: 5rem" @click='onClick("Locations")' class='btn btn-outline-primary' type='submit'>Location</button>
         </div>
+
       </div>
     </div>
   </nav>
