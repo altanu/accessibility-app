@@ -4,6 +4,11 @@
       :center="currentPlace"
       :zoom="zoom"
       style="min-width:50%; height: 100%">
+
+        <GmapMarker v-if="placesList.length == 0"
+          :position="currentPlace"
+        />
+
     </gmap-map>
   </div>
 </template>
@@ -63,7 +68,6 @@ export default {
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds()
-
 
         searchPlaces.forEach(function(place) {
 
