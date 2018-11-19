@@ -35,6 +35,7 @@ Vue.use(VueGoogleMaps, {
 })
 
 Vue.config.productionTip = false
+var self = this
 
 global.store = {
   state: {
@@ -42,10 +43,10 @@ global.store = {
     right: 'RightHome'
   },
   setCurrentLocation (newLocation) {
-    this.state.currentLocation = newLocation
+    store.state.currentLocation = newLocation
   },
   clearCurrentLocation () {
-    this.state.currentLocation = {}
+    store.state.currentLocation = {}
   }
 }
 

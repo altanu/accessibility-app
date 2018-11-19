@@ -25,7 +25,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'GoogleMap',
   props: {
@@ -48,9 +47,17 @@ export default {
     publishNewList() {
       this.$emit('new-list', this.newPlaceList)
     },
-    clickPin(place) {
-      console.log(place)
+    clickPin(marker) {
+      console.log(marker.latLng)
+      this.getPlaceID(marker.latLng)
+    },
+    getPlaceID(latLng) {
+      var geocoder = new google.maps.Geocoder
+      geocoder.geocode({'location': latLng}, function(results, status) {
+        store.setCurrentLocation(results[0])
+      })
     }
+
   },
   mounted () {
     var self = this
@@ -106,7 +113,8 @@ export default {
             map: map,
             icon: icon,
             title: place.name,
-            position: place.geometry.location
+            position: place.geometry.location,
+            placeID: place.place_id
           }))
 
           if (place.geometry.viewport) {
@@ -121,7 +129,7 @@ export default {
         map.fitBounds(bounds)
       })
     }).then(function() {
-      var geocoder = new google.maps.Geocoder
+      var geocoder = new google.maps.Geocoder;
       navigator.geolocation.getCurrentPosition(position => {
         geocoder.geocode({'location': {
             lat: position.coords.latitude,
