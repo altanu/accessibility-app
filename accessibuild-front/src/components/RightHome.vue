@@ -16,6 +16,7 @@
       v-for="place in placesList"
       v-bind:place="place"
       v-bind:key="place.place_id"
+      v-bind:onClick="onClick"
     ></Location>
     {{placesList[0]}}
     </div>

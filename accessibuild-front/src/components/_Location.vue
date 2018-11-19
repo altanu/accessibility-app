@@ -7,7 +7,7 @@
       <li class="list-group-item">bathroom: {{ bathroom }}</li>
       <li class="list-group-item">Parking: {{ parking }}</li>
     </ul>
-    <button v-if="not_exists" class="btn">Review this location</button>
+    <button v-if="not_exists" class="btn" @click="onClick('SubmitReview')">Review this location</button>
   </section>
 </template>
 
