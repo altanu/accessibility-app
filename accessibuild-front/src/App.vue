@@ -18,6 +18,7 @@
             <component
               v-bind:is='state.right'
               v-bind:address-string="this.currentAddress"
+              v-bind:set-login="setLogin"
               v-bind:current-place="this.currentLocation"
               v-bind:places-list="this.placesList"
               v-bind:onClick='setState'
@@ -63,7 +64,8 @@ export default {
       currentLocation: { lat: 45.5, lng: -73.5 },
       userId: 1,
       placesList: [],
-      currentAddress: ""
+      currentAddress: "",
+      loggedIn: false
     }
   },
   methods: {
@@ -83,6 +85,9 @@ export default {
           lng: position.coords.longitude
         })
       })
+    },
+    setLogin: function () {
+      this.loggedIn = !this.loggedIn
     },
     newList: function(arr) {
       this.placesList = arr
