@@ -35,10 +35,25 @@ Vue.use(VueGoogleMaps, {
 })
 
 Vue.config.productionTip = false
+var self = this
+
+global.store = {
+  state: {
+    currentLocation: {},
+    right: 'RightHome'
+  },
+  setCurrentLocation (newLocation) {
+    store.state.currentLocation = newLocation
+  },
+  clearCurrentLocation () {
+    store.state.currentLocation = {}
+  }
+}
 
 new Vue({
   router,
   securedAxiosInstance,
   plainAxiosInstance,
+  data: store,
   render: h => h(App)
 }).$mount('#app')

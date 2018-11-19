@@ -68,7 +68,8 @@ export default {
         location_id: 1,
         description: '',
         rating: null
-      }
+      },
+      sharedState: store.state
     }
   },
   created () {
