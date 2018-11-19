@@ -23,7 +23,10 @@ Rails.application.routes.draw do
         resources :contacts
         resources :reviews
         resources :trips
+
       end
+
+      resources :places, only: [:show]
 
       resources :locations do
         resources :trips
