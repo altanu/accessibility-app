@@ -26,12 +26,6 @@
         <button class="btn btn-success btn-block" type='submit' @click='updateContact'>Save</button>
       </li>
     </ul>
-   <!--  <input type="text" name="first_name" v-bind:placeholder="contactInfo.first_name" v-model="contactInfo.first_name">
-    <input type="text" name="last_name" v-bind:placeholder="contactInfo.last_name" v-model="contactInfo.last_name">
-    <input type="text" name="email" v-bind:placeholder="contactInfo.email" v-model="contactInfo.email">
-    <input type="text" name="phone_number" v-bind:placeholder="contactInfo.phone_number" v-model="contactInfo.phone_number">
-    <input type="checkbox" name="emergency" v-model="contactInfo.emergency">
-    <button type='submit' @click='updateContact'>Save</button> -->
   </form>
   </li>
   <li v-else class="card">
