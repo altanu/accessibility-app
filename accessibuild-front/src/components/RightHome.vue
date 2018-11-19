@@ -8,23 +8,23 @@
     <div>
       <button class="btn btn-primary" @click='onClick("SubmitReview")'>Submit a new review</button>
     </div>
-    <div>{{placesList}}</div>
+
+    <div v-if="placesList.length > 0">
     <p>We found the following results for you:</p>
-    <table>
-      <tr>
-        <td>Place_ID</td>
-        <td>Wheelchair?</td>
-      </tr>
-      <tr v-for="place in placesList">
-        <td>{{ place }}</td>
-        <td> NEEDTOCALLAPI </td>
-      </tr>
-    </table>
+    <p v-for="place in placesList">{{place.formatted_address}}</p>
+    <!-- <Location
+      v-for="place in placesList"
+      v-bind:placeID="place.place_id"
+      v-bind:key="place.place_id"
+    ></Location> -->
+    </div>
 
   </div>
 </template>
 
 <script>
+import Location from './_Location.vue'
+
 export default {
   props: {
     onClick: Function,
@@ -33,5 +33,8 @@ export default {
     addressString: String
   },
   name: 'RightHome',
+  components: {
+    Location
+  }
 }
 </script>

@@ -21,16 +21,16 @@ export default {
     return {
       center: this.currentPlace,
       zoom: 16,
+      newPlaceList: []
     }
   },
   methods: {
-    updatePlacesList(newPlace, index) {
-      console.log("updating placesList index", index)
-      this.placesList[index] = newPlace
-      if(index == 19) {
-        this.placesList.push(null);
-      }
+    updatePlacesList(newPlace) {
+      this.newPlaceList.push(newPlace)
     },
+    publishNewList() {
+      this.$emit('new-list', this.newPlaceList)
+    }
   },
   mounted () {
     var self = this
@@ -64,14 +64,16 @@ export default {
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds()
 
-        var i = 0;
+
         searchPlaces.forEach(function(place) {
+
+          self.updatePlacesList(place)
+
           if (!place.geometry) {
             console.log("Returned place contains no geometry")
             return
           }
 
-          self.updatePlacesList(place, i)
           var icon = {
             url: place.icon,
             size: new google.maps.Size(71, 71),
@@ -94,8 +96,9 @@ export default {
           } else {
             bounds.extend(place.geometry.location)
           }
-          i++
+           
         })
+        self.publishNewList()
         map.fitBounds(bounds)
       })
     }).then(function() {
