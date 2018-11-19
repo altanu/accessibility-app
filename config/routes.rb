@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  post 'sessions', controller: :sessions, action: :create
-  delete 'sessions', controller: :sessions, action: :destroy
-  post 'refresh', controller: :refresh, action: :create
+
+  devise_for :users
+  # devise_for :users, controllers: { sessions: 'sessions' }
+  # devise_for :users, defaults: { format: :json }
 
   namespace :api do
     namespace :v1 do

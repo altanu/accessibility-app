@@ -5,6 +5,7 @@ ruby '2.3.5'
 
 gem 'faker'
 
+gem 'dotenv-rails'
 gem 'devise'
 gem 'devise-jwt'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
