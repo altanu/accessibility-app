@@ -19,6 +19,13 @@ body {
     }
   }
 
+  button {
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+  }
+
   .navbar {
     background-color: $blue !important;
     font-size: 1.2em;
@@ -27,6 +34,10 @@ body {
   .btn{
 
     border-radius: 2rem;
+
+    &:focus {
+      box-shadow: none;
+    }
     &.btn-primary {
       color: $white;
       background-color: $blue;
