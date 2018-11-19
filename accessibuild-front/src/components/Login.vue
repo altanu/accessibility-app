@@ -3,7 +3,7 @@
   <div class="w-75" style="margin: auto;">
   <h1>Login</h1>
 
-  <form v-on:submit.prevent='signin'>
+  <form v-on:submit.prevent='setLogin'>
     <div class="form-group">
       <input type="text" name="email" placeholder="Email" class="form-control" v-model="email">
     </div>
@@ -18,9 +18,7 @@
 <script>
 export default {
   name: 'Login',
-  props: {
-    setLogin: Function
-  },
+  props: ['setLogin'],
   data () {
     return {
       email: '',
