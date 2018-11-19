@@ -7,7 +7,7 @@
     <input type="checkbox" name="emergency" v-model="contactInfo.emergency">
     <button type='submit' @click='updateContact'>Save</button>
   </form>
-  <p v-else v-bind:class="[ contactInfo.emergency ? 'text-danger' : 'text-success' ]">{{ fullName }} - {{ contactInfo.phone_number }} - {{ contactInfo.email }} <button @click='setForm'>Update</button><button @click='deleteContact'>Remove</button></p>
+  <li v-else v-bind:class="[ contactInfo.emergency ? 'text-danger' : 'text-success' ]">{{ fullName }} - {{ contactInfo.phone_number }} - {{ contactInfo.email }} <button @click='setForm'>Update</button><button @click='deleteContact'>Remove</button></li>
 </template>
 
 <script>

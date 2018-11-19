@@ -14,9 +14,9 @@
     </dl>
     <div id="contacts-block" v-if="hasContacts">
       <h4>Contacts</h4>
-      <div v-for="contact in contacts">
+      <ul v-for="contact in contacts">
         <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
-      </div>
+      </ul>
     </div>
     <h4 v-else>No contacts here... Let's add some!</h4>
     <button v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
