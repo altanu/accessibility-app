@@ -1,6 +1,6 @@
 <template>
   <section class="card">
-    <div class="card-header">Location: {{houseNumber}}, {{street}}</div>
+    <div class="card-header">Location: {{house_number}}, {{street}}</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Wheelchair: {{ wheelchair }}</li>
         <li class="list-group-item">bathroom: {{ bathroom }}</li>
@@ -19,17 +19,16 @@ export default {
   },
   data () {
     return {
-      houseNumber: '',
+      house_number: '',
       street: '',
       wheelchair: '',
       bathroom: '',
       parking: ''
     }
   },
-
   methods: {
     fetchLocationInfo () {
-      axios.get('http://localhost:3000/api/v2/places/' + placeID)
+      axios.get('http://localhost:3000/api/v2/places/' + this.placeID)
         .then(response => {
           const location = response.data[0]
           this.house_number = location.house_number
@@ -39,6 +38,9 @@ export default {
           this.parking = location.parking
         })
     }
+  },
+  created () {
+    this.fetchLocationInfo()
   }
 }
 
