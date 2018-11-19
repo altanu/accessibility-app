@@ -1,9 +1,10 @@
 <template>
   <div class="w-75 p-5">
-    <h1>Right Home</h1>
-    <button @click='onClick("SubmitReview")'>Submit review</button>
-    <button>Search</button>
-    <p> below is a list of places from the map </p>
+    <div>
+      <button class="btn btn-lg btn-primary" @click='onClick("SubmitReview")'>Submit review</button>
+    </div>
+    <div v-if="placesList.length > 0">
+    <p>We found the following results for you:</p>
     <table>
       <tr>
         <td>Place_ID</td>
@@ -14,6 +15,7 @@
         <td> NEEDTOCALLAPI </td>
       </tr>
     </table>
+    </div>
   </div>
 </template>
 
