@@ -41,7 +41,6 @@ import Map from './components/Map.vue'
 import Login from './components/Login.vue'
 import Contacts from './components/Contacts.vue'
 import Profile from './components/Profile.vue'
-import Locations from './components/Locations.vue'
 
 const store = {
   state: {
@@ -99,7 +98,6 @@ export default {
     Contacts,
     Profile,
     SubmitReview,
-    Locations
   }
 }
 </script>
