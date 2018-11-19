@@ -18,6 +18,9 @@
 <script>
 export default {
   name: 'Login',
+  props: {
+    setLogin: Function
+  },
   data () {
     return {
       email: '',
