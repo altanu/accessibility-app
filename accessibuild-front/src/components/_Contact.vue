@@ -7,7 +7,21 @@
     <input type="checkbox" name="emergency" v-model="contactInfo.emergency">
     <button type='submit' @click='updateContact'>Save</button>
   </form>
-  <li v-else v-bind:class="[ contactInfo.emergency ? 'text-danger' : 'text-success' ]">{{ fullName }} - {{ contactInfo.phone_number }} - {{ contactInfo.email }} <button @click='setForm'>Update</button><button @click='deleteContact'>Remove</button></li>
+  <li v-else class="card">
+    <div class="card-header">
+      {{ fullName }}
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{ contactInfo.phone_number }}</li>
+      <li class="list-group-item">{{ contactInfo.email }}</li>
+      <li class="list-group-item" v-if="contact.emergency">Set as Emergency Contact</li>
+      <li class="list-group-item" v-else>Not an Emergency Contact</li>
+    </ul>
+     <br>
+    <p v-if=" contact.emergency">Set as Emergency Contact</p>
+    <p v-else>Not an Emergency Contact</p>
+    <button class="btn btn-outline-primary" @click='setForm'>Update</button>
+    <button class="btn btn-outline-danger" @click='deleteContact'>Remove</button></li>
 </template>
 
 <script>
