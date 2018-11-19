@@ -11,16 +11,20 @@ body {
   background-color: $white !important;
   color: $blue;
   .navbar {
-    font-size: 2em;
     background-color: $blue !important;
   }
-  .btn-outline-primary {
-    color: $blue;
-    border-color: $blue;
-    background-color: $white;
-    &:hover {
-      background-color: $blue;
-      border-color: $white
+  .btn{
+    &.btn-outline-primary {
+      color: $blue;
+      border-color: $blue;
+      background-color: $white;
+      &:hover {
+        border-color: $blue;
+        color: $green;
+      }
     }
+  }
+  .form-control {
+    border-radius: 1rem;
   }
 }
