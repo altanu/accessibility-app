@@ -15,18 +15,22 @@ export default {
   props: {
     currentPlace: Object,
     placesList: Array,
-    addressString: Array
+    addressString: String
   },
   data () {
     return {
       center: this.currentPlace,
       zoom: 16,
+      newPlaceList: []
     }
   },
   methods: {
     updatePlacesList(newPlace) {
-      this.placesList.push(newPlace)
+      this.newPlaceList.push(newPlace)
     },
+    publishNewList() {
+      this.$emit('new-list', this.newPlaceList)
+    }
   },
   mounted () {
     var self = this
@@ -43,6 +47,8 @@ export default {
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
       searchBox.addListener('places_changed', function() {
+        console.log("called places_changed event")
+        self.newPlaceList = [];
         var searchPlaces = searchBox.getPlaces()
 
         if (searchPlaces.length == 0) {
@@ -57,14 +63,17 @@ export default {
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds()
+
+
         searchPlaces.forEach(function(place) {
+
+          self.updatePlacesList(place)
+
           if (!place.geometry) {
             console.log("Returned place contains no geometry")
             return
           }
 
-          self.updatePlacesList(place)
-          
           var icon = {
             url: place.icon,
             size: new google.maps.Size(71, 71),
@@ -87,7 +96,9 @@ export default {
           } else {
             bounds.extend(place.geometry.location)
           }
+           
         })
+        self.publishNewList()
         map.fitBounds(bounds)
       })
     }).then(function() {
@@ -97,7 +108,7 @@ export default {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           }}, function(results, status) {
-            self.$emit('address-change', results)
+            self.$emit('address-change', results[0].formatted_address)
           })
         })
     })

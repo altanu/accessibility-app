@@ -9,7 +9,8 @@
             v-bind:current-place="this.currentLocation" 
             v-bind:places-list="this.placesList" 
             v-bind:address-string="this.currentAddress"
-            v-on:address-change="updateAddress">
+            v-on:address-change="updateAddress"
+            v-on:new-list="newList">
           </Map>
         </div>
         <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
@@ -60,10 +61,10 @@ export default {
     return {
       state: store.state,
       // default to montreal
-      currentLocation: { lat: 45, lng: -73 },
+      currentLocation: { lat: 45.5, lng: -73.5 },
       userId: 1,
       placesList: [],
-      currentAddress: []
+      currentAddress: ""
     }
   },
   methods: {
@@ -84,6 +85,9 @@ export default {
         })
       })
     },
+    newList: function(arr) {
+      this.placesList = arr
+    }
   },
   components: {
     // Footer,
