@@ -7,7 +7,7 @@
       <li class="list-group-item">bathroom: {{ bathroom }}</li>
       <li class="list-group-item">Parking: {{ parking }}</li>
     </ul>
-    <button v-if="not_exists" class="btn" @click="onClick('SubmitReview')">Review this location</button>
+    <button v-if="not_exists" class="btn" @click="renderLocation">Review this location</button>
   </section>
 </template>
 
@@ -17,7 +17,8 @@ var axios = require('axios')
 export default {
   name: 'Location',
   props: {
-    place: Object
+    place: Object,
+    onClick: Function
   },
   data () {
     return {
@@ -43,6 +44,9 @@ export default {
           this.parking = location.parking
           if (location.id) this.not_exists = false
         })
+    },
+    renderLocation () {
+      this.onClick('SubmitReview')
     }
   },
   created () {

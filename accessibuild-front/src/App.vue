@@ -16,6 +16,7 @@
         <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
           <transition name='fade'>
             <component
+              v-bind:state="privateStore.state"
               v-bind:is='state.right'
               v-bind:address-string="this.currentAddress"
               v-bind:current-place="this.currentLocation"
@@ -42,7 +43,7 @@ import Login from './components/Login.vue'
 import Contacts from './components/Contacts.vue'
 import Profile from './components/Profile.vue'
 
-const store = {
+const privateStore = {
   state: {
     right: 'RightHome'
   }
@@ -58,7 +59,7 @@ export default {
   },
   data: () => {
     return {
-      state: store.state,
+      state: privateStore.state,
       // default to montreal
       currentLocation: { lat: 45.5, lng: -73.5 },
       userId: 1,
@@ -84,7 +85,7 @@ export default {
         })
       })
     },
-    newList: function(arr) {
+    newList: function (arr) {
       this.placesList = arr
       this.state.right = 'rightHome'
     }
