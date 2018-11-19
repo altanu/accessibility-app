@@ -25,6 +25,9 @@ body {
     // box-shadow: black 2em 2em;
   }
   .btn{
+
+    border-radius: 2rem;
+
     &.btn-primary {
       color: $white;
       background-color: $blue;
