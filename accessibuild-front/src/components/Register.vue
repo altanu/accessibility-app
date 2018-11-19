@@ -47,29 +47,12 @@ export default {
   },
   methods: {
     signup () {
-      this.$http.plain.post('/api/v2/users', { user: this.form })
-        .then(response => this.signupSuccessful(response))
-        .catch(error => this.signupFailed(error))
     },
     signupSuccessful (response) {
-      if (!response.data.csrf) {
-        this.signupFailed(response)
-        return
-      }
-      localStorage.csrf = response.data.csrf
-      localStorage.signedIn = true
-      this.error = ''
-      // this.$router.replace('/home')
     },
     signupFailed (error) {
-      this.error = (error.response && error.response.data && error.response.data.error) || 'Something went wrong'
-      delete localStorage.csrf
-      delete localStorage.signedIn
     },
     checkSignedIn () {
-      if (localStorage.signedIn) {
-        // this.$router.replace('/home')
-      }
     }
   }
 }

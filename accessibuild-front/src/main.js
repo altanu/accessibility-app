@@ -2,8 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-import VueAxios from 'vue-axios'
-import { securedAxiosInstance, plainAxiosInstance } from './backend/axios'
 
 // import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap'
@@ -17,11 +15,9 @@ import 'bootstrap/scss/bootstrap.scss'
 
 import * as VueGoogleMaps from 'vue2-google-maps'
 
-Vue.config.productionTip = false
-Vue.use(VueAxios, {
-  secured: securedAxiosInstance,
-  plain: plainAxiosInstance
-})
+let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+axios.defaults.headers.common['X-CSRF-Token'] = token
+axios.defaults.headers.common['Accept'] = 'application/json'
 
 // jquery
 global.$ = $
@@ -34,11 +30,7 @@ Vue.use(VueGoogleMaps, {
   installComponents: true
 })
 
-Vue.config.productionTip = false
-
 new Vue({
   router,
-  securedAxiosInstance,
-  plainAxiosInstance,
   render: h => h(App)
 }).$mount('#app')

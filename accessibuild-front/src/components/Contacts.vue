@@ -18,13 +18,6 @@ export default {
     }
   },
   created () {
-    if (!localStorage.signedIn) {
-      // this.$router.replace('/home')
-    } else {
-      this.$http.secured.get('/api/v2/users/1/contacts')
-        .then(response => { this.contacts = response.data })
-        .catch(error => this.setError(error, 'Something went wrong'))
-    }
   },
   methods: {
     setError (error, text) {
