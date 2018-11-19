@@ -17,9 +17,6 @@
       <li class="list-group-item" v-if="contact.emergency">Set as Emergency Contact</li>
       <li class="list-group-item" v-else>Not an Emergency Contact</li>
     </ul>
-     <br>
-    <p v-if=" contact.emergency">Set as Emergency Contact</p>
-    <p v-else>Not an Emergency Contact</p>
     <button class="btn btn-outline-primary" @click='setForm'>Update</button>
     <button class="btn btn-outline-danger" @click='deleteContact'>Remove</button></li>
 </template>

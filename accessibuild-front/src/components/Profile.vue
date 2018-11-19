@@ -1,19 +1,10 @@
 <template>
   <div id="profile">
-    <h3>Profile</h3>
-    <p> {{ msg }} </p>
-    <p> My parent says: {{ userId }}</p>
+    <h4>Profile</h4>
+    <h5>Hello, {{user.first_name}}!</h5>
 
-    <dl>
-      <dt>First Name</dt>
-      <dd>{{ user.first_name || 'No first name'}}</dd>
-      <dt>Last Name</dt>
-      <dd>{{ user.last_name || 'No last name'}}</dd>
-      <dt>Email</dt>
-      <dd>{{ user.email || 'No email'}}</dd>
-    </dl>
     <div id="contacts-block" v-if="hasContacts">
-      <h4>Contacts</h4>
+      <h4 style="width: 100%; text-align: center;">Contacts</h4>
       <ul v-for="contact in contacts">
         <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
       </ul>
