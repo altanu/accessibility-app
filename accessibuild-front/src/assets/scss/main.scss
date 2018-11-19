@@ -14,9 +14,16 @@ body {
 
   h3 {
     color: $white;
-    @media only screen and (max-width: 640px) {
-      color: purple;
+    @media only screen and (max-width: 750px) {
+      display: none;
+    }
   }
+
+  button {
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
   }
 
   .navbar {
@@ -25,6 +32,12 @@ body {
     // box-shadow: black 2em 2em;
   }
   .btn{
+
+    border-radius: 2rem;
+
+    &:focus {
+      box-shadow: none;
+    }
     &.btn-primary {
       color: $white;
       background-color: $blue;
@@ -53,6 +66,19 @@ body {
   }
   .form-control {
     border-radius: 1rem;
+  }
+
+  #accessibuild {
+    background: none !important;
+    border: none !important;
+    color: $white;
+    padding-top: 0.2em;
+    float: left;
+    cursor: pointer;
+  }
+
+  #search-container {
+    padding-top: 5px;
   }
 
   #profile {
