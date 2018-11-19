@@ -7,6 +7,17 @@
 
         <GmapMarker v-if="placesList.length == 0"
           :position="currentPlace"
+          @click="clickPin"
+        />
+
+        <GmapMarker
+          v-for="marker in markers"
+          :key="marker.place_id"
+          :position="marker.position"
+          :clickable="true"
+          :draggable="false"
+          :icon="marker.icon"
+          @click="clickPin"
         />
 
     </gmap-map>
@@ -26,6 +37,7 @@ export default {
     return {
       center: this.currentPlace,
       zoom: 16,
+      markers: [],
       newPlaceList: []
     }
   },
@@ -35,6 +47,9 @@ export default {
     },
     publishNewList() {
       this.$emit('new-list', this.newPlaceList)
+    },
+    clickPin(place) {
+      console.log(place)
     }
   },
   mounted () {
@@ -48,7 +63,7 @@ export default {
       map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());
       });
-      var markers = [];
+
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
       searchBox.addListener('places_changed', function() {
@@ -61,10 +76,10 @@ export default {
         }
 
         // Clear out the old markers.
-        markers.forEach(function(marker) {
+        self.markers.forEach(function(marker) {
           marker.setMap(null)
         });
-        markers = []
+        self.markers = []
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds()
@@ -87,7 +102,7 @@ export default {
           }
 
           // Create a marker for each place.
-          markers.push(new google.maps.Marker({
+          self.markers.push(new google.maps.Marker({
             map: map,
             icon: icon,
             title: place.name,
