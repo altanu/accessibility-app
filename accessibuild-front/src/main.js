@@ -47,6 +47,9 @@ global.store = {
   },
   clearCurrentLocation () {
     store.state.currentLocation = {}
+  },
+  setRightPane (name) {
+    store.state.right = name
   }
 }
 

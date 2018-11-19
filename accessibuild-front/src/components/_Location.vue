@@ -1,13 +1,13 @@
 <template>
   <section class="card">
-    <div class="card-header">{{name}}</div>
-    <div class="card-header">Address: {{formatted_address}}</div>
+    <div class="card-header">{{location.name}}</div>
+    <div class="card-header">Address: {{location.formatted_address}}</div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Wheelchair: {{ wheelchair }}</li>
-      <li class="list-group-item">bathroom: {{ bathroom }}</li>
-      <li class="list-group-item">Parking: {{ parking }}</li>
+      <li class="list-group-item">Wheelchair: {{ location.wheelchair }}</li>
+      <li class="list-group-item">bathroom: {{ location.bathroom }}</li>
+      <li class="list-group-item">Parking: {{ location.parking }}</li>
     </ul>
-    <button v-if="not_exists" class="btn" @click="renderLocation">Review this location</button>
+    <button v-if="location.not_exists" class="btn" @click="renderLocation(location)">Review this location</button>
   </section>
 </template>
 
@@ -22,14 +22,17 @@ export default {
   },
   data () {
     return {
-      name: this.place.name,
-      formatted_address: this.place.formatted_address,
-      house_number: this.place.house_number,
-      street: this.place.street,
-      wheelchair: 'No information',
-      bathroom: 'No information',
-      parking: 'No information',
-      not_exists: true
+      location: {
+        name: this.place.name,
+        formatted_address: this.place.formatted_address,
+        house_number: this.place.house_number,
+        street: this.place.street,
+        wheelchair: 'No information',
+        bathroom: 'No information',
+        parking: 'No information',
+        not_exists: true,
+        id: null
+      }
     }
   },
   methods: {
@@ -37,16 +40,20 @@ export default {
       axios.get('http://localhost:3000/api/v2/places/' + this.place.place_id)
         .then(response => {
           const location = response.data[0]
-          this.house_number = location.house_number
-          this.street = location.street
-          this.wheelchair = location.wheelchair
-          this.bathroom = location.bathroom
-          this.parking = location.parking
-          if (location.id) this.not_exists = false
+          this.location.house_number = location.house_number
+          this.location.street = location.street
+          this.location.wheelchair = location.wheelchair
+          this.location.bathroom = location.bathroom
+          this.location.parking = location.parking
+          if (location.id) {
+            this.location.not_exists = false
+            this.location.id = location.id
+          }
         })
     },
-    renderLocation () {
+    renderLocation (location) {
       this.onClick('SubmitReview')
+      store.setCurrentLocation(location)
     }
   },
   created () {

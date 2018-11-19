@@ -58,6 +58,7 @@ export default {
   name: 'SubmitReview',
   data () {
     return {
+      location: store.state.currentLocation,
       testUrl: 'http://localhost:3000/api/v2/locations/1',
       wheel_status: '',
       bathroom_status: '',
@@ -69,18 +70,17 @@ export default {
         description: '',
         rating: null
       },
-      sharedState: store.state
     }
   },
   created () {
     this.fetchReviews()
-    axios.get(this.testUrl)
-      .then(response => {
-        const location = response.data
-        this.wheel_status = location.wheelchair
-        this.bathroom_status = location.bathroom
-        this.parking_status = location.parking
-      })
+    // axios.get(this.testUrl)
+    //   .then(response => {
+    //     const location = response.data
+    //     this.wheel_status = location.wheelchair
+    //     this.bathroom_status = location.bathroom
+    //     this.parking_status = location.parking
+    //   })
   },
   methods: {
     fetchReviews () {
