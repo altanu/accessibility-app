@@ -11,13 +11,14 @@
     </div>
     <h4 v-else>Loading...</h4>
     <button v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
-    <form class="form-group" v-else v-on:submit.prevent>
+    <form class="form-group jumbotron" v-else v-on:submit.prevent>
+      <h4>Create a New Contact</h4>
       <input class="form-control" type="text" name="first_name" placeholder="First Name" v-model="newContact.first_name">
       <input class="form-control" type="text" name="last_name" placeholder="Last Name" v-model="newContact.last_name">
       <input class="form-control" type="text" name="email" placeholder="Email" v-model="newContact.email">
       <input class="form-control" type="text" name="phone_number" placeholder="Phone Number" v-model="newContact.phone_number">
-      <input class="form-control" type="checkbox" name="emergency" v-model="newContact.emergency">
-      <button type='submit' @click="pushNewContact">Save</button>
+      <input class="form-check" type="checkbox" name="emergency" v-model="newContact.emergency">
+      <button class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
   </form>
   </div>
 </template>
