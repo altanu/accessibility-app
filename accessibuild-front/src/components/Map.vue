@@ -21,7 +21,7 @@ export default {
     return {
       center: this.currentPlace,
       zoom: 16,
-      newPlaceList: []
+      newPlaceList: [],
     }
   },
   methods: {
@@ -30,7 +30,7 @@ export default {
     },
     publishNewList() {
       this.$emit('new-list', this.newPlaceList)
-    }
+    },
   },
   mounted () {
     var self = this
@@ -38,7 +38,7 @@ export default {
     this.$refs.mapRef.$mapPromise.then((map) => {
       var input = document.getElementById('pac-input');
       var searchBox = new google.maps.places.SearchBox(input);
-      
+
       // Bias the SearchBox results towards current map's viewport.
       map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());

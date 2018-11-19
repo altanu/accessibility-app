@@ -2,7 +2,11 @@
   <div class="w-75 p-5">
     <div v-if="placesList.length == 0">
       <h4>Welcome</h4>
-      <p>We located you at {{addressString}}</p>
+      <div>
+      <p v-if="addressString">We located you at {{addressString}}</p>
+      <p v-else>Please allow us to access your location, so we can help you better.</p>
+      </div>
+      
       <p>What would you like to do today?</p>
     </div>
     <div>
