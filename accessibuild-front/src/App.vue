@@ -86,6 +86,7 @@ export default {
     },
     newList: function(arr) {
       this.placesList = arr
+      this.state.right = 'rightHome'
     }
   },
   components: {
