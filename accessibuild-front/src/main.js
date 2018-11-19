@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-
+import axios from 'axios'
 
 // import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap'
@@ -15,8 +15,8 @@ import 'bootstrap/scss/bootstrap.scss'
 
 import * as VueGoogleMaps from 'vue2-google-maps'
 
-let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
-axios.defaults.headers.common['X-CSRF-Token'] = token
+// let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+// axios.defaults.headers.common['Authorization']
 axios.defaults.headers.common['Accept'] = 'application/json'
 
 // jquery

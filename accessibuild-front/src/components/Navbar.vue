@@ -31,13 +31,7 @@ export default {
   },
   methods: {
     signOut () {
-      this.$http.secured.delete('/sessions')
-        .then(response => {
-          delete localStorage.csrf
-          delete localStorage.signedIn
-          this.$router.replace('/')
-        })
-        .catch(error => this.setError(error, 'Cannot sign out'))
+
     }
   }
 }
