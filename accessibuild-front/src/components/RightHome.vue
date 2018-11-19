@@ -2,8 +2,7 @@
   <div class="w-75 p-5">
     <div v-if="placesList.length == 0">
       <h4>Welcome</h4>
-      <p>We located you at {{currentPlace}}</p>
-      <p v-if="addressString">{{addressString}}</p>
+      <p>We located you at {{addressString[0].formatted_address}}</p>
       <p>What would you like to do today?</p>
     </div>
     <div>
@@ -26,43 +25,13 @@
 </template>
 
 <script>
-var geocoder = new google.maps.Geocoder
-var self = this
 export default {
   props: {
     onClick: Function,
     currentPlace: Object,
-    placesList: Array
-  },
-  data () {
-    return {
-      addressString: "TEST",
-      coordinates: this.currentPlace
-    }
-  },
-  mounted() {
-    this.updateAddress()
+    placesList: Array,
+    addressString: Array
   },
   name: 'RightHome',
-  methods: {
-    updateAddress: () => {
-      var getAddress = new Promise(function(resolve, reject) {
-        console.log("called promise")
-        console.log("can I read currentPlace?", self.coordinates)
-        var address = ""
-        geocoder.geocode({'location': this.currentPlace}, function(results, status) {
-          console.log("status received", status)
-          console.log("called geocoder, got this result:", results)
-          address = results[0].formatted_address
-        })
-        resolve(address)
-      })
-      getAddress.then(data => {
-        console.log(data)
-        addressString = data
-      });
-    }
-  }
 }
-
 </script>

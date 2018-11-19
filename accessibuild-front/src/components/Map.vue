@@ -14,7 +14,8 @@ export default {
   name: 'GoogleMap',
   props: {
     currentPlace: Object,
-    placesList: Array
+    placesList: Array,
+    addressString: Array
   },
   data () {
     return {
@@ -33,7 +34,7 @@ export default {
     this.$refs.mapRef.$mapPromise.then((map) => {
       var input = document.getElementById('pac-input');
       var searchBox = new google.maps.places.SearchBox(input);
-
+      
       // Bias the SearchBox results towards current map's viewport.
       map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());
@@ -89,7 +90,17 @@ export default {
         })
         map.fitBounds(bounds)
       })
+    }).then(function() {
+      var geocoder = new google.maps.Geocoder
+      navigator.geolocation.getCurrentPosition(position => {
+        geocoder.geocode({'location': {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }}, function(results, status) {
+            self.$emit('address-change', results)
+          })
+        })
     })
-  },
+  }
 }
 </script>
