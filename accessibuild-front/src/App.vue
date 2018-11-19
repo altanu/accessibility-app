@@ -3,7 +3,7 @@
     <Navbar v-bind:onClick='setState' v-bind:is-logged-in="this.loggedIn"></Navbar>
     <div style="height: 100%">
     <div style="height: 100%">
-      <div class='d-flex align-self-center' style="padding-top: 5.4em; height: 100%">
+      <div class='d-flex align-self-center' style="padding-top: 4em; height: 100%">
         <div style="min-width:60%; height: 100%;">
           <Map
             v-bind:current-place="this.currentLocation"

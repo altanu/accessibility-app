@@ -63,6 +63,14 @@ body {
     border: none !important;
     color: $white;
     padding-top: 0.2em;
+    float: left;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  #search-container {
+    padding-top: 5px;
   }
 
   #profile {
