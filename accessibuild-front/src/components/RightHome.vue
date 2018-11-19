@@ -11,12 +11,13 @@
 
     <div v-if="placesList.length > 0">
     <p>We found the following results for you:</p>
-    <p v-for="place in placesList">{{place.formatted_address}}</p>
-    <!-- <Location
+
+    <Location
       v-for="place in placesList"
-      v-bind:placeID="place.place_id"
+      v-bind:place="place"
       v-bind:key="place.place_id"
-    ></Location> -->
+    ></Location>
+    {{placesList[0]}}
     </div>
 
   </div>
