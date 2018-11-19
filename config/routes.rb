@@ -15,6 +15,9 @@ Rails.application.routes.draw do
                sessions: 'sessions',
                registrations: 'registrations'
              }
+  devise_scope :user do
+    get 'users/current', to: 'sessions#show'
+  end
 
   namespace :api do
     namespace :v1 do
