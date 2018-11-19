@@ -10,6 +10,11 @@ $green: #9FD8CB;
 body {
   background-color: $white !important;
   color: $blue;
+
+  h3 {
+    color: $white;
+  }
+
   .navbar {
     background-color: $blue !important;
   }
