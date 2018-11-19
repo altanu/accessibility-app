@@ -100,6 +100,10 @@ export default {
 }
 </script>
 
+<style lang="scss">
+  @import './assets/scss/main.scss'
+</style>
+
 <style scoped>
 .fade-enter-active {
   transition: opacity 1.5s;

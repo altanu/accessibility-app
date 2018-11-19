@@ -13,7 +13,7 @@ import 'bootstrap/js/dist/modal'
 import 'bootstrap/js/dist/tooltip'
 
 // import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/scss/bootstrap.scss'
+// import 'bootstrap/scss/bootstrap.scss'
 
 import * as VueGoogleMaps from 'vue2-google-maps'
 
