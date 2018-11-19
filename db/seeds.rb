@@ -13,9 +13,9 @@ puts 'Seeding DB'
 puts 'Seeding users'
 
 User.destroy_all
-User.create!(first_name: 'John', last_name:'Xu', email: 'johnbxu@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
-User.create!(first_name: 'Altan', last_name:'Unsal', email: 'altanunsal@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
-User.create!(first_name: 'Louis', last_name:'Riehl', email: 'louisriehl@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
+User.create!(first_name: 'John', last_name:'Xu', email: 'johnbxu@gmail.com', phone_number: 5145145454, password: 'abc')
+User.create!(first_name: 'Altan', last_name:'Unsal', email: 'altanunsal@gmail.com', phone_number: 5145145454, password: 'abc')
+User.create!(first_name: 'Louis', last_name:'Riehl', email: 'louisriehl@gmail.com', phone_number: 5145145454, password: 'abc')
 
 puts 'Seeding locations'
 Location.destroy_all
