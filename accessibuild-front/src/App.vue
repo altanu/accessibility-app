@@ -83,7 +83,7 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '../public/styles/main.scss'
+  @import './assets/scss/main.scss'
 </style>
 
 <style scoped>
