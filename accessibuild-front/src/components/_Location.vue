@@ -21,7 +21,7 @@ export default {
 
   methods: {
     fetchLocationInfo () {
-      axios.get('http://localhost:3000/api/v2/locations/')
+      axios.get('http://localhost:3000/api/v2/places/ChIJJ9FRSXoPyUwRaJxKHz_K-qo')
         .then(response => console.log(response.data))
     }
   }
