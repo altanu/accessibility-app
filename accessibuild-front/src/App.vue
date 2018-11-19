@@ -16,7 +16,7 @@
         <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
           <transition name='fade'>
             <component
-              v-bind:state="privateStore.state"
+              v-bind:state="state"
               v-bind:is='state.right'
               v-bind:address-string="this.currentAddress"
               v-bind:current-place="this.currentLocation"
@@ -43,12 +43,6 @@ import Login from './components/Login.vue'
 import Contacts from './components/Contacts.vue'
 import Profile from './components/Profile.vue'
 
-const privateStore = {
-  state: {
-    right: 'RightHome'
-  }
-}
-
 export default {
   name: 'App',
   props: {
@@ -56,15 +50,16 @@ export default {
   },
   mounted () {
     this.geolocate()
+    console.log('store: ', store.state)
   },
   data: () => {
     return {
-      state: privateStore.state,
+      state: store.state,
       // default to montreal
       currentLocation: { lat: 45.5, lng: -73.5 },
       userId: 1,
       placesList: [],
-      currentAddress: ""
+      currentAddress: '',
     }
   },
   methods: {
