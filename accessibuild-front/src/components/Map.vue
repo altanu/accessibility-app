@@ -24,8 +24,8 @@ export default {
     }
   },
   methods: {
-    updatePlacesList(newPlace) {
-      this.placesList.push(newPlace)
+    updatePlacesList(newPlace, index) {
+      this.placesList[index] = newPlace
     },
   },
   mounted () {
@@ -43,6 +43,8 @@ export default {
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
       searchBox.addListener('places_changed', function() {
+        console.log("called places_changed event")
+        self.newPlaceList = [];
         var searchPlaces = searchBox.getPlaces()
 
         if (searchPlaces.length == 0) {
@@ -57,14 +59,16 @@ export default {
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds()
+
+        var i = 0;
         searchPlaces.forEach(function(place) {
           if (!place.geometry) {
             console.log("Returned place contains no geometry")
             return
           }
 
-          self.updatePlacesList(place)
-          
+          console.log("writing", place, "at index", i)
+          self.updatePlacesList(place, i)
           var icon = {
             url: place.icon,
             size: new google.maps.Size(71, 71),
@@ -87,6 +91,7 @@ export default {
           } else {
             bounds.extend(place.geometry.location)
           }
+          i++
         })
         map.fitBounds(bounds)
       })
