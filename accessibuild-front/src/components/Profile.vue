@@ -1,16 +1,28 @@
 <template>
   <div id="profile">
-    <h4>Profile</h4>
-    <h5>Hello, {{user.first_name}}!</h5>
+    <h3>Profile</h3>
+    <h5 class="subtitle">Hello, {{user.first_name}}!</h5>
+    <div class="d-flex">
+      <div class="card" style="flex-grow: 1;">
+        <div class="card-body">
+          {{user.email}}
+        </div>
+      </div>
+      <div class="card" style="flex-grow: 1;">
+        <div class="card-body">
+          {{user.phone_number}}
+        </div>
+      </div>
+    </div>
 
     <div id="contacts-block" v-if="hasContacts">
-      <h4 style="width: 100%; text-align: center;">Contacts</h4>
-      <ul v-for="contact in contacts">
+      <h4 style="width: 100%; text-align: center;">Contacts</h4><hr>
+      <div v-for="contact in contacts">
         <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
-      </ul>
+      </div>
     </div>
     <h4 v-else>Loading...</h4>
-    <button class='btn btn-success' v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
+    <button class='btn btn-success btn-block' v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
     <form class="form-group jumbotron" v-else v-on:submit.prevent>
       <h4>Create a New Contact</h4>
       <input class="form-control" type="text" name="first_name" placeholder="First Name" v-model="newContact.first_name">
@@ -22,7 +34,10 @@
         <input class="form-check-input" type="checkbox" name="emergency" v-model="newContact.emergency">
         </label>
       </div><br>
-      <button style="float: right;"class="btn btn-success btn-block" type='submit' @click="pushNewContact">Save</button>
+      <div class="d-flex btn-group" role="group">
+        <button style="flex-grow: 1;"class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
+        <button style="flex-grow: 1;"class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
+      </div>
   </form>
   </div>
 </template>
