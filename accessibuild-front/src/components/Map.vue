@@ -39,16 +39,7 @@ export default {
       zoom: 16,
       markers: [],
       newPlaceList: [],
-      mapStyle: {styles: [
-              {
-                "featureType": "poi",
-                "stylers": [
-                  {
-                    "visibility": "off"
-                  }
-                ]
-              }
-            ]}
+      mapStyle: { styles: [ { "featureType": "poi", "stylers": [ { "visibility": "off" } ] } ] }
     }
   },
   methods: {

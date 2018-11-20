@@ -25,12 +25,9 @@ export default {
       location: {
         name: this.place.name,
         formatted_address: this.place.formatted_address,
-        house_number: this.place.house_number,
-        street: this.place.street,
-        wheelchair: 'No information',
-        bathroom: 'No information',
-        parking: 'No information',
-        not_exists: true,
+        wheelchair: 0,
+        bathroom: false,
+        parking: false,
         id: null
       }
     }
@@ -40,14 +37,10 @@ export default {
       axios.get('http://localhost:3000/api/v2/places/' + this.place.place_id)
         .then(response => {
           const location = response.data[0]
-          this.location.house_number = location.house_number
-          this.location.street = location.street
-          this.location.wheelchair = location.wheelchair
-          this.location.bathroom = location.bathroom
-          this.location.parking = location.parking
-          console.log(location)
           if (location.id) {
-            this.location.not_exists = false
+            this.location.wheelchair = location.wheelchair
+            this.location.bathroom = location.bathroom
+            this.location.parking = location.parking
             this.location.id = location.id
           }
         })
@@ -55,6 +48,19 @@ export default {
     renderLocation (location) {
       this.onClick('SubmitReview')
       store.setCurrentLocation(location)
+      const saveLocation = {
+        place_id: this.place.place_id,
+        wheelchair: this.wheelchair,
+        bathroom: this.bathroom,
+        parking: this.parking
+      }
+      if (!this.location.id) {
+        axios.post('http://localhost:3000/api/v2/locations', saveLocation)
+          .then(response => {
+            store.state.currentLocation.id = response.data.id
+            console.log(response)
+          })
+      }
     }
   },
   created () {

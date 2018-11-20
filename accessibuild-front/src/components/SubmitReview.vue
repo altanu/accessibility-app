@@ -66,20 +66,18 @@ export default {
       comments: [],
       newComment: {
         user_id: 1,
-        location_id: 1,
+        location_id: store.state.currentLocation.id,
         description: '',
-        rating: null
+        rating: 5
       },
     }
   },
   created () {
-    if (location.id) {
-      this.fetchReviews()
-    }
+    this.fetchReviews()
   },
   methods: {
     fetchReviews () {
-      axios.get(this.baseUrl + this.location.id + '/reviews')
+      axios.get(this.baseUrl + store.state.currentLocation.id + '/reviews')
         .then(response => (this.comments = response.data))
         .catch(error => console.log(error))
     },
