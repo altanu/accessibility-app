@@ -8,12 +8,12 @@
 
     <div id="contacts-block" v-if="hasContacts">
       <h4 style="width: 100%; text-align: center;">Contacts</h4>
-      <ul v-for="contact in contacts">
+      <div v-for="contact in contacts">
         <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
-      </ul>
+      </div>
     </div>
     <h4 v-else>Loading...</h4>
-    <button class='btn btn-success' v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
+    <button class='btn btn-success btn-block' v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
     <form class="form-group jumbotron" v-else v-on:submit.prevent>
       <h4>Create a New Contact</h4>
       <input class="form-control" type="text" name="first_name" placeholder="First Name" v-model="newContact.first_name">

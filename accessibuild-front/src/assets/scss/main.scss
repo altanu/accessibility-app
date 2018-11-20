@@ -32,6 +32,12 @@ body {
     // box-shadow: black 2em 2em;
   }
 
+  .card {
+    &.form-group {
+      margin-bottom: 0;
+    }
+  }
+
   .card-header {
     background-color: $blue;
     color: $white;
@@ -88,6 +94,8 @@ body {
     border-radius: 1rem;
   }
 
+
+
   #accessibuild {
     background: none !important;
     border: none !important;
@@ -113,10 +121,6 @@ body {
       width: 100%;
       padding-top: 1em
     }
-  }
-
-  #contacts-block {
-    padding-right: 5%;
   }
 
   #flexbox-container {

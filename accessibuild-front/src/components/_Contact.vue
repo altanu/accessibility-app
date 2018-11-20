@@ -3,6 +3,7 @@
   <li v-if="isForm" class="card">
   <form class="form-group" v-on:submit.prevent>
     <ul class="list-group list-group-flush">
+      <li class="list-group-item card-header">Editing Contact</li>
       <li class="list-group-item">
         <label>First Name</label>
         <input class="form-control" type="text" name="first_name" v-bind:placeholder="contactInfo.first_name" v-model="contactInfo.first_name">
@@ -22,8 +23,9 @@
       <li class="list-group-item form-check">
         <input type="checkbox" name="emergency" v-model="contactInfo.emergency">  Emergency Contact
       </li>
-      <li class="list-group-item">
-        <button class="btn btn-success btn-block" type='submit' @click='updateContact'>Save</button>
+      <li class="list-group-item btn-group d-flex" role="group" style="padding: 0;">
+        <button style="flex-grow: 1" display="flex" class="btn btn-success" type='submit' @click='updateContact'>Save</button>
+        <button style="flex-grow: 1" display="flex" class="btn btn-warning" type='submit' @click='setForm'>Cancel</button>
       </li>
     </ul>
   </form>
