@@ -28,18 +28,25 @@
     </ul>
   </form>
   </li>
-  <li v-else class="card">
-    <div class="card-header">
-      {{ fullName }}
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{ contactInfo.phone_number }}</li>
-      <li class="list-group-item">{{ contactInfo.email }}</li>
-      <li class="list-group-item" v-if="contact.emergency">Set as Emergency Contact</li>
-      <li class="list-group-item" v-else>Not an Emergency Contact</li>
-    </ul>
-    <button class="btn btn-outline-primary" @click='setForm'>Update</button>
-    <button class="btn btn-outline-danger" @click='deleteContact'>Remove</button></li>
+  <div v-else id="accordion">
+    <li class="card">
+      <div class="card-header">
+        <button class="btn btn-link" data-toggle="collapse" v-bind:data-target="'#contact-' + contactInfo.id" aria-expanded="true" aria-controls="collapseOne">
+          {{ fullName }}
+        </button>
+      </div>
+      <div v-bind:id="'contact-' + contactInfo.id" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ contactInfo.phone_number }}</li>
+          <li class="list-group-item">{{ contactInfo.email }}</li>
+          <li class="list-group-item" v-if="contact.emergency">Set as Emergency Contact</li>
+          <li class="list-group-item" v-else>Not an Emergency Contact</li>
+        </ul>
+        <button class="btn btn-outline-primary" @click='setForm'>Update</button>
+        <button class="btn btn-outline-danger" @click='deleteContact'>Remove</button>
+      </div>
+    </li>
+  </div>
   </div>
 </template>
 

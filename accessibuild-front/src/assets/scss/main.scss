@@ -72,6 +72,14 @@ body {
     }
   }
 
+  .btn-link {
+    color: $white;
+    &:hover {
+      text-decoration: none;
+      color: $white;
+    }
+  }
+
   .subtitle {
     font-style: italic;
     padding-left: 2%;
