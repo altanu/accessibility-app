@@ -10,7 +10,8 @@
             v-bind:places-list="this.placesList"
             v-bind:address-string="this.currentAddress"
             v-on:address-change="updateAddress"
-            v-on:new-list="newList">
+            v-on:new-list="newList"
+            v-on:pop-card="popCard">
           </Map>
         </div>
         <div id="right-box" v-bind:style="rightHeight">
@@ -93,6 +94,9 @@ export default {
       this.placesList = arr
       this.state.right = 'RightHome'
       store.clearCurrentLocation()
+    },
+    popCard: function () {
+      console.log("popCard called in App.vue")
     }
   },
   computed: {

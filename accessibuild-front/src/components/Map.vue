@@ -9,6 +9,7 @@
         <GmapMarker v-if="placesList.length <= 1"
           :position="currentPlace"
           @click="clickPin"
+          @mouseover="popLocationCard"
         />
 
         <GmapMarker
@@ -59,8 +60,15 @@ export default {
       geocoder.geocode({'location': latLng}, function(results, status) {
         self.$emit('new-list', [results[0]])
       })
+    },
+    popLocationCard (marker) {
+      let self = this
+      console.log("hovering over", marker)
+      var geocoder = new google.maps.Geocoder
+      geocoder.geocode({'location': marker.latLng}, function(results, status) {
+        self.$emit('pop-card', [results[0]])
+      })
     }
-
   },
   mounted () {
     var self = this
