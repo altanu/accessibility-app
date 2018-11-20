@@ -42,6 +42,7 @@ export default {
       msg: 'Component loaded!',
       user: {},
       contacts: {},
+      userID: 1,
       makingNewContact: false,
       newContact: {
         user_id: this.userId,
@@ -58,10 +59,10 @@ export default {
   },
   methods: {
     fetchUserData: function () {
-      axios.get('http://localhost:3000/api/v2/users/' + this.userId)
+      axios.get('http://localhost:3000/api/v2/users/' + this.userID)
         .then(response => (this.user = response.data))
         .catch(error => console.log(error))
-        .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userId + '/contacts')
+        .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userID + '/contacts')
           .then(response => (this.contacts = response.data))
           .catch(error => console.log(error)))
     },
