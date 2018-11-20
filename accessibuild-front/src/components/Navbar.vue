@@ -18,7 +18,7 @@
           <button v-show="isLoggedIn" style="width: 7.5rem" @click='onClick("Profile")' class='btn btn-outline-primary' ref='profile' type='submit'>Profile</button>
           <button v-show="!isLoggedIn" style="width: 7.5rem" @click='onClick("Login")' class='btn btn-outline-primary' ref='login' type='submit'>Login</button>
 
-          <button v-show="isLoggedIn" style="width: 7.5rem" @click='signOut' class='btn btn-outline-primary' type='submit'>Log Out</button>
+          <button v-show="isLoggedIn" style="width: 7.5rem" @click='setLogin' class='btn btn-outline-primary' type='submit'>Log Out</button>
         </div>
 
       </div>
@@ -30,7 +30,8 @@
 export default {
   props: {
     onClick: Function,
-    isLoggedIn: Boolean
+    isLoggedIn: Boolean,
+    setLogin: Function
   },
   data () {
     return {
