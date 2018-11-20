@@ -37,7 +37,7 @@ export default {
       axios.get('http://localhost:3000/api/v2/places/' + this.place.place_id)
         .then(response => {
           const location = response.data[0]
-          if (location.id) {
+          if (location) {
             this.location.wheelchair = location.wheelchair
             this.location.bathroom = location.bathroom
             this.location.parking = location.parking
@@ -55,16 +55,19 @@ export default {
       if (!this.location.id) {
         axios.post('http://localhost:3000/api/v2/locations', saveLocation)
           .then(response => {
+            store.setCurrentLocation(location)
             store.setCurrentLocationId(response.data.id)
             this.onClick('SubmitReview')
           })
       } else {
+        console.log('location: ',location)
         store.setCurrentLocation(location)
       }
     }
   },
   created () {
     this.fetchLocationInfo()
+    console.log('this.location:',this.location)
   }
 }
 

@@ -71,6 +71,5 @@ new Vue({
   router,
   securedAxiosInstance,
   plainAxiosInstance,
-  data: store,
   render: h => h(App)
 }).$mount('#app')
