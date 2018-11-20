@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 p-5">
+  <div id='right-home'>
     <div v-if="placesList.length == 0">
       <h4>Welcome</h4>
       <p>We located you near {{addressString}}</p>

@@ -14,9 +14,6 @@ body {
 
   h3 {
     color: $white;
-    @media only screen and (max-width: 750px) {
-      display: none;
-    }
   }
 
   button {
@@ -81,11 +78,41 @@ body {
     padding-top: 5px;
   }
 
-  #profile {
+  #profile, #login, #register, #right-home {
     padding-top: 2em;
+    width: 90%;
+    margin: auto;
+    @media (max-width: 450px) {
+      width: 100%;
+      padding-top: 1em
+    }
   }
 
   #contacts-block {
     padding-right: 5%;
+  }
+
+  #flexbox-container {
+    padding-top: 3.4em;
+    height: 100%
+  }
+
+  #right-box {
+    min-width: 40%;
+    padding-top: 2em;
+    height: 100%;
+    overflow: scroll;
+    @media (max-width: 450px) {
+      height: 40%;
+      padding: 1em;
+    }
+  }
+
+  #left-box {
+    min-width: 60%;
+    height: 100%;
+    @media (max-width: 450px) {
+      height: 60%;
+    }
   }
 }
