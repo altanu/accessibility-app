@@ -1,7 +1,10 @@
 <template>
   <div id="profile">
-    <h4>Profile</h4>
-    <h5>Hello, {{user.first_name}}!</h5>
+    <h3>Profile</h3>
+    <hr>
+    <h5 class="subtitle">Hello, {{user.first_name}}!</h5>
+    <span><strong>Registered Email:</strong> {{user.email}}</span><br>
+    <span><strong>Registered Phone Number:</strong> {{user.phone_number}}</span>
 
     <div id="contacts-block" v-if="hasContacts">
       <h4 style="width: 100%; text-align: center;">Contacts</h4>

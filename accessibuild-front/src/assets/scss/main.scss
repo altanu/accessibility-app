@@ -12,9 +12,6 @@ body {
   background-color: $white !important;
   color: black;
 
-  h3 {
-    color: $white;
-  }
 
   button {
     &:focus {
@@ -23,10 +20,21 @@ body {
     }
   }
 
+  .jumbotron {
+    background-color: $white;
+    border: $blue 1px solid;
+    padding-top: 1em;
+  }
+
   .navbar {
     background-color: $blue !important;
     font-size: 1.2em;
     // box-shadow: black 2em 2em;
+  }
+
+  .card-header {
+    background-color: $blue;
+    color: $white;
   }
   .btn{
 
@@ -63,6 +71,11 @@ body {
       }
     }
   }
+
+  .subtitle {
+    font-style: italic;
+    padding-left: 2%;
+  }
   .form-control {
     border-radius: 1rem;
   }
@@ -74,6 +87,10 @@ body {
     padding-top: 0.2em;
     float: left;
     cursor: pointer;
+  }
+
+  #logo {
+    color: $white;
   }
 
   #search-container {
@@ -101,12 +118,11 @@ body {
 
   #right-box {
     min-width: 40%;
-    padding-top: 2em;
+    padding-top: 1em;
     height: 100%;
     overflow: scroll;
     @media (max-width: 450px) {
       height: 40%;
-      padding: 1em;
     }
   }
 
