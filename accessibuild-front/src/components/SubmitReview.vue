@@ -66,7 +66,7 @@ export default {
       comments: [],
       newComment: {
         user_id: 1,
-        location_id: 1,
+        location_id: location.id,
         description: '',
         rating: null
       },
