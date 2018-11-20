@@ -67,10 +67,6 @@ export default {
   },
   methods: {
     setState (stateValue) {
-      console.log('$mq currently equals ' + this.$mq)
-      console.log('renderMap is ' + this.renderMap)
-      console.log('rightHeight is ' + JSON.stringify(this.rightHeight))
-      console.log('classObject is set to ' + JSON.stringify(this.classObject))
       this.state.right = stateValue
     },
     updateLocation (place) {

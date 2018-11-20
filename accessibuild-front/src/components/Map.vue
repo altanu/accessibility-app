@@ -51,7 +51,6 @@ export default {
       this.$emit('new-list', this.newPlaceList)
     },
     clickPin (marker) {
-      console.log(marker.latLng)
       this.getPlaceID(marker.latLng)
     },
     getPlaceID(latLng) {
@@ -76,6 +75,7 @@ export default {
     this.$refs.mapRef.$mapPromise.then((map) => {
       var input = document.getElementById('pac-input')
       var searchBox = new google.maps.places.SearchBox(input)
+      var service = new google.maps.places.PlacesService(map)
 
       // Bias the SearchBox results towards current map's viewport.
       map.addListener('bounds_changed', function () {
@@ -85,7 +85,6 @@ export default {
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
       searchBox.addListener('places_changed', function () {
-        console.log('called places_changed event')
         self.newPlaceList = []
         var searchPlaces = searchBox.getPlaces()
 
@@ -103,6 +102,11 @@ export default {
         var bounds = new google.maps.LatLngBounds()
 
         searchPlaces.forEach(function (place) {
+
+          service.textSearch({'location': place.geometry.location, 'query': place.formatted_address}, function(results, status) {
+            place = results[0]
+          })
+
           self.updatePlacesList(place)
 
           if (!place.geometry) {
