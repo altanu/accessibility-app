@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueMq from 'vue-mq'
 import router from './router'
 
 import VueAxios from 'vue-axios'
@@ -32,6 +33,15 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places'
   },
   installComponents: true
+})
+
+// Breakpoints for reactive design: these are available to all components with $mq
+Vue.use(VueMq, {
+  breakpoints: {
+    sm: 450,
+    md: 1250,
+    lg: Infinity
+  }
 })
 
 Vue.config.productionTip = false
