@@ -101,5 +101,8 @@ body {
   #left-box {
     min-width: 60%;
     height: 100%;
+    @media (max-width: 450px) {
+      height: 60%;
+    }
   }
 }
