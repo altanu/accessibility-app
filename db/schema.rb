@@ -31,7 +31,8 @@ ActiveRecord::Schema.define(version: 2018_11_20_154435) do
     t.integer "wheelchair"
     t.boolean "bathroom"
     t.boolean "parking"
-    t.string "coordinates"
+    t.decimal "lat"
+    t.decimal "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "place_id"
