@@ -3,7 +3,7 @@
     <Navbar v-bind:onClick='setState' v-bind:is-logged-in="this.loggedIn" v-bind:set-login="setLogin"></Navbar>
     <div style="height: 100%">
     <div style="height: 100%">
-      <div class='d-flex align-self-center' style="padding-top: 4em; height: 100%">
+      <div :class="[activeClasses.flexClass, activeClasses.alignClass]" style="padding-top: 4em; height: 100%">
         <div style="min-width:60%; height: 100%;">
           <Map
             v-bind:current-place="this.currentLocation"
@@ -61,7 +61,11 @@ export default {
       userId: 1,
       placesList: [],
       currentAddress: '',
-      loggedIn: false
+      loggedIn: false,
+      activeClasses: {
+        flexClass: 'd-flex',
+        alignClass: 'align-self-center'
+      }
     }
   },
   methods: {
