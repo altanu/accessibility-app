@@ -1,6 +1,5 @@
 <template>
   <section class="card">
-    <div class="card-header">{{location.name}}</div>
     <div class="card-header">Address: {{location.formatted_address}}</div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Wheelchair: {{ location.wheelchair }}</li>
@@ -23,7 +22,6 @@ export default {
   data () {
     return {
       location: {
-        name: this.place.name,
         formatted_address: this.place.formatted_address,
         wheelchair: 0,
         bathroom: false,
