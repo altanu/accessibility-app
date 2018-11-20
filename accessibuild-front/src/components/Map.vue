@@ -6,7 +6,7 @@
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
-        <GmapMarker v-if="placesList.length <= 1"
+        <GmapMarker
           :position="currentPlace"
           @click="clickPin"
           @mouseover="popLocationCard"
