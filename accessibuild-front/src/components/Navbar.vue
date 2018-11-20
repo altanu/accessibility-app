@@ -5,9 +5,9 @@
       </div>
 
       <div style="display:flex; width: 100%; flex-direction: row; justify-content: space-between">
-        <div style="flex-grow: 1;">
+        <div v-if="$mq === 'lg'" style="flex-grow: 1;">
         <h3 style="width:100%; text-align: center">
-          <button v-show="$mq === 'lg'" id="accessibuild" style="width: 7.5rem" @click='onClick("RightHome")'>Accessibuild</button>
+          <button id="accessibuild" style="width: 7.5rem" @click='onClick("RightHome")'>Accessibuild</button>
         </h3>
         </div>
         <div style="flex-grow: 1" id="search-container">

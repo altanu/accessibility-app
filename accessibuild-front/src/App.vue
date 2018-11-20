@@ -61,7 +61,7 @@ export default {
       userId: 1,
       placesList: [],
       currentAddress: '',
-      loggedIn: false,
+      loggedIn: false
     }
   },
   methods: {
