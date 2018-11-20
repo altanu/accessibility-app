@@ -96,6 +96,9 @@ body {
     padding-top: 2em;
     height: 100%;
     overflow: scroll;
+    @media (max-width: 450px) {
+      height: 40%;
+    }
   }
 
   #left-box {

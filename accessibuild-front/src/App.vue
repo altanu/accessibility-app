@@ -4,7 +4,7 @@
     <div style="height: 100%">
     <div style="height: 100%">
       <div id="flexbox-container" :class="classObject">
-        <div id="left-box">
+        <div v-show="renderLeftBox" id="left-box">
           <Map
             v-bind:current-place="this.currentLocation"
             v-bind:places-list="this.placesList"
@@ -13,7 +13,7 @@
             v-on:new-list="newList">
           </Map>
         </div>
-        <div id="right-box" v-show="$mq !== 'sm'">
+        <div id="right-box">
           <transition name='fade'>
             <component
               v-bind:state="state"
@@ -104,6 +104,9 @@ export default {
           alignClass: ''
         }
       }
+    },
+    renderLeftBox : function () {
+      return this.state.right === 'rightHome'
     }
   },
   components: {
