@@ -18,7 +18,6 @@
       v-bind:key="place.place_id"
       v-bind:onClick="onClick"
     ></Location>
-    {{placesList[0]}}
     </div>
 
   </div>
