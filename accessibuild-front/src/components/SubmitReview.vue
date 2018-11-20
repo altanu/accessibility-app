@@ -2,11 +2,10 @@
   <div class="w-100 p-5" style="height: 100%; overflow: scroll;">
     <h1>Submit Review</h1>
     <p>How accessible is this building?</p>
-      {{location.name}}
-      {{location.formatted_address}}
-      {{location.wheelchair}}
+    <p>{{location.name}}</p>
+    <p>{{location.formatted_address}}</p>
     <section class="d-flex flex-column accessibility-info">
-      <h4>{{averageRating}}</h4>
+      <p>Average Rating: {{averageRating}}</p>
       <section class="picker wheelchair-picker">
         <p>Wheelchair</p>
         <button @click="savePickerChoice($event)" class="btn btn-success" id="wheel-fully">Fully</button>
