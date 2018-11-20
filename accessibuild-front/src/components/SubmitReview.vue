@@ -2,6 +2,9 @@
   <div class="w-100 p-5" style="height: 100%; overflow: scroll;">
     <h1>Submit Review</h1>
     <p>How accessible is this building?</p>
+      {{location.name}}
+      {{location.formatted_address}}
+      {{location.wheelchair}}
     <section class="d-flex flex-column accessibility-info">
       <section class="picker wheelchair-picker">
         <p>Wheelchair</p>
@@ -59,10 +62,7 @@ export default {
   data () {
     return {
       location: store.state.currentLocation,
-      testUrl: 'http://localhost:3000/api/v2/locations/1',
-      wheel_status: '',
-      bathroom_status: '',
-      parking_status: '',
+      baseUrl: 'http://localhost:3000/api/v2/locations/',
       comments: [],
       newComment: {
         user_id: 1,
@@ -73,23 +73,18 @@ export default {
     }
   },
   created () {
-    this.fetchReviews()
-    // axios.get(this.testUrl)
-    //   .then(response => {
-    //     const location = response.data
-    //     this.wheel_status = location.wheelchair
-    //     this.bathroom_status = location.bathroom
-    //     this.parking_status = location.parking
-    //   })
+    if (location.id) {
+      this.fetchReviews()
+    }
   },
   methods: {
     fetchReviews () {
-      axios.get(this.testUrl + '/reviews')
+      axios.get(this.baseUrl + this.location.id + '/reviews')
         .then(response => (this.comments = response.data))
         .catch(error => console.log(error))
     },
     saveComment () {
-      axios.post(this.testUrl + '/reviews', { review: this.newComment })
+      axios.post(this.baseUrl + this.location.id + '/reviews', { review: this.newComment })
         .then((response) => console.log(response))
         .catch((error) => console.log(error))
         .then(() => {
@@ -109,21 +104,21 @@ export default {
         } else if (event.target.id === 'wheel-no') {
           this.wheel_status = 0
         }
-        axios.put(this.testUrl, { wheelchair: this.wheel_status })
+        axios.put(this.baseUrl + this.location.id, { wheelchair: this.wheel_status })
       } else if (event.target.id[0] === 'b') {
         if (event.target.id === 'bath-yes') {
           this.bathroom_status = true
         } else if (event.target.id === 'bath-no') {
           this.bathroom_status = false
         }
-        axios.put(this.testUrl, { bathroom: this.bathroom_status })
+        axios.put(this.baseUrl + this.location.id, { bathroom: this.bathroom_status })
       } else if (event.target.id[0] === 'p') {
         if (event.target.id === 'parking-yes') {
           this.parking_status = true
         } else if (event.target.id === 'parking-no') {
           this.parking_status = false
         }
-        axios.put(this.testUrl, { parking: this.parking_status })
+        axios.put(this.baseUrl + this.location.id, { parking: this.parking_status })
       }
     },
     setError (error, text) {

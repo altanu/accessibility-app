@@ -7,7 +7,7 @@
       <li class="list-group-item">bathroom: {{ location.bathroom }}</li>
       <li class="list-group-item">Parking: {{ location.parking }}</li>
     </ul>
-    <button v-if="location.not_exists" class="btn" @click="renderLocation(location)">Review this location</button>
+    <button class="btn" @click="renderLocation(location)">Review this location</button>
   </section>
 </template>
 
@@ -45,6 +45,7 @@ export default {
           this.location.wheelchair = location.wheelchair
           this.location.bathroom = location.bathroom
           this.location.parking = location.parking
+          console.log(location)
           if (location.id) {
             this.location.not_exists = false
             this.location.id = location.id
