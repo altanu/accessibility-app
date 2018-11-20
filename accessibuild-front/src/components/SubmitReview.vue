@@ -82,7 +82,7 @@ export default {
         .catch(error => console.log(error))
     },
     saveComment () {
-      axios.post(this.baseUrl + this.location.id + '/reviews', { review: this.newComment })
+      axios.post(this.baseUrl + store.state.currentLocation.id + '/reviews', { review: this.newComment })
         .then((response) => console.log(response))
         .catch((error) => console.log(error))
         .then(() => {

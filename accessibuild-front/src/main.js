@@ -43,14 +43,17 @@ global.store = {
     right: 'RightHome'
   },
   setCurrentLocation (newLocation) {
-    store.state.currentLocation = newLocation
+    this.state.currentLocation = newLocation
     this.setRightPane('SubmitReview')
   },
   clearCurrentLocation () {
-    store.state.currentLocation = {}
+    this.state.currentLocation = {}
   },
   setRightPane (name) {
-    store.state.right = name
+    this.state.right = name
+  },
+  setCurrentLocationId (id) {
+    this.state.currentLocation.id = id
   }
 }
 
