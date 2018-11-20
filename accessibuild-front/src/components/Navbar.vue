@@ -11,9 +11,9 @@
         </h3>
         </div>
         <div style="flex-grow: 1" id="search-container">
-          <input id="pac-input" class="form-control" type="text" placeholder="🔍 Search keywords or addresses">
+          <input v-on:focus="isFocused" v-on:blur="isFocusedOnMobile = false" id="pac-input" class="form-control" type="text" placeholder="🔍 Search keywords or addresses">
         </div>
-        <div style="flex-grow: 1; display:flex; justify-content: flex-end">
+        <div v-bind:style="hideButtonsWhileSearchingOnMobile">
           <button v-show="!isLoggedIn" style="width: 7.5rem; padding: 2px;" @click='onClick("Register")' class='btn btn-outline-primary' ref='register' type='submit'>Register</button>
           <button v-show="isLoggedIn"style="width: 7.5rem" @click='onClick("Profile")' class='btn btn-outline-primary' ref='profile' type='submit'>Profile</button>
           <button v-show="!isLoggedIn" style="width: 7.5rem" @click='onClick("Login")' class='btn btn-outline-primary' ref='login' type='submit'>Login</button>
@@ -35,7 +35,8 @@ export default {
   },
   data () {
     return {
-      currentPlace: null
+      currentPlace: null,
+      isFocusedOnMobile: false
     }
   },
   methods: {
@@ -47,6 +48,24 @@ export default {
           this.$router.replace('/')
         })
         .catch(error => this.setError(error, 'Cannot sign out'))
+    },
+    isFocused: function () {
+      this.isFocusedOnMobile = this.$mq === 'sm'
+    }
+  },
+  computed: {
+    hideButtonsWhileSearchingOnMobile: function() {
+      if (!this.isFocusedOnMobile) {
+        return {
+          'flex-grow': 1,
+          'display': 'flex',
+          'justify-content': 'flex-end'
+        }
+      } else {
+        return {
+          'display': 'none'
+        }
+      }
     }
   }
 }
