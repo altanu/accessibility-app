@@ -2,10 +2,10 @@
   <div class="w-100 p-5" style="height: 100%; overflow: scroll;">
     <h1>Submit Review</h1>
     <p>How accessible is this building?</p>
-      {{location.name}}
-      {{location.formatted_address}}
-      {{location.wheelchair}}
+    <p>{{location.name}}</p>
+    <p>{{location.formatted_address}}</p>
     <section class="d-flex flex-column accessibility-info">
+      <p>Average Rating: {{averageRating}}</p>
       <section class="picker wheelchair-picker">
         <p>Wheelchair</p>
         <button @click="savePickerChoice($event)" class="btn btn-success" id="wheel-fully">Fully</button>
@@ -68,8 +68,9 @@ export default {
         user_id: 1,
         location_id: store.state.currentLocation.id,
         description: '',
-        rating: 5
-      }
+        rating: null
+      },
+      averageRating: 0
     }
   },
   created () {
@@ -78,8 +79,12 @@ export default {
   methods: {
     fetchReviews () {
       axios.get(this.baseUrl + store.state.currentLocation.id + '/reviews')
-        .then(response => (this.comments = response.data))
-        .catch(error => console.log(error))
+        .then(response => {
+          this.comments = response.data
+          this.averageRating = Math.round(this.comments.reduce((acc, curr) => {
+            return acc + curr.rating / this.comments.length
+          }, 0) * 10) / 10
+        }).catch(error => console.log(error))
     },
     saveComment () {
       axios.post(this.baseUrl + store.state.currentLocation.id + '/reviews', { review: this.newComment })
