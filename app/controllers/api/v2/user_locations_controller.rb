@@ -1,7 +1,7 @@
 module Api
   module V2
     class TripsController < ApplicationController
-      before_action :authorize_access_request!
+      # before_action :authorize_access_request!
       before_action :set_trip, only: [:show, :update, :destroy]
 
       # GET /trips

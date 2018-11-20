@@ -66,16 +66,14 @@ export default {
       comments: [],
       newComment: {
         user_id: 1,
-        location_id: 1,
+        location_id: store.state.currentLocation.id,
         description: '',
-        rating: null
+        rating: 5
       },
     }
   },
   created () {
-    if (location.id) {
-      this.fetchReviews()
-    }
+    this.fetchReviews()
   },
   methods: {
     fetchReviews () {
