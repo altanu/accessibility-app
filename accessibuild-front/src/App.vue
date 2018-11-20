@@ -60,7 +60,7 @@ export default {
       currentLocation: { lat: 45.5, lng: -73.5 },
       userId: 1,
       placesList: [],
-      currentAddress: "",
+      currentAddress: '',
       loggedIn: false
     }
   },
