@@ -13,7 +13,7 @@
             v-on:new-list="newList">
           </Map>
         </div>
-        <div id="right-box">
+        <div id="right-box" v-bind:style="rightHeight">
           <transition name='fade'>
             <component
               v-bind:state="state"
@@ -105,8 +105,11 @@ export default {
         }
       }
     },
-    renderLeftBox : function () {
+    renderLeftBox: function () {
       return this.state.right === 'rightHome'
+    },
+    rightHeight: function() {
+      return this.renderLeftBox ? { height: '40%'} : { height: '100%' }
     }
   },
   components: {
