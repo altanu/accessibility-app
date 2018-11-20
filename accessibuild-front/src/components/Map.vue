@@ -41,16 +41,7 @@ export default {
       newPlaceList: [],
       mapStyle: {styles: [
               {
-                "featureType": "poi.business",
-                "stylers": [
-                  {
-                    "visibility": "off"
-                  }
-                ]
-              },
-              {
-                "featureType": "poi.park",
-                "elementType": "labels.text",
+                "featureType": "poi",
                 "stylers": [
                   {
                     "visibility": "off"
