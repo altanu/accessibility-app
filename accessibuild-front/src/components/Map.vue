@@ -6,7 +6,7 @@
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
-        <GmapMarker v-if="placesList.length == 0"
+        <GmapMarker v-if="placesList.length <= 1"
           :position="currentPlace"
           @click="clickPin"
         />
@@ -53,10 +53,11 @@ export default {
       console.log(marker.latLng)
       this.getPlaceID(marker.latLng)
     },
-    getPlaceID (latLng) {
-      var geocoder = new google.maps.Geocoder()
-      geocoder.geocode({ 'location': latLng }, function (results, status) {
-        store.setCurrentLocation(results[0])
+    getPlaceID(latLng) {
+      let self = this
+      var geocoder = new google.maps.Geocoder
+      geocoder.geocode({'location': latLng}, function(results, status) {
+        self.$emit('new-list', [results[0]])
       })
     }
 
