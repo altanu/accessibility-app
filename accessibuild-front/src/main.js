@@ -44,6 +44,7 @@ global.store = {
   },
   setCurrentLocation (newLocation) {
     store.state.currentLocation = newLocation
+    this.setRightPane('SubmitReview')
   },
   clearCurrentLocation () {
     store.state.currentLocation = {}

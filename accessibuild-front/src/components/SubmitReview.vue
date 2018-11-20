@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     fetchReviews () {
-      axios.get(this.baseUrl + this.location.id + '/reviews')
+      axios.get(this.baseUrl + store.state.currentLocation.id + '/reviews')
         .then(response => (this.comments = response.data))
         .catch(error => console.log(error))
     },
