@@ -2,7 +2,7 @@
   <div class="w-75 p-5">
     <div v-if="placesList.length == 0">
       <h4>Welcome</h4>
-      <p>We located you at {{addressString}}</p>
+      <p>We located you near {{addressString}}</p>
       <p>What would you like to do today?</p>
     </div>
     <div>
