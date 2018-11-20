@@ -24,8 +24,8 @@
         <input type="checkbox" name="emergency" v-model="contactInfo.emergency">  Emergency Contact
       </li>
       <li class="list-group-item btn-group d-flex" role="group" style="padding: 0;">
-        <button style="flex-grow: 1" display="flex" class="btn btn-success" type='submit' @click='updateContact'>Save</button>
-        <button style="flex-grow: 1" display="flex" class="btn btn-warning" type='submit' @click='setForm'>Cancel</button>
+        <button style="flex-grow: 1;" class="btn btn-success" type='submit' @click='updateContact'>Save</button>
+        <button style="flex-grow: 1;" class="btn btn-warning" type='submit' @click='setForm'>Cancel</button>
       </li>
     </ul>
   </form>

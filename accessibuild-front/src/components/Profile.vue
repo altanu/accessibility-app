@@ -7,7 +7,7 @@
     <span><strong>Registered Phone Number:</strong> {{user.phone_number}}</span>
 
     <div id="contacts-block" v-if="hasContacts">
-      <h4 style="width: 100%; text-align: center;">Contacts</h4>
+      <h4 style="width: 100%; text-align: center;">Contacts</h4><hr>
       <div v-for="contact in contacts">
         <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
       </div>
@@ -25,7 +25,10 @@
         <input class="form-check-input" type="checkbox" name="emergency" v-model="newContact.emergency">
         </label>
       </div><br>
-      <button style="float: right;"class="btn btn-success btn-block" type='submit' @click="pushNewContact">Save</button>
+      <div class="d-flex btn-group" role="group">
+        <button style="flex-grow: 1;"class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
+        <button style="flex-grow: 1;"class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
+      </div>
   </form>
   </div>
 </template>
