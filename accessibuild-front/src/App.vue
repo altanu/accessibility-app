@@ -1,6 +1,6 @@
 <template>
   <div id="app" style="height: 100%">
-    <Navbar v-bind:onClick='setState' v-bind:is-logged-in="this.loggedIn"></Navbar>
+    <Navbar v-bind:onClick='setState' v-bind:is-logged-in="this.loggedIn" v-bind:set-login="setLogin"></Navbar>
     <div style="height: 100%">
     <div style="height: 100%">
       <div class='d-flex align-self-center' style="padding-top: 4em; height: 100%">
