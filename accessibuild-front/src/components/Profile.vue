@@ -1,10 +1,19 @@
 <template>
   <div id="profile">
     <h3>Profile</h3>
-    <hr>
     <h5 class="subtitle">Hello, {{user.first_name}}!</h5>
-    <span><strong>Registered Email:</strong> {{user.email}}</span><br>
-    <span><strong>Registered Phone Number:</strong> {{user.phone_number}}</span>
+    <div class="d-flex">
+      <div class="card" style="flex-grow: 1;">
+        <div class="card-body">
+          {{user.email}}
+        </div>
+      </div>
+      <div class="card" style="flex-grow: 1;">
+        <div class="card-body">
+          {{user.phone_number}}
+        </div>
+      </div>
+    </div>
 
     <div id="contacts-block" v-if="hasContacts">
       <h4 style="width: 100%; text-align: center;">Contacts</h4><hr>
