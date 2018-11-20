@@ -57,6 +57,7 @@ export default {
       let self = this
       var geocoder = new google.maps.Geocoder
       geocoder.geocode({'location': latLng}, function(results, status) {
+        console.log("this is the marker information", results[0])
         self.$emit('new-list', [results[0]])
       })
     }
@@ -68,6 +69,7 @@ export default {
     this.$refs.mapRef.$mapPromise.then((map) => {
       var input = document.getElementById('pac-input')
       var searchBox = new google.maps.places.SearchBox(input)
+      var service = new google.maps.places.PlacesService(map)
 
       // Bias the SearchBox results towards current map's viewport.
       map.addListener('bounds_changed', function () {
@@ -95,6 +97,11 @@ export default {
         var bounds = new google.maps.LatLngBounds()
 
         searchPlaces.forEach(function (place) {
+
+          service.textSearch({'location': place.geometry.location, 'query': place.formatted_address}, function(results, status) {
+            place = results[0]
+          })
+
           self.updatePlacesList(place)
 
           if (!place.geometry) {
