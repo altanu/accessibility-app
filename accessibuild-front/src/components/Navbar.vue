@@ -54,7 +54,7 @@ export default {
     }
   },
   computed: {
-    hideButtonsWhileSearchingOnMobile: function() {
+    hideButtonsWhileSearchingOnMobile: function () {
       if (!this.isFocusedOnMobile) {
         return {
           'flex-grow': 1,

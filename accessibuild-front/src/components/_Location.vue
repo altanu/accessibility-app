@@ -60,14 +60,14 @@ export default {
             this.onClick('SubmitReview')
           })
       } else {
-        console.log('location: ',location)
+        console.log('location: ', location)
         store.setCurrentLocation(location)
       }
     }
   },
   created () {
     this.fetchLocationInfo()
-    console.log('this.location:',this.location)
+    console.log('this.location:', this.location)
   }
 }
 

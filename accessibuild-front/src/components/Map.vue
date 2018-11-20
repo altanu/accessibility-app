@@ -39,23 +39,23 @@ export default {
       zoom: 16,
       markers: [],
       newPlaceList: [],
-      mapStyle: { styles: [ { "featureType": "poi", "stylers": [ { "visibility": "off" } ] } ] }
+      mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] }
     }
   },
   methods: {
-    updatePlacesList(newPlace) {
+    updatePlacesList (newPlace) {
       this.newPlaceList.push(newPlace)
     },
-    publishNewList() {
+    publishNewList () {
       this.$emit('new-list', this.newPlaceList)
     },
-    clickPin(marker) {
+    clickPin (marker) {
       console.log(marker.latLng)
       this.getPlaceID(marker.latLng)
     },
-    getPlaceID(latLng) {
-      var geocoder = new google.maps.Geocoder
-      geocoder.geocode({'location': latLng}, function(results, status) {
+    getPlaceID (latLng) {
+      var geocoder = new google.maps.Geocoder()
+      geocoder.geocode({ 'location': latLng }, function (results, status) {
         store.setCurrentLocation(results[0])
       })
     }
@@ -63,21 +63,21 @@ export default {
   },
   mounted () {
     var self = this
-    
+
     this.$refs.mapRef.$mapPromise.then((map) => {
-      var input = document.getElementById('pac-input');
-      var searchBox = new google.maps.places.SearchBox(input);
-      
+      var input = document.getElementById('pac-input')
+      var searchBox = new google.maps.places.SearchBox(input)
+
       // Bias the SearchBox results towards current map's viewport.
-      map.addListener('bounds_changed', function() {
-        searchBox.setBounds(map.getBounds());
-      });
+      map.addListener('bounds_changed', function () {
+        searchBox.setBounds(map.getBounds())
+      })
 
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
-      searchBox.addListener('places_changed', function() {
-        console.log("called places_changed event")
-        self.newPlaceList = [];
+      searchBox.addListener('places_changed', function () {
+        console.log('called places_changed event')
+        self.newPlaceList = []
         var searchPlaces = searchBox.getPlaces()
 
         if (searchPlaces.length == 0) {
@@ -85,20 +85,19 @@ export default {
         }
 
         // Clear out the old markers.
-        self.markers.forEach(function(marker) {
+        self.markers.forEach(function (marker) {
           marker.setMap(null)
-        });
+        })
         self.markers = []
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds()
 
-        searchPlaces.forEach(function(place) {
-
+        searchPlaces.forEach(function (place) {
           self.updatePlacesList(place)
 
           if (!place.geometry) {
-            console.log("Returned place contains no geometry")
+            console.log('Returned place contains no geometry')
             return
           }
 
@@ -125,21 +124,20 @@ export default {
           } else {
             bounds.extend(place.geometry.location)
           }
-           
         })
         self.publishNewList()
         map.fitBounds(bounds)
       })
-    }).then(function() {
-      var geocoder = new google.maps.Geocoder;
+    }).then(function () {
+      var geocoder = new google.maps.Geocoder()
       navigator.geolocation.getCurrentPosition(position => {
-        geocoder.geocode({'location': {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          }}, function(results, status) {
-            self.$emit('address-change', results[0].formatted_address)
-          })
+        geocoder.geocode({ 'location': {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        } }, function (results, status) {
+          self.$emit('address-change', results[0].formatted_address)
         })
+      })
     })
   }
 }

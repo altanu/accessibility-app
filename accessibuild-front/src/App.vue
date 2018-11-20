@@ -89,7 +89,7 @@ export default {
     setLogin: function () {
       this.loggedIn = !this.loggedIn
     },
-    newList: function(arr) {
+    newList: function (arr) {
       this.placesList = arr
       this.state.right = 'RightHome'
       store.clearCurrentLocation()
@@ -112,8 +112,8 @@ export default {
     renderMap: function () {
       return this.state.right === 'RightHome' || this.$mq !== 'sm'
     },
-    rightHeight: function() {
-      return this.renderMap && this.$mq === 'sm' ? { height: '40%'} : { height: '100%' }
+    rightHeight: function () {
+      return this.renderMap && this.$mq === 'sm' ? { height: '40%' } : { height: '100%' }
     }
   },
   components: {
@@ -125,7 +125,7 @@ export default {
     Map,
     Contacts,
     Profile,
-    SubmitReview,
+    SubmitReview
   }
 }
 </script>

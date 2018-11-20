@@ -69,7 +69,7 @@ export default {
         location_id: store.state.currentLocation.id,
         description: '',
         rating: 5
-      },
+      }
     }
   },
   created () {
