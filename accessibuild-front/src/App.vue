@@ -4,7 +4,7 @@
     <div style="height: 100%">
     <div style="height: 100%">
       <div id="flexbox-container" :class="classObject">
-        <div v-show="renderLeftBox" id="left-box">
+        <div v-show="renderMap" id="left-box">
           <Map
             v-bind:current-place="this.currentLocation"
             v-bind:places-list="this.placesList"
@@ -66,6 +66,10 @@ export default {
   },
   methods: {
     setState (stateValue) {
+      console.log('$mq currently equals ' + this.$mq)
+      console.log('renderMap is ' + this.renderMap)
+      console.log('rightHeight is ' + JSON.stringify(this.rightHeight))
+      console.log('classObject is set to ' + JSON.stringify(this.classObject))
       this.state.right = stateValue
     },
     updateLocation (place) {
@@ -87,7 +91,7 @@ export default {
     },
     newList: function(arr) {
       this.placesList = arr
-      this.state.right = 'rightHome'
+      this.state.right = 'RightHome'
       store.clearCurrentLocation()
     }
   },
@@ -105,11 +109,11 @@ export default {
         }
       }
     },
-    renderLeftBox: function () {
-      return this.state.right === 'rightHome'
+    renderMap: function () {
+      return this.state.right === 'RightHome' || this.$mq !== 'sm'
     },
     rightHeight: function() {
-      return this.renderLeftBox ? { height: '40%'} : { height: '100%' }
+      return this.renderMap && this.$mq === 'sm' ? { height: '40%'} : { height: '100%' }
     }
   },
   components: {
