@@ -15,7 +15,7 @@
         </div>
         <div style="flex-grow: 1; display:flex; justify-content: flex-end">
           <button v-show="!isLoggedIn" style="width: 7.5rem; padding: 2px;" @click='onClick("Register")' class='btn btn-outline-primary' ref='register' type='submit'>Register</button>
-          <button v-show="isLoggedIn"style="width: 7.5rem" @click='onClick("Profile")' class='btn btn-outline-primary' ref='profile' type='submit'>Profile</button>
+          <button v-show="isLoggedIn" style="width: 7.5rem" @click='onClick("Profile")' class='btn btn-outline-primary' ref='profile' type='submit'>Profile</button>
           <button v-show="!isLoggedIn" style="width: 7.5rem" @click='onClick("Login")' class='btn btn-outline-primary' ref='login' type='submit'>Login</button>
 
           <button v-show="isLoggedIn" style="width: 7.5rem" @click='signOut' class='btn btn-outline-primary' type='submit'>Log Out</button>

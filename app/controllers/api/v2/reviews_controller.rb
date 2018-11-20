@@ -52,7 +52,7 @@ module Api
 
         # Only allow a trusted parameter "white list" through.
         def review_params
-          params.require(:review).permit(:user_id, :location_id, :wheel_chair, :description, :rating)
+          params.require(:review).permit(:user_id, :location_id, :description, :rating)
         end
     end
   end
