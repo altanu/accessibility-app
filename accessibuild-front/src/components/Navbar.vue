@@ -30,7 +30,8 @@
 export default {
   props: {
     onClick: Function,
-    isLoggedIn: Boolean
+    isLoggedIn: Boolean,
+    setLogin: Function
   },
   data () {
     return {
