@@ -3,6 +3,7 @@
     <gmap-map ref="mapRef"
       :center="currentPlace"
       :zoom="zoom"
+      v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
         <GmapMarker v-if="placesList.length == 0"
@@ -37,7 +38,26 @@ export default {
       center: this.currentPlace,
       zoom: 16,
       markers: [],
-      newPlaceList: []
+      newPlaceList: [],
+      mapStyle: {styles: [
+              {
+                "featureType": "poi.business",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.park",
+                "elementType": "labels.text",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              }
+            ]}
     }
   },
   methods: {

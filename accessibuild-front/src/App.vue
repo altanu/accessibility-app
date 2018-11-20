@@ -1,9 +1,9 @@
 <template>
   <div id="app" style="height: 100%">
-    <Navbar v-bind:onClick='setState'></Navbar>
+    <Navbar v-bind:onClick='setState' v-bind:is-logged-in="this.loggedIn"></Navbar>
     <div style="height: 100%">
     <div style="height: 100%">
-      <div class='d-flex align-self-center' style="padding-top: 5.4em; height: 100%">
+      <div class='d-flex align-self-center' style="padding-top: 4em; height: 100%">
         <div style="min-width:60%; height: 100%;">
           <Map
             v-bind:current-place="this.currentLocation"
@@ -19,6 +19,7 @@
               v-bind:state="state"
               v-bind:is='state.right'
               v-bind:address-string="this.currentAddress"
+              v-bind:set-login="setLogin"
               v-bind:current-place="this.currentLocation"
               v-bind:places-list="this.placesList"
               v-bind:onClick='setState'
@@ -60,6 +61,7 @@ export default {
       userId: 1,
       placesList: [],
       currentAddress: '',
+      loggedIn: false
     }
   },
   methods: {
@@ -80,7 +82,10 @@ export default {
         })
       })
     },
-    newList: function (arr) {
+    setLogin: function () {
+      this.loggedIn = !this.loggedIn
+    },
+    newList: function(arr) {
       this.placesList = arr
       this.state.right = 'rightHome'
       store.clearCurrentLocation()
