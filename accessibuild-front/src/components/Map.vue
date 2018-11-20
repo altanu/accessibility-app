@@ -50,14 +50,12 @@ export default {
       this.$emit('new-list', this.newPlaceList)
     },
     clickPin (marker) {
-      console.log(marker.latLng)
       this.getPlaceID(marker.latLng)
     },
     getPlaceID(latLng) {
       let self = this
       var geocoder = new google.maps.Geocoder
       geocoder.geocode({'location': latLng}, function(results, status) {
-        console.log("this is the marker information", results[0])
         self.$emit('new-list', [results[0]])
       })
     }
@@ -79,7 +77,6 @@ export default {
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
       searchBox.addListener('places_changed', function () {
-        console.log('called places_changed event')
         self.newPlaceList = []
         var searchPlaces = searchBox.getPlaces()
 
