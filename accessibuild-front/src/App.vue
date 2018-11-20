@@ -4,7 +4,7 @@
     <div style="height: 100%">
     <div style="height: 100%">
       <div :class="classObject" style="padding-top: 4em; height: 100%">
-        <div style="min-width:60%; height: 100%;">
+        <div id="left-box">
           <Map
             v-bind:current-place="this.currentLocation"
             v-bind:places-list="this.placesList"
@@ -13,7 +13,7 @@
             v-on:new-list="newList">
           </Map>
         </div>
-        <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
+        <div id="right-box" v-show="$mq !== 'sm'">
           <transition name='fade'>
             <component
               v-bind:state="state"

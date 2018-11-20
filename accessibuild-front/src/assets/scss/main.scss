@@ -85,4 +85,16 @@ body {
   #contacts-block {
     padding-right: 5%;
   }
+
+  #right-box {
+    min-width: 40%;
+    padding-top: 2em;
+    height: 100%;
+    overflow: scroll;
+  }
+
+  #left-box {
+    min-width: 60%;
+    height: 100%;
+  }
 }
