@@ -20,9 +20,7 @@
           :clickable="true"
           :draggable="false"
           :icon="marker.icon"
-          @click="clickPin"
-          @mouseover="hoverPin"
-          @mouseout="clearBorder"
+          @click="hoverPin"
         />
 
     </gmap-map>
@@ -67,13 +65,6 @@ export default {
         self.$emit('pin-hover', results[0].place_id)
       })
     },
-    clearBorder (marker) {
-      let self = this
-      var geocoder = new google.maps.Geocoder()
-      geocoder.geocode({ 'location': marker.latLng }, function (results, status) {
-        self.$emit('hover-clear', results[0].place_id)
-      })
-    }
   },
   mounted () {
     var self = this

@@ -96,6 +96,7 @@ export default {
       var selectedCard = document.getElementById(place_id)
       if (selectedCard) {
         selectedCard.style.border = '3px solid black'
+        selectedCard.scrollIntoView({behavior: "smooth"})
       }
       console.log('app.vue received', place_id)
       console.log('selected card was', selectedCard)
