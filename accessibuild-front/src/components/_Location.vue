@@ -1,5 +1,5 @@
 <template>
-  <section class="card">
+  <section v-bind:id="this.place.place_id" class="card">
     <div class="card-header">Address: {{location.formatted_address}}</div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Wheelchair: {{ location.wheelchair }}</li>

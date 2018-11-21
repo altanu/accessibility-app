@@ -9,6 +9,7 @@
         <GmapMarker v-if="placesList.length <= 1"
           :position="currentPlace"
           @click="clickPin"
+          @mouseover="hoverPin"
         />
 
         <GmapMarker
@@ -19,6 +20,7 @@
           :draggable="false"
           :icon="marker.icon"
           @click="clickPin"
+          @mouseover="hoverPin"
         />
 
     </gmap-map>
@@ -50,16 +52,19 @@ export default {
       this.$emit('new-list', this.newPlaceList)
     },
     clickPin (marker) {
-      this.getPlaceID(marker.latLng)
-    },
-    getPlaceID(latLng) {
       let self = this
       var geocoder = new google.maps.Geocoder
-      geocoder.geocode({'location': latLng}, function(results, status) {
+      geocoder.geocode({'location': marker.latLng}, function(results, status) {
         self.$emit('new-list', [results[0]])
       })
+    },
+    hoverPin (marker) {
+      let self = this
+      var geocoder = new google.maps.Geocoder
+      geocoder.geocode({'location': marker.latLng}, function(results, status) {
+        self.$emit('pin-hover', results[0].place_id)
+      })
     }
-
   },
   mounted () {
     var self = this

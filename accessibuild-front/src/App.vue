@@ -10,7 +10,8 @@
             v-bind:places-list="this.placesList"
             v-bind:address-string="this.currentAddress"
             v-on:address-change="updateAddress"
-            v-on:new-list="newList">
+            v-on:new-list="newList"
+            v-on:pin-hover="pinHover">
           </Map>
         </div>
         <div id="right-box" v-bind:style="rightHeight">
@@ -89,6 +90,14 @@ export default {
       this.placesList = arr
       this.state.right = 'RightHome'
       store.clearCurrentLocation()
+    },
+    pinHover: function (place_id) {
+      var selectedCard = document.getElementById(place_id)
+      if (selectedCard) {
+        selectedCard.style.border = "3px solid black"
+      }
+      console.log("app.vue received", place_id)
+      console.log("selected card was", selectedCard)
     }
   },
   computed: {
