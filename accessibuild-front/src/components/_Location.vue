@@ -58,7 +58,6 @@ export default {
             this.onClick('SubmitReview')
           })
       } else {
-        console.log('location: ', location)
         store.setCurrentLocation(location)
       }
     }

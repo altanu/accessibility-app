@@ -8,8 +8,8 @@
 
         <GmapMarker v-if="placesList.length <= 1"
           :position="currentPlace"
-          @click="clickPin"
-          @mouseover="hoverPin"
+          :clickable="false"
+          :draggable="false"
         />
 
         <GmapMarker
@@ -20,7 +20,7 @@
           :clickable="true"
           :draggable="false"
           :icon="marker.icon"
-          @click="hoverPin"
+          @click="selectCard(marker.place_id)"
         />
 
     </gmap-map>
@@ -54,16 +54,12 @@ export default {
     clickPin (marker) {
       let self = this
       var geocoder = new google.maps.Geocoder()
-      geocoder.geocode({ 'location': marker.latLng }, function (results, status) {
+      geocoder.geocode({ 'placeId': marker.place_id, 'language': 'en' }, function (results, status) {
         self.$emit('new-list', [results[0]])
       })
     },
-    hoverPin (marker) {
-      let self = this
-      var geocoder = new google.maps.Geocoder()
-      geocoder.geocode({ 'location': marker.latLng }, function (results, status) {
-        self.$emit('pin-hover', results[0].place_id)
-      })
+    selectCard (place_id) {
+      this.$emit('pin-select', place_id)
     },
   },
   mounted () {
@@ -72,6 +68,7 @@ export default {
     this.$refs.mapRef.$mapPromise.then((map) => {
       var input = document.getElementById('pac-input')
       var searchBox = new google.maps.places.SearchBox(input)
+      var geocoder = new google.maps.Geocoder()
       var service = new google.maps.places.PlacesService(map)
 
       // Bias the SearchBox results towards current map's viewport.
@@ -99,14 +96,14 @@ export default {
         var bounds = new google.maps.LatLngBounds()
 
         searchPlaces.forEach(function (place) {
-          service.textSearch({ 'location': place.geometry.location, 'query': place.formatted_address }, function (results, status) {
+          geocoder.geocode({ placeId: place.place_id }, function (results, status) {
             place = results[0]
           })
 
           self.updatePlacesList(place)
 
           if (!place.geometry) {
-            console.log('Returned place contains no geometry')
+            // Returned place contains no geometry
             return
           }
 
@@ -124,7 +121,7 @@ export default {
             icon: icon,
             title: place.name,
             position: place.geometry.location,
-            placeID: place.place_id
+            place_id: place.place_id
           }))
 
           if (place.geometry.viewport) {

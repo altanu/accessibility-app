@@ -11,8 +11,7 @@
             v-bind:address-string="this.currentAddress"
             v-on:address-change="updateAddress"
             v-on:new-list="newList"
-            v-on:pin-hover="pinHover"
-            v-on:hover-clear="hoverClear">
+            v-on:pin-select="selectCard">
           </Map>
         </div>
         <div id="right-box" v-bind:style="rightHeight">
@@ -53,7 +52,6 @@ export default {
   },
   mounted () {
     this.geolocate()
-    console.log('store: ', store.state)
   },
   data: () => {
     return {
@@ -92,18 +90,16 @@ export default {
       this.state.right = 'RightHome'
       store.clearCurrentLocation()
     },
-    pinHover: function (place_id) {
+    selectCard: function (place_id) {
       var selectedCard = document.getElementById(place_id)
       if (selectedCard) {
         selectedCard.style.border = '3px solid black'
         selectedCard.scrollIntoView({behavior: "smooth"})
+        setTimeout(() => {
+          selectedCard.style.border = '1px solid grey'
+        }, 1500)
       }
-      console.log('app.vue received', place_id)
-      console.log('selected card was', selectedCard)
     },
-    hoverClear: function (place_id) {
-      console.log('app.vue received on mouseout', place_id)
-    }
   },
   computed: {
     classObject: function () {
