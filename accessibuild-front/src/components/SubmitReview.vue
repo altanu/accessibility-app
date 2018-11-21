@@ -9,9 +9,20 @@
       <p>Average Rating: {{averageRating}}</p>
       <section class="picker wheelchair-picker">
         <p>Wheelchair</p>
-        <button @click="savePickerChoice($event)" class="btn btn-success" id="wheel-fully">Fully</button>
-        <button @click="savePickerChoice($event)" class="btn btn-warning" id="wheel-partially">Partially</button>
-        <button @click="savePickerChoice($event)" class="btn btn-danger" id="wheel-no">Not at all</button>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-success active">
+            <input type="radio" name="options" id="wheel-fully" autocomplete="off" checked> Full
+          </label>
+          <label class="btn btn-warning">
+            <input type="radio" name="options" id="wheel-partially" autocomplete="off"> Partial
+          </label>
+          <label class="btn btn-danger">
+            <input type="radio" name="options" id="wheel-no" autocomplete="off"> None
+          </label>
+            <!-- <button @click="savePickerChoice($event)" class="btn btn-success" id="wheel-fully">Fully</button> -->
+          <!-- <button @click="savePickerChoice($event)" class="btn btn-warning" id="wheel-partially">Partially</button> -->
+          <!-- <button @click="savePickerChoice($event)" class="btn btn-danger" id="wheel-no">Not at all</button> -->
+        </div>
       </section>
       <section class="picker bathroom-picker">
         <p>Accessible Bathroom</p>
