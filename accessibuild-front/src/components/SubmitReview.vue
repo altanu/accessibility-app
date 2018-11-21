@@ -10,15 +10,13 @@
       <section class="picker wheelchair-picker">
         <p>Wheelchair</p>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-radio active">
-            <input type="radio" name="options" id="wheel-fully" autocomplete="off" checked> Full
-          </label>
-          <label class="btn btn-radio">
-            <input type="radio" name="options" id="wheel-partially" autocomplete="off"> Partial
-          </label>
-          <label class="btn btn-radio">
-            <input type="radio" name="options" id="wheel-no" autocomplete="off"> None
-          </label>
+          <p>{{ location.wheelchair }}</p>
+            <input type="radio" value="2" v-model="someTestData" id="wheel-fully">
+            <label for="wheel-fully">Fully</label>
+            <input type="radio" value="1" v-model="someTestData" id="wheel-partially">
+            <label for="wheel-partially">Partially</label>
+            <input type="radio" value="0" v-model="someTestData" id="wheel-no">
+            <label for="wheel-no">None</label>
             <!-- <button @click="savePickerChoice($event)" class="btn btn-success" id="wheel-fully">Fully</button> -->
           <!-- <button @click="savePickerChoice($event)" class="btn btn-warning" id="wheel-partially">Partially</button> -->
           <!-- <button @click="savePickerChoice($event)" class="btn btn-danger" id="wheel-no">Not at all</button> -->
@@ -26,13 +24,15 @@
       </section>
       <section class="picker bathroom-picker">
         <p>Accessible Bathroom</p>
-        <button @click="savePickerChoice($event)" class="btn btn-success" id="bath-yes">Yes</button>
-        <button @click="savePickerChoice($event)" class="btn btn-danger" id="bath-no">No</button>
+        <input type="checkbox" id="bathroom-acc" v-model="location.bathroom">
+        <!-- <button @click="savePickerChoice($event)" class="btn btn-success" id="bath-yes">Yes</button>
+        <button @click="savePickerChoice($event)" class="btn btn-danger" id="bath-no">No</button> -->
       </section>
       <section class="picker parking-picker">
         <p>Accessible Parking</p>
-        <button @click="savePickerChoice($event)" class="btn btn-success" id="parking-yes">Yes</button>
-        <button @click="savePickerChoice($event)" class="btn btn-danger" id="parking-no">No</button>
+        <input type="checkbox" id="parking-acc" v-model="location.parking">
+        <!-- <button @click="savePickerChoice($event)" class="btn btn-success" id="parking-yes">Yes</button>
+        <button @click="savePickerChoice($event)" class="btn btn-danger" id="parking-no">No</button> -->
       </section>
       <section class="comment-container">
         <form v-on:submit.prevent>
@@ -78,6 +78,7 @@ export default {
       location: store.state.currentLocation,
       baseUrl: 'http://localhost:3000/api/v2/locations/',
       comments: [],
+      someTestData: null,
       newComment: {
         user_id: 1,
         location_id: store.state.currentLocation.id,
