@@ -6,11 +6,21 @@
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
-        <!-- <GmapMarker v-if="placesList.length <= 1"
+        <GmapMarker v-if="placesList.length <= 1"
           :position="currentPlace"
           :clickable="false"
           :draggable="false"
-        /> -->
+        />
+
+        <GmapMarker v-if="placesList.length <= 1"
+          v-for="marker in defaultMarkers"
+          :id="marker.place_id"
+          :key="marker.place_id"
+          :position="marker.position"
+          :clickable="false"
+          :draggable="false"
+          :icon="marker.icon"
+        />
 
         <GmapMarker
           v-for="marker in markers"
@@ -20,7 +30,7 @@
           :clickable="true"
           :draggable="false"
           :icon="marker.icon"
-          @click="selectCard(marker.place_id)"
+          @click="selectCard(marker)"
         />
 
     </gmap-map>
@@ -42,6 +52,7 @@ export default {
       center: this.currentPlace,
       zoom: 16,
       markers: [],
+      defaultMarkers: [],
       newPlaceList: [],
       mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] },
       pinStyles: ['/redPin.png','/yellowPin.png','/greenPin.png']
@@ -56,13 +67,16 @@ export default {
     },
     clickPin (marker) {
       let self = this
+      console.log("clickedPin", marker)
       var geocoder = new google.maps.Geocoder()
       geocoder.geocode({ 'placeId': marker.place_id, 'language': 'en' }, function (results, status) {
+        console.log("geocoder returned", results, "will emit message now")
         self.$emit('new-list', [results[0]])
       })
     },
-    selectCard (place_id) {
-      this.$emit('pin-select', place_id)
+    selectCard (marker) {
+      console.log("selectCard was called with", marker)
+      this.$emit('pin-select', marker.place_id)
     },
     populateMapFromDB () {
       var self = this
@@ -71,7 +85,7 @@ export default {
         .then(response => {
           response.data.forEach(location => {
             // Create a marker for every tenth place
-            self.markers.push(new google.maps.Marker({
+            self.defaultMarkers.push(new google.maps.Marker({
               map: map,
               icon: function () {
                 return self.pinStyles[location["wheelchair"]]
@@ -80,7 +94,6 @@ export default {
               place_id: location.place_id
             }))
           })
-          this.$emit('new-list', [])
         })
       })
     }

@@ -93,7 +93,7 @@ export default {
     selectCard: function (place_id) {
       var self = this
       console.log("select card was called for", place_id)
-      if ( this.placesList.length === 0 ) {
+      if ( this.placesList.length <= 1 ) {
         var geocoder = new google.maps.Geocoder()
         geocoder.geocode({ 'placeId': place_id, 'language': 'en' }, function (results, status) {
           console.log("called geocoder")
