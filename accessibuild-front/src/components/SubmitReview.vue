@@ -140,11 +140,21 @@ export default {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
     putNewData () {
-      console.log('Boop!')
+      var locationData = this.location
+      console.log('Sending this:' + JSON.stringify(locationData))
+      axios.put(this.baseUrl + this.location.id, { location: this.location })
     }
   },
   components: {
     StarRating
+  },
+  watch: {
+    location: {
+      handler () {
+        this.putNewData()
+      },
+      deep: true
+    }
   }
 }
 
