@@ -70,7 +70,7 @@ export default {
         axios.get('http://localhost:3000/api/v2/locations')
         .then(response => {
           response.data.forEach(location => {
-            // Create a marker for each place.
+            // Create a marker for every tenth place
             self.markers.push(new google.maps.Marker({
               map: map,
               icon: function () {

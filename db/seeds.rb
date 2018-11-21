@@ -17,20 +17,28 @@ User.create!(first_name: 'John', last_name:'Xu', email: 'johnbxu@gmail.com', pho
 User.create!(first_name: 'Altan', last_name:'Unsal', email: 'altanunsal@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
 User.create!(first_name: 'Louis', last_name:'Riehl', email: 'louisriehl@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
 
+place_ids = []
+
 puts 'Seeding locations'
 Location.destroy_all
 osm_data.each do |place|
   if place["place_id"].include? "Ej"
     puts "skipping invalid location"
   else
-    Location.create!(
-      wheelchair: place["wheelchair"],
-      bathroom: place["bathroom"],
-      parking: place["parking"],
-      place_id: place["place_id"],
-      lat: place["lat"],
-      lng: place["lng"]
-    )
+    puts place_ids.size
+    if place_ids.include?(place["place_id"])
+      puts "skipping invalid location"
+    else
+      place_ids.push(place["place_id"])
+      Location.create!(
+        wheelchair: place["wheelchair"],
+        bathroom: place["bathroom"],
+        parking: place["parking"],
+        place_id: place["place_id"],
+        lat: place["lat"],
+        lng: place["lng"]
+      )
+    end
   end
 end
 
