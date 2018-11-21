@@ -8,28 +8,24 @@
     <section class="d-flex flex-column accessibility-info">
       <p>Average Rating: {{averageRating}}</p>
       <section class="picker wheelchair-picker">
-        <p>Wheelchair</p>
-            <input name="wheelchair" type="radio" value="2" v-model.number="location.wheelchair" id="wheel-fully">
-            <label for="wheel-fully">Fully</label>
-            <input name="wheelchair" type="radio" value="1" v-model.number="location.wheelchair" id="wheel-partially">
-            <label for="wheel-partially">Partially</label>
-            <input name="wheelchair" type="radio" value="0" v-model.number="location.wheelchair" id="wheel-no">
-            <label for="wheel-no">None</label>
-            <!-- <button @click="savePickerChoice($event)" class="btn btn-success" id="wheel-fully">Fully</button> -->
-          <!-- <button @click="savePickerChoice($event)" class="btn btn-warning" id="wheel-partially">Partially</button> -->
-          <!-- <button @click="savePickerChoice($event)" class="btn btn-danger" id="wheel-no">Not at all</button> -->
+        <p>Wheelchair Access</p>
+        <label for="wheel-fully">
+        <input name="wheelchair" type="radio" value="2" v-model.number="location.wheelchair" id="wheel-fully">Fully
+        </label><br>
+        <label for="wheel-partially">
+        <input name="wheelchair" type="radio" value="1" v-model.number="location.wheelchair" id="wheel-partially">Partially
+        </label><br>
+        <label for="wheel-no">
+        <input name="wheelchair" type="radio" value="0" v-model.number="location.wheelchair" id="wheel-no">None
+        </label><br>
       </section>
       <section class="picker bathroom-picker">
         <p>Accessible Bathroom</p>
         <input type="checkbox" id="bathroom-acc" v-model="location.bathroom">
-        <!-- <button @click="savePickerChoice($event)" class="btn btn-success" id="bath-yes">Yes</button>
-        <button @click="savePickerChoice($event)" class="btn btn-danger" id="bath-no">No</button> -->
       </section>
       <section class="picker parking-picker">
         <p>Accessible Parking</p>
         <input type="checkbox" id="parking-acc" v-model="location.parking">
-        <!-- <button @click="savePickerChoice($event)" class="btn btn-success" id="parking-yes">Yes</button>
-        <button @click="savePickerChoice($event)" class="btn btn-danger" id="parking-no">No</button> -->
       </section>
       <section class="comment-container">
         <form v-on:submit.prevent>
