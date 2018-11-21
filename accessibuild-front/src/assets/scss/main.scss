@@ -1,0 +1,149 @@
+@import 'bootstrap/scss/bootstrap.scss';
+
+$blue: #4343EA;
+$white: #FFFFFF;
+$blue-gray: #6A8EAE;
+$light-blue: #9BD1E5;
+$green: #9FD8CB;
+
+
+body {
+  font-family: Arial;
+  background-color: $white !important;
+  color: black;
+
+
+  button {
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+  }
+
+  .jumbotron {
+    background-color: $white;
+    border: $blue 1px solid;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+
+  .navbar {
+    background-color: $blue !important;
+    font-size: 1.2em;
+    // box-shadow: black 2em 2em;
+  }
+
+  .card {
+    &.form-group {
+      margin-bottom: 0;
+    }
+  }
+
+  .card-header {
+    background-color: $blue;
+    color: $white;
+  }
+  .btn{
+
+    &.round-button {
+      border-radius: 2rem;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+    &.btn-primary {
+      color: $white;
+      background-color: $blue;
+      border-color: $blue;
+      &:hover {
+        border-color: $blue;
+        color: $blue;
+        background-color: $white;
+      }
+    }
+    &.btn-success {
+      color: $white;
+      background-color: $green;
+
+    }
+    &.btn-outline-primary {
+      color: $blue;
+      border-color: $blue;
+      background-color: $white;
+      &:hover {
+        border-color: $white;
+        color: $white;
+        background-color: $blue;
+      }
+    }
+  }
+
+  .btn-link {
+    color: $white;
+    &:hover {
+      text-decoration: none;
+      color: $white;
+    }
+  }
+
+  .subtitle {
+    font-style: italic;
+    padding-left: 2%;
+  }
+  .form-control {
+    border-radius: 1rem;
+  }
+
+
+
+  #accessibuild {
+    background: none !important;
+    border: none !important;
+    color: $white;
+    padding-top: 0.2em;
+    float: left;
+    cursor: pointer;
+  }
+
+  #logo {
+    color: $white;
+  }
+
+  #search-container {
+    padding-top: 5px;
+  }
+
+  #profile, #login, #register, #right-home {
+    padding-top: 2em;
+    width: 90%;
+    margin: auto;
+    @media (max-width: 450px) {
+      width: 100%;
+      padding-top: 1em
+    }
+  }
+
+  #flexbox-container {
+    padding-top: 3.4em;
+    height: 100%
+  }
+
+  #right-box {
+    min-width: 40%;
+    height: 100%;
+    overflow: scroll;
+    @media (max-width: 450px) {
+      height: 40%;
+      padding: 5%;
+    }
+  }
+
+  #left-box {
+    min-width: 60%;
+    height: 100%;
+    @media (max-width: 450px) {
+      height: 60%;
+    }
+  }
+}

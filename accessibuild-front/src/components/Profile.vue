@@ -1,32 +1,43 @@
 <template>
   <div id="profile">
     <h3>Profile</h3>
-    <p> {{ msg }} </p>
-    <p> My parent says: {{ userId }}</p>
+    <h5 class="subtitle">Hello, {{user.first_name}}!</h5>
+    <div class="d-flex">
+      <div class="card" style="flex-grow: 1;">
+        <div class="card-body">
+          {{user.email}}
+        </div>
+      </div>
+      <div class="card" style="flex-grow: 1;">
+        <div class="card-body">
+          {{user.phone_number}}
+        </div>
+      </div>
+    </div>
 
-    <dl>
-      <dt>First Name</dt>
-      <dd>{{ user.first_name || 'No first name'}}</dd>
-      <dt>Last Name</dt>
-      <dd>{{ user.last_name || 'No last name'}}</dd>
-      <dt>Email</dt>
-      <dd>{{ user.email || 'No email'}}</dd>
-    </dl>
     <div id="contacts-block" v-if="hasContacts">
-      <h4>Contacts</h4>
+      <h4 style="width: 100%; text-align: center;">Contacts</h4><hr>
       <div v-for="contact in contacts">
         <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
       </div>
     </div>
-    <h4 v-else>No contacts here... Let's add some!</h4>
-    <button v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
-    <form v-else v-on:submit.prevent>
-      <input type="text" name="first_name" placeholder="First Name" v-model="newContact.first_name">
-      <input type="text" name="last_name" placeholder="Last Name" v-model="newContact.last_name">
-      <input type="text" name="email" placeholder="Email" v-model="newContact.email">
-      <input type="text" name="phone_number" placeholder="Phone Number" v-model="newContact.phone_number">
-      <input type="checkbox" name="emergency" v-model="newContact.emergency">
-      <button type='submit' @click="pushNewContact">Save</button>
+    <h4 v-else>Loading...</h4>
+    <button class='btn btn-success btn-block' v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
+    <form class="form-group jumbotron" v-else v-on:submit.prevent>
+      <h4>Create a New Contact</h4>
+      <input class="form-control" type="text" name="first_name" placeholder="First Name" v-model="newContact.first_name">
+      <input class="form-control" type="text" name="last_name" placeholder="Last Name" v-model="newContact.last_name">
+      <input class="form-control" type="text" name="email" placeholder="Email" v-model="newContact.email">
+      <input class="form-control" type="tel" name="phone_number" placeholder="Phone Number" v-model="newContact.phone_number">
+      <div class="form-check form-check-inline">
+        <label class="form-check-label" style="padding: 1em">Set As Emergency Contact
+        <input class="form-check-input" type="checkbox" name="emergency" v-model="newContact.emergency">
+        </label>
+      </div><br>
+      <div class="d-flex btn-group" role="group">
+        <button style="flex-grow: 1;"class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
+        <button style="flex-grow: 1;"class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
+      </div>
   </form>
   </div>
 </template>
@@ -46,6 +57,7 @@ export default {
       msg: 'Component loaded!',
       user: {},
       contacts: {},
+      userID: 1,
       makingNewContact: false,
       newContact: {
         user_id: this.userId,
@@ -62,10 +74,10 @@ export default {
   },
   methods: {
     fetchUserData: function () {
-      axios.get('http://localhost:3000/api/v2/users/' + this.userId)
+      axios.get('http://localhost:3000/api/v2/users/' + this.userID)
         .then(response => (this.user = response.data))
         .catch(error => console.log(error))
-        .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userId + '/contacts')
+        .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userID + '/contacts')
           .then(response => (this.contacts = response.data))
           .catch(error => console.log(error)))
     },

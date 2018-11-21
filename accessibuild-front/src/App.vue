@@ -1,15 +1,30 @@
 <template>
   <div id="app" style="height: 100%">
-    <Navbar v-bind:onClick='setState'></Navbar>
+    <Navbar v-bind:onClick='setState' v-bind:is-logged-in="this.loggedIn" v-bind:set-login="setLogin"></Navbar>
     <div style="height: 100%">
     <div style="height: 100%">
-      <div class='d-flex align-self-center' style="padding-top: 3.4em; height: 100%">
-        <div style="min-width:60%; height: 100%;">
-          <Map v-bind:current-place="this.currentLocation" v-bind:places-list="this.placesList"></Map>
+      <div id="flexbox-container" :class="classObject">
+        <div v-show="renderMap" id="left-box">
+          <Map
+            v-bind:current-place="this.currentLocation"
+            v-bind:places-list="this.placesList"
+            v-bind:address-string="this.currentAddress"
+            v-on:address-change="updateAddress"
+            v-on:new-list="newList">
+          </Map>
         </div>
-        <div style="min-width:40%; padding-top: 2em; height: 100%; overflow: scroll;">
+        <div id="right-box" v-bind:style="rightHeight">
           <transition name='fade'>
-            <component v-bind:is='state.right' v-bind:current-place="this.currentLocation" v-bind:places-list="this.placesList" v-bind:onClick='setState' :user-id="this.userId"></component>
+            <component
+              v-bind:state="state"
+              v-bind:is='state.right'
+              v-bind:address-string="this.currentAddress"
+              v-bind:set-login="setLogin"
+              v-bind:current-place="this.currentLocation"
+              v-bind:places-list="this.placesList"
+              v-bind:onClick='setState'
+              :user-id="this.userId">
+            </component>
           </transition>
         </div>
       </div>
@@ -29,12 +44,6 @@ import Login from './components/Login.vue'
 import Contacts from './components/Contacts.vue'
 import Profile from './components/Profile.vue'
 
-const store = {
-  state: {
-    right: 'RightHome'
-  }
-}
-
 export default {
   name: 'App',
   props: {
@@ -42,14 +51,17 @@ export default {
   },
   mounted () {
     this.geolocate()
+    console.log('store: ', store.state)
   },
   data: () => {
     return {
       state: store.state,
       // default to montreal
-      currentLocation: { lat: 45.508, lng: -73.587 },
+      currentLocation: { lat: 45.5, lng: -73.5 },
       userId: 1,
-      placesList: []
+      placesList: [],
+      currentAddress: '',
+      loggedIn: false
     }
   },
   methods: {
@@ -59,6 +71,9 @@ export default {
     updateLocation (place) {
       this.currentLocation = place
     },
+    updateAddress (newAddress) {
+      this.currentAddress = newAddress
+    },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
         this.updateLocation({
@@ -67,6 +82,35 @@ export default {
         })
       })
     },
+    setLogin: function () {
+      this.loggedIn = !this.loggedIn
+    },
+    newList: function (arr) {
+      this.placesList = arr
+      this.state.right = 'RightHome'
+      store.clearCurrentLocation()
+    }
+  },
+  computed: {
+    classObject: function () {
+      if (this.$mq !== 'sm') {
+        return {
+          'd-flex': true,
+          'align-self-center': true
+        }
+      } else {
+        return {
+          flexClass: '',
+          alignClass: ''
+        }
+      }
+    },
+    renderMap: function () {
+      return this.state.right === 'RightHome' || this.$mq !== 'sm'
+    },
+    rightHeight: function () {
+      return this.renderMap && this.$mq === 'sm' ? { height: '40%' } : { height: '100%' }
+    }
   },
   components: {
     // Footer,
@@ -81,6 +125,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  @import './assets/scss/main.scss'
+</style>
 
 <style scoped>
 .fade-enter-active {

@@ -1,35 +1,37 @@
 <template>
-  <div class="w-75 p-5">
-    <h1>Right Home</h1>
-    <button @click='onClick("SubmitReview")'>Submit review</button>
-    <button>Search</button>
-    <p> below is a list of places from the map </p>
-    <table>
-      <tr>
-        <td>Place_ID</td>
-        <td>Wheelchair?</td>
-      </tr>
-      <tr v-for="place in placesList">
-        <td>{{ place.place_id }}</td>
-        <td> NEEDTOCALLAPI </td>
-      </tr>
-    </table>
+  <div id='right-home'>
+    <div v-if="placesList.length == 0">
+      <h4>Welcome</h4>
+      <p>We located you near {{addressString}}</p>
+      <p>What would you like to do today?</p>
+    </div>
+    <div v-if="placesList.length > 0">
+      <p>We found the following results for you:</p>
+
+      <Location
+        v-for="place in placesList"
+        v-bind:place="place"
+        v-bind:key="place.place_id"
+        v-bind:onClick="onClick"
+      ></Location>
+    </div>
+
   </div>
 </template>
 
 <script>
+import Location from './_Location.vue'
+
 export default {
   props: {
     onClick: Function,
     currentPlace: Object,
-    placesList: Array
+    placesList: Array,
+    addressString: String
   },
   name: 'RightHome',
-  data () {
-    return {
-
-    }
+  components: {
+    Location
   }
 }
-
 </script>

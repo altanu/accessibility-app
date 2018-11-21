@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #  osm_data is the places found from OpenStreetMap, and populated with corresponding place_id from gMaps
-osm_data = ActiveSupport::JSON.decode(File.read('db/osm.json'))
+osm_data = ActiveSupport::JSON.decode(File.read('db/montrealData.json'))
 
 puts 'Seeding DB'
 puts 'Seeding users'
@@ -22,23 +22,15 @@ Location.destroy_all
 osm_data.each do |place|
   if place["place_id"].include? "Ej"
     puts "skipping invalid location"
-  elsif place["addr:housenumber"] == ""
-    puts "skipping invalid location"
-  elsif place["addr:street"] == ""
-    puts "skipping invalid location"
   else
-    if place["wheelchair"] == "yes"
-      place["wheelchair"] = 2
-    elsif place["wheelchair"] == "limited"
-      place["wheelchair"] = 1
-    else
-      place["wheelchair"] = 0
-    end
     Location.create!(
-      house_number: place["addr:housenumber"],
-      street: place["addr:street"],
       wheelchair: place["wheelchair"],
-      place_id: place["place_id"])
+      bathroom: place["bathroom"],
+      parking: place["parking"],
+      place_id: place["place_id"],
+      lat: place["lat"],
+      lng: place["lng"]
+    )
   end
 end
 

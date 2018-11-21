@@ -2,7 +2,10 @@
   <div class="w-100 p-5" style="height: 100%; overflow: scroll;">
     <h1>Submit Review</h1>
     <p>How accessible is this building?</p>
+    <p>{{location.name}}</p>
+    <p>{{location.formatted_address}}</p>
     <section class="d-flex flex-column accessibility-info">
+      <p>Average Rating: {{averageRating}}</p>
       <section class="picker wheelchair-picker">
         <p>Wheelchair</p>
         <button @click="savePickerChoice($event)" class="btn btn-success" id="wheel-fully">Fully</button>
@@ -30,10 +33,10 @@
     </section>
     <section>
       <li class="card" v-for="comment in comments">
-        <div class="card-header">User: {{ comment.user_id }}</div>
+        <div class="card-header">User: {{ comment.first_name }}</div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Comment: {{ comment.description }}</li>
-          <li class="list-group-item">Rating: {{ comment.rating }} at {{ comment.created_at }}</li>
+          <li class="list-group-item">Comment: {{ comment.review.description }}</li>
+          <li class="list-group-item"><span v-if="comment.review.rating">Rating: {{ comment.review.rating }}</span>At {{ comment.review.created_at }}</li>
         </ul>
       </li>
     </section>
@@ -58,38 +61,33 @@ export default {
   name: 'SubmitReview',
   data () {
     return {
-      testUrl: 'http://localhost:3000/api/v2/locations/1',
-      wheel_status: '',
-      bathroom_status: '',
-      parking_status: '',
+      location: store.state.currentLocation,
+      baseUrl: 'http://localhost:3000/api/v2/locations/',
       comments: [],
       newComment: {
         user_id: 1,
-        location_id: 1,
+        location_id: store.state.currentLocation.id,
         description: '',
         rating: null
-      }
+      },
+      averageRating: 0
     }
   },
   created () {
     this.fetchReviews()
-    axios.get(this.testUrl)
-      .then(response => {
-        const location = response.data
-        this.wheel_status = location.wheelchair
-        this.bathroom_status = location.bathroom
-        this.parking_status = location.parking
-      })
   },
   methods: {
     fetchReviews () {
-      axios.get(this.testUrl + '/reviews')
-        .then(response => (this.comments = response.data))
-        .catch(error => console.log(error))
+      axios.get(this.baseUrl + store.state.currentLocation.id + '/reviews')
+        .then(response => {
+          this.comments = response.data
+          this.averageRating = Math.round(this.comments.reduce((acc, curr) => {
+            return acc + curr.rating / this.comments.length
+          }, 0) * 10) / 10
+        }).catch(error => console.log(error))
     },
     saveComment () {
-      axios.post(this.testUrl + '/reviews', { review: this.newComment })
-        .then((response) => console.log(response))
+      axios.post(this.baseUrl + store.state.currentLocation.id + '/reviews', { review: this.newComment })
         .catch((error) => console.log(error))
         .then(() => {
           this.emptyComment()
@@ -108,21 +106,21 @@ export default {
         } else if (event.target.id === 'wheel-no') {
           this.wheel_status = 0
         }
-        axios.put(this.testUrl, { wheelchair: this.wheel_status })
+        axios.put(this.baseUrl + this.location.id, { wheelchair: this.wheel_status })
       } else if (event.target.id[0] === 'b') {
         if (event.target.id === 'bath-yes') {
           this.bathroom_status = true
         } else if (event.target.id === 'bath-no') {
           this.bathroom_status = false
         }
-        axios.put(this.testUrl, { bathroom: this.bathroom_status })
+        axios.put(this.baseUrl + this.location.id, { bathroom: this.bathroom_status })
       } else if (event.target.id[0] === 'p') {
         if (event.target.id === 'parking-yes') {
           this.parking_status = true
         } else if (event.target.id === 'parking-no') {
           this.parking_status = false
         }
-        axios.put(this.testUrl, { parking: this.parking_status })
+        axios.put(this.baseUrl + this.location.id, { parking: this.parking_status })
       }
     },
     setError (error, text) {

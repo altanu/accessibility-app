@@ -1,8 +1,8 @@
 <template>
-  <div class="w-75 p-5">
-    <h1>Contacts</h1>
+  <div>
+    <h1>Contacts</h1><hr>
     <ul>
-      <li v-for="contact in contacts" v-bind:key="contact.id">
+      <li class='card' v-for="contact in contacts" v-bind:key="contact.id">
       {{ contact }}
       </li>
     </ul>

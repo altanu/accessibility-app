@@ -1,13 +1,57 @@
 <template>
-  <form v-if="isForm" v-on:submit.prevent>
-    <input type="text" name="first_name" v-bind:placeholder="contactInfo.first_name" v-model="contactInfo.first_name">
-    <input type="text" name="last_name" v-bind:placeholder="contactInfo.last_name" v-model="contactInfo.last_name">
-    <input type="text" name="email" v-bind:placeholder="contactInfo.email" v-model="contactInfo.email">
-    <input type="text" name="phone_number" v-bind:placeholder="contactInfo.phone_number" v-model="contactInfo.phone_number">
-    <input type="checkbox" name="emergency" v-model="contactInfo.emergency">
-    <button type='submit' @click='updateContact'>Save</button>
+  <div class="contact-holder">
+  <li v-if="isForm" class="card">
+  <form class="form-group" v-on:submit.prevent>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item card-header">Editing Contact</li>
+      <li class="list-group-item">
+        <label>First Name</label>
+        <input class="form-control" type="text" name="first_name" v-bind:placeholder="contactInfo.first_name" v-model="contactInfo.first_name">
+      </li>
+      <li class="list-group-item">
+        <label>Last Name</label>
+        <input class="form-control" type="text" name="last_name" v-bind:placeholder="contactInfo.last_name" v-model="contactInfo.last_name">
+      </li>
+      <li class="list-group-item">
+        <label>Email Address</label>
+        <input class="form-control" type="text" name="email" v-bind:placeholder="contactInfo.email" v-model="contactInfo.email">
+      </li>
+      <li class="list-group-item">
+        <label>Phone Number</label>
+        <input class="form-control" type="tel" name="phone_number" v-bind:placeholder="contactInfo.phone_number" v-model="contactInfo.phone_number">
+      </li>
+      <li class="list-group-item form-check">
+        <input type="checkbox" name="emergency" v-model="contactInfo.emergency">  Emergency Contact
+      </li>
+      <li class="list-group-item btn-group d-flex" role="group" style="padding: 0;">
+        <button style="flex-grow: 1;" class="btn btn-success" type='submit' @click='updateContact'>Save</button>
+        <button style="flex-grow: 1;" class="btn btn-warning" type='submit' @click='setForm'>Cancel</button>
+      </li>
+    </ul>
   </form>
-  <p v-else v-bind:class="[ contactInfo.emergency ? 'text-danger' : 'text-success' ]">{{ fullName }} - {{ contactInfo.phone_number }} - {{ contactInfo.email }} <button @click='setForm'>Update</button><button @click='deleteContact'>Remove</button></p>
+  </li>
+  <div v-else id="accordion">
+    <li class="card">
+      <div class="card-header">
+        <button class="btn btn-link" data-toggle="collapse" v-bind:data-target="'#contact-' + contactInfo.id" aria-expanded="true" aria-controls="collapseOne">
+          {{ fullName }}
+        </button>
+      </div>
+      <div v-bind:id="'contact-' + contactInfo.id" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ contactInfo.phone_number }}</li>
+          <li class="list-group-item">{{ contactInfo.email }}</li>
+          <li class="list-group-item" v-if="contact.emergency">Set as Emergency Contact</li>
+          <li class="list-group-item" v-else>Not an Emergency Contact</li>
+          <li class="list-group-item d-flex btn-group" role="group" style="padding: 0;">
+            <button style="flex-grow: 1" display="flex" class="btn btn-outline-primary" @click='setForm'>Update</button>
+            <button style="flex-grow: 1" display="flex" class="btn btn-outline-danger" @click='deleteContact'>Remove</button>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </div>
+  </div>
 </template>
 
 <script>
