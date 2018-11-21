@@ -1,6 +1,6 @@
 <template>
   <div id="app" style="height: 100%">
-    <Navbar v-bind:onClick='setState' v-bind:is-logged-in="this.loggedIn" v-bind:set-login="setLogin"></Navbar>
+    <Navbar v-bind:loggedIn="loggedIn" v-bind:onClick='setState' v-bind:is-logged-in="this.loggedIn" v-bind:set-login="setLogin"></Navbar>
     <div style="height: 100%">
     <div style="height: 100%">
       <div id="flexbox-container" :class="classObject">
@@ -63,7 +63,7 @@ export default {
       userId: 1,
       placesList: [],
       currentAddress: '',
-      loggedIn: false
+      loggedIn: store.state.loggedIn
     }
   },
   methods: {
