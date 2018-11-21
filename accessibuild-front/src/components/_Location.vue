@@ -2,8 +2,8 @@
   <section v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
     <div class="card-header">Address: {{location.formatted_address}}</div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Wheelchair: {{ location.wheelchair }}</li>
-      <li class="list-group-item">bathroom: {{ location.bathroom }}</li>
+      <li class="list-group-item">Wheelchair Access: {{ location.wheelchair }}</li>
+      <li class="list-group-item">Accessible Bathrooms: {{ location.bathroom }}</li>
       <li class="list-group-item">Parking: {{ location.parking }}</li>
     </ul>
     <button class="btn" @click="renderLocation(location)">Review this location</button>
@@ -72,10 +72,20 @@ export default {
           store.setCurrentLocation(location)
         }
       })
-
-      
     }
   },
+  computed: {
+    wheelchairParsed () {
+
+    },
+    bathroomParsed () {
+
+    },
+    parkingParsed () {
+      
+    }
+
+  }
   created () {
     this.fetchLocationInfo()
   }
