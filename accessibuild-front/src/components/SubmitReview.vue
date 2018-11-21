@@ -1,6 +1,6 @@
 <template>
   <div class="w-100 p-5" style="height: 100%; overflow: scroll;">
-    <button class="btn btn-info" @click="onClick('RightHome')">< Back</button>
+    <button class="btn btn-info" @click="onClick('RightHome')">\< Back</button>
     <h1>Submit Review</h1>
     <p>How accessible is this building?</p>
     <p>{{location.name}}</p>

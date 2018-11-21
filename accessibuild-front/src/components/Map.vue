@@ -28,6 +28,8 @@
 </template>
 
 <script>
+var axios = require('axios')
+
 export default {
   name: 'GoogleMap',
   props: {
@@ -41,7 +43,8 @@ export default {
       zoom: 16,
       markers: [],
       newPlaceList: [],
-      mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] }
+      mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] },
+      pinStyles: ['/redPin.png','/yellowPin.png','/greenPin.png']
     }
   },
   methods: {
@@ -61,8 +64,28 @@ export default {
     selectCard (place_id) {
       this.$emit('pin-select', place_id)
     },
+    populateMapFromDB () {
+      var self = this
+      this.$refs.mapRef.$mapPromise.then((map) => {
+        axios.get('http://localhost:3000/api/v2/locations')
+        .then(response => {
+          response.data.forEach(location => {
+            // Create a marker for each place.
+            self.markers.push(new google.maps.Marker({
+              map: map,
+              icon: function () {
+                return self.pinStyles[location["wheelchair"]]
+              }(),
+              position: {lat: Number(location.lat), lng: Number(location.lng)},
+              place_id: location.place_id
+            }))
+          })
+        })
+      })
+    }
   },
   mounted () {
+    this.populateMapFromDB()
     var self = this
 
     this.$refs.mapRef.$mapPromise.then((map) => {
