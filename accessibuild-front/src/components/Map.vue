@@ -14,6 +14,7 @@
 
         <GmapMarker
           v-for="marker in markers"
+          :id="marker.place_id"
           :key="marker.place_id"
           :position="marker.position"
           :clickable="true"
@@ -21,6 +22,7 @@
           :icon="marker.icon"
           @click="clickPin"
           @mouseover="hoverPin"
+          @mouseout="clearBorder"
         />
 
     </gmap-map>
@@ -63,6 +65,13 @@ export default {
       var geocoder = new google.maps.Geocoder
       geocoder.geocode({'location': marker.latLng}, function(results, status) {
         self.$emit('pin-hover', results[0].place_id)
+      })
+    },
+    clearBorder (marker) {
+      let self = this
+      var geocoder = new google.maps.Geocoder
+      geocoder.geocode({'location': marker.latLng}, function(results, status) {
+        self.$emit('hover-clear', results[0].place_id)
       })
     }
   },

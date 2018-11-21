@@ -11,7 +11,8 @@
             v-bind:address-string="this.currentAddress"
             v-on:address-change="updateAddress"
             v-on:new-list="newList"
-            v-on:pin-hover="pinHover">
+            v-on:pin-hover="pinHover"
+            v-on:hover-clear="hoverClear">
           </Map>
         </div>
         <div id="right-box" v-bind:style="rightHeight">
@@ -98,6 +99,9 @@ export default {
       }
       console.log("app.vue received", place_id)
       console.log("selected card was", selectedCard)
+    },
+    hoverClear: function (place_id) {
+      console.log("app.vue received on mouseout", place_id)
     }
   },
   computed: {
