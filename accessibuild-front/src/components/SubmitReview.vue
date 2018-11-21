@@ -9,15 +9,17 @@
       <p>Average Rating: {{averageRating}}</p>
       <section class="picker wheelchair-picker">
         <p>Wheelchair Access</p>
-        <label class="btn btn-radio"for="wheel-fully">
-        <input name="wheelchair" type="radio" value="2" v-model.number="location.wheelchair" id="wheel-fully">  Fully
-        </label><br>
-        <label class="btn btn-radio"for="wheel-partially">
-        <input name="wheelchair" type="radio" value="1" v-model.number="location.wheelchair" id="wheel-partially">  Partially
-        </label><br>
-        <label class="btn btn-radio"for="wheel-no">
-        <input name="wheelchair" type="radio" value="0" v-model.number="location.wheelchair" id="wheel-no">  None
-        </label><br>
+        <div class="btn-group">
+          <label class="btn btn-radio"for="wheel-fully">
+          <input name="wheelchair" type="radio" value="2" v-model.number="location.wheelchair" id="wheel-fully">  Fully
+          </label><br>
+          <label class="btn btn-radio"for="wheel-partially">
+          <input name="wheelchair" type="radio" value="1" v-model.number="location.wheelchair" id="wheel-partially">  Partially
+          </label><br>
+          <label class="btn btn-radio"for="wheel-no">
+          <input name="wheelchair" type="radio" value="0" v-model.number="location.wheelchair" id="wheel-no">  None
+          </label><br>
+        </div>
       </section>
       <section class="picker bathroom-picker">
         <p>Accessible Bathroom</p>
@@ -136,6 +138,9 @@ export default {
     },
     setError (error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
+    },
+    putNewData () {
+      console.log('Boop!')
     }
   },
   components: {
