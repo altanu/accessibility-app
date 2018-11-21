@@ -33,10 +33,10 @@
     </section>
     <section>
       <li class="card" v-for="comment in comments">
-        <div class="card-header">User: {{ comment.user_id }}</div>
+        <div class="card-header">User: {{ comment.first_name }}</div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Comment: {{ comment.description }}</li>
-          <li class="list-group-item">Rating: {{ comment.rating }} at {{ comment.created_at }}</li>
+          <li class="list-group-item">Comment: {{ comment.review.description }}</li>
+          <li class="list-group-item"><span v-if="comment.review.rating">Rating: {{ comment.review.rating }}</span>At {{ comment.review.created_at }}</li>
         </ul>
       </li>
     </section>
@@ -88,7 +88,6 @@ export default {
     },
     saveComment () {
       axios.post(this.baseUrl + store.state.currentLocation.id + '/reviews', { review: this.newComment })
-        .then((response) => console.log(response))
         .catch((error) => console.log(error))
         .then(() => {
           this.emptyComment()

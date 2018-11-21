@@ -8,8 +8,11 @@ module Api
       def index
         @reference = params[:user_id] ? User.find(params[:user_id]) : Location.find(params[:location_id])
         @reviews = @reference.reviews.sort{ |b, a| a.created_at <=> b.created_at }
-
-        render json: @reviews
+        @response = []
+        @reviews.each do |review|
+          @response.push({review: review, first_name: review.user.first_name})
+        end
+        render json: @response
       end
 
       # GET /reviews/1
