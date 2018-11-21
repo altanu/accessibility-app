@@ -22,12 +22,10 @@
         </div>
       </section>
       <section class="picker bathroom-picker">
-        <p>Accessible Bathroom</p>
-        <input type="checkbox" id="bathroom-acc" v-model="location.bathroom">
+        <input type="checkbox" id="bathroom-acc" v-model="location.bathroom"> Accessible Bathroom
       </section>
       <section class="picker parking-picker">
-        <p>Accessible Parking</p>
-        <input type="checkbox" id="parking-acc" v-model="location.parking">
+        <input type="checkbox" id="parking-acc" v-model="location.parking"> Accessible Parking
       </section>
       <section class="comment-container">
         <form v-on:submit.prevent>
