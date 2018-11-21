@@ -57,7 +57,6 @@
 </style>
 <script>
 import StarRating from 'vue-star-rating'
-import BackButton from './BackButton.vue'
 
 var axios = require('axios')
 
@@ -135,8 +134,7 @@ export default {
     }
   },
   components: {
-    StarRating,
-    BackButton
+    StarRating
   }
 }
 
