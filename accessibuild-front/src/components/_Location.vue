@@ -2,9 +2,9 @@
   <section v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
     <div class="card-header">Address: {{location.formatted_address}}</div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Wheelchair Access: <span class='type-badge'>{{ wheelchairParsed }}</span></li>
-      <li class="list-group-item">Accessible Bathrooms: <span class='type-badge'>{{ bathroomParsed }}</span></li>
-      <li class="list-group-item">Parking: <span class='type-badge'>{{ parkingParsed }}</span></li>
+      <li class="list-group-item">Wheelchair Access: <span :class="wheelChairClass">{{ wheelchairParsed }}</span></li>
+      <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
+      <li class="list-group-item">Parking: <span :class="parkingClass">{{ parkingParsed }}</span></li>
     </ul>
     <button class="btn" @click="renderLocation(location)">Review this location</button>
   </section>
@@ -112,6 +112,45 @@ export default {
           break
         default:
           return 'Unknown'
+      }
+    },
+    wheelChairClass () {
+      switch (this.location.wheelchair) {
+        case 2: 
+          return {'type-badge': true, 'full': true}
+          break
+        case 1:
+          return {'type-badge': true, 'partial': true}
+          break
+        case 0:
+          return {'type-badge': true, 'none': true}
+          break
+        default:
+          return {'type-badge': true, 'unknown': true}
+      }
+    },
+    bathroomClass () {
+      switch (this.location.bathroom) {
+        case true: 
+          return {'type-badge': true, 'full': true}
+          break
+        case false:
+          return {'type-badge': true, 'none': true}
+          break
+        default:
+          return {'type-badge': true, 'unknown': true}
+      }
+    },
+    parkingClass () {
+      switch (this.location.parking) {
+        case true: 
+          return {'type-badge': true, 'full': true}
+          break
+        case false:
+          return {'type-badge': true, 'none': true}
+          break
+        default:
+          return {'type-badge': true, 'unknown': true}
       }
     }
   },
