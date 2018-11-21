@@ -1,12 +1,10 @@
 <template>
-  <div class="w-100 p-5" style="height: 100%; overflow: scroll;">
-    <button class="btn btn-info" @click="onClick('RightHome')">< Back</button>
-    <h1>Submit Review</h1>
-    <p>How accessible is this building?</p>
-    <p>{{location.name}}</p>
-    <p>{{location.formatted_address}}</p>
+  <div class="w-100" style="height: 100%; overflow: scroll;">
+    <button class="btn btn-outline-primary btn-block" @click="onClick('RightHome')">< Back</button>
+    <h5>{{location.formatted_address}}</h5>
+    <p>Here's what we know about this address...</p>
     <section class="d-flex flex-column accessibility-info">
-      <p>Average Rating: {{averageRating}}</p>
+      <p>User Accessibility Rating: {{averageRating}}</p>
       <section class="picker wheelchair-picker">
         <p>Wheelchair Access</p>
         <div class="btn-group">
@@ -29,10 +27,10 @@
       </section>
       <section class="comment-container">
         <form v-on:submit.prevent>
-          <label for="comment">Leave a comment:</label>
+          <label for="comment">Do you know this place? Leave a comment and rating on how accessible it is!</label>
           <textarea class="form-control" id="comment" v-model="newComment.description"></textarea>
           <star-rating v-model="newComment.rating" v-bind:star-size='25'></star-rating>
-          <button class="btn btn-submit" type="submit" @click="saveComment">Submit</button>
+          <button class="btn btn-submit" type="submit" @click="saveComment">Submit your review</button>
         </form>
       </section>
     </section>
