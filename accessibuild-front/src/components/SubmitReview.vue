@@ -1,5 +1,6 @@
 <template>
   <div class="w-100 p-5" style="height: 100%; overflow: scroll;">
+    <button class="btn btn-info" @click="onClick('RightHome')">< Back</button>
     <h1>Submit Review</h1>
     <p>How accessible is this building?</p>
     <p>{{location.name}}</p>
@@ -56,7 +57,9 @@
 </style>
 <script>
 import StarRating from 'vue-star-rating'
+
 var axios = require('axios')
+
 export default {
   name: 'SubmitReview',
   data () {
@@ -72,6 +75,9 @@ export default {
       },
       averageRating: 0
     }
+  },
+  props: {
+    onClick: Function
   },
   created () {
     this.fetchReviews()

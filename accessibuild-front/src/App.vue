@@ -31,7 +31,7 @@
       </div>
     </div>
   </div>
-    <router-view/>
+  <router-view/>
   </div>
 </template>
 
@@ -42,7 +42,6 @@ import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
 import Map from './components/Map.vue'
 import Login from './components/Login.vue'
-import Contacts from './components/Contacts.vue'
 import Profile from './components/Profile.vue'
 
 export default {
@@ -123,13 +122,11 @@ export default {
     }
   },
   components: {
-    // Footer,
     Navbar,
     RightHome,
     Register,
     Login,
     Map,
-    Contacts,
     Profile,
     SubmitReview
   }
