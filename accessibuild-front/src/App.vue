@@ -95,13 +95,13 @@ export default {
     pinHover: function (place_id) {
       var selectedCard = document.getElementById(place_id)
       if (selectedCard) {
-        selectedCard.style.border = "3px solid black"
+        selectedCard.style.border = '3px solid black'
       }
-      console.log("app.vue received", place_id)
-      console.log("selected card was", selectedCard)
+      console.log('app.vue received', place_id)
+      console.log('selected card was', selectedCard)
     },
     hoverClear: function (place_id) {
-      console.log("app.vue received on mouseout", place_id)
+      console.log('app.vue received on mouseout', place_id)
     }
   },
   computed: {

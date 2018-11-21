@@ -55,22 +55,22 @@ export default {
     },
     clickPin (marker) {
       let self = this
-      var geocoder = new google.maps.Geocoder
-      geocoder.geocode({'location': marker.latLng}, function(results, status) {
+      var geocoder = new google.maps.Geocoder()
+      geocoder.geocode({ 'location': marker.latLng }, function (results, status) {
         self.$emit('new-list', [results[0]])
       })
     },
     hoverPin (marker) {
       let self = this
-      var geocoder = new google.maps.Geocoder
-      geocoder.geocode({'location': marker.latLng}, function(results, status) {
+      var geocoder = new google.maps.Geocoder()
+      geocoder.geocode({ 'location': marker.latLng }, function (results, status) {
         self.$emit('pin-hover', results[0].place_id)
       })
     },
     clearBorder (marker) {
       let self = this
-      var geocoder = new google.maps.Geocoder
-      geocoder.geocode({'location': marker.latLng}, function(results, status) {
+      var geocoder = new google.maps.Geocoder()
+      geocoder.geocode({ 'location': marker.latLng }, function (results, status) {
         self.$emit('hover-clear', results[0].place_id)
       })
     }
@@ -108,8 +108,7 @@ export default {
         var bounds = new google.maps.LatLngBounds()
 
         searchPlaces.forEach(function (place) {
-
-          service.textSearch({'location': place.geometry.location, 'query': place.formatted_address}, function(results, status) {
+          service.textSearch({ 'location': place.geometry.location, 'query': place.formatted_address }, function (results, status) {
             place = results[0]
           })
 
