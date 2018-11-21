@@ -1,9 +1,8 @@
 module Api
   module V2
     class ContactsController < ApplicationController
-      # before_action :authorize_access_request!
       before_action :set_contact, only: [:show, :update, :destroy]
-
+      before_action :authenticate_user!
       # GET /contacts
       def index
         @user = User.find(params[:user_id])

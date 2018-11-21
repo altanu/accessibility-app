@@ -12,7 +12,7 @@
     </div>
     <button type="submit" class="btn btn-success btn-block" @click="signin">Login</button>
   </form>
-</div>
+  </div>
 </template>
 
 <script>
@@ -40,7 +40,17 @@ export default {
           email: this.email,
           password: this.password
         }
-      }).then(response => console.log(response.data))
+      }).then(response => {
+        console.log(response)
+        if (response.status === 200) {
+          store.state.loggedIn = true
+          store.state.token = response.data.token
+          store.setRightPane('Profile')
+        } else {
+          alert('Not Authorized')
+        }
+        console.log(response.data)
+      })
     },
     signinSuccessful (response) {
     },

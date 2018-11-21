@@ -13,7 +13,7 @@ module Api
 
       # GET /users/1
       def show
-        render json: @user
+        render json: @user.as_json(only: [:id, :first_name])
       end
 
       # POST /users

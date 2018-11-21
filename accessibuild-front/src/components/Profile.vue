@@ -74,10 +74,21 @@ export default {
   },
   methods: {
     fetchUserData: function () {
-      axios.get('http://localhost:3000/api/v2/users/' + this.userID)
-        .then(response => (this.user = response.data))
-        .catch(error => console.log(error))
-        .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userID + '/contacts')
+      axios.get('http://localhost:3000/api/v2/users/' + this.userID, {
+        user_id: this.userID,
+        headers: {
+          Authorization: 'Bearer ' + store.state.token
+        }
+      }).then(response => {
+        console.log(response)
+        (this.user = response.data)
+      }).catch(error => console.log(error))
+        .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userID + '/contacts', {
+          user_id: this.userID,
+          headers: {
+            Authorization: 'Bearer ' + store.state.token
+          }
+        })
           .then(response => (this.contacts = response.data))
           .catch(error => console.log(error)))
     },
