@@ -10,7 +10,7 @@
     <div class="form-group">
       <input type="password" name="password" placeholder="Password" class="form-control" v-model="password">
     </div>
-    <button type="submit" class="btn btn-success btn-block">Login</button>
+    <button type="submit" class="btn btn-success btn-block" @click="signin">Login</button>
   </form>
 </div>
 </template>
@@ -35,12 +35,17 @@ export default {
   },
   methods: {
     signin () {
-      axios.post('http://localhost:3000/login', {user: {email: this.email, password: this.password }})
-        .then(response => console.log(response.data))
+      axios.post('http://localhost:3000/login', {
+        user: {
+          email: this.email,
+          password: this.password
+        }
+      }).then(response => console.log(response.data))
     },
     signinSuccessful (response) {
     },
     signinFailed (error) {
+      console.log(error)
     },
     checkSignedIn () {
     }
