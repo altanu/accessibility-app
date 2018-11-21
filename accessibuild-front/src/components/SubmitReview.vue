@@ -1,7 +1,6 @@
 <template>
-feature/ui-ux-improvements-to-submit-review
   <div class="w-100" style="height: 100%; overflow: scroll;">
-    <button class="btn btn-outline-primary btn-block" @click="onClick('RightHome')">< Back</button>
+    <button class="btn btn-outline-primary btn-block" @click="onClick('RightHome')"> Back</button>
     <h5>{{location.formatted_address}}</h5>
     <p>Here's what we know about this address...</p>
     <section class="d-flex flex-column accessibility-info">
