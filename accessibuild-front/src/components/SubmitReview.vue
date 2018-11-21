@@ -9,18 +9,15 @@
       <p>Average Rating: {{averageRating}}</p>
       <section class="picker wheelchair-picker">
         <p>Wheelchair</p>
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <p>{{ location.wheelchair }}</p>
-            <input type="radio" value="2" v-model="someTestData" id="wheel-fully">
+            <input name="wheelchair" type="radio" value="2" v-model.number="location.wheelchair" id="wheel-fully">
             <label for="wheel-fully">Fully</label>
-            <input type="radio" value="1" v-model="someTestData" id="wheel-partially">
+            <input name="wheelchair" type="radio" value="1" v-model.number="location.wheelchair" id="wheel-partially">
             <label for="wheel-partially">Partially</label>
-            <input type="radio" value="0" v-model="someTestData" id="wheel-no">
+            <input name="wheelchair" type="radio" value="0" v-model.number="location.wheelchair" id="wheel-no">
             <label for="wheel-no">None</label>
             <!-- <button @click="savePickerChoice($event)" class="btn btn-success" id="wheel-fully">Fully</button> -->
           <!-- <button @click="savePickerChoice($event)" class="btn btn-warning" id="wheel-partially">Partially</button> -->
           <!-- <button @click="savePickerChoice($event)" class="btn btn-danger" id="wheel-no">Not at all</button> -->
-        </div>
       </section>
       <section class="picker bathroom-picker">
         <p>Accessible Bathroom</p>
