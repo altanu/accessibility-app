@@ -44,25 +44,36 @@ export default {
         })
     },
     renderLocation (location) {
-      console.log("when a _Location is rendered", this.place)
-      const saveLocation = {
-        place_id: this.place.place_id,
-        wheelchair: this.wheelchair,
-        bathroom: this.bathroom,
-        parking: this.parking,
-        lat: this.place.geometry.location.lat,
-        lng: this.place.geometry.location.lng
-      }
-      if (!this.location.id) {
-        axios.post('http://localhost:3000/api/v2/locations', saveLocation)
-          .then(response => {
-            store.setCurrentLocation(location)
-            store.setCurrentLocationId(response.data.id)
-            this.onClick('SubmitReview')
-          })
-      } else {
-        store.setCurrentLocation(location)
-      }
+      var self = this
+
+      var geocoder = new google.maps.Geocoder()
+      geocoder.geocode({ 'placeId': this.place.place_id, 'language': 'en' }, function (results, status) {
+        console.log('did we get something from the geocoder', results)
+        var lat = results[0].geometry.location.lat()
+        var lng = results[0].geometry.location.lng()
+
+        console.log("do we have coordinates", lat, lng)
+        const saveLocation = {
+          place_id: self.place.place_id,
+          wheelchair: self.wheelchair,
+          bathroom: self.bathroom,
+          parking: self.parking,
+          lat: lat,
+          lng: lng
+        }
+        if (!self.location.id) {
+          axios.post('http://localhost:3000/api/v2/locations', saveLocation)
+            .then(response => {
+              store.setCurrentLocation(location)
+              store.setCurrentLocationId(response.data.id)
+              self.onClick('SubmitReview')
+            })
+        } else {
+          store.setCurrentLocation(location)
+        }
+      })
+
+      
     }
   },
   created () {

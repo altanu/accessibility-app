@@ -48,7 +48,7 @@ module Api
 
         # Only allow a trusted parameter "white list" through.
         def location_params
-          params.require(:location).permit(:place_id, :house_number, :street, :wheelchair, :bathroom, :parking, :lat, :lng)
+          params.require(:location).permit(:place_id, :wheelchair, :bathroom, :parking, :lat, :lng)
         end
     end
   end
