@@ -110,32 +110,6 @@ export default {
     emptyComment () {
       this.newComment.description = ''
     },
-    savePickerChoice (event) {
-      if (event.target.id[0] === 'w') {
-        if (event.target.id === 'wheel-fully') {
-          this.wheel_status = 2
-        } else if (event.target.id === 'wheel-partially') {
-          this.wheel_status = 1
-        } else if (event.target.id === 'wheel-no') {
-          this.wheel_status = 0
-        }
-        axios.put(this.baseUrl + this.location.id, { wheelchair: this.wheel_status })
-      } else if (event.target.id[0] === 'b') {
-        if (event.target.id === 'bath-yes') {
-          this.bathroom_status = true
-        } else if (event.target.id === 'bath-no') {
-          this.bathroom_status = false
-        }
-        axios.put(this.baseUrl + this.location.id, { bathroom: this.bathroom_status })
-      } else if (event.target.id[0] === 'p') {
-        if (event.target.id === 'parking-yes') {
-          this.parking_status = true
-        } else if (event.target.id === 'parking-no') {
-          this.parking_status = false
-        }
-        axios.put(this.baseUrl + this.location.id, { parking: this.parking_status })
-      }
-    },
     setError (error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
