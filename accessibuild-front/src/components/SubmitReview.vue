@@ -94,11 +94,6 @@ export default {
       axios.get(this.baseUrl + store.state.currentLocation.id + '/reviews')
         .then(response => {
           this.comments = response.data
-          // this.averageRating = Math.round(this.comments.reduce((acc, curr) => {
-          //   console.log("Rating calc: acc: " + acc + " curr.rating: " + JSON.stringify(curr) + " this.comments.length: " + this.comments.length)
-          //   return acc + (curr.rating || 0) / this.comments.length
-          // }, 0) * 10) / 10
-          console.log(response)
           this.setAverageRating()
         }).catch(error => console.log(error))
     },
@@ -118,7 +113,6 @@ export default {
     },
     putNewData () {
       var locationData = this.location
-      console.log('Sending this:' + JSON.stringify(locationData))
       axios.put(this.baseUrl + this.location.id, { location: this.location })
     },
     setAverageRating () {
@@ -126,7 +120,12 @@ export default {
       this.comments.forEach(function (comment) {
         totalRating += comment.review.rating
       })
-      this.averageRating = totalRating / this.comments.length
+      var average = totalRating / this.comments.length
+      if (!average && average !== 0 ) {
+        this.averageRating = 'No ratings yet. Be the first!'
+      } else {
+        this.averageRating = average.toFixed(1)
+      }
     }
   },
   components: {
