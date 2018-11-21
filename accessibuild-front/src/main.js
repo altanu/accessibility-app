@@ -49,7 +49,7 @@ var self = this
 
 global.store = {
   state: {
-    currentLocation: {},
+    currentLocation: null,
     right: 'RightHome'
   },
   setCurrentLocation (newLocation) {
@@ -57,7 +57,7 @@ global.store = {
     this.setRightPane('SubmitReview')
   },
   clearCurrentLocation () {
-    this.state.currentLocation = {}
+    this.state.currentLocation = null
   },
   setRightPane (name) {
     this.state.right = name
