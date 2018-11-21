@@ -9,16 +9,20 @@
         <GmapMarker v-if="placesList.length <= 1"
           :position="currentPlace"
           @click="clickPin"
+          @mouseover="hoverPin"
         />
 
         <GmapMarker
           v-for="marker in markers"
+          :id="marker.place_id"
           :key="marker.place_id"
           :position="marker.position"
           :clickable="true"
           :draggable="false"
           :icon="marker.icon"
           @click="clickPin"
+          @mouseover="hoverPin"
+          @mouseout="clearBorder"
         />
 
     </gmap-map>
@@ -50,16 +54,26 @@ export default {
       this.$emit('new-list', this.newPlaceList)
     },
     clickPin (marker) {
-      this.getPlaceID(marker.latLng)
-    },
-    getPlaceID(latLng) {
       let self = this
-      var geocoder = new google.maps.Geocoder
-      geocoder.geocode({'location': latLng}, function(results, status) {
+      var geocoder = new google.maps.Geocoder()
+      geocoder.geocode({ 'location': marker.latLng }, function (results, status) {
         self.$emit('new-list', [results[0]])
       })
+    },
+    hoverPin (marker) {
+      let self = this
+      var geocoder = new google.maps.Geocoder()
+      geocoder.geocode({ 'location': marker.latLng }, function (results, status) {
+        self.$emit('pin-hover', results[0].place_id)
+      })
+    },
+    clearBorder (marker) {
+      let self = this
+      var geocoder = new google.maps.Geocoder()
+      geocoder.geocode({ 'location': marker.latLng }, function (results, status) {
+        self.$emit('hover-clear', results[0].place_id)
+      })
     }
-
   },
   mounted () {
     var self = this
@@ -94,8 +108,7 @@ export default {
         var bounds = new google.maps.LatLngBounds()
 
         searchPlaces.forEach(function (place) {
-
-          service.textSearch({'location': place.geometry.location, 'query': place.formatted_address}, function(results, status) {
+          service.textSearch({ 'location': place.geometry.location, 'query': place.formatted_address }, function (results, status) {
             place = results[0]
           })
 
