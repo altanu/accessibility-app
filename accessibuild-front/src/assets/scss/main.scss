@@ -72,6 +72,16 @@ body {
         background-color: $blue;
       }
     }
+
+    &.btn-radio {
+      color: $blue;
+      border-color: $blue;
+      background-color: $white;
+      &.active {
+        color: $white;
+        background-color: $blue;
+      }
+    }
   }
 
   .btn-link {

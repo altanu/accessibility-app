@@ -10,13 +10,13 @@
       <section class="picker wheelchair-picker">
         <p>Wheelchair</p>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-success active">
+          <label class="btn btn-radio active">
             <input type="radio" name="options" id="wheel-fully" autocomplete="off" checked> Full
           </label>
-          <label class="btn btn-warning">
+          <label class="btn btn-radio">
             <input type="radio" name="options" id="wheel-partially" autocomplete="off"> Partial
           </label>
-          <label class="btn btn-danger">
+          <label class="btn btn-radio">
             <input type="radio" name="options" id="wheel-no" autocomplete="off"> None
           </label>
             <!-- <button @click="savePickerChoice($event)" class="btn btn-success" id="wheel-fully">Fully</button> -->
