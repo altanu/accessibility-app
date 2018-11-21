@@ -121,11 +121,7 @@ export default {
         totalRating += comment.review.rating
       })
       var average = totalRating / this.comments.length
-      if (!average && average !== 0 ) {
-        this.averageRating = 'No ratings yet. Be the first!'
-      } else {
-        this.averageRating = average.toFixed(1)
-      }
+      this.averageRating = !average && average!== 0 ? 'No ratings yet. Be the first!' : average.toFixed(1)
     }
   },
   components: {
