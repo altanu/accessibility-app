@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-info"></button>
+  <button class="btn btn-info" v-on:click="goHome"> < Back</button>
 </template>
 
 <script>
