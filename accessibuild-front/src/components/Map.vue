@@ -6,11 +6,11 @@
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
-        <GmapMarker v-if="placesList.length <= 1"
+        <!-- <GmapMarker v-if="placesList.length <= 1"
           :position="currentPlace"
           :clickable="false"
           :draggable="false"
-        />
+        /> -->
 
         <GmapMarker
           v-for="marker in markers"
@@ -80,6 +80,7 @@ export default {
               place_id: location.place_id
             }))
           })
+          this.$emit('new-list', [])
         })
       })
     }
