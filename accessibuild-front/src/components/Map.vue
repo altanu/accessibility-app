@@ -20,7 +20,7 @@
           :clickable="true"
           :draggable="false"
           :icon="marker.icon"
-          @click="selectCard(marker.place_id)"
+          @click="selectCard(marker)"
         />
 
     </gmap-map>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+var axios = require('axios')
+
 export default {
   name: 'GoogleMap',
   props: {
@@ -41,7 +43,8 @@ export default {
       zoom: 16,
       markers: [],
       newPlaceList: [],
-      mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] }
+      mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] },
+      pinStyles: ['/redPin.png','/yellowPin.png','/greenPin.png']
     }
   },
   methods: {
@@ -53,16 +56,39 @@ export default {
     },
     clickPin (marker) {
       let self = this
+      console.log("clickedPin", marker)
       var geocoder = new google.maps.Geocoder()
       geocoder.geocode({ 'placeId': marker.place_id, 'language': 'en' }, function (results, status) {
+        console.log("geocoder returned", results, "will emit message now")
         self.$emit('new-list', [results[0]])
       })
     },
-    selectCard (place_id) {
-      this.$emit('pin-select', place_id)
+    selectCard (marker) {
+      console.log("selectCard was called with", marker)
+      this.$emit('pin-select', marker.place_id)
     },
+    populateMapFromDB () {
+      var self = this
+      this.$refs.mapRef.$mapPromise.then((map) => {
+        axios.get('http://localhost:3000/api/v2/locations')
+        .then(response => {
+          response.data.forEach(location => {
+            // Create a marker for every tenth place
+            self.markers.push(new google.maps.Marker({
+              map: map,
+              icon: function () {
+                return self.pinStyles[location["wheelchair"]]
+              }(),
+              position: {lat: Number(location.lat), lng: Number(location.lng)},
+              place_id: location.place_id
+            }))
+          })
+        })
+      })
+    }
   },
   mounted () {
+    this.populateMapFromDB()
     var self = this
 
     this.$refs.mapRef.$mapPromise.then((map) => {

@@ -85,11 +85,21 @@ export default {
       this.loggedIn = !this.loggedIn
     },
     newList: function (arr) {
+      console.log("newList is called with", arr)
       this.placesList = arr
       this.state.right = 'RightHome'
       store.clearCurrentLocation()
     },
     selectCard: function (place_id) {
+      var self = this
+      console.log("select card was called for", place_id)
+      if ( this.placesList.length <= 1 ) {
+        var geocoder = new google.maps.Geocoder()
+        geocoder.geocode({ 'placeId': place_id, 'language': 'en' }, function (results, status) {
+          console.log("called geocoder")
+          self.newList([results[0]])
+        })
+      }
       var selectedCard = document.getElementById(place_id)
       if (selectedCard) {
         selectedCard.style.border = '3px solid black'
