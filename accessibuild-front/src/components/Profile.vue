@@ -17,7 +17,7 @@
 
     <div id="contacts-block" v-if="hasContacts">
       <h4 style="width: 100%; text-align: center;">Contacts</h4><hr>
-      <div v-for="contact in contacts">
+      <div id="accordion" v-for="contact in contacts">
         <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
       </div>
     </div>
