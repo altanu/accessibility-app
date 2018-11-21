@@ -2,9 +2,9 @@
   <section v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
     <div class="card-header">Address: {{location.formatted_address}}</div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Wheelchair Access: {{ wheelchairParsed }}</li>
-      <li class="list-group-item">Accessible Bathrooms: {{ bathroomParsed }}</li>
-      <li class="list-group-item">Parking: {{ parkingParsed }}</li>
+      <li class="list-group-item">Wheelchair Access: <span class='type-badge'>{{ wheelchairParsed }}</span></li>
+      <li class="list-group-item">Accessible Bathrooms: <span class='type-badge'>{{ bathroomParsed }}</span></li>
+      <li class="list-group-item">Parking: <span class='type-badge'>{{ parkingParsed }}</span></li>
     </ul>
     <button class="btn" @click="renderLocation(location)">Review this location</button>
   </section>
