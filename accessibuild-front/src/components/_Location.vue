@@ -1,5 +1,5 @@
 <template>
-  <section class="card">
+  <section v-bind:name=this.place.place_id class="card" style="border: 1px solid gray">
     <div class="card-header">Address: {{location.formatted_address}}</div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Wheelchair: {{ location.wheelchair }}</li>
@@ -17,7 +17,7 @@ export default {
   name: 'Location',
   props: {
     place: Object,
-    onClick: Function
+    onClick: Function,
   },
   data () {
     return {
@@ -61,7 +61,7 @@ export default {
         console.log('location: ', location)
         store.setCurrentLocation(location)
       }
-    }
+    },
   },
   created () {
     this.fetchLocationInfo()

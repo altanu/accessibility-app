@@ -6,7 +6,8 @@
       <p>What would you like to do today?</p>
     </div>
     <div v-if="placesList.length > 0">
-      <p>We found the following results for you:</p>
+      <p v-if="placesList.length > 1" >We found the following results for you:</p>
+      <p v-if="placesList.length == 1">Here are the details for the location you've selected:</p>
 
       <Location
         v-for="place in placesList"
@@ -27,7 +28,7 @@ export default {
     onClick: Function,
     currentPlace: Object,
     placesList: Array,
-    addressString: String
+    addressString: String,
   },
   name: 'RightHome',
   components: {

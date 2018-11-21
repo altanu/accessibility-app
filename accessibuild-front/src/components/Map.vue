@@ -20,6 +20,7 @@
           :draggable="false"
           :icon="marker.icon"
           @click="clickPin"
+          @mouseover="popLocationCard"
         />
 
     </gmap-map>
@@ -62,10 +63,9 @@ export default {
     },
     popLocationCard (marker) {
       let self = this
-      console.log("hovering over", marker)
       var geocoder = new google.maps.Geocoder
       geocoder.geocode({'location': marker.latLng}, function(results, status) {
-        self.$emit('pop-card', [results[0]])
+        self.$emit('pop-card', results[0].place_id)
       })
     }
   },

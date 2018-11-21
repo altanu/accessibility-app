@@ -91,8 +91,8 @@ export default {
       this.state.right = 'RightHome'
       store.clearCurrentLocation()
     },
-    popCard: function () {
-      console.log("popCard called in App.vue")
+    popCard: function (place_id) {
+      document.getElementsByName(place_id)[0].style.border = ".25rem solid black"
     }
   },
   computed: {
