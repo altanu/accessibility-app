@@ -25,9 +25,8 @@ osm_data.each do |place|
   if place["place_id"].include? "Ej"
     puts "skipping invalid location"
   else
-    puts place_ids.size
     if place_ids.include?(place["place_id"])
-      puts "skipping invalid location"
+      puts "skipping duplicate location"
     else
       place_ids.push(place["place_id"])
       Location.create!(

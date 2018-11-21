@@ -44,11 +44,14 @@ export default {
         })
     },
     renderLocation (location) {
+      console.log("when a _Location is rendered", this.place)
       const saveLocation = {
         place_id: this.place.place_id,
         wheelchair: this.wheelchair,
         bathroom: this.bathroom,
-        parking: this.parking
+        parking: this.parking,
+        lat: this.place.geometry.location.lat,
+        lng: this.place.geometry.location.lng
       }
       if (!this.location.id) {
         axios.post('http://localhost:3000/api/v2/locations', saveLocation)

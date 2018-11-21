@@ -12,16 +12,6 @@
           :draggable="false"
         />
 
-        <GmapMarker v-if="placesList.length <= 1"
-          v-for="marker in defaultMarkers"
-          :id="marker.place_id"
-          :key="marker.place_id"
-          :position="marker.position"
-          :clickable="false"
-          :draggable="false"
-          :icon="marker.icon"
-        />
-
         <GmapMarker
           v-for="marker in markers"
           :id="marker.place_id"
@@ -52,7 +42,6 @@ export default {
       center: this.currentPlace,
       zoom: 16,
       markers: [],
-      defaultMarkers: [],
       newPlaceList: [],
       mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] },
       pinStyles: ['/redPin.png','/yellowPin.png','/greenPin.png']
@@ -85,7 +74,7 @@ export default {
         .then(response => {
           response.data.forEach(location => {
             // Create a marker for every tenth place
-            self.defaultMarkers.push(new google.maps.Marker({
+            self.markers.push(new google.maps.Marker({
               map: map,
               icon: function () {
                 return self.pinStyles[location["wheelchair"]]
