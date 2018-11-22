@@ -16,7 +16,7 @@
         v-bind:onClick="onClick"
       ></Location>
     </div>
-
+    
   </div>
 </template>
 

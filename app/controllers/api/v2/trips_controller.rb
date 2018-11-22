@@ -13,7 +13,10 @@ module Api
 
     # GET /trips/1
     def show
-      render json: @trip
+      render json: {
+        trip_time: @trip.trip_time,
+        trip_owner: @trip.user.first_name
+      }
     end
 
     # POST /trips
