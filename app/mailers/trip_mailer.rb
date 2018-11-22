@@ -8,15 +8,12 @@ class TripMailer < ApplicationMailer
     # Example until api calls have been ironed out
     # Also add address of destination to email
     @trip = params[:trip]
+    @recipient = params[:contact]
     @user = User.find(@trip.user_id)
-    @recipients = @trip.contacts
-    @recipients.each do |recipient|
-      @recipient = recipient
-      mail(
-          to: @recipient.email,
-          subject: "#{@user.first_name} has started their trip!"
-      )
-    end
+    mail(
+        to: @recipient.email,
+        subject: "#{@user.first_name} has started their trip!"
+    )
   end
 
   def trip_email_end
