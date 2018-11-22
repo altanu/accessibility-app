@@ -73,16 +73,16 @@ export default {
   },
   computed: {
     wheelchairParsed () {
-      switch (Number(this.location.wheelchair)) {
+      switch (this.location.wheelchair) {
         case 2:
           return 'Full'
-          break
+          break;
         case 1:
           return 'Partial'
-          break
+          break;
         case 0:
           return 'None'
-          break
+          break;
         default:
           return 'Unknown'
       }
@@ -91,10 +91,10 @@ export default {
       switch (this.location.bathroom) {
         case true:
           return 'Yes'
-          break
+          break;
         case false:
           return 'No'
-          break
+          break;
         default:
           return 'Unknown'
       }
@@ -103,10 +103,10 @@ export default {
       switch (this.location.parking) {
         case true:
           return 'Yes'
-          break
+          break;
         case false:
           return 'No'
-          break
+          break;
         default:
           return 'Unknown'
       }
@@ -115,13 +115,13 @@ export default {
       switch (this.location.wheelchair) {
         case 2:
           return { 'type-badge': true, 'full': true }
-          break
+          break;
         case 1:
           return { 'type-badge': true, 'partial': true }
-          break
+          break;
         case 0:
           return { 'type-badge': true, 'none': true }
-          break
+          break;
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -130,10 +130,10 @@ export default {
       switch (this.location.bathroom) {
         case true:
           return { 'type-badge': true, 'full': true }
-          break
+          break;
         case false:
           return { 'type-badge': true, 'none': true }
-          break
+          break;
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -142,10 +142,10 @@ export default {
       switch (this.location.parking) {
         case true:
           return { 'type-badge': true, 'full': true }
-          break
+          break;
         case false:
           return { 'type-badge': true, 'none': true }
-          break
+          break;
         default:
           return { 'type-badge': true, 'unknown': true }
       }
