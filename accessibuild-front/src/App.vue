@@ -93,15 +93,7 @@ export default {
     selectCard: function (place_id) {
       var self = this
       console.log("select card was called for", place_id)
-      var selectedCard = document.getElementById(place_id)
-      if (selectedCard) {
-        selectedCard.style.border = '3px solid black'
-        selectedCard.scrollIntoView({behavior: "smooth"})
-        setTimeout(() => {
-          selectedCard.style.border = '1px solid grey'
-        }, 1500)
-      }
-      if ( !store.currentLocation ) {
+      if ( !store.currentLocation  ) {
         var geocoder = new google.maps.Geocoder()
         geocoder.geocode({ 'placeId': place_id, 'language': 'en' }, function (results, status) {
           console.log("called geocoder")
