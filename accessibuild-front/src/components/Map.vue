@@ -71,25 +71,26 @@ export default {
     },
     populateMapFromDB () {
       var self = this
-      this.$refs.mapRef.$mapPromise.then((map) => {
-        axios.get('http://localhost:3000/api/v2/locations')
-          .then(response => {
-            response.data.forEach(location => {
-            // Create a marker for every tenth place
-              self.markers.push(new google.maps.Marker({
-                map: map,
-                icon: (function () {
-                  return self.pinStyles[location['wheelchair']]
-                }()),
-                position: { lat: Number(location.lat), lng: Number(location.lng) },
-                place_id: location.place_id
-              }))
-            })
+      axios
+        .get('http://localhost:3000/api/v2/locations')
+        .then(response => {
+          response.data.forEach(location => {
+            self.drawWithAccessibility(location)
           })
-      })
+        })
     },
-    drawWithAccessibility() {
-      
+    drawWithAccessibility(location) {
+      var self = this
+      this.$refs.mapRef.$mapPromise.then((map) => {
+        self.markers.push(new google.maps.Marker({
+          map: map,
+          icon: (function () {
+            return self.pinStyles[location['wheelchair']]
+          }()),
+          position: { lat: Number(location.lat), lng: Number(location.lng) },
+          place_id: location.place_id
+        }))
+      })
     }
   },
   mounted () {
