@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Locations from './components/Locations.vue'
 import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
-import Trip from './components/Trip.vue'
 
 Vue.use(Router)
 
@@ -24,11 +23,6 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: RightHome
-    },
-    {
-      path: '/api/v2/trips/:trip_id',
-      name: 'trip',
-      component: Trip
     }
   ]
 })
