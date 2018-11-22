@@ -2,11 +2,7 @@ class TripMailer < ApplicationMailer
 
   default from: 'trips@sandboxe6920535e59a48539a206fb0dc04a128.mailgun.org'
 
-  # IF the email is only being sent to one perseon, try looping this entire function instead of the internals
-
   def trip_email_start
-    # Example until api calls have been ironed out
-    # Also add address of destination to email
     @trip = params[:trip]
     @recipient = params[:contact]
     @user = User.find(@trip.user_id)
@@ -35,10 +31,4 @@ class TripMailer < ApplicationMailer
         subject: "#{@user.first_name} has cancelled their trip!"
     )
   end
-
-  private # Might remove if its easy to get contacts
-    def getIncludedContacts(tripid)
-      # Should return join table, but not individual contacts for now
-      @contacts = Trip.find(tripid).companions
-    end
 end
