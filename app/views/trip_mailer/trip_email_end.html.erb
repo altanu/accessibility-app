@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <!-- It's uncertain right now if and how the recipient gets mapped to the email. Same for location! -->
+    <h1>Hello, <%= @recipient.first_name %></h1>
+    <p>
+      This email is to inform you that <%= @user.first_name %> has <strong>arrived</strong> at their destination of:
+    </p>
+    <h4>PLACEHOLDER ADDRESS<%= @location.formatted_address %></h4>
+    <br>
+    <p>Thanks for being a part of the Accessibuild community!</p>
+  </body>
+</html>
