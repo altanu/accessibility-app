@@ -7,7 +7,7 @@
       <div style="display:flex; width: 100%; flex-direction: row; justify-content: space-between">
         <div v-if="$mq === 'lg'" style="flex-grow: 1;">
         <h3 id="logo" style="width:100%; text-align: center">
-          <button id="accessibuild" style="width: 7.5rem" @click='sendMeHome'>Accessibuild</button>
+          <button id="accessibuild" style="width: 7.5rem" @click='sendMeHome'>Accessibl</button>
         </h3>
         </div>
         <div style="flex-grow: 1" id="search-container">
