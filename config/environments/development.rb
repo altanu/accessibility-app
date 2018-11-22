@@ -35,6 +35,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
+  # Make sure you set these in your .env file. See .env-example for a reference
   config.action_mailer.smtp_settings = {
     :authentication => :plain,
     :address => "smtp.mailgun.org",
