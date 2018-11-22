@@ -1,0 +1,2 @@
+class TripMailer < ApplicationMailer
+end
