@@ -6,13 +6,13 @@
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
-        <GmapMarker
+        <GmapMarker v-if="placesList.length < 1"
           :position="center"
           :clickable="false"
           :draggable="false"
         />
 
-        <!-- <GmapMarker
+        <GmapMarker
           v-for="marker in markers"
           :id="marker.place_id"
           :key="marker.place_id"
@@ -21,7 +21,7 @@
           :draggable="false"
           :icon="marker.icon"
           @click="selectCard(marker)"
-        /> -->
+        />
     </gmap-map>
   </div>
 </template>
@@ -32,7 +32,7 @@ var axios = require('axios')
 export default {
   name: 'GoogleMap',
   props: {
-    placesList: Array,
+    placesList: Array
   },
   data () {
     return {
@@ -41,7 +41,7 @@ export default {
       markers: [],
       newPlaceList: [],
       mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] },
-      pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png']
+      pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png']
     }
   },
   methods: {
@@ -79,19 +79,34 @@ export default {
           })
         })
     },
+    fetchLocationInfo (place, callback) {
+      axios.get('http://localhost:3000/api/v2/places/' + place.place_id)
+        .then(response => {
+          const location = response.data[0]
+          if (location) {
+            place.wheelchair = location.wheelchair
+          } else {
+            place.wheelchair = 3
+          }
+          place.lat = place.geometry.location.lat()
+          place.lng = place.geometry.location.lng()
+          return place
+        }).then((place) => {
+          console.log("callback", place)
+          callback(place)
+        })
+    },
     drawWithAccessibility(location) {
       var self = this
       this.$refs.mapRef.$mapPromise.then((map) => {
         self.markers.push(new google.maps.Marker({
           map: map,
-          icon: (function () {
-            return self.pinStyles[location['wheelchair']]
-          }()),
+          icon: self.pinStyles[location['wheelchair']],
           position: { lat: Number(location.lat), lng: Number(location.lng) },
           place_id: location.place_id
         }))
       })
-    }
+    },
   },
   mounted () {
     var self = this
@@ -134,27 +149,7 @@ export default {
 
           self.updatePlacesList(place)
 
-          if (!place.geometry) {
-            // Returned place contains no geometry
-            return
-          }
-
-          var icon = {
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
-          }
-
-          // Create a marker for each place.
-          self.markers.push(new google.maps.Marker({
-            map: map,
-            icon: icon,
-            title: place.name,
-            position: place.geometry.location,
-            place_id: place.place_id
-          }))
+          self.fetchLocationInfo(place, self.drawWithAccessibility)
 
           if (place.geometry.viewport) {
             // Only geocodes have viewport.
