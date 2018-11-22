@@ -3,7 +3,7 @@
     <h1>Create your trip here!</h1>
     <h2>Here are all your contacts:</h2>
     <ul>
-      <li v-for="contact in contacts">
+      <li v-for="contact in contacts" v-bind:key="contact.id">
         <p>Name: {{contact.first_name}}</p>
         <p>Email: {{contact.email}}</p>
         <p>Emergency contact? {{contact.emergency}}</p>
