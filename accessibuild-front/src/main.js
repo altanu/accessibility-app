@@ -45,11 +45,10 @@ Vue.use(VueMq, {
 })
 
 Vue.config.productionTip = false
-var self = this
 
 global.store = {
   state: {
-    currentLocation: {},
+    currentLocation: null,
     right: 'RightHome',
     currentUserId: 1
   },
@@ -58,7 +57,7 @@ global.store = {
     this.setRightPane('SubmitReview')
   },
   clearCurrentLocation () {
-    this.state.currentLocation = {}
+    this.state.currentLocation = null
   },
   setRightPane (name) {
     this.state.right = name

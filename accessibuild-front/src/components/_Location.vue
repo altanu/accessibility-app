@@ -2,9 +2,9 @@
   <section v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
     <div class="card-header">Address: {{location.formatted_address}}</div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Wheelchair: {{ location.wheelchair }}</li>
-      <li class="list-group-item">bathroom: {{ location.bathroom }}</li>
-      <li class="list-group-item">Parking: {{ location.parking }}</li>
+      <li class="list-group-item">Wheelchair Access: <span :class="wheelChairClass">{{ wheelchairParsed }}</span></li>
+      <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
+      <li class="list-group-item">Parking: <span :class="parkingClass">{{ parkingParsed }}</span></li>
     </ul>
     <button class="btn" @click="renderLocation(location)">Review this location</button>
   </section>
@@ -48,11 +48,8 @@ export default {
 
       var geocoder = new google.maps.Geocoder()
       geocoder.geocode({ 'placeId': this.place.place_id, 'language': 'en' }, function (results, status) {
-        console.log('did we get something from the geocoder', results)
         var lat = results[0].geometry.location.lat()
         var lng = results[0].geometry.location.lng()
-
-        console.log("do we have coordinates", lat, lng)
         const saveLocation = {
           place_id: self.place.place_id,
           wheelchair: self.wheelchair,
@@ -72,8 +69,86 @@ export default {
           store.setCurrentLocation(location)
         }
       })
-
-      
+    }
+  },
+  computed: {
+    wheelchairParsed () {
+      switch (this.location.wheelchair) {
+        case 2:
+          return 'Full'
+          break
+        case 1:
+          return 'Partial'
+          break
+        case 0:
+          return 'None'
+          break
+        default:
+          return 'Unknown'
+      }
+    },
+    bathroomParsed () {
+      switch (this.location.bathroom) {
+        case true:
+          return 'Yes'
+          break
+        case false:
+          return 'No'
+          break
+        default:
+          return 'Unknown'
+      }
+    },
+    parkingParsed () {
+      switch (this.location.parking) {
+        case true:
+          return 'Yes'
+          break
+        case false:
+          return 'No'
+          break
+        default:
+          return 'Unknown'
+      }
+    },
+    wheelChairClass () {
+      switch (this.location.wheelchair) {
+        case 2:
+          return { 'type-badge': true, 'full': true }
+          break
+        case 1:
+          return { 'type-badge': true, 'partial': true }
+          break
+        case 0:
+          return { 'type-badge': true, 'none': true }
+          break
+        default:
+          return { 'type-badge': true, 'unknown': true }
+      }
+    },
+    bathroomClass () {
+      switch (this.location.bathroom) {
+        case true:
+          return { 'type-badge': true, 'full': true }
+          break
+        case false:
+          return { 'type-badge': true, 'none': true }
+          break
+        default:
+          return { 'type-badge': true, 'unknown': true }
+      }
+    },
+    parkingClass () {
+      switch (this.location.parking) {
+        case true:
+          return { 'type-badge': true, 'full': true }
+          break
+        case false:
+          return { 'type-badge': true, 'none': true }
+          break
+        default:
+          return { 'type-badge': true, 'unknown': true }
+      }
     }
   },
   created () {

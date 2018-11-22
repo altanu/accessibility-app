@@ -4,7 +4,9 @@ $blue: #4343EA;
 $white: #FFFFFF;
 $blue-gray: #6A8EAE;
 $light-blue: #9BD1E5;
-$green: #9FD8CB;
+$green: #28a745;
+$yellow: #ffc107;
+$red: #dc3545;
 
 
 body {
@@ -17,6 +19,37 @@ body {
     &:focus {
       box-shadow: none;
       outline: none;
+    }
+  }
+
+  .type-badge {
+    border: black 1px solid;
+    border-radius: 1rem;
+    padding: 1px 10px;
+    font-size: 1.2em;
+
+    &.full {
+      color: $white;
+      background-color: $green;
+      border-color: $green;
+    }
+
+    &.partial {
+      color: black;
+      background-color: $yellow;
+      border-color: $yellow;
+    }
+
+    &.none {
+      color: $white;
+      background-color: $red;
+      border-color: $red;
+    }
+
+    &.unknown {
+      color: white;
+      background-color: gray;
+      border-color: gray;
     }
   }
 
@@ -119,7 +152,7 @@ body {
     padding-top: 5px;
   }
 
-  #profile, #login, #register, #right-home {
+  #profile, #login, #register, #right-home, #submit-review {
     padding-top: 2em;
     width: 90%;
     margin: auto;

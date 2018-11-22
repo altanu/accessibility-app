@@ -1,37 +1,40 @@
 <template>
-  <div id="app" style="height: 100%">
-    <Navbar v-bind:onClick='setState' v-bind:is-logged-in="this.loggedIn" v-bind:set-login="setLogin"></Navbar>
-    <div style="height: 100%">
-    <div style="height: 100%">
-      <div id="flexbox-container" :class="classObject">
-        <div v-show="renderMap" id="left-box">
+  <div id='app' style='height: 100%'>
+    <Navbar 
+      v-bind:onClick='setState' 
+      v-bind:is-logged-in='this.loggedIn' 
+      v-bind:set-login='setLogin'
+      v-on:home-page='homePage'>
+    </Navbar>
+    <div style='height: 100%'>
+      <div id='flexbox-container' :class='classObject'>
+        <div v-show='renderMap' id='left-box'>
           <Map
-            v-bind:current-place="this.currentLocation"
-            v-bind:places-list="this.placesList"
-            v-bind:address-string="this.currentAddress"
-            v-on:address-change="updateAddress"
-            v-on:new-list="newList"
-            v-on:pin-select="selectCard">
+            v-bind:current-place='this.currentLocation'
+            v-bind:places-list='this.placesList'
+            v-bind:address-string='this.currentAddress'
+            v-on:address-change='updateAddress'
+            v-on:new-list='newList'
+            v-on:pin-select='selectCard'>
           </Map>
         </div>
-        <div id="right-box" v-bind:style="rightHeight">
+        <div id='right-box' v-bind:style='rightHeight'>
           <transition name='fade'>
             <component
-              v-bind:state="state"
+              v-bind:state='state'
               v-bind:is='state.right'
-              v-bind:address-string="this.currentAddress"
-              v-bind:set-login="setLogin"
-              v-bind:current-place="this.currentLocation"
-              v-bind:places-list="this.placesList"
+              v-bind:address-string='this.currentAddress'
+              v-bind:set-login='setLogin'
+              v-bind:current-place='this.currentLocation'
+              v-bind:places-list='this.placesList'
               v-bind:onClick='setState'
-              :user-id="this.userId">
+              :user-id='this.userId'>
             </component>
           </transition>
         </div>
       </div>
     </div>
   </div>
-  <router-view/>
   </div>
 </template>
 
@@ -86,30 +89,23 @@ export default {
       this.loggedIn = !this.loggedIn
     },
     newList: function (arr) {
-      console.log("newList is called with", arr)
       this.placesList = arr
       this.state.right = 'RightHome'
       store.clearCurrentLocation()
     },
-    selectCard: function (place_id) {
+    selectCard: function (placeId) {
       var self = this
-      console.log("select card was called for", place_id)
-      if ( this.placesList.length <= 1 ) {
+      if (!store.currentLocation) {
         var geocoder = new google.maps.Geocoder()
-        geocoder.geocode({ 'placeId': place_id, 'language': 'en' }, function (results, status) {
-          console.log("called geocoder")
+        geocoder.geocode({ 'placeId': placeId, 'language': 'en' }, function (results, status) {
           self.newList([results[0]])
         })
       }
-      var selectedCard = document.getElementById(place_id)
-      if (selectedCard) {
-        selectedCard.style.border = '3px solid black'
-        selectedCard.scrollIntoView({behavior: "smooth"})
-        setTimeout(() => {
-          selectedCard.style.border = '1px solid grey'
-        }, 1500)
-      }
     },
+    homePage: function () {
+      this.placesList = []
+      this.$children
+    }
   },
   computed: {
     classObject: function () {
@@ -145,7 +141,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang='scss'>
   @import './assets/scss/main.scss'
 </style>
 

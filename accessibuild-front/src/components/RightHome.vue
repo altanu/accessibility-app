@@ -35,11 +35,11 @@ export default {
     Location
   },
   methods: {
-    focusOnSearch: function() {
+    focusOnSearch: function () {
       var searchBar = document.getElementById('pac-input')
       searchBar.style.border = '3px solid black'
       searchBar.focus()
-      setTimeout(function(){
+      setTimeout(function () {
         searchBar.style.border = '1px solid grey'
       }, 3000)
     }
