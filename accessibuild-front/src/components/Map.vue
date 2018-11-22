@@ -52,8 +52,21 @@ export default {
       this.$emit('new-list', this.newPlaceList)
     },
     selectCard (marker) {
+      var self = this
       var selectedCard = document.getElementById(marker.place_id)
-      selectedCard.scrollIntoView({behavior: "smooth"})
+      if (selectedCard) {
+        selectedCard.scrollIntoView({behavior: "smooth"})
+        selectedCard.style.border = '3px solid black'
+        setTimeout(() => {
+          selectedCard.style.border = '1px solid grey'
+        }, 2000)
+      }
+      if (selectedCard === null) {
+        var geocoder = new google.maps.Geocoder()
+        geocoder.geocode({'location': marker.position}, function(results,status) {
+          self.$emit('new-list', [results[0]])
+        })
+      }
     },
     geolocate() {
       var self = this
