@@ -19,6 +19,9 @@
           <button v-show="!isLoggedIn" style="width: 7.5rem" @click='onClick("Login")' class='btn btn-outline-primary round-button' ref='login' type='submit'>Login</button>
 
           <button v-show="isLoggedIn" style="width: 7.5rem" @click='setLogin' class='btn btn-outline-primary round-button' type='submit'>Log Out</button>
+
+          <button style="width: 7.5rem" @click='onClick("CreateTrip")' class='btn btn-outline-primary round-button' type='submit'>Create Trip</button>
+
         </div>
       </div>
     </div>

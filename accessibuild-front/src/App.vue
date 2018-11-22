@@ -46,6 +46,7 @@ import RightHome from './components/RightHome.vue'
 import Map from './components/Map.vue'
 import Login from './components/Login.vue'
 import Profile from './components/Profile.vue'
+import CreateTrip from './components/CreateTrip.vue'
 
 export default {
   name: 'App',
@@ -134,7 +135,8 @@ export default {
     Login,
     Map,
     Profile,
-    SubmitReview
+    SubmitReview,
+    CreateTrip
   }
 }
 </script>

@@ -49,7 +49,8 @@ Vue.config.productionTip = false
 global.store = {
   state: {
     currentLocation: null,
-    right: 'RightHome'
+    right: 'RightHome',
+    currentUserId: 1
   },
   setCurrentLocation (newLocation) {
     this.state.currentLocation = newLocation
