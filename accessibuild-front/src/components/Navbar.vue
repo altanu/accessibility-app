@@ -55,7 +55,7 @@ export default {
       this.isFocusedOnMobile = this.$mq === 'sm'
     },
     sendMeHome() {
-      this.$emit('home-page')
+      this.$emit('new-list', [])
     }
   },
   computed: {
