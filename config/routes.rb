@@ -39,7 +39,6 @@ Rails.application.routes.draw do
         put 'created_mail', to: 'trips#created_mail'
         put 'completed_mail', to: 'trips#completed_mail'
         put 'cancelled_mail', to: 'trips#cancelled_mail'
-        put 'test_email', to: 'trips#test_emailer'
       end
 
       resources :companions, only: [:show, :create, :destroy]

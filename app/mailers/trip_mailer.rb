@@ -4,13 +4,6 @@ class TripMailer < ApplicationMailer
 
   # IF the email is only being sent to one perseon, try looping this entire function instead of the internals
 
-  def test_emailer
-    mail(
-        to: "louisriehl@gmail.com",
-        subject: "Congrats!"
-    )
-  end
-
   def trip_email_start
     # Example until api calls have been ironed out
     # Also add address of destination to email
