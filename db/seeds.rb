@@ -45,9 +45,9 @@ puts 'Seeding contacts'
 Contact.destroy_all
 users = User.all
 users.each do |user|
-  user.contacts.create!(first_name: 'test1', last_name: 'test1', email: 'test1@test.test', phone_number: 1234567, emergency: true)
-  user.contacts.create!(first_name: 'test2', last_name: 'test2', email: 'test2@test.test', phone_number: 1234567, emergency: true)
-  user.contacts.create!(first_name: 'test3', last_name: 'test3', email: 'test3@test.test', phone_number: 1234567, emergency: true)
+  user.contacts.create!(first_name: 'Altan', last_name: 'Unsal', email: 'altanunsal@gmail.com', phone_number: 1234567, emergency: true)
+  user.contacts.create!(first_name: 'Louis', last_name: 'Riehl', email: 'louisriehl@gmail.com', phone_number: 1234567, emergency: true)
+  user.contacts.create!(first_name: 'John', last_name: 'Xu', email: 'johnbxu@gmail.com', phone_number: 1234567, emergency: true)
 end
 
 puts 'Seeding reviews'
@@ -58,7 +58,7 @@ Location.find(1).reviews.create!(user_id: 1, description: 'meh!', rating: '3')
 Location.find(1).reviews.create!(user_id: 1, description: 'crappy place!', rating: '2')
 Location.find(1).reviews.create!(user_id: 1, description: 'crappy place!', rating: '1')
 
-puts 'Seeding trips (no trips yet)'
+puts 'Seeding trip'
 @trip = User.find(1).trips.create!(location_id: 1, trip_time: DateTime.now)
 @trip.companions.create!(contact_id: 1)
 @trip.companions.create!(contact_id: 2)

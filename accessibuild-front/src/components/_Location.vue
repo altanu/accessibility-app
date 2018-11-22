@@ -1,6 +1,6 @@
 <template>
   <section v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
-    <div class="card-header">Address: {{location.formatted_address}}</div>
+    <div class="card-header">Address: {{this.location.formatted_address}}</div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Wheelchair Access: <span :class="wheelChairClass">{{ wheelchairParsed }}</span></li>
       <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
@@ -13,7 +13,6 @@
 
 <script>
 var axios = require('axios')
-
 export default {
   name: 'Location',
   props: {
@@ -35,6 +34,7 @@ export default {
     fetchLocationInfo () {
       axios.get('http://localhost:3000/api/v2/places/' + this.place.place_id)
         .then(response => {
+          console.log("location received from db:", response.data[0])
           const location = response.data[0]
           if (location) {
             this.location.wheelchair = location.wheelchair
@@ -44,7 +44,7 @@ export default {
           }
         })
     },
-    renderLocation (location) {
+    reviewLocation (location) {
       var self = this
 
       var geocoder = new google.maps.Geocoder()
@@ -102,16 +102,16 @@ export default {
   },
   computed: {
     wheelchairParsed () {
-      switch (Number(this.location.wheelchair)) {
+      switch (this.location.wheelchair) {
         case 2:
           return 'Full'
-          break
+          break;
         case 1:
           return 'Partial'
-          break
+          break;
         case 0:
           return 'None'
-          break
+          break;
         default:
           return 'Unknown'
       }
@@ -120,10 +120,10 @@ export default {
       switch (this.location.bathroom) {
         case true:
           return 'Yes'
-          break
+          break;
         case false:
           return 'No'
-          break
+          break;
         default:
           return 'Unknown'
       }
@@ -132,10 +132,10 @@ export default {
       switch (this.location.parking) {
         case true:
           return 'Yes'
-          break
+          break;
         case false:
           return 'No'
-          break
+          break;
         default:
           return 'Unknown'
       }
@@ -144,13 +144,13 @@ export default {
       switch (this.location.wheelchair) {
         case 2:
           return { 'type-badge': true, 'full': true }
-          break
+          break;
         case 1:
           return { 'type-badge': true, 'partial': true }
-          break
+          break;
         case 0:
           return { 'type-badge': true, 'none': true }
-          break
+          break;
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -159,10 +159,10 @@ export default {
       switch (this.location.bathroom) {
         case true:
           return { 'type-badge': true, 'full': true }
-          break
+          break;
         case false:
           return { 'type-badge': true, 'none': true }
-          break
+          break;
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -171,18 +171,18 @@ export default {
       switch (this.location.parking) {
         case true:
           return { 'type-badge': true, 'full': true }
-          break
+          break;
         case false:
           return { 'type-badge': true, 'none': true }
-          break
+          break;
         default:
           return { 'type-badge': true, 'unknown': true }
       }
     }
   },
   created () {
+    console.log("location received on render:", this.location)
     this.fetchLocationInfo()
   }
 }
-
 </script>
