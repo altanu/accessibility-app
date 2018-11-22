@@ -1,6 +1,6 @@
 class TripMailer < ApplicationMailer
 
-  default from: 'trips@sandboxe6920535e59a48539a206fb0dc04a128.mailgun.org'
+  default from: "trips@#{ENV['MAILGUN_DOMAIN']}"
 
   def trip_email_start
     @trip = params[:trip]

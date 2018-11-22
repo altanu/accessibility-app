@@ -39,9 +39,9 @@ Rails.application.configure do
     :authentication => :plain,
     :address => "smtp.mailgun.org",
     :port => 587,
-    :domain => "sandboxe6920535e59a48539a206fb0dc04a128.mailgun.org",
-    :user_name => "postmaster@sandboxe6920535e59a48539a206fb0dc04a128.mailgun.org",
-    :password => "b0f0f23a533f964209ce9e27fd2fc6b3-a3d67641-e7ad216a"
+    :domain => ENV['MAILGUN_DOMAIN'],
+    :user_name => ENV['MAILGUN_USERNAME'],
+    :password => ENV['MAILGUN_PASSWORD']
   }
 
   config.action_mailer.perform_caching = false
