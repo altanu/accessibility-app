@@ -1,18 +1,18 @@
 <template>
   <div style="height: 100%">
     <gmap-map ref="mapRef"
-      :center="currentPlace"
-      :zoom="zoom"
+      :center="{lat: 45.5, lng: -73.5}"
+      :zoom="16"
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
-        <GmapMarker v-if="placesList.length <= 1"
-          :position="currentPlace"
+        <!-- <GmapMarker
+          :position="userPlace.geometry.location"
           :clickable="false"
           :draggable="false"
-        />
+        /> -->
 
-        <GmapMarker
+        <!-- <GmapMarker
           v-for="marker in markers"
           :id="marker.place_id"
           :key="marker.place_id"
@@ -21,7 +21,7 @@
           :draggable="false"
           :icon="marker.icon"
           @click="selectCard(marker)"
-        />
+        /> -->
 
     </gmap-map>
   </div>
@@ -33,14 +33,11 @@ var axios = require('axios')
 export default {
   name: 'GoogleMap',
   props: {
-    currentPlace: Object,
     placesList: Array,
-    addressString: String
   },
   data () {
     return {
-      center: this.currentPlace,
-      zoom: 16,
+      userPlace: {},
       markers: [],
       newPlaceList: [],
       mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] },
@@ -55,7 +52,6 @@ export default {
       this.$emit('new-list', this.newPlaceList)
     },
     clickPin (marker) {
-      let self = this
       var geocoder = new google.maps.Geocoder()
       geocoder.geocode({ 'placeId': marker.place_id, 'language': 'en' }, function (results, status) {
         self.$emit('new-list', [results[0]])
@@ -64,8 +60,20 @@ export default {
     selectCard (marker) {
       this.$emit('pin-select', marker.place_id)
     },
-    populateMapFromDB () {
+    geolocate() {
       var self = this
+      var geocoder = new google.maps.Geocoder()
+      navigator.geolocation.getCurrentPosition(position => {
+        geocoder.geocode({ 'location': {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        } }, function (results, status) {
+          self.userPlace = results[0]
+          self.$emit('user-detected-place', results[0])
+        })
+      })
+    },
+    populateMapFromDB () {
       this.$refs.mapRef.$mapPromise.then((map) => {
         axios.get('http://localhost:3000/api/v2/locations')
           .then(response => {
@@ -85,10 +93,11 @@ export default {
     }
   },
   mounted () {
-    this.populateMapFromDB()
     var self = this
+    // this.populateMapFromDB()
 
     this.$refs.mapRef.$mapPromise.then((map) => {
+      self.geolocate()
       var input = document.getElementById('pac-input')
       var searchBox = new google.maps.places.SearchBox(input)
       var geocoder = new google.maps.Geocoder()
@@ -156,17 +165,7 @@ export default {
         self.publishNewList()
         map.fitBounds(bounds)
       })
-    }).then(function () {
-      var geocoder = new google.maps.Geocoder()
-      navigator.geolocation.getCurrentPosition(position => {
-        geocoder.geocode({ 'location': {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        } }, function (results, status) {
-          self.$emit('address-change', results[0].formatted_address)
-        })
-      })
     })
-  }
+  },
 }
 </script>

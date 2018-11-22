@@ -3,38 +3,33 @@
     <Navbar 
       v-bind:onClick='setState' 
       v-bind:is-logged-in='this.loggedIn' 
-      v-bind:set-login='setLogin'
-      v-on:home-page='homePage'>
+      v-bind:set-login='setLogin'>
     </Navbar>
     <div style='height: 100%'>
       <div id='flexbox-container' :class='classObject'>
         <div v-show='renderMap' id='left-box'>
           <Map
-            v-bind:current-place='this.currentLocation'
             v-bind:places-list='this.placesList'
-            v-bind:address-string='this.currentAddress'
-            v-on:address-change='updateAddress'
             v-on:new-list='newList'
+            v-on:user-detected-place='detectUserPlace'
             v-on:pin-select='selectCard'>
           </Map>
         </div>
         <div id='right-box' v-bind:style='rightHeight'>
           <transition name='fade'>
             <component
+              v-bind:user-detected-place='this.userDetectedPlace'
               v-bind:state='state'
               v-bind:is='state.right'
-              v-bind:address-string='this.currentAddress'
               v-bind:set-login='setLogin'
-              v-bind:current-place='this.currentLocation'
               v-bind:places-list='this.placesList'
               v-bind:onClick='setState'
-              :user-id='this.userId'>
+              v-bind:user-id='this.userId'>
             </component>
           </transition>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -49,40 +44,18 @@ import Profile from './components/Profile.vue'
 
 export default {
   name: 'App',
-  props: {
-    msg: String
-  },
-  mounted () {
-    this.geolocate()
-  },
   data: () => {
     return {
       state: store.state,
-      // default to montreal
-      currentLocation: { lat: 45.5, lng: -73.5 },
+      userDetectedPlace: {},
       userId: 1,
       placesList: [],
-      currentAddress: '',
       loggedIn: false
     }
   },
   methods: {
     setState (stateValue) {
       this.state.right = stateValue
-    },
-    updateLocation (place) {
-      this.currentLocation = place
-    },
-    updateAddress (newAddress) {
-      this.currentAddress = newAddress
-    },
-    geolocate: function () {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.updateLocation({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        })
-      })
     },
     setLogin: function () {
       this.loggedIn = !this.loggedIn
@@ -101,9 +74,8 @@ export default {
         })
       }
     },
-    homePage: function () {
-      this.placesList = []
-      this.$children
+    detectUserPlace: function (place) {
+      this.userDetectedPlace = place
     }
   },
   computed: {

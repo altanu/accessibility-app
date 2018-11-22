@@ -2,7 +2,7 @@
   <div id='right-home'>
     <div v-if="placesList.length == 0">
       <h4>Welcome</h4>
-      <p>We located you near {{addressString}}</p>
+      <p>We located you near {{userDetectedPlace.formatted_address}}</p>
       <p>What would you like to do today?</p>
       <button class='btn btn-outline-primary round-button' @click="focusOnSearch">Search</button>
     </div>
@@ -26,9 +26,8 @@ import Location from './_Location.vue'
 export default {
   props: {
     onClick: Function,
-    currentPlace: Object,
+    userDetectedPlace: Object,
     placesList: Array,
-    addressString: String
   },
   name: 'RightHome',
   components: {
