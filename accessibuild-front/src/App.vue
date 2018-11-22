@@ -27,6 +27,7 @@
               v-bind:user-id='this.userId'>
             </component>
           </transition>
+          <router-view></router-view>
         </div>
       </div>
     </div>

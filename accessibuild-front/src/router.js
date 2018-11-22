@@ -4,7 +4,7 @@ import Locations from './components/Locations.vue'
 import Register from './components/Register.vue'
 import RightHome from './components/RightHome.vue'
 import TripCompanion from './components/TripCompanion.vue'
-import TripUser from './components/TripUser.vue'
+// import TripUser from './components/TripUser.vue'
 
 Vue.use(Router)
 
@@ -29,12 +29,12 @@ export default new Router({
     {
       path: '/trips/:trip_id/companion',
       name: 'tripCompanion',
-      component: TripCompanion,
+      component: TripCompanion
     },
-    {
-      path: '/trips/:trip_id',
-      name: 'tripUser',
-      component: TripUser
-    }
+    // {
+    //   path: '/trips/:trip_id',
+    //   name: 'tripUser',
+    //   component: TripUser
+    // }
   ]
 })
