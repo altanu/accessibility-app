@@ -12,6 +12,7 @@
         <p>Emergency contact? {{contact.emergency}}</p>
       </li>
     </ul>
+    <input v-model='trip_time' type='datetime-local'></input>
     <button class='btn' @click='createTrip'>Create Trip</button>
 
 
@@ -28,7 +29,8 @@ export default {
       baseUrl: 'http://localhost:3000/api/v2/',
       userId: store.state.currentUserId,
       contacts: [],
-      companions: []
+      companions: [],
+      trip_time: null
     }
   },
   methods: {
@@ -47,7 +49,15 @@ export default {
       })
     },
     createTrip () {
-
+      axios.post(`${this.baseUrl}users/${this.userId}/trips`, {
+        location_id: 1,
+        user_id: this.userId,
+        trip_time: this.trip_time
+      }).then(response => {
+        tripId = response.data.id
+        console.log(response)
+        
+      })
     }
   },
   created () {
