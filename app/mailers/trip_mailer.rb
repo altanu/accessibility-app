@@ -1,6 +1,6 @@
 class TripMailer < ApplicationMailer
 
-  default from: 'trips@accessibuild.com'
+  default from: 'trips@sandboxe6920535e59a48539a206fb0dc04a128.mailgun.org'
 
   # IF the email is only being sent to one perseon, try looping this entire function instead of the internals
   def trip_email_start
