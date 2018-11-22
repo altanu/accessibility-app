@@ -58,7 +58,7 @@ Location.find(1).reviews.create!(user_id: 1, description: 'meh!', rating: '3')
 Location.find(1).reviews.create!(user_id: 1, description: 'crappy place!', rating: '2')
 Location.find(1).reviews.create!(user_id: 1, description: 'crappy place!', rating: '1')
 
-puts 'Seeding trips (no trips yet)'
+puts 'Seeding trip'
 @trip = User.find(1).trips.create!(location_id: 1, trip_time: DateTime.now)
 @trip.companions.create!(contact_id: 1)
 @trip.companions.create!(contact_id: 2)
