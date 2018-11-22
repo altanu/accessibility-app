@@ -23,9 +23,9 @@ export default {
     return {
       location: {
         formatted_address: this.place.formatted_address,
-        wheelchair: 0,
-        bathroom: false,
-        parking: false,
+        wheelchair: null,
+        bathroom: null,
+        parking: null,
         id: null
       }
     }
