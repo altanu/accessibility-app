@@ -33,6 +33,18 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  config.action_mailer.delivery_method = :smtp
+
+  # Make sure you set these in your .env file. See .env-example for a reference
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => ENV['MAILGUN_DOMAIN'],
+    :user_name => ENV['MAILGUN_USERNAME'],
+    :password => ENV['MAILGUN_PASSWORD']
+  }
+
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.

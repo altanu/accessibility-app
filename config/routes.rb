@@ -33,7 +33,7 @@ Rails.application.routes.draw do
         resources :reviews
       end
 
-      resources :trips do 
+      resources :trips do
         resources :companions
 
         put 'created_mail', to: 'trips#created_mail'

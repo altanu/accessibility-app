@@ -42,12 +42,24 @@ module Api
     end
 
     def created_mail
+      @trip = Trip.find(params[:trip_id])
+      @trip.contacts.each do |recipient|
+        TripMailer.with(trip: @trip, contact: recipient).trip_email_start.deliver_now
+      end
     end
 
     def completed_mail
+      @trip = Trip.find(params[:trip_id])
+      @trip.contacts.each do |recipient|
+        TripMailer.with(trip: @trip, contact: recipient).trip_email_start.deliver_now
+      end
     end
 
     def cancelled_mail
+      @trip = Trip.find(params[:trip_id])
+      @trip.contacts.each do |recipient|
+        TripMailer.with(trip: @trip, contact: recipient).trip_email_start.deliver_now
+      end
     end
 
     private
