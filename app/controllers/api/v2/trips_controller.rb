@@ -42,12 +42,18 @@ module Api
     end
 
     def created_mail
+      @trip = Trip.find(params[:trip_id])
+      puts @trip.inspect
     end
 
     def completed_mail
+      @trip = Trip.find(params[:trip_id])
+      puts @trip.inspect
     end
 
     def cancelled_mail
+      @trip = Trip.find(params[:trip_id])
+      puts @trip.inspect
     end
 
     private
