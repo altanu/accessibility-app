@@ -30,7 +30,8 @@ global.$ = $
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyDhckeqRinlpHeTfo3T-ethx8hJyTG62UY',
-    libraries: 'places'
+    libraries: 'places',
+    language: 'en'
   },
   installComponents: true
 })

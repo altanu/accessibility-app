@@ -1,13 +1,13 @@
 <template>
   <div style="height: 100%">
     <gmap-map ref="mapRef"
-      :center="currentPlace"
-      :zoom="zoom"
+      :center="center"
+      :zoom="12"
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
-        <GmapMarker v-if="placesList.length <= 1"
-          :position="currentPlace"
+        <GmapMarker v-if="placesList.length < 1"
+          :position="center"
           :clickable="false"
           :draggable="false"
         />
@@ -22,7 +22,6 @@
           :icon="marker.icon"
           @click="selectCard(marker)"
         />
-
     </gmap-map>
   </div>
 </template>
@@ -33,18 +32,16 @@ var axios = require('axios')
 export default {
   name: 'GoogleMap',
   props: {
-    currentPlace: Object,
-    placesList: Array,
-    addressString: String
+    placesList: Array
   },
   data () {
     return {
-      center: this.currentPlace,
-      zoom: 16,
+      center: {lat: 45.5035, lng: -73.5685},
+      userPlace: {},
       markers: [],
       newPlaceList: [],
       mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] },
-      pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png']
+      pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png']
     }
   },
   methods: {
@@ -54,41 +51,82 @@ export default {
     publishNewList () {
       this.$emit('new-list', this.newPlaceList)
     },
-    clickPin (marker) {
-      let self = this
-      var geocoder = new google.maps.Geocoder()
-      geocoder.geocode({ 'placeId': marker.place_id, 'language': 'en' }, function (results, status) {
-        self.$emit('new-list', [results[0]])
-      })
-    },
     selectCard (marker) {
-      this.$emit('pin-select', marker.place_id)
+      var self = this
+      var selectedCard = document.getElementById(marker.place_id)
+      if (selectedCard) {
+        selectedCard.scrollIntoView({behavior: "smooth"})
+        selectedCard.style.border = '3px solid black'
+        setTimeout(() => {
+          selectedCard.style.border = '1px solid grey'
+        }, 2000)
+      }
+      if (selectedCard === null) {
+        var geocoder = new google.maps.Geocoder()
+        geocoder.geocode({'location': marker.position}, function(results,status) {
+          self.$emit('new-list', [results[0]])
+        })
+      }
+    },
+    geolocate() {
+      var self = this
+      var geocoder = new google.maps.Geocoder()
+      navigator.geolocation.getCurrentPosition(position => {
+        geocoder.geocode({ 'location': {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        } }, function (results, status) {
+          self.userPlace = results[0]
+          self.center.lat = self.userPlace.geometry.location.lat()
+          self.center.lng = self.userPlace.geometry.location.lng()
+          self.$emit('user-detected-place', results[0])
+        })
+      })
     },
     populateMapFromDB () {
       var self = this
-      this.$refs.mapRef.$mapPromise.then((map) => {
-        axios.get('http://localhost:3000/api/v2/locations')
-          .then(response => {
-            response.data.forEach(location => {
-            // Create a marker for every tenth place
-              self.markers.push(new google.maps.Marker({
-                map: map,
-                icon: (function () {
-                  return self.pinStyles[location['wheelchair']]
-                }()),
-                position: { lat: Number(location.lat), lng: Number(location.lng) },
-                place_id: location.place_id
-              }))
-            })
+      axios
+        .get('http://localhost:3000/api/v2/locations')
+        .then(response => {
+          response.data.forEach(location => {
+            self.drawWithAccessibility(location)
           })
+        })
+    },
+    fetchLocationInfo (place, callback) {
+      axios.get('http://localhost:3000/api/v2/places/' + place.place_id)
+        .then(response => {
+          const location = response.data[0]
+          if (location) {
+            place.wheelchair = location.wheelchair
+          } else {
+            place.wheelchair = 3
+          }
+          place.lat = place.geometry.location.lat()
+          place.lng = place.geometry.location.lng()
+          return place
+        }).then((place) => {
+          callback(place)
+        })
+    },
+    drawWithAccessibility(location) {
+      var self = this
+      this.$refs.mapRef.$mapPromise.then((map) => {
+        self.markers.push(new google.maps.Marker({
+          map: map,
+          icon: self.pinStyles[location['wheelchair']],
+          position: { lat: Number(location.lat), lng: Number(location.lng) },
+          place_id: location.place_id
+        }))
       })
-    }
+    },
   },
   mounted () {
-    this.populateMapFromDB()
     var self = this
+    this.populateMapFromDB()
 
     this.$refs.mapRef.$mapPromise.then((map) => {
+      self.geolocate()
       var input = document.getElementById('pac-input')
       var searchBox = new google.maps.places.SearchBox(input)
       var geocoder = new google.maps.Geocoder()
@@ -118,55 +156,22 @@ export default {
         var bounds = new google.maps.LatLngBounds()
 
         searchPlaces.forEach(function (place) {
-          geocoder.geocode({ placeId: place.place_id }, function (results, status) {
+          geocoder.geocode({ 'address': place.formatted_address }, function (results, status) {
             place = results[0]
+            self.updatePlacesList(place)
+            self.fetchLocationInfo(place, self.drawWithAccessibility)
           })
-
-          self.updatePlacesList(place)
-
-          if (!place.geometry) {
-            // Returned place contains no geometry
-            return
-          }
-
-          var icon = {
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
-          }
-
-          // Create a marker for each place.
-          self.markers.push(new google.maps.Marker({
-            map: map,
-            icon: icon,
-            title: place.name,
-            position: place.geometry.location,
-            place_id: place.place_id
-          }))
-
           if (place.geometry.viewport) {
-            // Only geocodes have viewport.
-            bounds.union(place.geometry.viewport)
-          } else {
-            bounds.extend(place.geometry.location)
-          }
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport)
+            } else {
+              bounds.extend(place.geometry.location)
+            }
         })
         self.publishNewList()
         map.fitBounds(bounds)
       })
-    }).then(function () {
-      var geocoder = new google.maps.Geocoder()
-      navigator.geolocation.getCurrentPosition(position => {
-        geocoder.geocode({ 'location': {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        } }, function (results, status) {
-          self.$emit('address-change', results[0].formatted_address)
-        })
-      })
     })
-  }
+  },
 }
 </script>

@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     wheelchairParsed () {
-      switch (this.location.wheelchair) {
+      switch (Number(this.location.wheelchair)) {
         case 2:
           return 'Full'
           break
