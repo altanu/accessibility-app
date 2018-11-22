@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :companions
   post 'sessions', controller: :sessions, action: :create
   delete 'sessions', controller: :sessions, action: :destroy
   post 'refresh', controller: :refresh, action: :create
