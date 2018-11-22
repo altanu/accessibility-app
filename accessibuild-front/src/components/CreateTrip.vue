@@ -5,8 +5,8 @@
     <ul>
       <li v-for="contact in contacts" v-bind:key="contact.id">
         <p>Name: {{contact.first_name}} 
-          <button @click="addContactToTrip" class="btn">Add to Trip</button>
-          <button @click="removeContactFromTrip" class="btn">Remove from Trip</button>
+          <button @click="addContactToTrip(contact)" class="btn">Add to Trip</button>
+          <button @click="removeContactFromTrip(contact)" class="btn">Remove from Trip</button>
         </p>
         <p>Email: {{contact.email}}</p>
         <p>Emergency contact? {{contact.emergency}}</p>
@@ -36,11 +36,15 @@ export default {
       axios.get(this.baseUrl + 'users/1/contacts')
         .then(response => (this.contacts = response.data))
     },
-    addContactToTrip () {
-      this.companions.push('')
+    addContactToTrip (contact) {
+      if (this.companions.indexOf(contact) < 0) {
+        this.companions.push(contact)
+      }
     },
-    removeContactFromTrip () {
-
+    removeContactFromTrip (contact) {
+      this.companions = this.companions.filter(companion => {
+        return companion.id !== contact.id
+      })
     },
     createTrip () {
 
