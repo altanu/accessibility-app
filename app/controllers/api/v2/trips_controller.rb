@@ -41,6 +41,15 @@ module Api
       @trip.destroy
     end
 
+    def created_mail
+    end
+
+    def completed_mail
+    end
+
+    def cancelled_mail
+    end
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_trip
