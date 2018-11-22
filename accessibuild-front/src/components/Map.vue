@@ -1,16 +1,16 @@
 <template>
   <div style="height: 100%">
     <gmap-map ref="mapRef"
-      :center="{lat: 45.5, lng: -73.5}"
-      :zoom="16"
+      :center="center"
+      :zoom="12"
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
-        <!-- <GmapMarker
-          :position="userPlace.geometry.location"
+        <GmapMarker
+          :position="center"
           :clickable="false"
           :draggable="false"
-        /> -->
+        />
 
         <!-- <GmapMarker
           v-for="marker in markers"
@@ -22,7 +22,6 @@
           :icon="marker.icon"
           @click="selectCard(marker)"
         /> -->
-
     </gmap-map>
   </div>
 </template>
@@ -37,6 +36,7 @@ export default {
   },
   data () {
     return {
+      center: {lat: 45.5035, lng: -73.5685},
       userPlace: {},
       markers: [],
       newPlaceList: [],
@@ -51,12 +51,6 @@ export default {
     publishNewList () {
       this.$emit('new-list', this.newPlaceList)
     },
-    clickPin (marker) {
-      var geocoder = new google.maps.Geocoder()
-      geocoder.geocode({ 'placeId': marker.place_id, 'language': 'en' }, function (results, status) {
-        self.$emit('new-list', [results[0]])
-      })
-    },
     selectCard (marker) {
       this.$emit('pin-select', marker.place_id)
     },
@@ -69,11 +63,14 @@ export default {
           lng: position.coords.longitude
         } }, function (results, status) {
           self.userPlace = results[0]
+          self.center.lat = self.userPlace.geometry.location.lat()
+          self.center.lng = self.userPlace.geometry.location.lng()
           self.$emit('user-detected-place', results[0])
         })
       })
     },
     populateMapFromDB () {
+      var self = this
       this.$refs.mapRef.$mapPromise.then((map) => {
         axios.get('http://localhost:3000/api/v2/locations')
           .then(response => {
@@ -90,11 +87,14 @@ export default {
             })
           })
       })
+    },
+    drawWithAccessibility() {
+      
     }
   },
   mounted () {
     var self = this
-    // this.populateMapFromDB()
+    this.populateMapFromDB()
 
     this.$refs.mapRef.$mapPromise.then((map) => {
       self.geolocate()
