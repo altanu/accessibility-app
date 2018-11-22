@@ -1,7 +1,11 @@
 <template>
   <div id='app' style='height: 100%'>
-    <Navbar v-bind:onClick='setState' v-bind:is-logged-in='this.loggedIn' v-bind:set-login='setLogin'></Navbar>
-    <div style='height: 100%'>
+    <Navbar 
+      v-bind:onClick='setState' 
+      v-bind:is-logged-in='this.loggedIn' 
+      v-bind:set-login='setLogin'
+      v-on:home-page='homePage'>
+    </Navbar>
     <div style='height: 100%'>
       <div id='flexbox-container' :class='classObject'>
         <div v-show='renderMap' id='left-box'>
@@ -31,7 +35,6 @@
       </div>
     </div>
   </div>
-  <router-view/>
   </div>
 </template>
 
@@ -97,6 +100,10 @@ export default {
           self.newList([results[0]])
         })
       }
+    },
+    homePage: function () {
+      this.placesList = []
+      this.$children
     }
   },
   computed: {

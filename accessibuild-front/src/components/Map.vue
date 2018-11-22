@@ -92,7 +92,6 @@ export default {
       var input = document.getElementById('pac-input')
       var searchBox = new google.maps.places.SearchBox(input)
       var geocoder = new google.maps.Geocoder()
-      var service = new google.maps.places.PlacesService(map)
 
       // Bias the SearchBox results towards current map's viewport.
       map.addListener('bounds_changed', function () {

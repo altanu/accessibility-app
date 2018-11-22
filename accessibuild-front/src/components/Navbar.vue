@@ -7,7 +7,7 @@
       <div style="display:flex; width: 100%; flex-direction: row; justify-content: space-between">
         <div v-if="$mq === 'lg'" style="flex-grow: 1;">
         <h3 id="logo" style="width:100%; text-align: center">
-          <button id="accessibuild" style="width: 7.5rem" @click='onClick("RightHome")'>Accessibuild</button>
+          <button id="accessibuild" style="width: 7.5rem" @click='sendMeHome'>Accessibuild</button>
         </h3>
         </div>
         <div style="flex-grow: 1" id="search-container">
@@ -20,7 +20,6 @@
 
           <button v-show="isLoggedIn" style="width: 7.5rem" @click='setLogin' class='btn btn-outline-primary round-button' type='submit'>Log Out</button>
         </div>
-
       </div>
     </div>
   </nav>
@@ -51,6 +50,9 @@ export default {
     },
     isFocused: function () {
       this.isFocusedOnMobile = this.$mq === 'sm'
+    },
+    sendMeHome() {
+      this.$emit('home-page')
     }
   },
   computed: {
