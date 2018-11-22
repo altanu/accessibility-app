@@ -21,7 +21,7 @@ module Api
         @companion = Companion.new(companion_params)
 
         if @companion.save
-          render json: @companion, status: :created, location: @companion
+          render json: @companion, status: :created, location: api_v2_companions_url(@companion)
         else
           render json: @companion.errors, status: :unprocessable_entity
         end

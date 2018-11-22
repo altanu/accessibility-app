@@ -21,7 +21,7 @@ module Api
       @trip = Trip.new(trip_params)
 
       if @trip.save
-        render json: @trip, status: :created
+        render json: @trip, status: :created, location: api_v2_user_trips_url
       else
         render json: @trip.errors, status: :unprocessable_entity
       end

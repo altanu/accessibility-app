@@ -54,9 +54,15 @@ export default {
         user_id: this.userId,
         trip_time: this.trip_time
       }).then(response => {
-        tripId = response.data.id
-        console.log(response)
-        
+        const tripId = response.data.id
+        this.companions.forEach(companion => {
+          axios.post(`${this.baseUrl}companions`, {
+            trip_id: tripId,
+            contact_id: companion.id
+          }).then(response => {
+            console.log(response.data)
+          })
+        })
       })
     }
   },

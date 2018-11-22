@@ -33,6 +33,10 @@ Rails.application.routes.draw do
         resources :reviews
       end
 
+      resources :trips do 
+        resources :companions
+      end
+      
       resources :companions, only: [:show, :create, :destroy]
     end
   end
