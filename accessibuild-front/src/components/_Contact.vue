@@ -30,8 +30,7 @@
     </ul>
   </form>
   </li>
-  <div v-else id="accordion">
-    <li class="card">
+    <li v-else class="card">
       <div class="card-header">
         <button class="btn btn-link" data-toggle="collapse" v-bind:data-target="'#contact-' + contactInfo.id" aria-expanded="true" aria-controls="collapseOne">
           {{ fullName }}
@@ -50,7 +49,6 @@
         </ul>
       </div>
     </li>
-  </div>
   </div>
 </template>
 
