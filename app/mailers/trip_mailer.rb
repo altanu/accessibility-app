@@ -6,7 +6,8 @@ class TripMailer < ApplicationMailer
     # Example until api calls have been ironed out
     # Also add address of destination to email
     @user = User.find(params:[:user_id])
-    @recipients = getIncludedContacts(params:[:trip_id])
+    @trip = Trip.find(params:[:id])
+    @recipients = getIncludedContacts(@trip) #@trip.contacts ???
     mail(
         to: @recipients.map(&:email).uniq,
         subject: "#{@user.first_name} has started their trip!"
@@ -32,7 +33,7 @@ class TripMailer < ApplicationMailer
 
   end
 
-  private
+  private # Might remove if its easy to get contacts
     def getIncludedContacts(tripid)
       # Should return join table, but not individual contacts for now
       @contacts = Trip.find(tripid).companions
