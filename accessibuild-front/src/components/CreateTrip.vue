@@ -13,13 +13,30 @@ var axios = require('axios')
 export default {
   name: 'CreateTrip',
   data () {
+    return {
+      baseUrl: 'http://localhost:3000/api/v2/',
+      contacts: []
 
+    }
   },
   methods: {
+    fetchContacts () {
+      axios.get(baseUrl + 'users/1/contacts')
+        .then(response => console.log(response.data))
+    },
     createTrip () {
 
     }
+  },
+  created () {
+    this.fetchContacts()
   }
-}
+};
 
 </script>
+
+
+// click create trip
+// -> make db call: post trip (give access url)
+// -> afterwards: loop through contacts
+// -> create companion for each

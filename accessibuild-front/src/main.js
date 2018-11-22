@@ -50,7 +50,8 @@ var self = this
 global.store = {
   state: {
     currentLocation: {},
-    right: 'RightHome'
+    right: 'RightHome',
+    currentUserId: 1
   },
   setCurrentLocation (newLocation) {
     this.state.currentLocation = newLocation
