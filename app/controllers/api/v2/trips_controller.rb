@@ -54,6 +54,10 @@ module Api
       @trip = Trip.find(params[:trip_id])
     end
 
+    def test_emailer
+      TripMailer.with(empty: 0).test_emailer.deliver_now
+    end
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_trip
