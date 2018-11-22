@@ -52,6 +52,7 @@ export default {
       this.$emit('new-list', this.newPlaceList)
     },
     selectCard (marker) {
+      console.log("select card was called for marker:", marker)
       this.$emit('pin-select', marker.place_id)
     },
     geolocate() {
@@ -92,7 +93,6 @@ export default {
           place.lng = place.geometry.location.lng()
           return place
         }).then((place) => {
-          console.log("callback", place)
           callback(place)
         })
     },
@@ -143,20 +143,17 @@ export default {
         var bounds = new google.maps.LatLngBounds()
 
         searchPlaces.forEach(function (place) {
-          geocoder.geocode({ placeId: place.place_id }, function (results, status) {
+          geocoder.geocode({ 'address': place.formatted_address }, function (results, status) {
             place = results[0]
+            self.updatePlacesList(place)
+            self.fetchLocationInfo(place, self.drawWithAccessibility)
           })
-
-          self.updatePlacesList(place)
-
-          self.fetchLocationInfo(place, self.drawWithAccessibility)
-
           if (place.geometry.viewport) {
-            // Only geocodes have viewport.
-            bounds.union(place.geometry.viewport)
-          } else {
-            bounds.extend(place.geometry.location)
-          }
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport)
+            } else {
+              bounds.extend(place.geometry.location)
+            }
         })
         self.publishNewList()
         map.fitBounds(bounds)

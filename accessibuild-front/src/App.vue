@@ -66,6 +66,7 @@ export default {
       store.clearCurrentLocation()
     },
     selectCard: function (placeId) {
+      console.log("selectCard in app.vue was given place_id", placeId)
       var self = this
       if (!store.currentLocation) {
         var geocoder = new google.maps.Geocoder()
