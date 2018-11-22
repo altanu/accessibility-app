@@ -1,6 +1,14 @@
 <template>
   <div class='w-100' style='height: 100%; overflow: scroll;'>
     <h1>Create your trip here!</h1>
+    <h2>Here are all your contacts:</h2>
+    <ul>
+      <li v-for="contact in contacts">
+        <p>Name: {{contact.first_name}}</p>
+        <p>Email: {{contact.email}}</p>
+        <p>Emergency contact? {{contact.emergency}}</p>
+      </li>
+    </ul>
     <button class='btn' @click=''>Create Trip</button>
 
 
@@ -15,14 +23,20 @@ export default {
   data () {
     return {
       baseUrl: 'http://localhost:3000/api/v2/',
-      contacts: []
-
+      contacts: [],
+      companions: []
     }
   },
   methods: {
     fetchContacts () {
-      axios.get(baseUrl + 'users/1/contacts')
-        .then(response => console.log(response.data))
+      axios.get(this.baseUrl + 'users/1/contacts')
+        .then(response => (this.contacts = response.data))
+    },
+    addContactToTrip () {
+      this.companions.push()
+    },
+    removeContactFromTrip () {
+
     },
     createTrip () {
 
