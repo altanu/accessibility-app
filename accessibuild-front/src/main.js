@@ -45,7 +45,6 @@ Vue.use(VueMq, {
 })
 
 Vue.config.productionTip = false
-var self = this
 
 global.store = {
   state: {

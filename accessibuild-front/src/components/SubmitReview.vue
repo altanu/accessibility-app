@@ -112,12 +112,12 @@ export default {
       axios.put(this.baseUrl + this.location.id, { location: this.location })
     },
     setAverageRating () {
-      var totalRating = 0;
+      var totalRating = 0
       this.comments.forEach(function (comment) {
         totalRating += comment.review.rating
       })
       var average = totalRating / this.comments.length
-      this.averageRating = !average && average!== 0 ? 'No ratings yet. Be the first!' : average.toFixed(1)
+      this.averageRating = !average && average !== 0 ? 'No ratings yet. Be the first!' : average.toFixed(1)
     }
   },
   components: {

@@ -48,11 +48,8 @@ export default {
 
       var geocoder = new google.maps.Geocoder()
       geocoder.geocode({ 'placeId': this.place.place_id, 'language': 'en' }, function (results, status) {
-        console.log('did we get something from the geocoder', results)
         var lat = results[0].geometry.location.lat()
         var lng = results[0].geometry.location.lng()
-
-        console.log("do we have coordinates", lat, lng)
         const saveLocation = {
           place_id: self.place.place_id,
           wheelchair: self.wheelchair,
@@ -77,7 +74,7 @@ export default {
   computed: {
     wheelchairParsed () {
       switch (this.location.wheelchair) {
-        case 2: 
+        case 2:
           return 'Full'
           break
         case 1:
@@ -92,7 +89,7 @@ export default {
     },
     bathroomParsed () {
       switch (this.location.bathroom) {
-        case true: 
+        case true:
           return 'Yes'
           break
         case false:
@@ -104,7 +101,7 @@ export default {
     },
     parkingParsed () {
       switch (this.location.parking) {
-        case true: 
+        case true:
           return 'Yes'
           break
         case false:
@@ -116,41 +113,41 @@ export default {
     },
     wheelChairClass () {
       switch (this.location.wheelchair) {
-        case 2: 
-          return {'type-badge': true, 'full': true}
+        case 2:
+          return { 'type-badge': true, 'full': true }
           break
         case 1:
-          return {'type-badge': true, 'partial': true}
+          return { 'type-badge': true, 'partial': true }
           break
         case 0:
-          return {'type-badge': true, 'none': true}
+          return { 'type-badge': true, 'none': true }
           break
         default:
-          return {'type-badge': true, 'unknown': true}
+          return { 'type-badge': true, 'unknown': true }
       }
     },
     bathroomClass () {
       switch (this.location.bathroom) {
-        case true: 
-          return {'type-badge': true, 'full': true}
+        case true:
+          return { 'type-badge': true, 'full': true }
           break
         case false:
-          return {'type-badge': true, 'none': true}
+          return { 'type-badge': true, 'none': true }
           break
         default:
-          return {'type-badge': true, 'unknown': true}
+          return { 'type-badge': true, 'unknown': true }
       }
     },
     parkingClass () {
       switch (this.location.parking) {
-        case true: 
-          return {'type-badge': true, 'full': true}
+        case true:
+          return { 'type-badge': true, 'full': true }
           break
         case false:
-          return {'type-badge': true, 'none': true}
+          return { 'type-badge': true, 'none': true }
           break
         default:
-          return {'type-badge': true, 'unknown': true}
+          return { 'type-badge': true, 'unknown': true }
       }
     }
   },
