@@ -40,7 +40,10 @@ export default {
       userPlace: {},
       markers: [],
       newPlaceList: [],
-      mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ] },
+      mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ],
+                  streetViewControl: false,
+                  fullscreenControl: false,
+                  mapTypeControl: false },
       pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png']
     }
   },
