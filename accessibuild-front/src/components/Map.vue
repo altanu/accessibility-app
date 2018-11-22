@@ -52,8 +52,8 @@ export default {
       this.$emit('new-list', this.newPlaceList)
     },
     selectCard (marker) {
-      console.log("select card was called for marker:", marker)
-      this.$emit('pin-select', marker.place_id)
+      var selectedCard = document.getElementById(marker.place_id)
+      selectedCard.scrollIntoView({behavior: "smooth"})
     },
     geolocate() {
       var self = this

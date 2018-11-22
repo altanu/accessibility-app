@@ -11,8 +11,7 @@
           <Map
             v-bind:places-list='this.placesList'
             v-on:new-list='newList'
-            v-on:user-detected-place='detectUserPlace'
-            v-on:pin-select='selectCard'>
+            v-on:user-detected-place='detectUserPlace'>
           </Map>
         </div>
         <div id='right-box' v-bind:style='rightHeight'>
@@ -64,16 +63,6 @@ export default {
       this.placesList = arr
       this.state.right = 'RightHome'
       store.clearCurrentLocation()
-    },
-    selectCard: function (placeId) {
-      console.log("selectCard in app.vue was given place_id", placeId)
-      var self = this
-      if (!store.currentLocation) {
-        var geocoder = new google.maps.Geocoder()
-        geocoder.geocode({ 'placeId': placeId, 'language': 'en' }, function (results, status) {
-          self.newList([results[0]])
-        })
-      }
     },
     detectUserPlace: function (place) {
       this.userDetectedPlace = place
