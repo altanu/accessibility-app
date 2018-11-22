@@ -4,12 +4,15 @@
     <h2>Here are all your contacts:</h2>
     <ul>
       <li v-for="contact in contacts" v-bind:key="contact.id">
-        <p>Name: {{contact.first_name}}</p>
+        <p>Name: {{contact.first_name}} 
+          <button @click="addContactToTrip" class="btn">Add to Trip</button>
+          <button @click="removeContactFromTrip" class="btn">Remove from Trip</button>
+        </p>
         <p>Email: {{contact.email}}</p>
         <p>Emergency contact? {{contact.emergency}}</p>
       </li>
     </ul>
-    <button class='btn' @click=''>Create Trip</button>
+    <button class='btn' @click='createTrip'>Create Trip</button>
 
 
   </div>
@@ -23,6 +26,7 @@ export default {
   data () {
     return {
       baseUrl: 'http://localhost:3000/api/v2/',
+      userId: store.state.currentUserId,
       contacts: [],
       companions: []
     }
@@ -33,7 +37,7 @@ export default {
         .then(response => (this.contacts = response.data))
     },
     addContactToTrip () {
-      this.companions.push()
+      this.companions.push('')
     },
     removeContactFromTrip () {
 
