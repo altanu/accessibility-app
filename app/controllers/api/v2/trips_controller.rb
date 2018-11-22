@@ -43,17 +43,15 @@ module Api
 
     def created_mail
       @trip = Trip.find(params[:trip_id])
-      puts @trip.inspect
+      TripMailer.with(trip: @trip).trip_email_start.deliver_now
     end
 
     def completed_mail
       @trip = Trip.find(params[:trip_id])
-      puts @trip.inspect
     end
 
     def cancelled_mail
       @trip = Trip.find(params[:trip_id])
-      puts @trip.inspect
     end
 
     private
