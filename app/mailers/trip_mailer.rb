@@ -19,23 +19,29 @@ class TripMailer < ApplicationMailer
   end
 
   def trip_email_end
-    # @user = User.find(params:[:user_id])
-    # @recipients = getIncludedContacts(params:[:trip_id])
-    # @recipients.each do |recipient|
-    #   mail(
-    #       to: @recipient.email,
-    #       subject: "#{@user.first_name} has arrived at their destination!"
-    #     )
-    # end
+    @trip = params[:trip]
+    @user = User.find(@trip.user_id)
+    @recipients = @trip.contacts
+    @recipients.each do |recipient|
+      @recipient = recipient
+      mail(
+          to: @recipient.email,
+          subject: "#{@user.first_name} has ended their trip!"
+      )
+    end
   end
 
   def trip_email_cancel
-    # @user = User.find(params:[:user_id])
-    # @recipients = getIncludedContacts(params:[:trip_id])
-    # mail(
-    #     to: @recipients.map(&:email).uniq,
-    #     subject: "#{@user.first_name} has cancelled their trip!"
-    #   )
+    @trip = params[:trip]
+    @user = User.find(@trip.user_id)
+    @recipients = @trip.contacts
+    @recipients.each do |recipient|
+      @recipient = recipient
+      mail(
+          to: @recipient.email,
+          subject: "#{@user.first_name} has cancelled their trip!"
+      )
+    end
 
   end
 
