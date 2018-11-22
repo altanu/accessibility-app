@@ -6,7 +6,8 @@
       <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
       <li class="list-group-item">Parking: <span :class="parkingClass">{{ parkingParsed }}</span></li>
     </ul>
-    <button class="btn" @click="reviewLocation(location)">Review this location</button>
+    <button class="btn" @click="renderLocation(location)">Review this location</button>
+    <button class="btn" @click="renderCreateTrip(location)">Create a Trip</button>
   </section>
 </template>
 
@@ -67,6 +68,34 @@ export default {
             })
         } else {
           store.setCurrentLocation(location)
+        }
+      })
+    },
+    renderCreateTrip (location) {
+      var self = this
+
+      var geocoder = new google.maps.Geocoder()
+      geocoder.geocode({ 'placeId': this.place.place_id, 'language': 'en' }, function (results, status) {
+        var lat = results[0].geometry.location.lat()
+        var lng = results[0].geometry.location.lng()
+        const saveLocation = {
+          place_id: self.place.place_id,
+          wheelchair: self.wheelchair,
+          bathroom: self.bathroom,
+          parking: self.parking,
+          lat: lat,
+          lng: lng
+        }
+        if (!self.location.id) {
+          axios.post('http://localhost:3000/api/v2/locations', saveLocation)
+            .then(response => {
+              store.setCurrentLocation(location)
+              store.setCurrentLocationId(response.data.id)
+              self.onClick('CreateTrip')
+            })
+        } else {
+          store.setCurrentLocation(location)
+          self.onClick('CreateTrip')
         }
       })
     }
