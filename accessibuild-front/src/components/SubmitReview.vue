@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100" style="height: 100%; overflow: scroll;">
+  <div id="submit-review" style="height: 100%; overflow: scroll;">
     <button class="btn btn-outline-primary btn-block" @click="onClick('RightHome')"> Back</button>
     <h5>{{location.formatted_address}}</h5>
     <p>Here's what we know about this address...</p>
