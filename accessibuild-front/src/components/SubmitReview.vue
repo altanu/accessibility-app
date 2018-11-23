@@ -1,7 +1,7 @@
 <template>
   <div id="submit-review" style="height: 100%; overflow: scroll;">
     <button id="pointer" class="btn btn-outline-primary btn-block" @click="onClick('RightHome')">Back to Search Results</button>
-    <div class="card">
+    <div class="card w-100">
     <h5 class="card-header">{{location.formatted_address}}</h5>
     <div class="card-body">
       <section class="container">
@@ -93,7 +93,7 @@ export default {
   name: 'SubmitReview',
   data () {
     return {
-      location: store.state.currentLocation,
+      location: JSON.parse(JSON.stringify(store.state.currentLocation)),
       baseUrl: 'http://localhost:3000/api/v2/locations/',
       comments: [],
       someTestData: null,
@@ -103,7 +103,7 @@ export default {
         description: '',
         rating: null
       },
-      averageRating: null
+      averageRating: null,
     }
   },
   props: {
@@ -114,6 +114,7 @@ export default {
   },
   methods: {
     fetchReviews () {
+      console.log('fetching reviews...')
       axios.get(this.baseUrl + store.state.currentLocation.id + '/reviews')
         .then(response => {
           this.comments = response.data
@@ -135,6 +136,7 @@ export default {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
     putNewData () {
+      console.log('putting new data...')
       var locationData = this.location
       axios.put(this.baseUrl + this.location.id, { location: this.location })
     },
@@ -153,6 +155,7 @@ export default {
   watch: {
     location: {
       handler () {
+        console.log('Watch handler: location has been changed!')
         this.putNewData()
       },
       deep: true
