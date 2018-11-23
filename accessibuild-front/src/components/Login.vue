@@ -10,7 +10,7 @@
     <div class="form-group">
       <input type="password" name="password" placeholder="Password" class="form-control" v-model="password">
     </div>
-    <button type="submit" class="btn btn-success btn-block">Login</button>
+    <button type="submit" class="btn btn-success btn-block" @click="signin">Login</button>
   </form>
 </div>
 </template>
@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     signin () {
+      store.state.loggedIn = true
       this.$http.plain.post('/sessions', { email: this.email, password: this.password })
         .then(response => this.signinSuccessful(response))
         .catch(error => this.signinFailed(error))

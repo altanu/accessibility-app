@@ -1,10 +1,15 @@
 <template>
-  <section v-if="trip_owner">
-    <h3>This is the page for companions of the user</h3>
-    {{address}}
-    {{trip_time}}
-    {{trip_owner}}
-  </section>  
+  <section>
+    <section v-if="loggedIn">
+
+    </section>
+    <section v-if="!loggedIn">
+      <h3>This is the page for companions of the user</h3>
+      {{address}}
+      {{trip_time}}
+      {{trip_owner}}
+    </section>  
+  </section>
 </template>
 
 <script>
@@ -16,6 +21,7 @@ export default {
   },
   data () {
     return {
+      loggedIn: store.state.loggedIn,
       tripId: this.$route.params.trip_id,
       address: store.state.currentTrip.address,
       trip_time: store.state.currentTrip.trip_time,
