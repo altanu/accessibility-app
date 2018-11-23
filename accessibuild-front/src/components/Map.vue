@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100%;">
     <div style="display: flex">
-    <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
+    <pulse-loader :loading="loading" style="margin:auto; z-index: 5"></pulse-loader>
     </div>
     <gmap-map ref="mapRef"
       :center="center"
@@ -9,11 +9,11 @@
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
-        <!-- <GmapMarker v-if="placesList.length < 1"
+        <GmapMarker
           :position="center"
           :clickable="false"
           :draggable="false"
-        /> -->
+        />
 
         <GmapMarker
           v-for="marker in markers"
@@ -146,7 +146,6 @@ export default {
       var searchBox = new google.maps.places.SearchBox(input)
       var geocoder = new google.maps.Geocoder()
 
-      // Bias the SearchBox results towards current map's viewport.
       map.addListener('bounds_changed', function () {
         searchBox.setBounds(map.getBounds())
       })
@@ -156,23 +155,21 @@ export default {
       searchBox.addListener('places_changed', function () {
         self.newPlaceList = []
         var searchPlaces = searchBox.getPlaces()
-
         if (searchPlaces.length == 0) {
           return
         }
-
         // Clear out the old markers.
         self.markers.forEach(function (marker) {
           marker.setMap(null)
         })
         self.markers = []
-
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds()
-
         searchPlaces.forEach(function (place) {
+          var establishmentName = place.name
           geocoder.geocode({ 'address': place.formatted_address }, function (results, status) {
             place = results[0]
+            place.name = establishmentName
             self.updatePlacesList(place)
             self.fetchLocationInfo(place, self.drawWithAccessibility)
           })
@@ -186,6 +183,8 @@ export default {
         self.publishNewList()
         map.fitBounds(bounds)
       })
+    }).then(() => {
+      self.loading = false
     })
   },
   components: {

@@ -1,7 +1,8 @@
 <template>
-  <div style="display:flex; width: 100%">
+  <div style="display:flex; width: auto">
     <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
     <section v-if="!loading" v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
+      <div v-if="this.place.name" class="card-header">{{this.place.name}}</div>
       <div class="card-header">Address: {{this.place.formatted_address}}</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Wheelchair Access: <span :class="wheelChairClass">{{ wheelchairParsed }}</span></li>
@@ -31,10 +32,10 @@ export default {
   },
   methods: {
     fetchLocationInfo () {
+      console.log(this.place)
       var self = this
       axios.get('http://localhost:3000/api/v2/places/' + this.place.place_id)
         .then(response => {
-          console.log("location received from db:", response.data[0])
           const dbLocation = response.data[0]
           if (dbLocation) {
             this.place.wheelchair = dbLocation.wheelchair
@@ -182,9 +183,10 @@ export default {
       }
     }
   },
-  mounted () {
-    console.log("location received on render:", this.place)
-    this.fetchLocationInfo()
+  created () {
+    setTimeout(() => {
+      this.fetchLocationInfo()
+    }, 400);
   },
   components: {
     PulseLoader
