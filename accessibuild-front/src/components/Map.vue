@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100%;">
     <div style="display: flex">
-    <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
+    <pulse-loader :loading="loading" style="margin:auto; z-index: 5"></pulse-loader>
     </div>
     <gmap-map ref="mapRef"
       :center="center"
@@ -155,53 +155,36 @@ export default {
       searchBox.addListener('places_changed', function () {
         self.newPlaceList = []
         var searchPlaces = searchBox.getPlaces()
-
         if (searchPlaces.length == 0) {
           return
         }
-
         // Clear out the old markers.
         self.markers.forEach(function (marker) {
           marker.setMap(null)
         })
         self.markers = []
-
+        // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds()
-
-        for (var i = 0; i < searchPlaces.length; i++) {
-          (function(i) {           
-            setTimeout(function() {
-              console.log("sending searchPlaces []", i)
-              geocoder.geocode({ 'placeId': searchPlaces[i].place_id }, function (results, status) {
-                console.log("request status", status)
-                searchPlaces[i] = results[0]
-                self.updatePlacesList(searchPlaces[i])
-                self.fetchLocationInfo(searchPlaces[i], self.drawWithAccessibility)
-                if (place.geometry.viewport) {
-                  // Only geocodes have viewport.
-                  bounds.union(place.geometry.viewport)
-                } else {
-                  bounds.extend(place.geometry.location)
-                }
-              })
-            }, 500 * i)
-          })(i)
-        }
-
-        
-        
-        // searchPlaces.forEach(function (place) {
-        //   geocoder.geocode({ 'address': place.formatted_address }, function (results, status) {
-        //     console.log("request status", status)
-        //     place = results[0]
-        //     self.updatePlacesList(place)
-        //     self.fetchLocationInfo(place, self.drawWithAccessibility)
-        //   })
-        //   
-        // })
+        searchPlaces.forEach(function (place) {
+          var establishmentName = place.name
+          geocoder.geocode({ 'address': place.formatted_address }, function (results, status) {
+            place = results[0]
+            place.name = establishmentName
+            self.updatePlacesList(place)
+            self.fetchLocationInfo(place, self.drawWithAccessibility)
+          })
+          if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport)
+            } else {
+              bounds.extend(place.geometry.location)
+            }
+        })
         self.publishNewList()
-        // map.fitBounds(bounds)
+        map.fitBounds(bounds)
       })
+    }).then(() => {
+      self.loading = false
     })
   },
   components: {
