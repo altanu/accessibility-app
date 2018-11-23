@@ -21,13 +21,13 @@
             <div class="col">
               <div class="btn-group">
                 <label class="btn btn-radio" for="wheel-fully" style="border-right: none">
-                <input name="wheelchair" type="radio" value="2" v-model.number="wheelchair" id="wheel-fully">  Full
+                <input name="wheelchair" type="radio" value="2" v-model.number="location.wheelchair" id="wheel-fully">  Full
                 </label><br>
                 <label class="btn btn-radio" for="wheel-partially" style="border-right: none">
-                <input name="wheelchair" type="radio" value="1" v-model.number="wheelchair" id="wheel-partially">  Partial
+                <input name="wheelchair" type="radio" value="1" v-model.number="location.wheelchair" id="wheel-partially">  Partial
                 </label><br>
                 <label class="btn btn-radio" for="wheel-no" style="border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem">
-                <input name="wheelchair" type="radio" value="0" v-model.number="wheelchair" id="wheel-no">  None
+                <input name="wheelchair" type="radio" value="0" v-model.number="location.wheelchair" id="wheel-no">  None
                 </label><br>
               </div>
             </div>
@@ -38,7 +38,7 @@
            <p><strong>Accessible Bathroom:</strong></p>
           </div>
           <div class="col">
-            <input type="checkbox" id="bathroom-acc" v-model="bathroom">
+            <input type="checkbox" id="bathroom-acc" v-model="location.bathroom">
           </div>
        </div>
         <div class="row">
@@ -46,7 +46,7 @@
             <p><strong>Parking Available:</strong></p>
           </div>
           <div class="col">
-            <input type="checkbox" id="parking-acc" v-model="parking">
+            <input type="checkbox" id="parking-acc" v-model="location.parking">
           </div>
         </div>
         <hr>
@@ -93,7 +93,7 @@ export default {
   name: 'SubmitReview',
   data () {
     return {
-      location: store.state.currentLocation,
+      location: JSON.parse(JSON.stringify(store.state.currentLocation)),
       baseUrl: 'http://localhost:3000/api/v2/locations/',
       comments: [],
       someTestData: null,
@@ -104,9 +104,6 @@ export default {
         rating: null
       },
       averageRating: null,
-      bathroom: true,
-      parking: true,
-      wheelchair: store.state.currentLocation.wheelchair
     }
   },
   props: {
@@ -159,15 +156,9 @@ export default {
     location: {
       handler () {
         console.log('Watch handler: location has been changed!')
-        // this.putNewData()
+        this.putNewData()
       },
       deep: true
-    },
-    wheelchair: {
-      handler () {
-        console.log('Watch handler: wheelchair has been changed!')
-        // this.putNewData()
-      },
     }
   }
 }
