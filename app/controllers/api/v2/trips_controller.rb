@@ -15,7 +15,8 @@ module Api
     def show
       render json: {
         trip_time: @trip.trip_time,
-        trip_owner: @trip.user.first_name
+        trip_owner: @trip.user.first_name,
+        address: @trip.address
       }
     end
 
