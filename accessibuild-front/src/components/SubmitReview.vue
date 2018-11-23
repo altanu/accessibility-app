@@ -1,39 +1,66 @@
 <template>
   <div id="submit-review" style="height: 100%; overflow: scroll;">
-    <button class="btn btn-outline-primary btn-block" @click="onClick('RightHome')"> Back</button>
-    <h5>{{location.formatted_address}}</h5>
-    <p>Here's what we know about this address...</p>
-    <section class="d-flex flex-column accessibility-info">
-      <p>User Accessibility Rating: {{averageRating}}</p>
-      <section class="picker wheelchair-picker">
-        <p>Wheelchair Access</p>
-        <div class="btn-group">
-          <label class="btn btn-radio"for="wheel-fully">
-          <input name="wheelchair" type="radio" value="2" v-model.number="location.wheelchair" id="wheel-fully">  Fully
-          </label><br>
-          <label class="btn btn-radio"for="wheel-partially">
-          <input name="wheelchair" type="radio" value="1" v-model.number="location.wheelchair" id="wheel-partially">  Partially
-          </label><br>
-          <label class="btn btn-radio"for="wheel-no">
-          <input name="wheelchair" type="radio" value="0" v-model.number="location.wheelchair" id="wheel-no">  None
-          </label><br>
+    <button id="pointer" class="btn btn-outline-primary btn-block" @click="onClick('RightHome')">Back to Search Results</button>
+    <div class="card">
+    <h5 class="card-header">{{location.formatted_address}}</h5>
+    <div class="card-body">
+      <section class="container">
+        <div class="row">
+          <div class="col">
+            <p><strong>Accessibility Rating:</strong></p>
+          </div>
+          <div class="col">
+            <p>{{averageRating}}</p>
+          </div>
         </div>
+        <section class="picker wheelchair-picker">
+          <div class="row">
+            <div class="col">
+              <p><strong>Wheelchair Access:</strong></p>
+            </div>
+            <div class="col">
+              <div class="btn-group">
+                <label class="btn btn-radio"for="wheel-fully" style="border-right: none">
+                <input name="wheelchair" type="radio" value="2" v-model.number="location.wheelchair" id="wheel-fully">  Full
+                </label><br>
+                <label class="btn btn-radio"for="wheel-partially" style="border-right: none">
+                <input name="wheelchair" type="radio" value="1" v-model.number="location.wheelchair" id="wheel-partially">  Partial
+                </label><br>
+                <label class="btn btn-radio"for="wheel-no" style="border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem">
+                <input name="wheelchair" type="radio" value="0" v-model.number="location.wheelchair" id="wheel-no">  None
+                </label><br>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="row">
+          <div class="col">
+           <p><strong>Accessible Bathroom:</strong></p>
+          </div>
+          <div class="col">
+            <input type="checkbox" id="bathroom-acc" v-model="location.bathroom">
+          </div>
+       </div>
+        <div class="row">
+          <div class="col">
+            <p><strong>Parking Available:</strong></p>
+          </div>
+          <div class="col">
+            <input type="checkbox" id="parking-acc" v-model="location.parking">
+          </div>
+        </div>
+        <hr>
+        <section class="comment-container">
+          <form v-on:submit.prevent>
+            <label for="comment">Do you know this place? Leave a comment and rating on how accessible it is!</label>
+            <textarea class="form-control" id="comment" v-model="newComment.description"></textarea>
+            <star-rating style="margin: auto" v-model="newComment.rating" v-bind:star-size='25'></star-rating>
+            <button class="btn btn-success btn-block" style="margin-top: 5px" type="submit" @click="saveComment">Submit your review</button>
+          </form>
+        </section>
       </section>
-      <section class="picker bathroom-picker">
-        <input type="checkbox" id="bathroom-acc" v-model="location.bathroom"> Accessible Bathroom
-      </section>
-      <section class="picker parking-picker">
-        <input type="checkbox" id="parking-acc" v-model="location.parking"> Accessible Parking
-      </section>
-      <section class="comment-container">
-        <form v-on:submit.prevent>
-          <label for="comment">Do you know this place? Leave a comment and rating on how accessible it is!</label>
-          <textarea class="form-control" id="comment" v-model="newComment.description"></textarea>
-          <star-rating v-model="newComment.rating" v-bind:star-size='25'></star-rating>
-          <button class="btn btn-submit" type="submit" @click="saveComment">Submit your review</button>
-        </form>
-      </section>
-    </section>
+    </div>
+  </div>
     <section>
       <li class="card" v-for="comment in comments">
         <div class="card-header">User: {{ comment.first_name }}</div>
@@ -117,7 +144,7 @@ export default {
         totalRating += comment.review.rating
       })
       var average = totalRating / this.comments.length
-      this.averageRating = !average && average !== 0 ? 'No ratings yet. Be the first!' : average.toFixed(1)
+      this.averageRating = !average && average !== 0 ? 'No ratings yet!' : average.toFixed(1)
     }
   },
   components: {
