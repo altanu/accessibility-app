@@ -1,8 +1,8 @@
 <template>
   <div id='app' style='height: 100%'>
-    <Navbar 
-      v-bind:onClick='setState' 
-      v-bind:is-logged-in='this.loggedIn' 
+    <Navbar
+      v-bind:onClick='setState'
+      v-bind:is-logged-in='this.loggedIn'
       v-bind:set-login='setLogin'
        v-on:new-list='newList'>
     </Navbar>
