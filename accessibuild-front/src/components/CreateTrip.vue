@@ -1,7 +1,7 @@
 <template>
   <div class='w-100 p-3' style='height: 100%; overflow: scroll;'>
-    <h3>Create your trip to {{location.formatted_address}} here!</h3>
-    <h4>Who would you like to meet you at the destination?</h4>
+    <h4>Create your trip to {{location.formatted_address}} here!</h4>
+    <h5>Who would you like to meet you at the destination?</h5>
     <ul>
       <li v-for="contact in contacts" v-bind:key="contact.id">
         <p>Name: {{contact.first_name}} 
@@ -13,9 +13,9 @@
       </li>
     </ul>
     <div>
-      <h4>What time do you plan on arriving?</h4>
+      <h5>What time do you plan on arriving?</h5>
       <input v-model='trip_time' type='datetime-local'></input>
-      <button class='btn' @click='createTrip'>Create Trip</button>
+      <button class='btn round-button' @click='createTrip'>Create Trip</button>
     </div>
   </div>
 </template>
@@ -51,7 +51,7 @@ export default {
     },
     createTrip () {
       axios.post(`${this.baseUrl}users/${this.userId}/trips`, {
-        location_id: 1, // currently hard coded
+        location_id: this.location.id,
         user_id: this.userId,
         trip_time: this.trip_time,
         address: this.location.formatted_address
