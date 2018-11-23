@@ -17,7 +17,7 @@
 
     <div id="contacts-block" v-if="hasContacts">
       <h4 style="width: 100%; text-align: center;">Contacts</h4><hr>
-      <div id="accordion" v-for="contact in contacts">
+      <div id="accordion" v-for="contact in contacts" v-bind:key="contact.id">
         <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
       </div>
     </div>
@@ -35,10 +35,14 @@
         </label>
       </div><br>
       <div class="d-flex btn-group" role="group">
-        <button style="flex-grow: 1;"class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
-        <button style="flex-grow: 1;"class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
+        <button style="flex-grow: 1;" class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
+        <button style="flex-grow: 1;" class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
       </div>
-  </form>
+    </form>
+    <div class="container-fluid w-100">
+      <h4>Trips</h4>
+      <div></div>
+    </div>
   </div>
 </template>
 
@@ -66,7 +70,8 @@ export default {
         email: '',
         phone_number: '',
         emergency: false
-      }
+      },
+      trips: []
     }
   },
   mounted: function () {
@@ -80,6 +85,12 @@ export default {
         .then(() => axios.get('http://localhost:3000/api/v2/users/' + this.userID + '/contacts')
           .then(response => (this.contacts = response.data))
           .catch(error => console.log(error)))
+    },
+    fetchTrips: function () {
+      axios.get(`http://localhost:3000/api/v2/users/${store.state.currentUserId}/trips`)
+        .then(response => {
+          this.trips = response.data
+        })
     },
     refreshContacts: function () {
       this.contacts = {}
