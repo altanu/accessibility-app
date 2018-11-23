@@ -5,20 +5,20 @@
     <h5 class="card-header">{{location.formatted_address}}</h5>
     <div class="card-body">
       <section class="container">
-        <!-- <div class="row"> -->
-          <!-- <div class="col"> -->
+        <div class="row">
+          <div class="col">
             <p><strong>Accessibility Rating:</strong></p>
-          <!-- </div> -->
-          <!-- <div class="col"> -->
+          </div>
+          <div class="col">
             <p>{{averageRating}}</p>
-          <!-- </div> -->
-        <!-- </div> -->
+          </div>
+        </div>
         <section class="picker wheelchair-picker">
-          <!-- <div class="row"> -->
-            <!-- <div class="col"> -->
+          <div class="row">
+            <div class="col">
               <p><strong>Wheelchair Access:</strong></p>
-            <!-- </div> -->
-            <!-- <div class="col"> -->
+            </div>
+            <div class="col">
               <div class="btn-group">
                 <label class="btn btn-radio" for="wheel-fully" style="border-right: none">
                 <input name="wheelchair" type="radio" value="2" v-model.number="wheelchair" id="wheel-fully">  Full
@@ -30,25 +30,25 @@
                 <input name="wheelchair" type="radio" value="0" v-model.number="wheelchair" id="wheel-no">  None
                 </label><br>
               </div>
-            <!-- </div> -->
-          <!-- </div> -->
+            </div>
+          </div>
         </section>
-        <!-- <div class="row"> -->
-          <!-- <div class="col"> -->
+        <div class="row">
+          <div class="col">
            <p><strong>Accessible Bathroom:</strong></p>
-          <!-- </div> -->
-          <!-- <div class="col"> -->
+          </div>
+          <div class="col">
             <input type="checkbox" id="bathroom-acc" v-model="bathroom">
-          <!-- </div> -->
-       <!-- </div> -->
-        <!-- <div class="row"> -->
-          <!-- <div class="col"> -->
+          </div>
+       </div>
+        <div class="row">
+          <div class="col">
             <p><strong>Parking Available:</strong></p>
-          <!-- </div> -->
-          <!-- <div class="col"> -->
+          </div>
+          <div class="col">
             <input type="checkbox" id="parking-acc" v-model="parking">
-          <!-- </div> -->
-        <!-- </div> -->
+          </div>
+        </div>
         <hr>
         <section class="comment-container">
           <form v-on:submit.prevent>
