@@ -6,7 +6,7 @@
       <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
       <li class="list-group-item">Parking: <span :class="parkingClass">{{ parkingParsed }}</span></li>
     </ul>
-    <button class="btn" @click="renderLocation(location)">Review this location</button>
+    <button class="btn" @click="reviewLocation(location)">Review this location</button>
     <button class="btn" @click="renderCreateTrip(location)">Create a Trip</button>
   </section>
 </template>
