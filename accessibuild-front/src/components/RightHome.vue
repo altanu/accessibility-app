@@ -42,6 +42,6 @@ export default {
         searchBar.style.border = '1px solid grey'
       }, 3000)
     }
-  }
+  },
 }
 </script>

@@ -34,7 +34,6 @@ export default {
       var self = this
       axios.get('http://localhost:3000/api/v2/places/' + this.place.place_id)
         .then(response => {
-          console.log("location received from db:", response.data[0])
           const dbLocation = response.data[0]
           if (dbLocation) {
             this.place.wheelchair = dbLocation.wheelchair
@@ -182,9 +181,10 @@ export default {
       }
     }
   },
-  mounted () {
-    console.log("location received on render:", this.place)
-    this.fetchLocationInfo()
+  created () {
+    setTimeout(() => {
+      this.fetchLocationInfo()
+    }, 400);
   },
   components: {
     PulseLoader

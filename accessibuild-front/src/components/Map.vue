@@ -9,11 +9,11 @@
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
-        <!-- <GmapMarker v-if="placesList.length < 1"
+        <GmapMarker
           :position="center"
           :clickable="false"
           :draggable="false"
-        /> -->
+        />
 
         <GmapMarker
           v-for="marker in markers"
@@ -146,7 +146,6 @@ export default {
       var searchBox = new google.maps.places.SearchBox(input)
       var geocoder = new google.maps.Geocoder()
 
-      // Bias the SearchBox results towards current map's viewport.
       map.addListener('bounds_changed', function () {
         searchBox.setBounds(map.getBounds())
       })
@@ -167,24 +166,41 @@ export default {
         })
         self.markers = []
 
-        // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds()
 
-        searchPlaces.forEach(function (place) {
-          geocoder.geocode({ 'address': place.formatted_address }, function (results, status) {
-            place = results[0]
-            self.updatePlacesList(place)
-            self.fetchLocationInfo(place, self.drawWithAccessibility)
-          })
-          if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport)
-            } else {
-              bounds.extend(place.geometry.location)
-            }
-        })
+        for (var i = 0; i < searchPlaces.length; i++) {
+          (function(i) {           
+            setTimeout(function() {
+              console.log("sending searchPlaces []", i)
+              geocoder.geocode({ 'placeId': searchPlaces[i].place_id }, function (results, status) {
+                console.log("request status", status)
+                searchPlaces[i] = results[0]
+                self.updatePlacesList(searchPlaces[i])
+                self.fetchLocationInfo(searchPlaces[i], self.drawWithAccessibility)
+                if (place.geometry.viewport) {
+                  // Only geocodes have viewport.
+                  bounds.union(place.geometry.viewport)
+                } else {
+                  bounds.extend(place.geometry.location)
+                }
+              })
+            }, 500 * i)
+          })(i)
+        }
+
+        
+        
+        // searchPlaces.forEach(function (place) {
+        //   geocoder.geocode({ 'address': place.formatted_address }, function (results, status) {
+        //     console.log("request status", status)
+        //     place = results[0]
+        //     self.updatePlacesList(place)
+        //     self.fetchLocationInfo(place, self.drawWithAccessibility)
+        //   })
+        //   
+        // })
         self.publishNewList()
-        map.fitBounds(bounds)
+        // map.fitBounds(bounds)
       })
     })
   },
