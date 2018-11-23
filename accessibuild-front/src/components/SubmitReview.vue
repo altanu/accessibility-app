@@ -1,7 +1,7 @@
 <template>
   <div id="submit-review" style="height: 100%; overflow: scroll;">
     <button id="pointer" class="btn btn-outline-primary btn-block" @click="onClick('RightHome')">Back to Search Results</button>
-    <div class="card">
+    <div class="card w-100">
     <h5 class="card-header">{{location.formatted_address}}</h5>
     <div class="card-body">
       <section class="container">
