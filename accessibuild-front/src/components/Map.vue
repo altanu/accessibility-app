@@ -1,5 +1,8 @@
 <template>
-  <div style="height: 100%">
+  <div style="height: 100%;">
+    <div style="display: flex">
+    <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
+    </div>
     <gmap-map ref="mapRef"
       :center="center"
       :zoom="12"
@@ -27,6 +30,8 @@
 </template>
 
 <script>
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+
 var axios = require('axios')
 
 export default {
@@ -44,7 +49,8 @@ export default {
                   streetViewControl: false,
                   fullscreenControl: false,
                   mapTypeControl: false },
-      pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png']
+      pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png'],
+      loading: true
     }
   },
   methods: {
@@ -66,7 +72,7 @@ export default {
       }
       if (selectedCard === null) {
         var geocoder = new google.maps.Geocoder()
-        geocoder.geocode({'location': marker.position}, function(results,status) {
+        geocoder.geocode({'placeId': marker.place_id}, function(results,status) {
           self.$emit('new-list', [results[0]])
         })
       }
@@ -94,6 +100,8 @@ export default {
           response.data.forEach(location => {
             self.drawWithAccessibility(location)
           })
+        }).then(function() {
+          self.loading = false
         })
     },
     fetchLocationInfo (place, callback) {
@@ -113,12 +121,16 @@ export default {
         })
     },
     drawWithAccessibility(location) {
+      if ( typeof location.lat === "string" ) {
+        location.lat = Number(location.lat)
+        location.lng = Number(location.lng)
+      }
       var self = this
       this.$refs.mapRef.$mapPromise.then((map) => {
         self.markers.push(new google.maps.Marker({
           map: map,
           icon: self.pinStyles[location['wheelchair']],
-          position: { lat: Number(location.lat), lng: Number(location.lng) },
+          position: { lat: location.lat, lng: location.lng },
           place_id: location.place_id
         }))
       })
@@ -176,5 +188,8 @@ export default {
       })
     })
   },
+  components: {
+    PulseLoader
+  }
 }
 </script>

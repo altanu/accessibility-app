@@ -17,6 +17,7 @@
     "vue-axios": "^2.1.4",
     "vue-mq": "^0.2.1",
     "vue-router": "^3.0.1",
+    "vue-spinner": "^1.0.3",
     "vue-star-rating": "^1.6.1",
     "vue2-google-maps": "^0.10.2"
   },

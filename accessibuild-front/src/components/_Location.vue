@@ -1,17 +1,22 @@
 <template>
-  <section v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
-    <div class="card-header">Address: {{this.location.formatted_address}}</div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Wheelchair Access: <span :class="wheelChairClass">{{ wheelchairParsed }}</span></li>
-      <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
-      <li class="list-group-item">Parking: <span :class="parkingClass">{{ parkingParsed }}</span></li>
-    </ul>
-    <button class="btn" @click="reviewLocation(location)">Review this location</button>
-    <button class="btn" @click="renderCreateTrip(location)">Create a Trip</button>
-  </section>
+  <div style="display:flex; width: 100%">
+    <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
+    <section v-if="!loading" v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
+      <div class="card-header">Address: {{this.place.formatted_address}}</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Wheelchair Access: <span :class="wheelChairClass">{{ wheelchairParsed }}</span></li>
+        <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
+        <li class="list-group-item">Parking: <span :class="parkingClass">{{ parkingParsed }}</span></li>
+      </ul>
+      <button class="btn" @click="reviewLocation(location)">Review this location</button>
+      <button class="btn" @click="renderCreateTrip(location)">Create a Trip</button>
+    </section>
+  </div>
 </template>
 
 <script>
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+
 var axios = require('axios')
 export default {
   name: 'Location',
@@ -21,27 +26,24 @@ export default {
   },
   data () {
     return {
-      location: {
-        formatted_address: this.place.formatted_address,
-        wheelchair: null,
-        bathroom: null,
-        parking: null,
-        id: null
-      }
+      loading: true
     }
   },
   methods: {
     fetchLocationInfo () {
+      var self = this
       axios.get('http://localhost:3000/api/v2/places/' + this.place.place_id)
         .then(response => {
           console.log("location received from db:", response.data[0])
-          const location = response.data[0]
-          if (location) {
-            this.location.wheelchair = location.wheelchair
-            this.location.bathroom = location.bathroom
-            this.location.parking = location.parking
-            this.location.id = location.id
+          const dbLocation = response.data[0]
+          if (dbLocation) {
+            this.place.wheelchair = dbLocation.wheelchair
+            this.place.bathroom = dbLocation.bathroom
+            this.place.parking = dbLocation.parking
+            this.place.id = dbLocation.id
           }
+        }).then(() => {
+          self.loading = false
         })
     },
     reviewLocation (location) {
@@ -102,7 +104,7 @@ export default {
   },
   computed: {
     wheelchairParsed () {
-      switch (this.location.wheelchair) {
+      switch (this.place.wheelchair) {
         case 2:
           return 'Full'
           break;
@@ -117,7 +119,7 @@ export default {
       }
     },
     bathroomParsed () {
-      switch (this.location.bathroom) {
+      switch (this.place.bathroom) {
         case true:
           return 'Yes'
           break;
@@ -129,7 +131,7 @@ export default {
       }
     },
     parkingParsed () {
-      switch (this.location.parking) {
+      switch (this.place.parking) {
         case true:
           return 'Yes'
           break;
@@ -141,7 +143,7 @@ export default {
       }
     },
     wheelChairClass () {
-      switch (this.location.wheelchair) {
+      switch (this.place.wheelchair) {
         case 2:
           return { 'type-badge': true, 'full': true }
           break;
@@ -156,7 +158,7 @@ export default {
       }
     },
     bathroomClass () {
-      switch (this.location.bathroom) {
+      switch (this.place.bathroom) {
         case true:
           return { 'type-badge': true, 'full': true }
           break;
@@ -168,7 +170,7 @@ export default {
       }
     },
     parkingClass () {
-      switch (this.location.parking) {
+      switch (this.place.parking) {
         case true:
           return { 'type-badge': true, 'full': true }
           break;
@@ -180,9 +182,12 @@ export default {
       }
     }
   },
-  created () {
-    console.log("location received on render:", this.location)
+  mounted () {
+    console.log("location received on render:", this.place)
     this.fetchLocationInfo()
+  },
+  components: {
+    PulseLoader
   }
 }
 </script>
