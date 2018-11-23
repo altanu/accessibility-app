@@ -59,7 +59,7 @@ Location.find(1).reviews.create!(user_id: 1, description: 'crappy place!', ratin
 Location.find(1).reviews.create!(user_id: 1, description: 'crappy place!', rating: '1')
 
 puts 'Seeding trip'
-@trip = User.find(1).trips.create!(location_id: 1, trip_time: DateTime.now)
+@trip = User.find(1).trips.create!(location_id: 1, trip_time: DateTime.now, address: '123 test st.')
 @trip.companions.create!(contact_id: 1)
 @trip.companions.create!(contact_id: 2)
 @trip.companions.create!(contact_id: 3)
