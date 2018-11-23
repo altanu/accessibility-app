@@ -8,8 +8,8 @@
         <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
         <li class="list-group-item">Parking: <span :class="parkingClass">{{ parkingParsed }}</span></li>
       </ul>
-      <button class="btn" @click="reviewLocation(location)">Review this location</button>
-      <button class="btn" @click="renderCreateTrip(location)">Create a Trip</button>
+      <button class="btn" @click="reviewLocation(place)">Review this location</button>
+      <button class="btn" @click="renderCreateTrip(place)">Create a Trip</button>
     </section>
   </div>
 </template>
@@ -61,7 +61,7 @@ export default {
           lat: lat,
           lng: lng
         }
-        if (!self.location.id) {
+        if (!self.place.id) {
           axios.post('http://localhost:3000/api/v2/locations', saveLocation)
             .then(response => {
               store.setCurrentLocation(location)
@@ -88,7 +88,7 @@ export default {
           lat: lat,
           lng: lng
         }
-        if (!self.location.id) {
+        if (!self.place.id) {
           axios.post('http://localhost:3000/api/v2/locations', saveLocation)
             .then(response => {
               store.setCurrentLocation(location)

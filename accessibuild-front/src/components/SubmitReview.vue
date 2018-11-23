@@ -20,13 +20,13 @@
             </div>
             <div class="col">
               <div class="btn-group">
-                <label class="btn btn-radio"for="wheel-fully" style="border-right: none">
+                <label class="btn btn-radio" for="wheel-fully" style="border-right: none">
                 <input name="wheelchair" type="radio" value="2" v-model.number="location.wheelchair" id="wheel-fully">  Full
                 </label><br>
-                <label class="btn btn-radio"for="wheel-partially" style="border-right: none">
+                <label class="btn btn-radio" for="wheel-partially" style="border-right: none">
                 <input name="wheelchair" type="radio" value="1" v-model.number="location.wheelchair" id="wheel-partially">  Partial
                 </label><br>
-                <label class="btn btn-radio"for="wheel-no" style="border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem">
+                <label class="btn btn-radio" for="wheel-no" style="border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem">
                 <input name="wheelchair" type="radio" value="0" v-model.number="location.wheelchair" id="wheel-no">  None
                 </label><br>
               </div>

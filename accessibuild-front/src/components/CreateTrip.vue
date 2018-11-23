@@ -1,6 +1,6 @@
 <template>
   <div class='w-100 p-3' style='height: 100%; overflow: scroll;'>
-    <h3>Create your trip here!</h3>
+    <h3>Create your trip to {{location.formatted_address}} here!</h3>
     <h4>Who would you like to meet you at the destination?</h4>
     <ul>
       <li v-for="contact in contacts" v-bind:key="contact.id">
