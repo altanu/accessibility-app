@@ -106,7 +106,7 @@ export default {
       averageRating: null,
       bathroom: true,
       parking: true,
-      wheelchair: 1
+      wheelchair: store.state.currentLocation.wheelchair
     }
   },
   props: {
@@ -162,6 +162,12 @@ export default {
         // this.putNewData()
       },
       deep: true
+    },
+    wheelchair: {
+      handler () {
+        console.log('Watch handler: wheelchair has been changed!')
+        // this.putNewData()
+      },
     }
   }
 }
