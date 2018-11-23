@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     fetchLocationInfo () {
-      console.log(this.place)
       var self = this
       axios.get('http://localhost:3000/api/v2/places/' + this.place.place_id)
         .then(response => {

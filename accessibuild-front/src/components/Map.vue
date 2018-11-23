@@ -167,7 +167,7 @@ export default {
         var bounds = new google.maps.LatLngBounds()
         searchPlaces.forEach(function (place) {
           var establishmentName = place.name
-          geocoder.geocode({ 'address': place.formatted_address }, function (results, status) {
+          geocoder.geocode({ 'placeId': place.place_id }, function (results, status) {
             place = results[0]
             place.name = establishmentName
             self.updatePlacesList(place)
@@ -189,6 +189,6 @@ export default {
   },
   components: {
     PulseLoader
-  }
+  },
 }
 </script>
