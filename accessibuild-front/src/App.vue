@@ -43,7 +43,7 @@ import Map from './components/Map.vue'
 import Login from './components/Login.vue'
 import Profile from './components/Profile.vue'
 import CreateTrip from './components/CreateTrip.vue'
-
+import TripCompanion from './components/TripCompanion.vue'
 export default {
   name: 'App',
   data: () => {
@@ -100,7 +100,8 @@ export default {
     Map,
     Profile,
     SubmitReview,
-    CreateTrip
+    CreateTrip,
+    TripCompanion
   }
 }
 </script>
