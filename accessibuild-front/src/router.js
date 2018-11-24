@@ -27,7 +27,7 @@ export default new Router({
       component: RightHome
     },
     {
-      path: '/trips/:trip_id/',
+      path: '/trips/:trip_id',
       name: 'trip',
       component: Trip
     },
