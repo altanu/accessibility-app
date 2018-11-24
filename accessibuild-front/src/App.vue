@@ -24,7 +24,8 @@
               v-bind:set-login='setLogin'
               v-bind:places-list='this.placesList'
               v-bind:onClick='setState'
-              v-bind:user-id='this.userId'>
+              v-bind:user-id='this.userId'
+              v-on:refresh-map='refreshMap'>
             </component>
           </transition>
           <div style="display: none;">
@@ -71,6 +72,11 @@ export default {
     },
     detectUserPlace: function (place) {
       this.userDetectedPlace = place
+    },
+    refreshMap: function (arr) {
+      console.log("app received the refresh-map event")
+      this.placesList = []
+      this.newList(arr)
     }
   },
   computed: {

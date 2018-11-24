@@ -9,6 +9,7 @@
       v-bind:options="mapStyle"
       style="min-width:50%; height: 100%">
 
+        <!-- user location -->
         <GmapMarker
           :position="center"
           :clickable="false"

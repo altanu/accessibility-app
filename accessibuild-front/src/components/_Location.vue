@@ -22,6 +22,7 @@ var axios = require('axios')
 export default {
   name: 'Location',
   props: {
+    placesList: Array,
     place: Object,
     onClick: Function
   },

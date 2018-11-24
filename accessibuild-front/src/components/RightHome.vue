@@ -11,9 +11,11 @@
 
       <Location
         v-for="place in placesList"
+        v-bind:placesList="placesList"
         v-bind:place="place"
         v-bind:key="place.place_id"
         v-bind:onClick="onClick"
+        v-on:show-results="refreshMap"
       ></Location>
     </div>
     
@@ -41,6 +43,9 @@ export default {
       setTimeout(function () {
         searchBar.style.border = '1px solid grey'
       }, 3000)
+    },
+    refreshMap: function () {
+      this.$emit('refresh-map', placesList)
     }
   },
 }

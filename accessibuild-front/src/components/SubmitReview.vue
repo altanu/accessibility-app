@@ -1,6 +1,6 @@
 <template>
   <div id="submit-review" style="height: 100%; overflow: scroll;">
-    <button id="pointer" class="btn btn-outline-primary btn-block" @click="onClick('RightHome')">Back to Search Results</button>
+    <button id="pointer" class="btn btn-outline-primary btn-block" @click="backToList">Back to Search Results</button>
     <div class="card w-100">
     <h5 class="card-header">{{location.formatted_address}}</h5>
     <div class="card-body">
@@ -62,11 +62,11 @@
     </div>
   </div>
     <section>
-      <li class="card" v-for="comment in comments">
+      <li class="card" v-bind:key="comment.review.id" v-for="comment in comments">
         <div class="card-header">User: {{ comment.first_name }}</div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Comment: {{ comment.review.description }}</li>
-          <li class="list-group-item"><span v-if="comment.review.rating">Rating: {{ comment.review.rating }}</span>At {{ comment.review.created_at }}</li>
+          <li class="list-group-item"><span v-if="comment.review.rating">Rating: {{ comment.review.rating }}</span> on {{ new Date(comment.review.created_at).toDateString() }}</li>
         </ul>
       </li>
     </section>
@@ -107,7 +107,8 @@ export default {
     }
   },
   props: {
-    onClick: Function
+    onClick: Function,
+    placesList: Array
   },
   created () {
     this.fetchReviews()
@@ -147,6 +148,10 @@ export default {
       })
       var average = totalRating / this.comments.length
       this.averageRating = !average && average !== 0 ? 'No ratings yet!' : average.toFixed(1)
+    },
+    backToList () {
+      this.$emit('refresh-map', this.placesList)
+      this.onClick('RightHome')
     }
   },
   components: {
