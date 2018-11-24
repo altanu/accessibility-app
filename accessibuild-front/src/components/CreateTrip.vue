@@ -57,13 +57,23 @@ export default {
         address: this.location.formatted_address
       }).then(response => {
         const tripId = response.data.id
-        this.companions.forEach(companion => {
-          axios.post(`${this.baseUrl}companions`, {
+
+        store.state.currentTrip.address = this.location.formatted_address
+        store.state.currentTrip.trip_time = this.trip_time
+        store.state.currentTrip.trip_id = tripId
+
+        Promise.all(this.companions.map(companion => {
+          return axios.post(`${this.baseUrl}companions`, {
             trip_id: tripId,
             contact_id: companion.id
           }).then(response => {
             console.log(response.data)
+            console.log('one promise resolved')
           })
+        })).then(() => {
+          console.log('promises resolved')
+          store.setRightPane('Trip')
+          
         })
       })
     }

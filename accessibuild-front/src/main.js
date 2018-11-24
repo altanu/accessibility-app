@@ -56,7 +56,8 @@ global.store = {
       trip_time: null,
       trip_owner: null
     },
-    right: 'RightHome'
+    right: 'RightHome',
+    loggedIn: false
   },
   setCurrentLocation (newLocation) {
     this.state.currentLocation = newLocation

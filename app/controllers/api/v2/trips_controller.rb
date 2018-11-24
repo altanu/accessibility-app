@@ -13,10 +13,15 @@ module Api
 
     # GET /trips/1
     def show
+      @companions = @trip.companions.map do |companion|
+        companion.contact
+      end
+      puts @companions
       render json: {
         trip_time: @trip.trip_time,
         trip_owner: @trip.user.first_name,
-        address: @trip.address
+        address: @trip.address,
+        companions: @companions
       }
     end
 

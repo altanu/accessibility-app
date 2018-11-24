@@ -39,9 +39,12 @@
         <button style="flex-grow: 1;" class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
       </div>
     </form>
-    <div class="container-fluid w-100">
+    <div v-if="trips[0]" class="container-fluid w-100">
       <h4>Trips</h4>
-      <div></div>
+      <table v-for="trip in trips" v-bind:key="trip.id">
+        <tr>{{trip.address}}</tr>
+        <tr>{{trip.trip_time}}</tr>
+      </table>
     </div>
   </div>
 </template>
@@ -76,6 +79,7 @@ export default {
   },
   mounted: function () {
     this.fetchUserData()
+    this.fetchTrips()
   },
   methods: {
     fetchUserData: function () {
@@ -136,3 +140,14 @@ export default {
 }
 
 </script>
+
+<style scoped>
+  table, tr {
+    border: solid black 1px;
+  }
+  table {
+    width: 100%;
+    margin: 1rem;
+  }
+</style>
+
