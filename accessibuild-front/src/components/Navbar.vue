@@ -14,11 +14,11 @@
           <input v-on:focus="isFocused" v-on:blur="isFocusedOnMobile = false" id="pac-input" class="form-control" type="text" placeholder="🔍 Search keywords or addresses">
         </div>
         <div v-bind:style="hideButtonsWhileSearchingOnMobile">
-          <button v-show="!isLoggedIn" style="width: 7.5rem; padding: 2px;" @click='onClick("Register")' class='btn btn-outline-primary round-button' ref='register' type='submit'>Register</button>
-          <button v-show="isLoggedIn" style="width: 7.5rem" @click='onClick("Profile")' class='btn btn-outline-primary round-button' ref='profile' type='submit'>Profile</button>
-          <button v-show="!isLoggedIn" style="width: 7.5rem" @click='onClick("Login")' class='btn btn-outline-primary round-button' ref='login' type='submit'>Login</button>
+          <button v-show="!sharedState.loggedIn" style="width: 7.5rem; padding: 2px;" @click='onClick("Register")' class='btn btn-outline-primary round-button' ref='register' type='submit'>Register</button>
+          <button v-show="sharedState.loggedIn" style="width: 7.5rem" @click='onClick("Profile")' class='btn btn-outline-primary round-button' ref='profile' type='submit'>Profile</button>
+          <button v-show="!sharedState.loggedIn" style="width: 7.5rem" @click='onClick("Login")' class='btn btn-outline-primary round-button' ref='login' type='submit'>Login</button>
 
-          <button v-show="isLoggedIn" style="width: 7.5rem" @click='signOut' class='btn btn-outline-primary round-button' type='submit'>Log Out</button>
+          <button v-show="sharedState.loggedIn" style="width: 7.5rem" @click='signOut' class='btn btn-outline-primary round-button' type='submit'>Log Out</button>
         </div>
       </div>
     </div>
@@ -36,19 +36,20 @@ export default {
     return {
       currentPlace: null,
       isFocusedOnMobile: false,
-      isLoggedIn: store.state.loggedIn
+      isLoggedIn: store.state.loggedIn,
+      sharedState: store.state
     }
   },
   methods: {
     signOut () {
-      store.state.loggedIn = false
-      this.$http.secured.delete('/sessions')
-        .then(response => {
-          delete localStorage.csrf
-          delete localStorage.signedIn
-          this.$router.replace('/')
-        })
-        .catch(error => this.setError(error, 'Cannot sign out'))
+      this.sharedState.loggedIn = false
+      // this.$http.secured.delete('/sessions')
+      //   .then(response => {
+      //     delete localStorage.csrf
+      //     delete localStorage.signedIn
+      //     this.$router.replace('/')
+      //   })
+      //   .catch(error => this.setError(error, 'Cannot sign out'))
     },
     isFocused: function () {
       this.isFocusedOnMobile = this.$mq === 'sm'

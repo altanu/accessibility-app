@@ -39,9 +39,16 @@
         <button style="flex-grow: 1;" class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
       </div>
     </form>
-    <div class="container-fluid w-100">
+    <div v-if="trips[0]" class="container-fluid w-100">
       <h4>Trips</h4>
-      <div></div>
+      <ul>
+        <li v-for="trip in trips" v-bind:key="trip.id">
+          {{trip.id}}
+          {{trip.name}}
+          {{trip.trip_address}}
+          {{trip.trip_time}}
+        </li>
+      </ul>
     </div>
   </div>
 </template>

@@ -3,7 +3,7 @@
   <div id= "login" style="margin: auto;">
   <h1>Login</h1>
 
-  <form v-on:submit.prevent='setLogin'>
+  <form v-on:submit.prevent>
     <div class="form-group">
       <input type="text" name="email" placeholder="Email" class="form-control" v-model="email">
     </div>
@@ -35,9 +35,10 @@ export default {
   methods: {
     signin () {
       store.state.loggedIn = true
-      this.$http.plain.post('/sessions', { email: this.email, password: this.password })
-        .then(response => this.signinSuccessful(response))
-        .catch(error => this.signinFailed(error))
+      store.setRightPane('Profile')
+      // this.$http.plain.post('/sessions', { email: this.email, password: this.password })
+      //   .then(response => this.signinSuccessful(response))
+      //   .catch(error => this.signinFailed(error))
     },
     signinSuccessful (response) {
       if (!response.data.csrf) {
