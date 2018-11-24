@@ -41,14 +41,15 @@
     </form>
     <div v-if="trips[0]" class="container-fluid w-100">
       <h4>Trips</h4>
-      <ul>
-        <li v-for="trip in trips" v-bind:key="trip.id">
-          {{trip.id}}
-          {{trip.name}}
-          {{trip.trip_address}}
-          {{trip.trip_time}}
-        </li>
-      </ul>
+      <table v-for="trip in trips" v-bind:key="trip.id">
+        <tr>
+          <td>{{trip.id}}</td>
+          <td>{{trip.address}}</td>
+        </tr>
+        <tr>
+          <td>{{trip.trip_time}}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -83,6 +84,7 @@ export default {
   },
   mounted: function () {
     this.fetchUserData()
+    this.fetchTrips()
   },
   methods: {
     fetchUserData: function () {
@@ -143,3 +145,10 @@ export default {
 }
 
 </script>
+
+<style scoped>
+  table, td {
+    border: solid black 1px;
+  }
+</style>
+
