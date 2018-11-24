@@ -1,9 +1,8 @@
 <template>
   <div style="display:flex; width: auto">
     <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
-    <section v-if="!loading" v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
-      <div v-if="this.place.name" class="card-header">{{this.place.name}}</div>
-      <div class="card-header">Address: {{this.place.formatted_address}}</div>
+    <section v-if="!loading" v-bind:id="place.place_id" class="card" style="border: 1px solid grey">
+      <div class="card-header"><img :src="icon"/> {{place.formatted_address}}</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Wheelchair Access: <span :class="wheelChairClass">{{ wheelchairParsed }}</span></li>
         <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
@@ -27,7 +26,8 @@ export default {
   },
   data () {
     return {
-      loading: true
+      loading: true,
+      pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png'],
     }
   },
   methods: {
@@ -180,6 +180,9 @@ export default {
         default:
           return { 'type-badge': true, 'unknown': true }
       }
+    },
+    icon() {
+      return this.pinStyles[this.place.wheelchair]
     }
   },
   created () {
