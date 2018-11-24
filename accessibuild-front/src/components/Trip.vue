@@ -54,6 +54,7 @@ export default {
   },
   created () {
     this.fetchTripInfo()
+    this.fetch
   }
 }
 </script>
