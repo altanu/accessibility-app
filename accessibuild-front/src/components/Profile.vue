@@ -42,13 +42,8 @@
     <div v-if="trips[0]" class="container-fluid w-100">
       <h4>Trips</h4>
       <table v-for="trip in trips" v-bind:key="trip.id">
-        <tr>
-          <td>{{trip.id}}</td>
-          <td>{{trip.address}}</td>
-        </tr>
-        <tr>
-          <td>{{trip.trip_time}}</td>
-        </tr>
+        <tr>{{trip.address}}</tr>
+        <tr>{{trip.trip_time}}</tr>
       </table>
     </div>
   </div>
@@ -147,8 +142,12 @@ export default {
 </script>
 
 <style scoped>
-  table, td {
+  table, tr {
     border: solid black 1px;
+  }
+  table {
+    width: 100%;
+    margin: 1rem;
   }
 </style>
 
