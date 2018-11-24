@@ -57,6 +57,11 @@ export default {
         address: this.location.formatted_address
       }).then(response => {
         const tripId = response.data.id
+
+        store.currentTrip.address = this.location.formatted_address
+        store.currentTrip.trip_time = this.trip_time
+        store.setRightPane('Trip')
+
         this.companions.forEach(companion => {
           axios.post(`${this.baseUrl}companions`, {
             trip_id: tripId,

@@ -30,7 +30,7 @@ export default {
           const trip = response.data
           store.state.currentTrip.trip_owner = trip.trip_owner
           store.state.currentTrip.trip_time = trip.trip_time
-          store.setRightPane('TripCompanion')
+          store.setRightPane('Trip')
         })
     }
   },
