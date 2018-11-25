@@ -1,7 +1,7 @@
 <template>
-  <div class='w-100 p-3' style='height: 100%; overflow: scroll;'>
-    <h4>Create your trip to {{location.formatted_address}} here!</h4>
-    <h5>Who would you like to meet you at the destination?</h5>
+  <div style="text-align: center;" class='w-100 p-3' style='height: 100%; overflow: scroll;'>
+    <h4>Creating your trip to {{location.formatted_address}}</h4>
+    <h5 style="text-align: center;">Choose contacts to keep informed of your trip!</h5>
     <section id="user-contacts" class="container">
       <div class="row"style v-for="contact in contacts" v-bind:key="contact.id">
         <div class="contact-info card col" style="padding: 0;">
