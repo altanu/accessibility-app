@@ -1,27 +1,14 @@
 <template>
-  <div style="text-align: center;" class='w-100 p-3' style='height: 100%; overflow: scroll;'>
+  <div class='w-100 p-3' style=' text-align: center; height: 100%; overflow: scroll;'>
     <h4>Creating your trip to {{location.formatted_address}}</h4>
     <h5 style="text-align: center;">Choose contacts to keep informed of your trip!</h5>
     <section id="user-contacts" class="container">
-      <div class="row"style v-for="contact in contacts" v-bind:key="contact.id">
+      <div style v-for="contact in contacts" v-bind:key="contact.id">
         <TripContact :contact="contact"
                      :add-contact-to-trip="addContactToTrip"
-                     :remove-contact-from="removeContactFromTrip">
+                     :remove-contact-from="removeContactFromTrip"
+                     class="row">
         </TripContact>
-        <!-- <div class="contact-info card col" style="padding: 0;">
-          <div class="card-header">
-            <p>{{contact.first_name}}</p>
-          </div>
-          <div class="card-body">
-            <p>{{contact.email}}</p>
-            <p v-if="contact.emergency">{{contact.first_name}} is one of your emergency contacts!</p>
-            <p v-else >{{contact.first_name}} isn't an emergency contact.</p>
-          </div>
-        </div>
-        <div class="contact-buttons card col-sm-4" style="display: flex; flex-direction: column; padding: 0;">
-          <button @click="addContactToTrip(contact)" style="flex-grow: 1;" class="btn btn-outline-primary round-button">Add</button>
-          <button @click="removeContactFromTrip(contact)" style="flex-grow: 1;" class="btn btn-outline-primary round-button">Remove</button>
-        </div> -->
       </div>
     </section>
     <div>
@@ -31,7 +18,7 @@
     </div>
   </div>
 </template>
-<script type="text/javascript">
+<script>
 import router from '../router.js'
 import TripContact from './_TripContact.vue'
 var axios = require('axios')
