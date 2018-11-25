@@ -55,7 +55,7 @@ export default {
       userDetectedPlace: {},
       userId: 1,
       placesList: [],
-      loggedIn: false
+      loggedIn: true
     }
   },
   methods: {

@@ -1,26 +1,26 @@
 <template>
-  <div class='w-100 p-3' style='height: 100%; overflow: scroll;'>
-    <h4>Create your trip to {{location.formatted_address}} here!</h4>
-    <h5>Who would you like to meet you at the destination?</h5>
-    <ul>
-      <li v-for="contact in contacts" v-bind:key="contact.id">
-        <p>Name: {{contact.first_name}} 
-          <button @click="addContactToTrip(contact)" class="btn round-button">Add</button>
-          <button @click="removeContactFromTrip(contact)" class="btn round-button">Remove</button>
-        </p>
-        <p>Email: {{contact.email}}</p>
-        <p>Emergency contact? {{contact.emergency}}</p>
-      </li>
-    </ul>
+  <div class='w-100 p-3' style=' text-align: center; height: 100%; overflow: scroll;'>
+    <h4>Creating your trip to {{location.formatted_address}}</h4>
+    <h5 style="text-align: center;">Choose contacts to keep informed of your trip!</h5>
+    <section id="user-contacts" class="container">
+      <div style v-for="contact in contacts" v-bind:key="contact.id">
+        <TripContact :contact="contact"
+                     :add-contact-to-trip="addContactToTrip"
+                     :remove-contact-from-trip="removeContactFromTrip"
+                     class="row">
+        </TripContact>
+      </div>
+    </section>
     <div>
       <h5>What time do you plan on arriving?</h5>
-      <input v-model='trip_time' type='datetime-local'></input>
-      <button class='btn round-button' @click='createTrip'>Create Trip</button>
+      <input v-model='trip_time' type='datetime-local' class="form-control" :min="currentTime"></input>
+      <button style="margin-top: 1em;" class='btn btn-block btn-success round-button' @click='createTrip'>Create Trip</button>
     </div>
   </div>
 </template>
-<script type="text/javascript">
+<script>
 import router from '../router.js'
+import TripContact from './_TripContact.vue'
 var axios = require('axios')
 
 export default {
@@ -76,13 +76,21 @@ export default {
           router.push('/')
           store.setRightPane('Trip')
           axios.put(`${this.baseUrl}trips/${tripId}/created_mail`)
-          
+
         })
       })
     }
   },
   created () {
     this.fetchContacts()
+  },
+  computed: {
+    currentTime () {
+      return new Date()
+    }
+  },
+  components: {
+    TripContact
   }
 };
 
