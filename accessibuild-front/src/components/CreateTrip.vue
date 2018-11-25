@@ -4,6 +4,10 @@
     <h5 style="text-align: center;">Choose contacts to keep informed of your trip!</h5>
     <section id="user-contacts" class="container">
       <div class="row"style v-for="contact in contacts" v-bind:key="contact.id">
+        <TripContact :contact="contact"
+                     :add-contact-to-trip="addContactToTrip"
+                     :remove-contact-from="removeContactFromTrip">
+        </TripContact>
         <!-- <div class="contact-info card col" style="padding: 0;">
           <div class="card-header">
             <p>{{contact.first_name}}</p>
@@ -29,6 +33,7 @@
 </template>
 <script type="text/javascript">
 import router from '../router.js'
+import TripContact from './_TripContact.vue'
 var axios = require('axios')
 
 export default {
@@ -91,6 +96,9 @@ export default {
   },
   created () {
     this.fetchContacts()
+  },
+  components: {
+    TripContact
   }
 };
 
