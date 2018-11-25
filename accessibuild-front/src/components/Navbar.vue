@@ -43,6 +43,7 @@ export default {
   methods: {
     signOut () {
       this.sharedState.loggedIn = false
+      store.setRightPane('RightHome')
       // this.$http.secured.delete('/sessions')
       //   .then(response => {
       //     delete localStorage.csrf

@@ -9,7 +9,7 @@
         <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
         <li class="list-group-item">Parking: <span :class="parkingClass">{{ parkingParsed }}</span></li>
       </ul>
-      <button class="btn" @click="reviewLocation(place)">Review this location</button>
+      <button class="btn" @click="reviewLocation(place)" v-if="sharedState.loggedIn">Review this location</button>
       <button class="btn" @click="renderCreateTrip(place)" v-if="sharedState.loggedIn">Create a Trip</button>
     </section>
   </div>
