@@ -4,7 +4,7 @@
     <h5>Who would you like to meet you at the destination?</h5>
     <section id="user-contacts" class="container">
       <div class="row"style v-for="contact in contacts" v-bind:key="contact.id">
-        <div class="contact-info card col" style="flex-grow: 1;">
+        <div class="contact-info card col" style="flex-grow: 1; padding: 0;">
           <div class="card-header">
             <p>{{contact.first_name}}</p>
           </div>
@@ -13,9 +13,9 @@
             <p>{{contact.emergency}}</p>
           </div>
         </div>
-        <div class="contact-buttons card col-sm-4" style="flex-grow: 1;">
-          <button @click="addContactToTrip(contact)" class="btn round-button">Add</button>
-          <button @click="removeContactFromTrip(contact)" class="btn round-button">Remove</button>
+        <div class="contact-buttons card col-sm-4" style="flex-grow: 1; padding: 0;">
+          <button @click="addContactToTrip(contact)" class="btn btn-outline-primary round-button">Add</button>
+          <button @click="removeContactFromTrip(contact)" class="btn btn-outline-primary round-button">Remove</button>
         </div>
       </div>
     </section>
