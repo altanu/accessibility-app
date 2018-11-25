@@ -13,7 +13,7 @@
     </section>
     <div>
       <h5>What time do you plan on arriving?</h5>
-      <input v-model='trip_time' type='datetime-local' class="form-control"></input>
+      <input v-model='trip_time' type='datetime-local' class="form-control" :min="currentTime"></input>
       <button style="margin-top: 1em;" class='btn btn-block btn-success round-button' @click='createTrip'>Create Trip</button>
     </div>
   </div>
@@ -83,6 +83,11 @@ export default {
   },
   created () {
     this.fetchContacts()
+  },
+  computed: {
+    currentTime () {
+      return new Date()
+    }
   },
   components: {
     TripContact
