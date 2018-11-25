@@ -13,8 +13,8 @@
     </section>
     <div>
       <h5>What time do you plan on arriving?</h5>
-      <input v-model='trip_time' type='datetime-local'></input>
-      <button class='btn round-button' @click='createTrip'>Create Trip</button>
+      <input v-model='trip_time' type='datetime-local' class="form-control"></input>
+      <button style="margin-top: 1em;" class='btn btn-block btn-success round-button' @click='createTrip'>Create Trip</button>
     </div>
   </div>
 </template>
