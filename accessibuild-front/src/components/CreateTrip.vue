@@ -2,16 +2,21 @@
   <div class='w-100 p-3' style='height: 100%; overflow: scroll;'>
     <h4>Create your trip to {{location.formatted_address}} here!</h4>
     <h5>Who would you like to meet you at the destination?</h5>
-    <ul>
-      <li v-for="contact in contacts" v-bind:key="contact.id">
-        <p>Name: {{contact.first_name}} 
+    <section id="user-contacts">
+      <div style="display:flex; width: 100%; flex-direction: row; justify-content: space-between" v-for="contact in contacts" v-bind:key="contact.id">
+        <div class="contact-info card" style="flex-grow: 1;">
+          <div class="card-body">
+            <p>{{contact.first_name}}</p>
+            <p>{{contact.email}}</p>
+            <p>{{contact.emergency}}</p>
+          </div>
+        </div>
+        <div class="contact-buttons card" style="flex-grow: 1;">
           <button @click="addContactToTrip(contact)" class="btn round-button">Add</button>
           <button @click="removeContactFromTrip(contact)" class="btn round-button">Remove</button>
-        </p>
-        <p>Email: {{contact.email}}</p>
-        <p>Emergency contact? {{contact.emergency}}</p>
-      </li>
-    </ul>
+        </div>
+      </div>
+    </section>
     <div>
       <h5>What time do you plan on arriving?</h5>
       <input v-model='trip_time' type='datetime-local'></input>
@@ -76,7 +81,7 @@ export default {
           router.push('/')
           store.setRightPane('Trip')
           axios.put(`${this.baseUrl}trips/${tripId}/created_mail`)
-          
+
         })
       })
     }
