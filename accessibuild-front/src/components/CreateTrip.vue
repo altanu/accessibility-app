@@ -6,7 +6,7 @@
       <div style v-for="contact in contacts" v-bind:key="contact.id">
         <TripContact :contact="contact"
                      :add-contact-to-trip="addContactToTrip"
-                     :remove-contact-from="removeContactFromTrip"
+                     :remove-contact-from-trip="removeContactFromTrip"
                      class="row">
         </TripContact>
       </div>

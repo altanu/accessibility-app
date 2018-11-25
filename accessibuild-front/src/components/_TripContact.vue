@@ -11,8 +11,8 @@
       </div>
     </div>
     <div class="contact-buttons card col-sm-4" style="display: flex; flex-direction: column; padding: 0;">
-      <button @click="addContactToTrip(contact)" style="flex-grow: 1;" class="btn btn-outline-primary round-button">Add</button>
-      <button @click="removeContactFromTrip(contact)" style="flex-grow: 1;" class="btn btn-outline-primary round-button">Remove</button>
+      <button v-show="!isOnTrip" @click="addContactToTrip(contact); setIsOnTrip(true)" style="flex-grow: 1;" class="btn btn-outline-primary">Add</button>
+      <button v-show="isOnTrip" @click="removeContactFromTrip(contact); setIsOnTrip(false)" style="flex-grow: 1;" class="btn btn-outline-primary">Remove</button>
     </div>
   </div>
 </template>
@@ -28,6 +28,12 @@ export default {
   },
   data () {
     return {
+      isOnTrip: false
+    }
+  },
+  methods: {
+    setIsOnTrip (bool) {
+      this.isOnTrip = bool
     }
   }
 }
