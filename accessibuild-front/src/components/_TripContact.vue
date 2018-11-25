@@ -21,7 +21,11 @@
 
 export default {
   name: 'TripContact',
-  props: {},
+  props: {
+    contact: Object,
+    addContactToTrip: Function,
+    removeContactFromTrip: Function
+  },
   data () {
     return {
     }
