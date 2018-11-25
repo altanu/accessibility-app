@@ -20,6 +20,7 @@
   </div>
 </template>
 <script type="text/javascript">
+import router from '../router.js'
 var axios = require('axios')
 
 export default {
@@ -72,7 +73,9 @@ export default {
           })
         })).then(() => {
           console.log('promises resolved')
+          router.push('/')
           store.setRightPane('Trip')
+          axios.put(`${this.baseUrl}trips/${tripId}/created_mail`)
           
         })
       })
