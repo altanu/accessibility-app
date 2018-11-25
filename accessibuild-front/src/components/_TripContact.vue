@@ -12,8 +12,8 @@
       </div>
     </div>
     <div class="contact-buttons card col-sm-4" style="display: flex; flex-direction: column; padding: 0;">
-      <button v-show="!isOnTrip" @click="addContactToTrip(contact); setIsOnTrip(true)" style="flex-grow: 1;" class="btn btn-outline-success" style="font-size: 150%">Add</button>
-      <button v-show="isOnTrip" @click="removeContactFromTrip(contact); setIsOnTrip(false)" style="flex-grow: 1;" class="btn btn-outline-warning" style="font-size: 150%">Remove</button>
+      <button v-show="!isOnTrip" @click="addContactToTrip(contact); setIsOnTrip(true)" style="flex-grow: 1; font-size: 150%" class="btn btn-outline-success" >Add</button>
+      <button v-show="isOnTrip" @click="removeContactFromTrip(contact); setIsOnTrip(false)" style="flex-grow: 1; font-size: 150%" class="btn btn-outline-warning" >Remove</button>
     </div>
   </div>
 </template>
