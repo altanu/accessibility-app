@@ -44,13 +44,13 @@
       <hr>
       <h4 style="width: 100%; text-align: center;">Trips</h4>
       
-      <div class="d-flex flex-column" v-for="trip in trips" v-bind:key="trip.id">
+      <div class="d-flex flex-column" v-for="trip in trips" v-bind:key="trip.id" @click="renderTrip(trip)">
         <div class="trip card">
           <div class="card-title">
             Destination: {{trip.address}}
           </div>
           <div class="card-body">
-            Trip time: {{trip.trip_time}}
+            Trip time: {{trip.trip_time_moment}}
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@ export default {
         .then(response => {
           this.trips = response.data
           this.trips.forEach(trip => {
-            trip.trip_time = moment(trip.trip_time).format('MMMM Do YYYY, h:mm:ss a')
+            trip.trip_time_moment = moment(trip.trip_time).format('MMMM Do YYYY, h:mm:ss a')
           })
         })
     },
@@ -114,6 +114,12 @@ export default {
     },
     toggleForm: function () {
       this.makingNewContact = !this.makingNewContact
+    },
+    renderTrip: function(trip) {
+      store.state.currentTrip.trip_id = trip.id
+      store.state.currentTrip.address = trip.address
+      store.state.currentTrip.trip_time = trip.trip_time
+      store.setRightPane('Trip')
     },
     pushNewContact: function () {
       var url = this.buildUrl()
