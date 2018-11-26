@@ -71,7 +71,6 @@ export default {
       this.loggedIn = !this.loggedIn
     },
     newList: function (arr) {
-      console.log("app received new list")
       this.placesList = arr
       this.state.right = 'RightHome'
       store.clearCurrentLocation()
@@ -102,6 +101,9 @@ export default {
     },
     isOnRightHomeOnMobile: function () {
       return this.state.right === 'RightHome' && this.$mq === 'sm'
+    },
+    refreshMap: function () {
+      this.$emit('app-refresh')
     }
   },
   components: {
