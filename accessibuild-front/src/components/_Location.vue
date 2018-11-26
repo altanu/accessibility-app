@@ -1,5 +1,5 @@
 <template>
-  <div style="display:flex; width: auto">
+  <div style=" width: auto">
     <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
     <section v-if="!loading" v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
       <div v-if="this.place.name" class="card-header">{{this.place.name}}</div>

@@ -22,7 +22,7 @@ place_ids = []
 puts 'Seeding locations'
 Location.destroy_all
 osm_data.each do |place|
-  if place["place_id"].include? "Ej"
+  if place["place_id"].length > 27
     puts "skipping invalid location"
   else
     if place_ids.include?(place["place_id"])

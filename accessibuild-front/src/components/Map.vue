@@ -129,7 +129,6 @@ export default {
       var self = this
       this.$refs.mapRef.$mapPromise.then((map) => {
         self.markers.push(new google.maps.Marker({
-          map: map,
           icon: self.pinStyles[location['wheelchair']],
           position: { lat: location.lat, lng: location.lng },
           place_id: location.place_id
@@ -139,7 +138,6 @@ export default {
   },
   mounted () {
     var self = this
-    this.populateMapFromDB()
 
     this.$refs.mapRef.$mapPromise.then((map) => {
       self.geolocate()
@@ -156,9 +154,7 @@ export default {
       searchBox.addListener('places_changed', function () {
         self.newPlaceList = []
         var searchPlaces = searchBox.getPlaces()
-        if (searchPlaces.length == 0) {
-          return
-        }
+
         // Clear out the old markers.
         self.markers.forEach(function (marker) {
           marker.setMap(null)
@@ -185,7 +181,7 @@ export default {
         map.fitBounds(bounds)
       })
     }).then(() => {
-      self.loading = false
+      self.populateMapFromDB()
     })
   },
   components: {
