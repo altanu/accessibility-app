@@ -197,7 +197,7 @@ body {
   #right-box {
     min-width: 40%;
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
     @media (max-width: 450px) {
       height: 40%;
       padding: 5%;
@@ -210,5 +210,9 @@ body {
     @media (max-width: 450px) {
       height: 60%;
     }
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 }
