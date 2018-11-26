@@ -1,13 +1,13 @@
 <template>
   <div id='right-home'>
-    <button @click="$emit('drop-right')"v-show="isFocused"class="btn btn-outline-primary btn-block">Hide</button>
-    <div v-if="placesList.length == 0">
+    <button @click.self="$emit('drop-right')" v-show="isFocused && $mq === 'sm'" class="btn btn-outline-primary btn-block">Hide</button>
+    <div @click="$emit('lift-right')" v-if="placesList.length == 0">
       <h4>Welcome</h4>
       <p>We located you near {{userDetectedPlace.formatted_address}}</p>
       <p>What would you like to do today?</p>
       <button class='btn btn-outline-primary round-button' @click="focusOnSearch">Search</button>
     </div>
-    <div v-if="placesList.length > 0">
+    <div @click="$emit('lift-right')" v-if="placesList.length > 0">
       <p>We found the following results for you:</p>
 
       <Location

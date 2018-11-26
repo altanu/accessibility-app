@@ -15,7 +15,7 @@
             v-on:user-detected-place='detectUserPlace'>
           </Map>
         </div>
-        <div id='right-box' @click="scaleUpOnMobile" v-bind:style='rightHeight'>
+        <div id='right-box' v-bind:style='rightHeight'>
           <transition name='fade'>
             <component
               v-bind:user-detected-place='this.userDetectedPlace'
@@ -26,6 +26,7 @@
               v-bind:onClick='setState'
               v-bind:user-id='this.userId'
               v-on:refresh-map='refreshMap'
+              v-on:lift-right='rightHomeIsFocused = true'
               v-on:drop-right='rightHomeIsFocused = false'
               v-bind:is-focused='rightHomeIsFocused'>
             </component>
@@ -82,18 +83,16 @@ export default {
       this.newList(arr)
     },
     scaleUpOnMobile: function () {
-      console.log('Scaling up on mobile!')
       const isNotYetFocused = this.$mq === 'sm' && this.isOnRightHomeOnMobile && !this.rightHomeIsFocused;
       if (isNotYetFocused) {
+      console.log('Scaling up on mobile!')
         this.rightHomeIsFocused = true
-      } else {
-        this.dropRight()
       }
     },
     dropRight: function () {
-      console.log('Dropping right box!')
       const isNotYetFocused = this.$mq === 'sm' && this.isOnRightHomeOnMobile && this.rightHomeIsFocused;
       if (isNotYetFocused) {
+      console.log('Dropping right box!')
         this.rightHomeIsFocused = false
       }
     }
