@@ -24,22 +24,24 @@
     </div>
     <h4 v-else>Loading...</h4>
     <button class='btn btn-success btn-block' v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
-    <form class="form-group jumbotron" v-else v-on:submit.prevent>
-      <h4>Create a New Contact</h4>
-      <input class="form-control" type="text" name="first_name" placeholder="First Name" v-model="newContact.first_name">
-      <input class="form-control" type="text" name="last_name" placeholder="Last Name" v-model="newContact.last_name">
-      <input class="form-control" type="text" name="email" placeholder="Email" v-model="newContact.email">
-      <input class="form-control" type="tel" name="phone_number" placeholder="Phone Number" v-model="newContact.phone_number">
-      <div class="form-check form-check-inline">
-        <label class="form-check-label" style="padding: 1em">Set As Emergency Contact
-        <input class="form-check-input" type="checkbox" name="emergency" v-model="newContact.emergency">
-        </label>
-      </div><br>
-      <div class="d-flex btn-group" role="group">
-        <button style="flex-grow: 1;" class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
-        <button style="flex-grow: 1;" class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
-      </div>
-    </form>
+    <transition name="fade">
+      <form class="form-group jumbotron new-contact" v-if="makingNewContact" v-on:submit.prevent>
+        <h4>Create a New Contact</h4>
+        <input class="form-control" type="text" name="first_name" placeholder="First Name" v-model="newContact.first_name">
+        <input class="form-control" type="text" name="last_name" placeholder="Last Name" v-model="newContact.last_name">
+        <input class="form-control" type="text" name="email" placeholder="Email" v-model="newContact.email">
+        <input class="form-control" type="tel" name="phone_number" placeholder="Phone Number" v-model="newContact.phone_number">
+        <div class="form-check form-check-inline">
+          <label class="form-check-label" style="padding: 1em">Set As Emergency Contact
+          <input class="form-check-input" type="checkbox" name="emergency" v-model="newContact.emergency">
+          </label>
+        </div><br>
+        <div class="d-flex btn-group" role="group">
+          <button style="flex-grow: 1;" class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
+          <button style="flex-grow: 1;" class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
+        </div>
+      </form>
+    </transition>
     <div v-if="trips[0]" class="container-fluid w-100" style="margin-top: 20px">
       <hr>
       <h4 style="width: 100%; text-align: center;">Trips</h4>
@@ -175,5 +177,17 @@ export default {
   }
   .trip:hover {
     transform: scale(1.05);
+  }
+  .new-contact {
+    transition: all .2s ease;
+  }
+  .fade-enter-active {
+    transition: opacity .5s;
+  }
+  .fade-leave-active {
+    transition: 0s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 </style>
