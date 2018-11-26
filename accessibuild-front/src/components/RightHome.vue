@@ -9,14 +9,15 @@
     </div>
     <div @click="$emit('lift-right')" v-if="placesList.length > 0">
       <p>We found the following results for you:</p>
-
-      <Location
-        v-for="place in placesList"
-        v-bind:placesList="placesList"
-        v-bind:place="place"
-        v-bind:key="place.place_id"
-        v-bind:onClick="onClick"
-      ></Location>
+      <transition name="fade">
+        <Location
+          v-for="place in placesList"
+          v-bind:placesList="placesList"
+          v-bind:place="place"
+          v-bind:key="place.place_id"
+          v-bind:onClick="onClick"
+        ></Location>
+      </transition>
     </div>
 
   </div>
@@ -51,3 +52,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>
