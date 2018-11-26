@@ -1,9 +1,9 @@
 <template>
   <section>
-    <header>
+    <header class="card">
       <h3>You've arrived at your destination!</h3>
     </header>
-    <p>Thank you for using Accessibl. We hope your trip is a success!</p>
+    <div class="card card-body">Thank you for using Accessibl. We hope your trip is a success!</div >
 
   </section>
 </template>
@@ -17,11 +17,16 @@ export default {
 </script>
 
 <style scoped>
-    header {
-      padding: 10%;
-    }
-    p {
-        padding-right: 10%;
-        padding-left: 20%;
-    }
+  header {
+    padding: 5%;
+    margin: 5%;
+    margin-top: 15%;
+    margin-bottom: 0;
+    box-shadow: 5px 5px 3px grey;
+  }
+  .card-body {
+    padding: 5%;
+    margin: 5%;
+    box-shadow: 5px 5px 3px grey;
+  }
 </style>

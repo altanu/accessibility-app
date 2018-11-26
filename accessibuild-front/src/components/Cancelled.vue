@@ -1,11 +1,9 @@
 <template>
   <section>
-    <header>
-      <h3>Your trip has been cancelled successfully.</h3>
+    <header class="card">
+      <h3>Your trip has been cancelled successfully</h3>
     </header>
-    <div>
-      <p>To create a new trip, please click on your destination, and then click on "Create a Trip"</p>
-    </div>
+    <div class="card card-body">To create a new trip, please click on your destination, and then click on "Create a Trip"</div >
 
   </section>
 </template>
@@ -13,17 +11,22 @@
 <script>
 
 export default {
-  name: 'Cancelled'
+  name: 'Arrived'
 }
 
 </script>
 
 <style scoped>
-    header {
-      padding: 10%;
-    }
-    p {
-        padding-right: 10%;
-        padding-left: 20%;
-    }
+  header {
+    padding: 5%;
+    margin: 5%;
+    margin-top: 15%;
+    margin-bottom: 0;
+    box-shadow: 5px 5px 3px grey;
+  }
+  .card-body {
+    padding: 5%;
+    margin: 5%;
+    box-shadow: 5px 5px 3px grey;
+  }
 </style>
