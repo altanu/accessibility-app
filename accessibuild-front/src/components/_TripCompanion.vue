@@ -5,9 +5,9 @@
         <h3 style="margin: 0">{{ full_name }}</h3>
       </div>
       <div class="card-body">
-        <p>{{companion.email}}</p>
-        <p>{{companion.phone_number}}</p>
-        <p v-if="companion.emergency">{{companion.first_name}} is one of your emergency contacts!</p>
+        <p>Email: {{companion.email}}</p>
+        <p>Phone number: {{companion.phone_number}}</p>
+        <p v-if="companion.emergency">{{companion.first_name}} is one of your emergency contacts.</p>
         <p v-else >{{companion.first_name}} isn't an emergency contact.</p>
       </div>
     </div>

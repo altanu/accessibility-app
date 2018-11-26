@@ -1,17 +1,23 @@
 <template>
   <section>
     <section v-if="loggedIn">
-      <h3>This is the page for owner of the trip</h3>
-      <p>Destination: {{address}}</p>
-      <p>Trip Time: {{trip_time}}</p>
+      <header>
+        <h3>Hello, {{trip_owner}}</h3>
+      </header>
+      <div class='trip-info'>
+        <p>Destination: <strong>{{address}}</strong></p>
+        <p>Trip Time: <strong>{{trip_time}}</strong></p>
+      </div>
       <ul>
         Companions attached to this trip:
         <li v-for="companion in companions" v-bind:key="companion.id">
           <TripCompanion v-bind:companion="companion"></TripCompanion>
         </li>
       </ul>
-      <button class="btn round-button arrived-btn" @click="arrivedAtDestination">I've arrived</button>
-      <button class="btn round-button cancel-btn" @click="cancelledTrip">Cancel this Trip</button>
+      <div class="buttons-container">
+        <button class="btn round-button arrived-btn" @click="arrivedAtDestination">I've arrived</button>
+        <button class="btn round-button cancel-btn" @click="cancelledTrip">Cancel this Trip</button>
+      </div>
     </section>
     <section v-if="!loggedIn">
       <h3>This is the page for companions of the user</h3>
@@ -50,6 +56,7 @@ export default {
           store.state.currentTrip.address = trip.address
           store.setRightPane('Trip')
           this.companions = response.data.companions
+          this.trip_owner = response.data.trip_owner
         })
     },
     arrivedAtDestination () {
@@ -61,7 +68,6 @@ export default {
   },
   created () {
     this.fetchTripInfo()
-    this.fetch
   },
   components: {
     TripCompanion
@@ -75,5 +81,18 @@ export default {
   }
   .cancel-btn {
     background-color: red;
+  }
+  .buttons-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  .trip-info {
+    padding: 20px;
+  }
+  ul {
+    padding: 20px;
+  }
+  header {
+    padding: 20px;
   }
 </style>
