@@ -33,6 +33,7 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places',
     language: 'en'
   },
+  autobindAllEvents: false,
   installComponents: true
 })
 
