@@ -45,7 +45,7 @@
       <h4 style="width: 100%; text-align: center;">Trips</h4>
       
       <div class="d-flex flex-column" v-for="trip in trips" v-bind:key="trip.id">
-        <div class="card">
+        <div class="trip card">
           <div class="card-title">
             Destination: {{trip.address}}
           </div>
@@ -160,5 +160,14 @@ export default {
   .card-title {
     padding-left: 20px;
     padding-top: 10px;
+  }
+  .trip {
+    margin-bottom: 10px;
+    border-color: grey;
+    box-shadow: 5px 5px 3px grey;
+    transition: all 0.05s ease-in-out;
+  }
+  .trip:hover {
+    transform: scale(1.05);
   }
 </style>
