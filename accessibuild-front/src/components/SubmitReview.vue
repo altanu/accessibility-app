@@ -115,6 +115,7 @@ export default {
   },
   methods: {
     fetchReviews () {
+      console.log('fetching reviews...')
       axios.get(this.baseUrl + store.state.currentLocation.id + '/reviews')
         .then(response => {
           this.comments = response.data
@@ -136,6 +137,8 @@ export default {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
     putNewData () {
+      console.log('putting new data...')
+      var locationData = this.location
       axios.put(this.baseUrl + this.location.id, { location: this.location })
     },
     setAverageRating () {
@@ -157,6 +160,7 @@ export default {
   watch: {
     location: {
       handler () {
+        console.log('Watch handler: location has been changed!')
         this.putNewData()
       },
       deep: true
