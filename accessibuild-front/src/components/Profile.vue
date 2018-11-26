@@ -15,8 +15,9 @@
       </div>
     </div>
 
-    <div id="contacts-block" v-if="hasContacts">
-      <h4 style="width: 100%; text-align: center;">Contacts</h4><hr>
+    <div id="contacts-block" style="margin-top: 20px;" v-if="hasContacts">
+      <hr>
+      <h4 style="width: 100%; text-align: center;">Contacts</h4>
       <div id="accordion" v-for="contact in contacts" v-bind:key="contact.id">
         <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
       </div>
@@ -40,15 +41,16 @@
       </div>
     </form>
     <div v-if="trips[0]" class="container-fluid w-100" style="margin-top: 20px">
-      <h4 style="width: 100%; text-align: center;">Trips</h4><hr>
+      <hr>
+      <h4 style="width: 100%; text-align: center;">Trips</h4>
       
       <div class="d-flex flex-column" v-for="trip in trips" v-bind:key="trip.id">
         <div class="card">
           <div class="card-title">
-            {{trip.address}}
+            Destination: {{trip.address}}
           </div>
           <div class="card-body">
-            {{trip.trip_time}}
+            Trip time: {{trip.trip_time}}
           </div>
         </div>
       </div>

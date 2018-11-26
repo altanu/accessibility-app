@@ -5,7 +5,7 @@
         <h3>Hello, {{trip_owner}}</h3>
       </header>
       <div class='trip-info'>
-        <p>Destination: <strong>{{address}}</strong></p>
+        <p>Trip Destination: <strong>{{address}}</strong></p>
         <p>Trip Time: <strong>{{trip_time}}</strong></p>
       </div>
       <ul>
