@@ -7,7 +7,7 @@
       <ul>
         Companions attached to this trip:
         <li v-for="companion in companions" v-bind:key="companion.id">
-          {{companion.first_name}} {{companion.last_name}}
+          <TripCompanion v-bind:companion="companion"></TripCompanion>
         </li>
       </ul>
       <button class="btn round-button arrived-btn" @click="arrivedAtDestination">I've arrived</button>
@@ -24,6 +24,7 @@
 
 <script>
 import axios from 'axios'
+import TripCompanion from './_TripCompanion.vue'
 export default {
   name: 'Trip',
   props: {
@@ -61,6 +62,9 @@ export default {
   created () {
     this.fetchTripInfo()
     this.fetch
+  },
+  components: {
+    TripCompanion
   }
 }
 </script>
