@@ -11,7 +11,7 @@
 
         <!-- user location -->
         <GmapMarker
-          :position="center"
+          :position="userCoordinates"
           :clickable="false"
           :draggable="false"
         />
@@ -44,6 +44,7 @@ export default {
     return {
       center: { lat: 45.5035, lng: -73.5685 },
       userPlace: {},
+      userCoordinates: { lat: 0, lng: 0 },
       markers: [],
       newPlaceList: [],
       mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ],
@@ -62,6 +63,9 @@ export default {
       this.$emit('new-list', this.newPlaceList)
     },
     selectCard (marker) {
+      this.$refs.mapRef.$mapPromise.then((map) => {
+        map.panTo(marker.position)
+      })
       var self = this
       var selectedCard = document.getElementById(marker.place_id)
       if (selectedCard) {
@@ -87,8 +91,8 @@ export default {
           lng: position.coords.longitude
         } }, function (results, status) {
           self.userPlace = results[0]
-          self.center.lat = self.userPlace.geometry.location.lat()
-          self.center.lng = self.userPlace.geometry.location.lng()
+          self.userCoordinates.lat = self.userPlace.geometry.location.lat()
+          self.userCoordinates.lng = self.userPlace.geometry.location.lng()
           self.$emit('user-detected-place', results[0])
         })
       })
