@@ -26,6 +26,7 @@
               v-bind:onClick='setState'
               v-bind:user-id='this.userId'
               v-on:refresh-map='refreshMap'
+              v-on:drop-right='rightHomeIsFocused = false'
               v-bind:is-focused='rightHomeIsFocused'>
             </component>
           </transition>
@@ -81,9 +82,19 @@ export default {
       this.newList(arr)
     },
     scaleUpOnMobile: function () {
-      const isNotYetFocused = this.$mq === 'sm' && this.isOnRightHome && !this.rightHomeIsFocused;
+      console.log('Scaling up on mobile!')
+      const isNotYetFocused = this.$mq === 'sm' && this.isOnRightHomeOnMobile && !this.rightHomeIsFocused;
       if (isNotYetFocused) {
         this.rightHomeIsFocused = true
+      } else {
+        this.dropRight()
+      }
+    },
+    dropRight: function () {
+      console.log('Dropping right box!')
+      const isNotYetFocused = this.$mq === 'sm' && this.isOnRightHomeOnMobile && this.rightHomeIsFocused;
+      if (isNotYetFocused) {
+        this.rightHomeIsFocused = false
       }
     }
   },
@@ -102,13 +113,13 @@ export default {
       }
     },
     renderMap: function () {
-      return !this.rightHomeIsFocused && this.isOnRightHome || this.$mq !== 'sm'
+      return !this.rightHomeIsFocused && this.isOnRightHomeOnMobile || this.$mq !== 'sm'
     },
     rightHeight: function () {
       return this.renderMap && this.$mq === 'sm' ? { height: '40%' } : { height: '100%' }
     },
-    isOnRightHome: function () {
-      return this.state.right === 'RightHome'
+    isOnRightHomeOnMobile: function () {
+      return this.state.right === 'RightHome' && this.$mq === 'sm'
     }
   },
   components: {
@@ -123,7 +134,7 @@ export default {
     Trip
   },
   watch: {
-    isOnRightHome () {
+    isOnRightHomeOnMobile () {
       this.rightHomeIsFocused = false
     }
   }

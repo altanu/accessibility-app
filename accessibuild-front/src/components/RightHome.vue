@@ -1,6 +1,6 @@
 <template>
   <div id='right-home'>
-    <button v-show="isFocused"class="btn btn-outline-primary btn-block">Hide</button>
+    <button @click="$emit('drop-right')"v-show="isFocused"class="btn btn-outline-primary btn-block">Hide</button>
     <div v-if="placesList.length == 0">
       <h4>Welcome</h4>
       <p>We located you near {{userDetectedPlace.formatted_address}}</p>
