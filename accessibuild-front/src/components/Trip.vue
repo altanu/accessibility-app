@@ -15,8 +15,8 @@
         </li>
       </ul>
       <div class="buttons-container">
-        <button class="btn round-button arrived-btn" @click="arrivedAtDestination">I've arrived</button>
-        <button class="btn round-button cancel-btn" @click="cancelledTrip">Cancel this Trip</button>
+        <button class="btn btn-success" @click="arrivedAtDestination">I've arrived</button>
+        <button class="btn btn-warning" @click="cancelledTrip">Cancel this Trip</button>
       </div>
     </section>
     <section v-if="!loggedIn">
@@ -87,7 +87,7 @@ export default {
     justify-content: space-around;
   }
   .trip-info {
-    padding: 20px;
+    padding: 0 20px 0 20px;
   }
   ul {
     padding: 20px;

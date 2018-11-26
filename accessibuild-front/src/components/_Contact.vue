@@ -37,7 +37,7 @@
         </button>
       </div>
       <div v-bind:id="'contact-' + contactInfo.id" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush" style="padding-left: 5%">
           <li class="list-group-item">{{ contactInfo.phone_number }}</li>
           <li class="list-group-item">{{ contactInfo.email }}</li>
           <li class="list-group-item" v-if="contact.emergency">Set as Emergency Contact</li>

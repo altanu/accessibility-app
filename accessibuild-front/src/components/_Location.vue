@@ -9,8 +9,8 @@
         <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
         <li class="list-group-item">Parking: <span :class="parkingClass">{{ parkingParsed }}</span></li>
       </ul>
-      <button class="btn" @click="reviewLocation(place)" v-if="sharedState.loggedIn">Review this location</button>
-      <button class="btn" @click="renderCreateTrip(place)" v-if="sharedState.loggedIn">Create a Trip</button>
+      <button class="btn btn-primary" id="review-btn" @click="reviewLocation(place)" v-if="sharedState.loggedIn">Review this location</button>
+      <button class="btn btn-primary" id="trip-btn" @click="renderCreateTrip(place)" v-if="sharedState.loggedIn">Create a Trip</button>
     </section>
   </div>
 </template>
@@ -197,3 +197,12 @@ export default {
   }
 }
 </script>
+
+<style>
+  #review-btn {
+    border-radius: 0;
+  }
+  #trip-btn {
+    border-radius: 0;
+  }
+</style>
