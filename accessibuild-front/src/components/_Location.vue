@@ -38,7 +38,6 @@ export default {
       var self = this
       axios.get('http://localhost:3000/api/v2/places/' + this.place.place_id)
         .then(response => {
-          const dbLocation = response.data[0]
           if (dbLocation) {
             this.place.wheelchair = dbLocation.wheelchair
             this.place.bathroom = dbLocation.bathroom
@@ -110,13 +109,10 @@ export default {
       switch (this.place.wheelchair) {
         case 2:
           return 'Full'
-          break
         case 1:
           return 'Partial'
-          break
         case 0:
           return 'None'
-          break
         default:
           return 'Unknown'
       }
@@ -125,10 +121,8 @@ export default {
       switch (this.place.bathroom) {
         case true:
           return 'Yes'
-          break
         case false:
           return 'No'
-          break
         default:
           return 'Unknown'
       }
@@ -137,10 +131,8 @@ export default {
       switch (this.place.parking) {
         case true:
           return 'Yes'
-          break
         case false:
           return 'No'
-          break
         default:
           return 'Unknown'
       }
@@ -149,13 +141,10 @@ export default {
       switch (this.place.wheelchair) {
         case 2:
           return { 'type-badge': true, 'full': true }
-          break
         case 1:
           return { 'type-badge': true, 'partial': true }
-          break
         case 0:
           return { 'type-badge': true, 'none': true }
-          break
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -164,10 +153,8 @@ export default {
       switch (this.place.bathroom) {
         case true:
           return { 'type-badge': true, 'full': true }
-          break
         case false:
           return { 'type-badge': true, 'none': true }
-          break
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -176,10 +163,8 @@ export default {
       switch (this.place.parking) {
         case true:
           return { 'type-badge': true, 'full': true }
-          break
         case false:
           return { 'type-badge': true, 'none': true }
-          break
         default:
           return { 'type-badge': true, 'unknown': true }
       }
