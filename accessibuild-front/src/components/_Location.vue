@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%">
+  <div style="display:flex; width: auto">
     <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
     <section v-if="!loading" v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
       <div v-if="this.place.name" class="card-header">{{this.place.name}}</div>
@@ -110,13 +110,14 @@ export default {
       switch (this.place.wheelchair) {
         case 2:
           return 'Full'
-          break;
         case 1:
           return 'Partial'
-          break;
         case 0:
           return 'None'
-          break;
+        case 1:
+          return 'Partial'
+        case 0:
+          return 'None'
         default:
           return 'Unknown'
       }
@@ -125,10 +126,10 @@ export default {
       switch (this.place.bathroom) {
         case true:
           return 'Yes'
-          break;
         case false:
           return 'No'
-          break;
+        case false:
+          return 'No'
         default:
           return 'Unknown'
       }
@@ -137,10 +138,10 @@ export default {
       switch (this.place.parking) {
         case true:
           return 'Yes'
-          break;
         case false:
           return 'No'
-          break;
+        case false:
+          return 'No'
         default:
           return 'Unknown'
       }
@@ -149,13 +150,14 @@ export default {
       switch (this.place.wheelchair) {
         case 2:
           return { 'type-badge': true, 'full': true }
-          break;
         case 1:
           return { 'type-badge': true, 'partial': true }
-          break;
         case 0:
           return { 'type-badge': true, 'none': true }
-          break;
+        case 1:
+          return { 'type-badge': true, 'partial': true }
+        case 0:
+          return { 'type-badge': true, 'none': true }
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -164,10 +166,10 @@ export default {
       switch (this.place.bathroom) {
         case true:
           return { 'type-badge': true, 'full': true }
-          break;
         case false:
           return { 'type-badge': true, 'none': true }
-          break;
+        case false:
+          return { 'type-badge': true, 'none': true }
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -176,10 +178,10 @@ export default {
       switch (this.place.parking) {
         case true:
           return { 'type-badge': true, 'full': true }
-          break;
         case false:
           return { 'type-badge': true, 'none': true }
-          break;
+        case false:
+          return { 'type-badge': true, 'none': true }
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -188,7 +190,7 @@ export default {
   created () {
     setTimeout(() => {
       this.fetchLocationInfo()
-    }, 400);
+    }, 400)
   },
   components: {
     PulseLoader
