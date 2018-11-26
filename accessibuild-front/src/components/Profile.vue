@@ -174,6 +174,7 @@ export default {
     border-color: grey;
     box-shadow: 5px 5px 3px grey;
     transition: all 0.05s ease-in-out;
+    padding-right: 20px;
   }
   .trip:hover {
     transform: scale(1.05);

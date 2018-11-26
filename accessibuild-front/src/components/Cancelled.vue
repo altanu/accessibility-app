@@ -1,10 +1,10 @@
 <template>
   <section>
     <header>
-      Your trip has been cancelled successfully.
+      <h3>Your trip has been cancelled successfully.</h3>
     </header>
     <div>
-      To create a new trip, please click on your destination, and then click on "Create a Trip"
+      <p>To create a new trip, please click on your destination, and then click on "Create a Trip"</p>
     </div>
 
   </section>
@@ -17,3 +17,13 @@ export default {
 }
 
 </script>
+
+<style scoped>
+    header {
+      padding: 10%;
+    }
+    p {
+        padding-right: 10%;
+        padding-left: 20%;
+    }
+</style>
