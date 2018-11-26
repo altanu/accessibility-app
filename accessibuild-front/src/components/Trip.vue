@@ -6,7 +6,7 @@
       </header>
       <div class='trip-info'>
         <p>Trip Destination: <strong>{{address}}</strong></p>
-        <p>Trip Time: <strong>{{trip_time}}</strong></p>
+        <p>Trip Time: <strong>{{trip_time_moment}}</strong></p>
       </div>
       <ul>
         Companions attached to this trip:
@@ -31,6 +31,7 @@
 <script>
 import axios from 'axios'
 import TripCompanion from './_TripCompanion.vue'
+import moment from 'moment'
 export default {
   name: 'Trip',
   props: {
@@ -44,6 +45,11 @@ export default {
       trip_time: store.state.currentTrip.trip_time,
       trip_owner: store.state.currentTrip.trip_owner,
       companions: []
+    }
+  },
+  computed: {
+    trip_time_moment: function () {
+      return moment(this.trip_time).format('MMMM Do YYYY, h:mm:ss a')
     }
   },
   methods: {
