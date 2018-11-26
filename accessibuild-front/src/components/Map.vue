@@ -133,14 +133,22 @@ export default {
       var self = this
       this.$refs.mapRef.$mapPromise.then((map) => {
         self.markers.push(new google.maps.Marker({
-          icon: self.pinStyles[location['wheelchair']],
+          icon: location['wheelchair'] === null ? self.pinStyles[3] : self.pinStyles[location['wheelchair']],
           position: { lat: location.lat, lng: location.lng },
           place_id: location.place_id
         }))
       })
+    },
+    refreshMap () {
+      var self = this
+      self.markers = []
+      self.newPlaceList.forEach(location => {
+        self.fetchLocationInfo(location, self.drawWithAccessibility)
+      })
     }
   },
   mounted () {
+    this.$parent.$on('app-refresh', this.refreshMap)
     var self = this
 
     this.$refs.mapRef.$mapPromise.then((map) => {

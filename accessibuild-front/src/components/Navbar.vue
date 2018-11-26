@@ -57,6 +57,7 @@ export default {
     },
     sendMeHome () {
       document.getElementById('pac-input').value = ''
+      this.$parent.$children[1].populateMapFromDB()
       this.$emit('new-list', [])
     }
   },
