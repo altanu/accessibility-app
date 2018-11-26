@@ -103,7 +103,7 @@ export default {
         description: '',
         rating: null
       },
-      averageRating: null,
+      averageRating: null
     }
   },
   props: {

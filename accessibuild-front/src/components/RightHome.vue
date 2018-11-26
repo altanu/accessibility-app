@@ -18,7 +18,7 @@
         v-on:show-results="refreshMap"
       ></Location>
     </div>
-    
+
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
   props: {
     onClick: Function,
     userDetectedPlace: Object,
-    placesList: Array,
+    placesList: Array
   },
   name: 'RightHome',
   components: {
@@ -47,6 +47,6 @@ export default {
     refreshMap: function () {
       this.$emit('refresh-map', placesList)
     }
-  },
+  }
 }
 </script>
