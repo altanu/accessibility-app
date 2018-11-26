@@ -149,7 +149,31 @@ body {
   }
 
   .pac-container {
-    padding-top: 0.4em;
+    padding-top: .5rem;
+    border: 2px solid $blue;
+    border-radius: 0 0 1rem 1rem;
+    font: inherit;
+  }
+
+  .pac-logo {
+    &:after{
+      background-image: none !important;
+      height: 0px
+    }
+  }
+
+  .pac-item {
+    font: inherit;
+    font-size: smaller;
+    margin: 0 1rem 0;
+    line-height: 2rem
+  }
+  .pac-item-query {
+    font: inherit;
+    font-size: medium
+  }
+  .pac-icon {
+    display: none;
   }
 
   #logo {

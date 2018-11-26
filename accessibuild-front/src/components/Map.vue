@@ -6,7 +6,7 @@
     <gmap-map ref="mapRef"
       :center="center"
       :zoom="12"
-      v-bind:options="mapStyle"
+      :options="mapStyle"
       style="min-width:50%; height: 100%">
 
         <!-- user location -->
@@ -98,6 +98,7 @@ export default {
       })
     },
     populateMapFromDB () {
+      this.markers = []
       var self = this
       axios
         .get('http://localhost:3000/api/v2/locations')
