@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #  osm_data is the places found from OpenStreetMap, and populated with corresponding place_id from gMaps
-osm_data = ActiveSupport::JSON.decode(File.read('db/montrealData.json'))
+osm_data = ActiveSupport::JSON.decode(File.read('db/test.json'))
 
 puts 'Seeding DB'
 puts 'Seeding users'
