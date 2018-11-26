@@ -1,6 +1,8 @@
 <template>
   <div style=" width: auto">
-    <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
+    <div id="loading" style="width:100%; display: flex">
+      <pulse-loader :loading="loading" :color="brandBlue" style="margin: 0 auto 0"></pulse-loader>
+    </div>
     <section v-if="!loading" v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
       <div class="card-header" style="display: flex; flex-direction: row">
         <div style="margin-right: auto">
@@ -41,7 +43,8 @@ export default {
     return {
       loading: true,
       sharedState: store.state,
-      pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png']
+      pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png'],
+      brandBlue: "#4343EA"
     }
   },
   methods: {
