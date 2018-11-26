@@ -133,7 +133,7 @@ export default {
       var self = this
       this.$refs.mapRef.$mapPromise.then((map) => {
         self.markers.push(new google.maps.Marker({
-          icon: self.pinStyles[location['wheelchair']],
+          icon: location['wheelchair'] ? self.pinStyles[location['wheelchair']] : self.pinStyles[3],
           position: { lat: location.lat, lng: location.lng },
           place_id: location.place_id
         }))

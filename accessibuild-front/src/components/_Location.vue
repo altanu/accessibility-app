@@ -199,6 +199,9 @@ export default {
       }
     },
     wheelchairIcon () {
+      if (this.place.wheelchair == null) {
+        return this.pinStyles[3]
+      }
       return this.pinStyles[this.place.wheelchair]
     },
     wheelchairString () {

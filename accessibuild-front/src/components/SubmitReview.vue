@@ -137,7 +137,7 @@ export default {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
     putNewData () {
-      console.log('putting new data...')
+      this.$emit('refresh-map', this.placesList)
       var locationData = this.location
       axios.put(this.baseUrl + this.location.id, { location: this.location })
     },
