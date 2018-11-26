@@ -81,20 +81,6 @@ export default {
       console.log('app received the refresh-map event')
       this.placesList = []
       this.newList(arr)
-    },
-    scaleUpOnMobile: function () {
-      const isNotYetFocused = this.$mq === 'sm' && this.isOnRightHomeOnMobile && !this.rightHomeIsFocused;
-      if (isNotYetFocused) {
-      console.log('Scaling up on mobile!')
-        this.rightHomeIsFocused = true
-      }
-    },
-    dropRight: function () {
-      const isNotYetFocused = this.$mq === 'sm' && this.isOnRightHomeOnMobile && this.rightHomeIsFocused;
-      if (isNotYetFocused) {
-      console.log('Dropping right box!')
-        this.rightHomeIsFocused = false
-      }
     }
   },
   computed: {
