@@ -25,7 +25,8 @@
               v-bind:places-list='this.placesList'
               v-bind:onClick='setState'
               v-bind:user-id='this.userId'
-              v-on:refresh-map='refreshMap'>
+              v-on:refresh-map='refreshMap'
+              v-bind:is-focused='rightHomeIsFocused'>
             </component>
           </transition>
           <div style="display: none;">
