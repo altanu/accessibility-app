@@ -15,7 +15,7 @@
             v-on:user-detected-place='detectUserPlace'>
           </Map>
         </div>
-        <div id='right-box' v-bind:style='rightHeight'>
+        <div id='right-box' @click="scaleUpOnMobile" v-bind:style='rightHeight'>
           <transition name='fade'>
             <component
               v-bind:user-detected-place='this.userDetectedPlace'
@@ -77,6 +77,13 @@ export default {
       console.log('app received the refresh-map event')
       this.placesList = []
       this.newList(arr)
+    },
+    scaleUpOnMobile: function () {
+      if (this.$mq === 'sm' && store.state.right === 'RightHome') {
+        console.log('Mobile touch on div!')
+      } else if (store.state.right === 'RightHome') {
+        console.log('Desktop touch on div!')
+      }
     }
   },
   computed: {
