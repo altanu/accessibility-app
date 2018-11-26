@@ -80,7 +80,7 @@ export default {
       this.newList(arr)
     },
     scaleUpOnMobile: function () {
-      const isNotYetFocused = this.$mq === 'sm' && store.state.right === 'RightHome' && !this.rightHomeIsFocused;
+      const isNotYetFocused = this.$mq === 'sm' && this.isOnRightHome && !this.rightHomeIsFocused;
       if (isNotYetFocused) {
         this.rightHomeIsFocused = true
       }
@@ -101,10 +101,13 @@ export default {
       }
     },
     renderMap: function () {
-      return !this.rightHomeIsFocused || this.$mq !== 'sm'
+      return !this.rightHomeIsFocused && this.isOnRightHome || this.$mq !== 'sm'
     },
     rightHeight: function () {
       return this.renderMap && this.$mq === 'sm' ? { height: '40%' } : { height: '100%' }
+    },
+    isOnRightHome: function () {
+      return this.state.right === 'RightHome'
     }
   },
   components: {
@@ -117,6 +120,11 @@ export default {
     SubmitReview,
     CreateTrip,
     Trip
+  },
+  watch: {
+    isOnRightHome () {
+      this.rightHomeIsFocused = false
+    }
   }
 }
 </script>
