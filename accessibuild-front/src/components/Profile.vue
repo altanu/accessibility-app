@@ -59,7 +59,7 @@
 </template>
 
 <script>
-
+import moment from 'moment'
 import Contact from './_Contact.vue'
 var axios = require('axios')
 
@@ -103,6 +103,9 @@ export default {
       axios.get(`http://localhost:3000/api/v2/users/${store.state.currentUserId}/trips`)
         .then(response => {
           this.trips = response.data
+          this.trips.forEach(trip => {
+            trip.trip_time = moment(trip.trip_time).format('MMMM Do YYYY, h:mm:ss a')
+          })
         })
     },
     refreshContacts: function () {
