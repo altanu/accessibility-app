@@ -110,13 +110,13 @@ export default {
       switch (this.place.wheelchair) {
         case 2:
           return 'Full'
-          break;
+          break
         case 1:
           return 'Partial'
-          break;
+          break
         case 0:
           return 'None'
-          break;
+          break
         default:
           return 'Unknown'
       }
@@ -125,10 +125,10 @@ export default {
       switch (this.place.bathroom) {
         case true:
           return 'Yes'
-          break;
+          break
         case false:
           return 'No'
-          break;
+          break
         default:
           return 'Unknown'
       }
@@ -137,10 +137,10 @@ export default {
       switch (this.place.parking) {
         case true:
           return 'Yes'
-          break;
+          break
         case false:
           return 'No'
-          break;
+          break
         default:
           return 'Unknown'
       }
@@ -149,13 +149,13 @@ export default {
       switch (this.place.wheelchair) {
         case 2:
           return { 'type-badge': true, 'full': true }
-          break;
+          break
         case 1:
           return { 'type-badge': true, 'partial': true }
-          break;
+          break
         case 0:
           return { 'type-badge': true, 'none': true }
-          break;
+          break
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -164,10 +164,10 @@ export default {
       switch (this.place.bathroom) {
         case true:
           return { 'type-badge': true, 'full': true }
-          break;
+          break
         case false:
           return { 'type-badge': true, 'none': true }
-          break;
+          break
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -176,10 +176,10 @@ export default {
       switch (this.place.parking) {
         case true:
           return { 'type-badge': true, 'full': true }
-          break;
+          break
         case false:
           return { 'type-badge': true, 'none': true }
-          break;
+          break
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -188,7 +188,7 @@ export default {
   created () {
     setTimeout(() => {
       this.fetchLocationInfo()
-    }, 400);
+    }, 400)
   },
   components: {
     PulseLoader

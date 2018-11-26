@@ -76,7 +76,6 @@ export default {
           router.push('/')
           store.setRightPane('Trip')
           axios.put(`${this.baseUrl}trips/${tripId}/created_mail`)
-
         })
       })
     }
@@ -92,10 +91,9 @@ export default {
   components: {
     TripContact
   }
-};
+}
 
 </script>
-
 
 // click create trip
 // -> make db call: post trip (give access url)

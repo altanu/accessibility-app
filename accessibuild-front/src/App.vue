@@ -74,7 +74,7 @@ export default {
       this.userDetectedPlace = place
     },
     refreshMap: function (arr) {
-      console.log("app received the refresh-map event")
+      console.log('app received the refresh-map event')
       this.placesList = []
       this.newList(arr)
     }

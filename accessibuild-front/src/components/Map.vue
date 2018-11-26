@@ -42,14 +42,14 @@ export default {
   },
   data () {
     return {
-      center: {lat: 45.5035, lng: -73.5685},
+      center: { lat: 45.5035, lng: -73.5685 },
       userPlace: {},
       markers: [],
       newPlaceList: [],
       mapStyle: { styles: [ { 'featureType': 'poi', 'stylers': [ { 'visibility': 'off' } ] } ],
-                  streetViewControl: false,
-                  fullscreenControl: false,
-                  mapTypeControl: false },
+        streetViewControl: false,
+        fullscreenControl: false,
+        mapTypeControl: false },
       pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png'],
       loading: true
     }
@@ -65,7 +65,7 @@ export default {
       var self = this
       var selectedCard = document.getElementById(marker.place_id)
       if (selectedCard) {
-        selectedCard.scrollIntoView({behavior: "smooth"})
+        selectedCard.scrollIntoView({ behavior: 'smooth' })
         selectedCard.style.border = '3px solid black'
         setTimeout(() => {
           selectedCard.style.border = '1px solid grey'
@@ -73,12 +73,12 @@ export default {
       }
       if (selectedCard === null) {
         var geocoder = new google.maps.Geocoder()
-        geocoder.geocode({'placeId': marker.place_id}, function(results,status) {
+        geocoder.geocode({ 'placeId': marker.place_id }, function (results, status) {
           self.$emit('new-list', [results[0]])
         })
       }
     },
-    geolocate() {
+    geolocate () {
       var self = this
       var geocoder = new google.maps.Geocoder()
       navigator.geolocation.getCurrentPosition(position => {
@@ -101,7 +101,7 @@ export default {
           response.data.forEach(location => {
             self.drawWithAccessibility(location)
           })
-        }).then(function() {
+        }).then(function () {
           self.loading = false
         })
     },
@@ -121,8 +121,8 @@ export default {
           callback(place)
         })
     },
-    drawWithAccessibility(location) {
-      if ( typeof location.lat === "string" ) {
+    drawWithAccessibility (location) {
+      if (typeof location.lat === 'string') {
         location.lat = Number(location.lat)
         location.lng = Number(location.lng)
       }
@@ -135,7 +135,7 @@ export default {
           place_id: location.place_id
         }))
       })
-    },
+    }
   },
   mounted () {
     var self = this
@@ -175,11 +175,11 @@ export default {
             self.fetchLocationInfo(place, self.drawWithAccessibility)
           })
           if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport)
-            } else {
-              bounds.extend(place.geometry.location)
-            }
+            // Only geocodes have viewport.
+            bounds.union(place.geometry.viewport)
+          } else {
+            bounds.extend(place.geometry.location)
+          }
         })
         self.publishNewList()
         map.fitBounds(bounds)
