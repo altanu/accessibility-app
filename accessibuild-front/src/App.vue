@@ -55,7 +55,8 @@ export default {
       userDetectedPlace: {},
       userId: 1,
       placesList: [],
-      loggedIn: true
+      loggedIn: true,
+      rightHomeIsFocused: false
     }
   },
   methods: {
@@ -79,10 +80,9 @@ export default {
       this.newList(arr)
     },
     scaleUpOnMobile: function () {
-      if (this.$mq === 'sm' && store.state.right === 'RightHome') {
-        console.log('Mobile touch on div!')
-      } else if (store.state.right === 'RightHome') {
-        console.log('Desktop touch on div!')
+      const isNotYetFocused = this.$mq === 'sm' && store.state.right === 'RightHome' && !this.rightHomeIsFocused;
+      if (isNotYetFocused) {
+        this.rightHomeIsFocused = true
       }
     }
   },
@@ -101,7 +101,7 @@ export default {
       }
     },
     renderMap: function () {
-      return this.state.right === 'RightHome' || this.$mq !== 'sm'
+      return !this.rightHomeIsFocused || this.$mq !== 'sm'
     },
     rightHeight: function () {
       return this.renderMap && this.$mq === 'sm' ? { height: '40%' } : { height: '100%' }
