@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     full_name () {
-      return this.contact.first_name + " " + this.contact.last_name
+      return this.contact.first_name + ' ' + this.contact.last_name
     }
   }
 }
