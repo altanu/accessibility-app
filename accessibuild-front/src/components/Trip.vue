@@ -5,7 +5,7 @@
         <h3>Hello, {{trip_owner}}</h3>
       </header>
       <div class='trip-info'>
-        <p>Destination: <strong>{{address}}</strong></p>
+        <p>Trip Destination: <strong>{{address}}</strong></p>
         <p>Trip Time: <strong>{{trip_time}}</strong></p>
       </div>
       <ul>
@@ -61,9 +61,11 @@ export default {
     },
     arrivedAtDestination () {
       axios.put(`http://localhost:3000/api/v2/trips/${this.tripId}/completed_mail`)
+      store.setRightPane('Arrived')
     },
     cancelledTrip () {
       axios.put(`http://localhost:3000/api/v2/trips/${this.tripId}/cancelled_mail`)
+      store.setRightPane('Cancelled')
     }
   },
   created () {
