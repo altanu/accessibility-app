@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100%; border-right: 2px solid #4343EA; display:flex; align-items: center; justify-content: center">
     <div style="display: flex">
-    <pulse-loader :loading="loading" style="margin:auto; height:100%"></pulse-loader>
+    <pulse-loader :loading="loading" :color="brandBlue" style="margin:auto; height:100%"></pulse-loader>
     </div>
     <gmap-map ref="mapRef"
       :center="center"
@@ -53,7 +53,8 @@ export default {
         fullscreenControl: false,
         mapTypeControl: false },
       pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png'],
-      loading: true
+      loading: true,
+      brandBlue: "#4343EA"
     }
   },
   methods: {
