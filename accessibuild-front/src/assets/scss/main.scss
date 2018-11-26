@@ -64,7 +64,6 @@ body {
   .navbar {
     background-color: $blue !important;
     font-size: 1.2em;
-    // box-shadow: black 2em 2em;
   }
 
   .card {
@@ -141,6 +140,22 @@ body {
     padding-top: 0.2em;
     float: left;
     cursor: pointer;
+  }
+
+  .contact-info {
+    @media (max-width: 450px) {
+      margin-bottom: 0;
+    }
+  }
+
+  .contact-buttons {
+    @media (max-width: 450px) {
+      margin-top: 0;
+    }
+  }
+
+  .pac-container {
+    padding-top: 0.4em;
   }
 
   #logo {
