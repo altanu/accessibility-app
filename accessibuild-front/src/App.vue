@@ -25,7 +25,6 @@
               v-bind:places-list='this.placesList'
               v-bind:onClick='setState'
               v-bind:user-id='this.userId'
-              v-on:refresh-map='refreshMap'
               v-on:lift-right='rightHomeIsFocused = true'
               v-on:drop-right='rightHomeIsFocused = false'
               v-bind:is-focused='rightHomeIsFocused'>

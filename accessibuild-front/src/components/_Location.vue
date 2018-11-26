@@ -3,13 +3,16 @@
     <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
     <section v-if="!loading" v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
       <div class="card-header" style="display: flex; flex-direction: row">
-        <div>
+        <div style="margin-right: auto">
           <span v-if="this.place.name" style="font-weight: 700; font-size:larger">{{this.place.name}}</span><br v-if="this.place.name"/>
-          <span style="font-size: smaller">{{this.place.formatted_address}}</span>
+          <span style="font-size: small">{{this.place.formatted_address}}</span>
         </div>
-        <div style="border-left: 1px solid white; display:flex; flex-direction: column">
-          <img style="margin-left: auto" :src="wheelchairIcon"/>
-          <span style="margin-left: auto; font-size: smaller; text-align:right">{{wheelchairString}}</span>
+        <div style="border-left: 1px solid white; min-width: %30">
+          <div style="display: flex; flex-direction: column; align-items: center; padding-left: 1rem">
+            <img style="width: 37px; height: auto" :src="wheelchairIcon"/>
+            <br/>
+            <span style="font-size: smaller" >{{wheelchairString}}</span>
+          </div>
         </div>
       </div>
       <ul class="list-group list-group-flush">
