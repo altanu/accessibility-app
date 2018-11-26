@@ -34,13 +34,26 @@
         <input class="form-check-input" type="checkbox" name="emergency" v-model="newContact.emergency">
         </label>
       </div><br>
-      <div class="d-flex btn-group" role="group">
+      <div class="d-flex flex-column btn-group" role="group">
         <button style="flex-grow: 1;" class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
         <button style="flex-grow: 1;" class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
       </div>
     </form>
-    <div v-if="trips[0]" class="container-fluid w-100">
-      <h4>Trips</h4>
+    <div v-if="trips[0]" class="container-fluid w-100" style="margin-top: 20px">
+      <h4 style="width: 100%; text-align: center;">Trips</h4><hr>
+      
+      <div class="d-flex" v-for="trip in trips" v-bind:key="trip.id">
+        <div class="card">
+          <div class="card-body">
+            {{trip.address}}
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            {{trip.trip_time}}
+          </div>
+        </div>
+      </div>
       <table v-for="trip in trips" v-bind:key="trip.id">
         <tr>{{trip.address}}</tr>
         <tr>{{trip.trip_time}}</tr>
