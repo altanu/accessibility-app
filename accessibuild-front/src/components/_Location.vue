@@ -2,12 +2,20 @@
   <div style=" width: auto">
     <pulse-loader :loading="loading" style="margin:auto"></pulse-loader>
     <section v-if="!loading" v-bind:id="this.place.place_id" class="card" style="border: 1px solid grey">
-      <div v-if="this.place.name" class="card-header">{{this.place.name}}</div>
-      <div class="card-header">Address: {{this.place.formatted_address}}</div>
+      <div class="card-header" style="display: flex; flex-direction: row">
+        <div>
+          <span v-if="this.place.name" style="font-weight: 700; font-size:larger">{{this.place.name}}</span><br v-if="this.place.name"/>
+          <span style="font-size: smaller">{{this.place.formatted_address}}</span>
+        </div>
+        <div style="border-left: 1px solid white; display:flex; flex-direction: column">
+          <img style="margin-left: auto" :src="wheelchairIcon"/>
+          <span style="margin-left: auto; font-size: smaller; text-align:right">{{wheelchairString}}</span>
+        </div>
+      </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Wheelchair Access: <span :class="wheelChairClass">{{ wheelchairParsed }}</span></li>
-        <li class="list-group-item">Accessible Bathrooms: <span :class="bathroomClass">{{ bathroomParsed }}</span></li>
-        <li class="list-group-item">Parking: <span :class="parkingClass">{{ parkingParsed }}</span></li>
+        <li style="display:flex" class="list-group-item">Wheelchair Access: <span style="margin-left:auto" :class="wheelChairClass">{{ wheelchairParsed }}</span></li>
+        <li style="display:flex" class="list-group-item">Accessible Bathrooms: <span style="margin-left:auto" :class="bathroomClass">{{ bathroomParsed }}</span></li>
+        <li style="display:flex" class="list-group-item">Parking: <span style="margin-left:auto" :class="parkingClass">{{ parkingParsed }}</span></li>
       </ul>
       <button class="btn btn-primary" id="review-btn" @click="reviewLocation(place)" v-if="sharedState.loggedIn">Review this location</button>
       <button class="btn btn-primary" id="trip-btn" @click="renderCreateTrip(place)" v-if="sharedState.loggedIn">Create a Trip</button>
@@ -29,7 +37,8 @@ export default {
   data () {
     return {
       loading: true,
-      sharedState: store.state
+      sharedState: store.state,
+      pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png']
     }
   },
   methods: {
@@ -184,6 +193,24 @@ export default {
           return { 'type-badge': true, 'none': true }
         default:
           return { 'type-badge': true, 'unknown': true }
+      }
+    },
+    wheelchairIcon () {
+      return this.pinStyles[this.place.wheelchair]
+    },
+    wheelchairString () {
+      switch(this.place.wheelchair) {
+        case 2:
+          return "Fully Accessible"
+          break
+        case 1:
+          return "Limited Accessibility"
+          break
+        case 0:
+          return "Not Accessible"
+          break
+        default:
+          return "Unknown Accessibility"
       }
     }
   },
