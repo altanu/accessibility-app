@@ -34,7 +34,7 @@
         <input class="form-check-input" type="checkbox" name="emergency" v-model="newContact.emergency">
         </label>
       </div><br>
-      <div class="d-flex flex-column btn-group" role="group">
+      <div class="d-flex btn-group" role="group">
         <button style="flex-grow: 1;" class="btn btn-success" type='submit' @click="pushNewContact">Save</button>
         <button style="flex-grow: 1;" class="btn btn-warning" type='submit' @click="toggleForm">Cancel</button>
       </div>
@@ -42,22 +42,16 @@
     <div v-if="trips[0]" class="container-fluid w-100" style="margin-top: 20px">
       <h4 style="width: 100%; text-align: center;">Trips</h4><hr>
       
-      <div class="d-flex" v-for="trip in trips" v-bind:key="trip.id">
+      <div class="d-flex flex-column" v-for="trip in trips" v-bind:key="trip.id">
         <div class="card">
-          <div class="card-body">
+          <div class="card-title">
             {{trip.address}}
           </div>
-        </div>
-        <div class="card">
           <div class="card-body">
             {{trip.trip_time}}
           </div>
         </div>
       </div>
-      <table v-for="trip in trips" v-bind:key="trip.id">
-        <tr>{{trip.address}}</tr>
-        <tr>{{trip.trip_time}}</tr>
-      </table>
     </div>
   </div>
 </template>
@@ -155,11 +149,11 @@ export default {
 </script>
 
 <style scoped>
-  table, tr {
-    border: solid black 1px;
+  .card {
+    margin: 0;
   }
-  table {
-    width: 100%;
-    margin: 1rem;
+  .card-title {
+    padding-left: 20px;
+    padding-top: 10px;
   }
 </style>
