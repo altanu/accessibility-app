@@ -18,7 +18,7 @@
       <p>Destination: {{address}}</p>
       <p>Trip Time: {{trip_time}}</p>
       <p>Trip Owner: {{trip_owner}}</p>
-    </section>
+    </section>  
   </section>
 </template>
 
@@ -27,7 +27,7 @@ import axios from 'axios'
 export default {
   name: 'Trip',
   props: {
-
+      
   },
   data () {
     return {
@@ -73,3 +73,4 @@ export default {
     background-color: red;
   }
 </style>
+

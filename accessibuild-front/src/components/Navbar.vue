@@ -55,7 +55,7 @@ export default {
     isFocused: function () {
       this.isFocusedOnMobile = this.$mq === 'sm'
     },
-    sendMeHome () {
+    sendMeHome() {
       this.$emit('new-list', [])
     }
   },

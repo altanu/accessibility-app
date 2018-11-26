@@ -113,6 +113,13 @@ export default {
           return 'Partial'
         case 0:
           return 'None'
+          break;
+        case 1:
+          return 'Partial'
+          break;
+        case 0:
+          return 'None'
+          break;
         default:
           return 'Unknown'
       }
@@ -123,6 +130,10 @@ export default {
           return 'Yes'
         case false:
           return 'No'
+          break;
+        case false:
+          return 'No'
+          break;
         default:
           return 'Unknown'
       }
@@ -133,6 +144,10 @@ export default {
           return 'Yes'
         case false:
           return 'No'
+          break;
+        case false:
+          return 'No'
+          break;
         default:
           return 'Unknown'
       }
@@ -145,6 +160,13 @@ export default {
           return { 'type-badge': true, 'partial': true }
         case 0:
           return { 'type-badge': true, 'none': true }
+          break;
+        case 1:
+          return { 'type-badge': true, 'partial': true }
+          break;
+        case 0:
+          return { 'type-badge': true, 'none': true }
+          break;
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -155,6 +177,10 @@ export default {
           return { 'type-badge': true, 'full': true }
         case false:
           return { 'type-badge': true, 'none': true }
+          break;
+        case false:
+          return { 'type-badge': true, 'none': true }
+          break;
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -165,6 +191,10 @@ export default {
           return { 'type-badge': true, 'full': true }
         case false:
           return { 'type-badge': true, 'none': true }
+          break;
+        case false:
+          return { 'type-badge': true, 'none': true }
+          break;
         default:
           return { 'type-badge': true, 'unknown': true }
       }
@@ -173,7 +203,7 @@ export default {
   created () {
     setTimeout(() => {
       this.fetchLocationInfo()
-    }, 400)
+    }, 400);
   },
   components: {
     PulseLoader

@@ -4,7 +4,7 @@
     {{address}}
     {{trip_time}}
     {{trip_owner}}
-  </section>
+  </section>  
 </template>
 
 <script>
@@ -12,7 +12,7 @@ import axios from 'axios'
 export default {
   name: 'TripUser',
   props: {
-
+      
   },
   data () {
     return {
@@ -39,3 +39,4 @@ export default {
   }
 }
 </script>
+
