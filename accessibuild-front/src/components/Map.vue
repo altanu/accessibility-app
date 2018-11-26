@@ -138,9 +138,17 @@ export default {
           place_id: location.place_id
         }))
       })
+    },
+    refreshMap () {
+      var self = this
+      self.markers = []
+      self.newPlaceList.forEach(location => {
+        self.fetchLocationInfo(location, self.drawWithAccessibility)
+      })
     }
   },
   mounted () {
+    this.$parent.$on('app-refresh', this.refreshMap)
     var self = this
 
     this.$refs.mapRef.$mapPromise.then((map) => {

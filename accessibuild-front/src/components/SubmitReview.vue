@@ -137,9 +137,10 @@ export default {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
     putNewData () {
-      this.$emit('refresh-map', this.placesList)
       var locationData = this.location
-      axios.put(this.baseUrl + this.location.id, { location: this.location })
+      axios.put(this.baseUrl + this.location.id, { location: this.location }).then(() => {
+        this.$parent.$children[1].refreshMap()
+      })
     },
     setAverageRating () {
       var totalRating = 0
@@ -150,7 +151,7 @@ export default {
       this.averageRating = !average && average !== 0 ? 'No ratings yet!' : average.toFixed(1)
     },
     backToList () {
-      this.$emit('refresh-map', this.placesList)
+      this.$parent.$children[1].refreshMap()
       this.onClick('RightHome')
     }
   },
@@ -160,7 +161,6 @@ export default {
   watch: {
     location: {
       handler () {
-        console.log('Watch handler: location has been changed!')
         this.putNewData()
       },
       deep: true
