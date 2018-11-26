@@ -25,7 +25,10 @@
               v-bind:places-list='this.placesList'
               v-bind:onClick='setState'
               v-bind:user-id='this.userId'
-              v-on:refresh-map='refreshMap'>
+              v-on:refresh-map='refreshMap'
+              v-on:lift-right='rightHomeIsFocused = true'
+              v-on:drop-right='rightHomeIsFocused = false'
+              v-bind:is-focused='rightHomeIsFocused'>
             </component>
           </transition>
           <div style="display: none;">
@@ -55,7 +58,8 @@ export default {
       userDetectedPlace: {},
       userId: 1,
       placesList: [],
-      loggedIn: true
+      loggedIn: true,
+      rightHomeIsFocused: false
     }
   },
   methods: {
@@ -94,10 +98,13 @@ export default {
       }
     },
     renderMap: function () {
-      return this.state.right === 'RightHome' || this.$mq !== 'sm'
+      return !this.rightHomeIsFocused && this.isOnRightHomeOnMobile || this.$mq !== 'sm'
     },
     rightHeight: function () {
       return this.renderMap && this.$mq === 'sm' ? { height: '40%' } : { height: '100%' }
+    },
+    isOnRightHomeOnMobile: function () {
+      return this.state.right === 'RightHome' && this.$mq === 'sm'
     }
   },
   components: {
@@ -110,6 +117,11 @@ export default {
     SubmitReview,
     CreateTrip,
     Trip
+  },
+  watch: {
+    isOnRightHomeOnMobile () {
+      this.rightHomeIsFocused = false
+    }
   }
 }
 </script>
