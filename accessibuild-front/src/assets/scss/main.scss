@@ -63,7 +63,6 @@ body {
   .navbar {
     background-color: $blue !important;
     font-size: 1.2em;
-    // box-shadow: black 2em 2em;
   }
 
   .card {
@@ -152,6 +151,10 @@ body {
     @media (max-width: 450px) {
       margin-top: 0;
     }
+  }
+
+  .pac-container {
+    padding-top: 0.4em;
   }
 
   #logo {
