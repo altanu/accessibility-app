@@ -61,9 +61,11 @@ export default {
     },
     arrivedAtDestination () {
       axios.put(`http://localhost:3000/api/v2/trips/${this.tripId}/completed_mail`)
+      store.setRightPane('Arrived')
     },
     cancelledTrip () {
       axios.put(`http://localhost:3000/api/v2/trips/${this.tripId}/cancelled_mail`)
+      store.setRightPane('Cancelled')
     }
   },
   created () {
