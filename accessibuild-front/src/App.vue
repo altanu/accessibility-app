@@ -4,7 +4,7 @@
       v-bind:onClick='setState'
       v-bind:is-logged-in='this.loggedIn'
       v-bind:set-login='setLogin'
-       v-on:new-list='newList'>
+      v-on:new-list='newList'>
     </Navbar>
     <div style='height: 100%'>
       <div id='flexbox-container' :class='classObject'>
@@ -70,6 +70,7 @@ export default {
       this.loggedIn = !this.loggedIn
     },
     newList: function (arr) {
+      console.log("app received new list")
       this.placesList = arr
       this.state.right = 'RightHome'
       store.clearCurrentLocation()
@@ -77,11 +78,6 @@ export default {
     detectUserPlace: function (place) {
       this.userDetectedPlace = place
     },
-    refreshMap: function (arr) {
-      console.log('app received the refresh-map event')
-      this.placesList = []
-      this.newList(arr)
-    }
   },
   computed: {
     classObject: function () {

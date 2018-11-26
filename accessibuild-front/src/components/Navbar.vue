@@ -56,6 +56,8 @@ export default {
       this.isFocusedOnMobile = this.$mq === 'sm'
     },
     sendMeHome () {
+      console.log("navbar called sendMeHome")
+      store.clearCurrentLocation()
       this.$emit('new-list', [])
     }
   },
