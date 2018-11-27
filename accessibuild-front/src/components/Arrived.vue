@@ -6,16 +6,14 @@
     <div class="card card-body">
       <p>Thank you for using Accessibl. We hope your trip is a success!</p>
       <p>An email has been sent to the contacts you added to your trip</p>
-    </div >
+    </div>
   </section>
 </template>
 
 <script>
-
-export default {
-  name: 'Arrived'
-}
-
+  export default {
+    name: 'Arrived'
+  }
 </script>
 
 <style scoped>
@@ -26,6 +24,7 @@ export default {
     margin-bottom: 0;
     box-shadow: 5px 5px 3px grey;
   }
+  
   .card-body {
     padding: 5%;
     margin: 5%;
