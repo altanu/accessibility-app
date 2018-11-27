@@ -1,5 +1,6 @@
 <template>
   <div id="profile">
+    <button id="pointer" class="btn btn-outline-primary btn-block" @click="backToList">Back to Search Results</button>
     <h3>Profile</h3>
     <h5 class="subtitle">Hello, {{user.first_name}}!</h5>
     <div class="d-flex">
@@ -147,6 +148,9 @@ export default {
     reRender: function () {
       this.contacts = {}
       this.fetchUserData()
+    },
+    backToList () {
+      this.$parent.setState('RightHome')
     }
   },
   components: {

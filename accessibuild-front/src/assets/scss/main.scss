@@ -131,7 +131,6 @@ body {
     background: none !important;
     border: none !important;
     color: $white;
-    padding-top: 0.2em;
     float: left;
     cursor: pointer;
   }
@@ -149,7 +148,31 @@ body {
   }
 
   .pac-container {
-    padding-top: 0.4em;
+    padding-top: .5rem;
+    border: 2px solid $blue;
+    border-radius: 0 0 1rem 1rem;
+    font: inherit;
+  }
+
+  .pac-logo {
+    &:after{
+      background-image: none !important;
+      height: 0px
+    }
+  }
+
+  .pac-item {
+    font: inherit;
+    font-size: smaller;
+    margin: 0 1rem 0;
+    line-height: 2rem
+  }
+  .pac-item-query {
+    font: inherit;
+    font-size: medium
+  }
+  .pac-icon {
+    display: none;
   }
 
   #logo {
@@ -174,7 +197,7 @@ body {
   #right-box {
     min-width: 40%;
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
     @media (max-width: 450px) {
       height: 40%;
       padding: 5%;
@@ -187,5 +210,9 @@ body {
     @media (max-width: 450px) {
       height: 60%;
     }
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 }

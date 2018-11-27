@@ -1,19 +1,20 @@
 <template>
-  <div style="height: 100%;">
+  <div style="height: 100%; border-right: 2px solid #4343EA; display:flex; align-items: center; justify-content: center">
     <div style="display: flex">
-    <pulse-loader :loading="loading" style="margin:auto; z-index: 5"></pulse-loader>
+    <pulse-loader :loading="loading" :color="brandBlue" style="margin:auto; height:100%"></pulse-loader>
     </div>
     <gmap-map ref="mapRef"
       :center="center"
       :zoom="12"
-      v-bind:options="mapStyle"
-      style="min-width:50%; height: 100%">
+      :options="mapStyle"
+      style="min-width:100%; height: 100%; display: none">
 
         <!-- user location -->
         <GmapMarker
           :position="userCoordinates"
-          :clickable="false"
+          :clickable="true"
           :draggable="false"
+          @click="selectCard(userPlace)"
         />
 
         <GmapMarker
@@ -52,7 +53,8 @@ export default {
         fullscreenControl: false,
         mapTypeControl: false },
       pinStyles: ['/redPin.png', '/yellowPin.png', '/greenPin.png', '/greyPin.png'],
-      loading: true
+      loading: true,
+      brandBlue: "#4343EA"
     }
   },
   methods: {
@@ -98,6 +100,7 @@ export default {
       })
     },
     populateMapFromDB () {
+      this.markers = []
       var self = this
       axios
         .get('http://localhost:3000/api/v2/locations')
@@ -105,8 +108,9 @@ export default {
           response.data.forEach(location => {
             self.drawWithAccessibility(location)
           })
-        }).then(function () {
+        }).finally(function () {
           self.loading = false
+          document.getElementsByClassName("vue-map-container")[0].style = 'min-width:100%; height: 100%'
         })
     },
     fetchLocationInfo (place, callback) {
