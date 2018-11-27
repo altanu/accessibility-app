@@ -43,11 +43,26 @@
         </div>
       </form>
     </transition>
-    <div v-if="trips[0]" class="container-fluid w-100" style="margin-top: 20px">
+    <div v-if="currentTrips[0]" class="container-fluid w-100" style="margin-top: 20px">
       <hr>
-      <h4 style="width: 100%; text-align: center;">Trips</h4>
+      <h4 style="width: 100%; text-align: center;">Current Trips</h4>
       
-      <div class="d-flex flex-column" v-for="trip in trips" v-bind:key="trip.id" @click="renderTrip(trip)">
+      <div class="d-flex flex-column" v-for="trip in currentTrips" v-bind:key="trip.id" @click="renderTrip(trip)">
+        <div class="trip card">
+          <div class="card-title">
+            Destination: {{trip.address}}
+          </div>
+          <div class="card-body">
+            Trip time: {{trip.trip_time_moment}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-if="pastTrips[0]" class="container-fluid w-100" style="margin-top: 20px">
+      <hr>
+      <h4 style="width: 100%; text-align: center;">Past Trips</h4>
+      
+      <div class="d-flex flex-column" v-for="trip in pastTrips" v-bind:key="trip.id" @click="renderTrip(trip)">
         <div class="trip card">
           <div class="card-title">
             Destination: {{trip.address}}
@@ -86,7 +101,9 @@ export default {
         phone_number: '',
         emergency: false
       },
-      trips: []
+      trips: [],
+      pastTrips: [],
+      currentTrips: []
     }
   },
   mounted: function () {
@@ -109,6 +126,8 @@ export default {
           this.trips.forEach(trip => {
             trip.trip_time_moment = moment(trip.trip_time).format('MMMM Do YYYY, h:mm:ss a')
           })
+          this.pastTrips = this.trips.filter(trip => moment(trip.trip_time) < moment()).sort((a,b) => (a.trip_time < b.trip_time ? 1 : -1))
+          this.currentTrips = this.trips.filter(trip => moment(trip.trip_time) > moment()).sort((a,b) => (a.trip_time < b.trip_time ? -1 : 1))
         })
     },
     refreshContacts: function () {
