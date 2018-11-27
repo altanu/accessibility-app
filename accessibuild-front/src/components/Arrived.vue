@@ -1,10 +1,12 @@
 <template>
   <section>
     <header class="card">
-      <h3>You've arrived at your destination!</h3>
+      <h3>You've arrived at your destination</h3>
     </header>
-    <div class="card card-body">Thank you for using Accessibl. We hope your trip is a success!</div >
-
+    <div class="card card-body">
+      <p>Thank you for using Accessibl. We hope your trip is a success!</p>
+      <p>An email has been sent to the contacts you added to your trip</p>
+    </div >
   </section>
 </template>
 
