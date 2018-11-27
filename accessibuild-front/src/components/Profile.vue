@@ -28,7 +28,7 @@
       </div>
     </div>
     <h4 v-else>Loading...</h4>
-    <button class='btn btn-success btn-block' v-if="!makingNewContact" @click="toggleForm">Create New Contact</button>
+    <button class='btn btn-success btn-block' v-if="!makingNewContact && toggleContacts" @click="toggleForm">Create New Contact</button>
     <transition name="fade">
       <form class="form-group jumbotron new-contact" v-if="makingNewContact" v-on:submit.prevent>
         <h4>Create a New Contact</h4>

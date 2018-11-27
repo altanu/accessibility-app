@@ -40,7 +40,7 @@
         <ul class="list-group list-group-flush" style="padding-left: 5%">
           <li class="list-group-item">{{ contactInfo.phone_number }}</li>
           <li class="list-group-item">{{ contactInfo.email }}</li>
-          <li class="list-group-item" v-if="contact.emergency">Set as Emergency Contact</li>
+          <li class="list-group-item" v-if="contact.emergency">Emergency Contact</li>
           <li class="list-group-item" v-else>Not an Emergency Contact</li>
           <li class="list-group-item d-flex btn-group" role="group" style="padding: 0;">
             <button style="flex-grow: 1" display="flex" class="btn btn-outline-primary" @click='setForm'>Update</button>
