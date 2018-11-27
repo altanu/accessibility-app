@@ -31,8 +31,8 @@ osm_data.each do |place|
       place_ids.push(place["place_id"])
       Location.create!(
         wheelchair: place["wheelchair"],
-        bathroom: place["bathroom"],
-        parking: place["parking"],
+        bathroom: false,
+        parking: false,
         place_id: place["place_id"],
         lat: place["lat"],
         lng: place["lng"]
