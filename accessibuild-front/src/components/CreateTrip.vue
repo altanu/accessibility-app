@@ -1,7 +1,8 @@
 <template>
   <div class='w-100 p-3' style=' text-align: center; height: 100%; overflow: scroll;'>
     <h4>Creating your trip to {{location.formatted_address}}</h4>
-    <h5 style="text-align: center;">Choose contacts to keep informed of your trip!</h5>
+    <!-- <h5 style="text-align: center;">Choose contacts to keep informed of your trip!</h5> -->
+    <div style="text-align: left; margin-top: 20px;">Please choose which contacts you would like us to notify when you start your trip and arrive at your destination:</div>
     <section id="user-contacts" class="container">
       <div style v-for="contact in contacts" v-bind:key="contact.id">
         <TripContact :contact="contact"
