@@ -18,8 +18,12 @@
 
     <div id="contacts-block" style="margin-top: 20px;" v-if="hasContacts">
       <hr>
-      <h4 style="width: 100%; text-align: center;">Contacts</h4>
-      <div id="accordion" v-for="contact in contacts" v-bind:key="contact.id">
+      <h4 style="width: 100%; text-align: center;" @click="toggleContactsCollapse">
+        Contacts 
+        <i v-if="toggleContacts" class="fas fa-minus-square"></i>
+        <i v-if="!toggleContacts" class="fas fa-plus-square"></i>
+      </h4>
+      <div id="accordion" v-for="contact in contacts" v-bind:key="contact.id" v-show="toggleContacts">
         <Contact :contact='contact' :trigger-rerender="refreshContacts"></Contact>
       </div>
     </div>
@@ -45,9 +49,12 @@
     </transition>
     <div v-if="currentTrips[0]" class="container-fluid w-100" style="margin-top: 20px">
       <hr>
-      <h4 style="width: 100%; text-align: center;">Current Trips</h4>
+      <h4 style="width: 100%; text-align: center;" @click="toggleCurrentTripsCollapse">Current Trips
+        <i v-if="toggleCurrentTrips" class="fas fa-minus-square"></i>
+        <i v-if="!toggleCurrentTrips" class="fas fa-plus-square"></i>
+      </h4>
       
-      <div class="d-flex flex-column" v-for="trip in currentTrips" v-bind:key="trip.id" @click="renderTrip(trip)">
+      <div class="d-flex flex-column" v-if="toggleCurrentTrips" v-for="trip in currentTrips" v-bind:key="trip.id" @click="renderTrip(trip)">
         <div class="trip card">
           <div class="card-title">
             Destination: {{trip.address}}
@@ -60,9 +67,12 @@
     </div>
     <div v-if="pastTrips[0]" class="container-fluid w-100" style="margin-top: 20px">
       <hr>
-      <h4 style="width: 100%; text-align: center;">Past Trips</h4>
+      <h4 style="width: 100%; text-align: center;" @click="togglePastTripsCollapse">Past Trips
+        <i v-if="togglePastTrips" class="fas fa-minus-square"></i>
+        <i v-if="!togglePastTrips" class="fas fa-plus-square"></i>
+      </h4>
       
-      <div class="d-flex flex-column" v-for="trip in pastTrips" v-bind:key="trip.id" @click="renderTrip(trip)">
+      <div class="d-flex flex-column" v-for="trip in pastTrips" v-bind:key="trip.id" @click="renderTrip(trip)" v-if="togglePastTrips">
         <div class="trip card">
           <div class="card-title">
             Destination: {{trip.address}}
@@ -103,7 +113,10 @@ export default {
       },
       trips: [],
       pastTrips: [],
-      currentTrips: []
+      currentTrips: [],
+      toggleContacts: false,
+      toggleCurrentTrips: false,
+      togglePastTrips: false
     }
   },
   mounted: function () {
@@ -170,6 +183,15 @@ export default {
     },
     backToList () {
       this.$parent.setState('RightHome')
+    },
+    toggleContactsCollapse () {
+      this.toggleContacts = !this.toggleContacts
+    },
+    toggleCurrentTripsCollapse () {
+      this.toggleCurrentTrips = !this.toggleCurrentTrips
+    },
+    togglePastTripsCollapse () {
+      this.togglePastTrips = !this.togglePastTrips
     }
   },
   components: {
@@ -212,6 +234,13 @@ export default {
     transition: 0s;
   }
   .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+  .expand-transition {
+    transition: all 1s ease;
+  }
+  .expand-enter, .expand-leave {
+    height: 0;
     opacity: 0;
   }
 </style>

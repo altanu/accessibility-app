@@ -5,7 +5,7 @@
     </header>
     <div class="card card-body">
       <p>To create a new trip, please click on your destination, and then click on "Create a Trip"</p>
-      <p>An email has been sent to the contacts you added to your trip.</p>
+      <p>An email has been sent to the contacts you added to your trip</p>
     </div >
 
   </section>
