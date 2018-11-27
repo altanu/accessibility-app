@@ -33,7 +33,7 @@
         <input class="form-control" type="text" name="email" placeholder="Email" v-model="newContact.email">
         <input class="form-control" type="tel" name="phone_number" placeholder="Phone Number" v-model="newContact.phone_number">
         <div class="form-check form-check-inline">
-          <label class="form-check-label" style="padding: 1em">Set As Emergency Contact
+          <label class="form-check-label" style="padding: 1em">Emergency Contact
           <input class="form-check-input" type="checkbox" name="emergency" v-model="newContact.emergency">
           </label>
         </div><br>
