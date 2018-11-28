@@ -13,15 +13,24 @@ puts 'Seeding DB'
 puts 'Seeding users'
 
 User.destroy_all
-User.create!(first_name: 'Mark', last_name:'Tremblay', email: 'mtrembaly@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
 User.create!(first_name: 'John', last_name:'Xu', email: 'johnbxu@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
 User.create!(first_name: 'Altan', last_name:'Unsal', email: 'altanunsal@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
 User.create!(first_name: 'Louis', last_name:'Riehl', email: 'louisriehl@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
 
 place_ids = []
 
-puts 'Seeding locations'
+puts 'Seeding wework'
 Location.destroy_all
+Location.create!(
+  wheelchair: 2,
+  bathroom: null,
+  parking: null,
+  place_id: "ChIJAVPyG2gayUwRFbKNtoOUdOo",
+  lat: "45.4964397",
+  lng: "-73.5706624"
+)
+
+puts 'Seeding locations'
 osm_data.each do |place|
   if place["place_id"].length > 27
     puts "skipping invalid location"
@@ -46,6 +55,7 @@ puts 'Seeding contacts'
 Contact.destroy_all
 users = User.all
 users.each do |user|
+  user.contacts.create!(first_name: 'Altan', last_name: 'Unsal', email: 'altanunsal@gmail.com', phone_number: 1234567, emergency: true)
   user.contacts.create!(first_name: 'Louis', last_name: 'Riehl', email: 'louisriehl@gmail.com', phone_number: 1234567, emergency: true)
   user.contacts.create!(first_name: 'John', last_name: 'Xu', email: 'johnbxu@gmail.com', phone_number: 1234567, emergency: true)
 end
