@@ -103,13 +103,14 @@ export default {
       contacts: {},
       userID: 1,
       makingNewContact: false,
+      // These are mock values added by default for the presentation
       newContact: {
         user_id: this.userId,
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone_number: '',
-        emergency: false
+        first_name: 'Altan',
+        last_name: 'Unsal',
+        email: 'altanunsal@gmail.com',
+        phone_number: '1234567890',
+        emergency: true
       },
       trips: [],
       pastTrips: [],
