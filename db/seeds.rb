@@ -46,7 +46,6 @@ puts 'Seeding contacts'
 Contact.destroy_all
 users = User.all
 users.each do |user|
-  user.contacts.create!(first_name: 'Altan', last_name: 'Unsal', email: 'altanunsal@gmail.com', phone_number: 1234567, emergency: true)
   user.contacts.create!(first_name: 'Louis', last_name: 'Riehl', email: 'louisriehl@gmail.com', phone_number: 1234567, emergency: true)
   user.contacts.create!(first_name: 'John', last_name: 'Xu', email: 'johnbxu@gmail.com', phone_number: 1234567, emergency: true)
 end
