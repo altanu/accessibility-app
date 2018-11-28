@@ -23,8 +23,6 @@ puts 'Seeding wework'
 Location.destroy_all
 Location.create!(
   wheelchair: 2,
-  bathroom: null,
-  parking: null,
   place_id: "ChIJAVPyG2gayUwRFbKNtoOUdOo",
   lat: "45.4964397",
   lng: "-73.5706624"
