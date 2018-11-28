@@ -13,7 +13,7 @@ puts 'Seeding DB'
 puts 'Seeding users'
 
 User.destroy_all
-User.create!(first_name: 'Mark', last_name:'Tremblay', email: 'mtrembaly@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
+User.create!(first_name: 'Mark', last_name:'Tremblay', email: 'mtremblay@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
 
 place_ids = []
 
