@@ -13,9 +13,7 @@ puts 'Seeding DB'
 puts 'Seeding users'
 
 User.destroy_all
-User.create!(first_name: 'John', last_name:'Xu', email: 'johnbxu@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
-User.create!(first_name: 'Altan', last_name:'Unsal', email: 'altanunsal@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
-User.create!(first_name: 'Louis', last_name:'Riehl', email: 'louisriehl@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
+User.create!(first_name: 'Mark', last_name:'Tremblay', email: 'mtrembaly@gmail.com', phone_number: 5145145454, password: 'abc', password_confirmation: 'abc')
 
 place_ids = []
 
@@ -53,21 +51,11 @@ puts 'Seeding contacts'
 Contact.destroy_all
 users = User.all
 users.each do |user|
-  user.contacts.create!(first_name: 'Altan', last_name: 'Unsal', email: 'altanunsal@gmail.com', phone_number: 1234567, emergency: true)
   user.contacts.create!(first_name: 'Louis', last_name: 'Riehl', email: 'louisriehl@gmail.com', phone_number: 1234567, emergency: true)
   user.contacts.create!(first_name: 'John', last_name: 'Xu', email: 'johnbxu@gmail.com', phone_number: 1234567, emergency: true)
 end
 
-puts 'Seeding reviews'
-
-Location.find(1).reviews.create!(user_id: 1, description: 'cool place!', rating: '5')
-Location.find(1).reviews.create!(user_id: 1, description: 'cool place!', rating: '4')
-Location.find(1).reviews.create!(user_id: 1, description: 'meh!', rating: '3')
-Location.find(1).reviews.create!(user_id: 1, description: 'crappy place!', rating: '2')
-Location.find(1).reviews.create!(user_id: 1, description: 'crappy place!', rating: '1')
-
 puts 'Seeding trip'
-@trip = User.find(1).trips.create!(location_id: 1, trip_time: DateTime.now, address: '123 test st.')
+@trip = User.find(1).trips.create!(location_id: 1, trip_time: DateTime.now, address: '1275 Avenue des Canadiens')
 @trip.companions.create!(contact_id: 1)
 @trip.companions.create!(contact_id: 2)
-@trip.companions.create!(contact_id: 3)
