@@ -1,6 +1,6 @@
 <template>
   <div id="profile">
-    <button id="pointer" class="btn btn-outline-primary btn-block" @click="backToList">Back to Search Results</button>
+    <button id="pointer" class="btn btn-outline-primary btn-block" @click="backToList">← Back </button>
     <h3 style="margin-top: 20px;">Profile</h3>
     <h5 class="subtitle">Hello, {{user.first_name}}!</h5>
     <div class="d-flex">
