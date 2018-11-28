@@ -32,7 +32,7 @@ export default {
       userId: store.state.currentUserId,
       contacts: [],
       companions: [],
-      trip_time: null,
+      trip_time: "2018-11-29T19:00",
       location: store.state.currentLocation
     }
   },
