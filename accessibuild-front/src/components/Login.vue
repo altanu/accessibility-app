@@ -21,7 +21,7 @@ export default {
   props: ['setLogin'],
   data () {
     return {
-      email: 'mtrembaly@gmail.com',
+      email: 'mtremblay@gmail.com',
       password: 'averycomplexpassword',
       error: ''
     }
