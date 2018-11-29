@@ -100,8 +100,8 @@ export default {
       newComment: {
         user_id: 1,
         location_id: store.state.currentLocation.id,
-        description: '',
-        rating: null
+        description: 'There are automated doors at the entrance. Elevators exist, but they require a keycard to use.',
+        rating: 4
       },
       averageRating: null
     }
