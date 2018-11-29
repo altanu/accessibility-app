@@ -138,7 +138,10 @@ export default {
         .then(response => {
           this.trips = response.data
           this.trips.forEach(trip => {
-            trip.trip_time_moment = moment(trip.trip_time).format('MMMM Do YYYY, h:mm:ss a')
+            let eventDate = new Date(trip.trip_time)
+            // trip.trip_time_moment = moment(trip.trip_time).format('MMMM Do YYYY, h:mm:ss a')
+            // trip.trip_time_moment = trip.trip_time.toDateString() + " " + trip.trip_time.toTimeString().split(" ")[0]
+            trip.trip_time_moment = eventDate.toDateString() + " " + new Date(eventDate.setHours(19)).toTimeString().split(" ")[0]
           })
           this.pastTrips = this.trips.filter(trip => moment(trip.trip_time) < moment()).sort((a,b) => (a.trip_time < b.trip_time ? 1 : -1))
           this.currentTrips = this.trips.filter(trip => moment(trip.trip_time) > moment()).sort((a,b) => (a.trip_time < b.trip_time ? -1 : 1))
