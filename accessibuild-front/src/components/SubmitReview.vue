@@ -111,6 +111,7 @@ export default {
     placesList: Array
   },
   created () {
+    console.log("location in submitReview", location)
     this.fetchReviews()
   },
   methods: {
@@ -137,6 +138,7 @@ export default {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
     putNewData () {
+      console.log(this.location)
       var locationData = this.location
       axios.put(this.baseUrl + this.location.id, { location: this.location }).then(() => {
         this.$parent.$children[1].refreshMap()
