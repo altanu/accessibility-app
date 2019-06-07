@@ -34,7 +34,7 @@ Going forward, we will be working on making improvements on the following:
 
 * Ruby 2.3.5
 * Bundler
-* NPM
+* Yarn
 * Node.js 11
 * Mailgun account
 
@@ -44,6 +44,6 @@ Going forward, we will be working on making improvements on the following:
 3. Run `rake db:create` followed by `rake db:migrate` to instantatiate the database.
 4. Add your Mailgun API information in a `.env` file in the root directory. Refer to `.env-example`
 5. Run `rails server` to start the rails api server, hosted at `localhost:3000`
-6. Navigate to the `accessibuild-front/` directory and run `npm install`
-7. After the modules have installed, run `npm run serve` to start up the server (This may take a while!)
+6. Navigate to the `accessibuild-front/` directory and run `yarn`
+7. After the modules have installed, run `yarn run serve` to start up the server (This may take a while!)
 8. Go to `localhost:8080` to see the page!
