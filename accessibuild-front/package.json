@@ -20,7 +20,7 @@
     "vue-router": "^3.0.1",
     "vue-spinner": "^1.0.3",
     "vue-star-rating": "^1.6.1",
-    "vue2-google-maps": "^0.10.2"
+    "vue2-google-maps": "^0.10.7"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",
